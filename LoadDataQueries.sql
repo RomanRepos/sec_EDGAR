@@ -31,6 +31,11 @@ CHECKPOINT;
 ALTER TABLE raw_data DROP COLUMN fileNameCol;
 CHECKPOINT;
 
+alter Table raw_data add column topLevelKeys VARCHAR;
+UPDATE raw_data SET topLevelKeys = json_keys(facts);
+CHECKPOINT;
+
+
 --create temp filter table to only load submissions that have coresponding facts
 DROP TABLE IF EXISTS filter_list;
 CREATE TEMP TABLE filter_list AS 
@@ -55,7 +60,7 @@ FROM
 WHERE
     EXISTS( SELECT 1 FROM filter_list f WHERE filename = f.fileNameCol )
     ;
-CHECKPOINT;
+
 
 --load  copmpany dimesions table from submission files where facts exist
 drop table if exists companyDimension;
