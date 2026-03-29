@@ -1,0 +1,74 @@
+cells:
+  - kind: 2
+    languageId: sql
+    value: "select companyDimension.cik AS descriptions\r
+
+      from raw_data \r
+
+      inner join companyDimension on raw_data.cik=companyDimension.cik\r
+
+      and companyDimension.firstTicker = 'AAPL'\r
+
+      \r
+
+      \r
+
+      --fy, fp, end, accn, val\r\n"
+    metadata: {}
+  - kind: 2
+    languageId: sql
+    value: "with topLevelKeysAvailable as (\r
+
+      select \r
+
+      cik,\r
+
+      unnest(topLevelKey)\r
+
+      from raw_data\r
+
+      where cik is not null and facts is not null and topLevelKey != [])\r
+
+      \r
+
+      \r
+
+      creat TABLE finFacts as\r
+
+      \r
+
+      select \r
+
+      cik,\r
+
+      \r
+
+      \r
+
+      \r
+
+      from raw_data as rd\r
+
+      left outer join topLevelKeysAvailable\r
+
+      on rd.cik = topLevelKeysAvailable.cik\r
+
+      \r
+
+      where rd.cik is not null and rd.facts is not null and rd.topLevelKey !=
+      []\r
+
+      \r
+
+      \r\n"
+    metadata: {}
+  - kind: 2
+    languageId: sql
+    value: ""
+    metadata: {}
+metadata:
+  conn:
+    id: pcozl85Oej9x2e0wj5GEh
+    name: secDBCon
+  database: secfacts
+  schema: main
