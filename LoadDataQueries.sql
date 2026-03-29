@@ -7,7 +7,6 @@ CHECKPOINT;
 CREATE TABLE raw_data AS
 SELECT
 CAST(Left(Right(filename, 15), 10), AS INTEGER)::INTEGER AS cik,
-(json->>'$.entityName')::VARCHAR AS entityName,
 (json->'$.facts')::JSON AS facts,
 FROM read_json_objects(CONCAT(facts_path,'*.json'), filename=True)
 CHECKPOINT;
@@ -20,25 +19,32 @@ UPDATE raw_data
 SET fileNameCol  = CONCAT(facts_path, 'CIK', LPAD(cik::VARCHAR, 10, '0'), '.json');
 
 CHECKPOINT;
+with fileNameMeta as (SELECT filename, last_modified 
+    FROM read_text(CONCAT(facts_path,'*.json')))
 UPDATE raw_data
 SET last_modified = metadata.last_modified
-FROM (
-    SELECT filename, last_modified 
-    FROM read_text(CONCAT(facts_path,'*.json'))
-) AS metadata
-WHERE raw_data.fileNameCol = metadata.filename;
-CHECKPOINT;
+FROM fileNameMeta
+WHERE raw_data.fileNameCol = fileNameMeta.filename;
 ALTER TABLE raw_data DROP COLUMN fileNameCol;
 CHECKPOINT;
 
-alter Table raw_data add column topLevelKeys VARCHAR;
-UPDATE raw_data SET topLevelKeys = json_keys(facts);
+
 CHECKPOINT;
+WITH parsed AS (
+  SELECT cik, list_sort(json_keys(facts))::VARCHAR[] AS keys_arr from raw_data
+)
+ALTER TABLE raw_data ADD COLUMN topLevelKeys VARCHAR[];
+UPDATE raw_data 
+SET topLevelKeys = parsed.keys_arr
+FROM parsed
+where raw_data.cik = parsed.cik;
+checkpoint;
+
 
 
 --create temp filter table to only load submissions that have coresponding facts
 DROP TABLE IF EXISTS filter_list;
-CREATE TEMP TABLE filter_list AS 
+CREATE TEMP TABLE filter_list AS
 (select CONCAT(submissions_path, 'CIK', LPAD(distinctCik.cik::VARCHAR, 10, '0'), '.json') as fileNameCol from
     (select Distinct cik from raw_data) as distinctCik);
     
@@ -70,7 +76,7 @@ CREATE TABLE companyDimension AS
 SELECT
     CAST(cik AS INTEGER)::INTEGER as cik,
     entityType::VARCHAR AS entityType,
-    name::VARCHAR AS organizationName,
+    name::VARCHAR AS entityName,
     category::VARCHAR AS category,
     fiscalYearEnd::VARCHAR AS fiscalYearEnd,
     stateOfIncorporation::VARCHAR AS stateOfIncorporation,

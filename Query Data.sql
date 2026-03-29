@@ -1,5 +1,4 @@
-SELECT cik, json_keys(facts) FROM raw_data;
 
-SELECT DISTINCT json_keys(facts) FROM raw_data;
-
+SELECT * FROM raw_data where cik is not null
+limit 100 ;
 
