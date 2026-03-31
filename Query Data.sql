@@ -1,4 +1,4 @@
 
-SELECT * FROM raw_data where cik is not null
-limit 100 ;
+select * from financialData
+limit 10000
 

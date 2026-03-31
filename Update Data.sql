@@ -64,4 +64,22 @@ FROM
     ) AS t
 );
 DROP TABLE IF EXISTS filter_list;
+
+
+CREATE TABLE financialData (
+    cik INTEGER,
+    source VARCHAR,
+    financialMetric VARCHAR,
+    label VARCHAR,
+    description VARCHAR,
+    units VARCHAR,
+    financialYear INTEGER,
+    financialPeriod VARCHAR,
+    endDate DATE,        -- Converted from string to DATE
+    accn VARCHAR,
+    value DOUBLE         -- Matches pandas float64
+);
+
+DELETE FROM raw_data 
+WHERE facts IS NULL;
 CHECKPOINT;

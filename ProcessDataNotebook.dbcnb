@@ -17,46 +17,73 @@ cells:
     metadata: {}
   - kind: 2
     languageId: sql
-    value: "with topLevelKeysAvailable as (\r
+    value: "CREATE OR REPLACE TEMP TABLE topLevelKeysAvailable AS \r
 
       select \r
 
       cik,\r
 
-      unnest(topLevelKey)\r
+      key\r
 
-      from raw_data\r
+      \r
 
-      where cik is not null and facts is not null and topLevelKey != [])\r
+      from raw_data, json_each(json_col->'$.nested_metadata') AS entry;\r
+
+      where cik = 2969 and cik is not null and topLevelKeys != []\r
+
+      ;\r
 
       \r
 
       \r
 
-      creat TABLE finFacts as\r
-
       \r
+
+      SET threads = 3;\r
+
+      SET preserve_insertion_order = false;\r
+
+      CREATE OR REPLACE TEMP TABLE finMeasuresKeysAvailable AS \r
 
       select \r
 
-      cik,\r
+      tlka.cik,\r
+
+      tlka.source,\r
+
+      json_keys(facts) AS finMsrKeys\r
+
+      \r
+
+      from topLevelKeysAvailable as tlka;\r
 
       \r
 
       \r
 
+      /*\r
+
+      SET preserve_insertion_order = false;\r
+
+      CREATE OR REPLACE TEMP TABLE finMeasuresWithUnitsAvailable AS \r
+
+      select \r
+
+      fmka.cik,\r
+
+      fmka.source,\r
+
+      fmka.finMsrKey\r
+
       \r
 
-      from raw_data as rd\r
+      \r
 
-      left outer join topLevelKeysAvailable\r
-
-      on rd.cik = topLevelKeysAvailable.cik\r
+      from finMeasuresKeysAvailable fmka;\r
 
       \r
 
-      where rd.cik is not null and rd.facts is not null and rd.topLevelKey !=
-      []\r
+      */\r
 
       \r
 
@@ -64,11 +91,43 @@ cells:
     metadata: {}
   - kind: 2
     languageId: sql
+    value: "select \r
+
+      cik,\r
+
+      unnest(json_keys(facts))\r
+
+      \r
+
+      from raw_data\r
+
+      where cik = 2969\r
+
+      ;"
+    metadata: {}
+  - kind: 2
+    languageId: sql
+    value: "select \r
+
+      cik,\r
+
+      unnest(json_keys(json_transform(facts,
+      '{\"dei\":\"VARCHAR\",\"srt\":\"VARCHAR\",\"us-gaap\":\"VARCHAR\",\"invest\
+      \":\"VARCHAR\",\"ifrs-full\":\"VARCHAR\"}')))\r
+
+      \r
+
+      from raw_data\r
+
+      --where cik = 2969"
+    metadata: {}
+  - kind: 2
+    languageId: sql
     value: ""
     metadata: {}
 metadata:
   conn:
-    id: pcozl85Oej9x2e0wj5GEh
-    name: secDBCon
-  database: secfacts
+    id: YtqrCeb3m_h_fkdq7Ygzq
+    name: secFilingsDBCon
+  database: secfilingsdb
   schema: main

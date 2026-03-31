@@ -2,55 +2,37 @@ SET VARIABLE facts_path = 'D:\EDGAR_Data_Analytics\Data\companyfacts\';
 SET VARIABLE submissions_path = 'D:\EDGAR_Data_Analytics\Data\submissions\';
 
 --Load raw data from company facts
-drop table if exists raw_data;
-CHECKPOINT;
-CREATE TABLE raw_data AS
+CREATE OR REPLACE TABLE raw_data AS
 SELECT
-CAST(Left(Right(filename, 15), 10), AS INTEGER)::INTEGER AS cik,
-(json->'$.facts')::JSON AS facts,
-FROM read_json_objects(CONCAT(facts_path,'*.json'), filename=True)
-CHECKPOINT;
+CAST(Left(Right(filename, 15), 10) AS INTEGER)::INTEGER AS cik,
+(json->'$.facts')::JSON AS facts
+FROM read_json_objects(CONCAT(getvariable('facts_path'),'*.json'), filename=True);
 
 --add last modified file for companyfacts
-ALTER TABLE raw_data ADD COLUMN last_modified TIMESTAMPTZ;
+ALTER TABLE raw_data ADD COLUMN lastModified TIMESTAMPTZ;
 ALTER TABLE raw_data ADD COLUMN fileNameCol VARCHAR;
-CHECKPOINT;
-UPDATE raw_data
-SET fileNameCol  = CONCAT(facts_path, 'CIK', LPAD(cik::VARCHAR, 10, '0'), '.json');
 
-CHECKPOINT;
-with fileNameMeta as (SELECT filename, last_modified 
-    FROM read_text(CONCAT(facts_path,'*.json')))
 UPDATE raw_data
-SET last_modified = metadata.last_modified
+SET fileNameCol  = CONCAT(getvariable('facts_path'), 'CIK', LPAD(cik::VARCHAR, 10, '0'), '.json');
+
+
+with fileNameMeta as (SELECT filename, last_modified 
+    FROM read_text(CONCAT(getvariable('facts_path'),'*.json')))
+UPDATE raw_data
+SET lastModified = fileNameMeta.last_modified
 FROM fileNameMeta
 WHERE raw_data.fileNameCol = fileNameMeta.filename;
 ALTER TABLE raw_data DROP COLUMN fileNameCol;
-CHECKPOINT;
 
+DELETE FROM raw_data 
+WHERE facts IS NULL or facts='{}' or cik is NULL;
 
-CHECKPOINT;
-WITH parsed AS (
-  SELECT cik, list_sort(json_keys(facts))::VARCHAR[] AS keys_arr from raw_data
-)
-ALTER TABLE raw_data ADD COLUMN topLevelKeys VARCHAR[];
-UPDATE raw_data 
-SET topLevelKeys = parsed.keys_arr
-FROM parsed
-where raw_data.cik = parsed.cik;
-checkpoint;
-
-
-
---create temp filter table to only load submissions that have coresponding facts
-DROP TABLE IF EXISTS filter_list;
-CREATE TEMP TABLE filter_list AS
-(select CONCAT(submissions_path, 'CIK', LPAD(distinctCik.cik::VARCHAR, 10, '0'), '.json') as fileNameCol from
+CREATE OR REPLACE TEMP TABLE filter_list AS
+(select CONCAT(getvariable('submissions_path'), 'CIK', LPAD(distinctCik.cik::VARCHAR, 10, '0'), '.json') as fileNameCol from
     (select Distinct cik from raw_data) as distinctCik);
-    
-drop table if exists submissions;
-CHECKPOINT;
-CREATE TABLE submissions AS
+
+
+CREATE OR REPLACE TABLE submissions AS
 SELECT
     CAST(cik AS INTEGER)::INTEGER as cik,
     unnest(filings.recent.form)::VARCHAR AS form,
@@ -60,7 +42,7 @@ SELECT
     unnest(filings.recent.acceptanceDateTime)::TIMESTAMPTZ AS acceptanceDateTime
 FROM
     read_json_auto(
-        CONCAT(submissions_path,'*.json'),
+        CONCAT(getvariable('submissions_path'),'*.json'),
         filename = True
     ) AS t
 WHERE
@@ -69,10 +51,8 @@ WHERE
 
 
 --load  copmpany dimesions table from submission files where facts exist
-drop table if exists companyDimension;
 SET memory_limit = "25GB";
-CHECKPOINT;
-CREATE TABLE companyDimension AS
+CREATE OR REPLACE TABLE companyDimension AS
 SELECT
     CAST(cik AS INTEGER)::INTEGER as cik,
     entityType::VARCHAR AS entityType,
@@ -100,11 +80,31 @@ SELECT
     now() AS ingested_at  
 FROM
     read_json_auto(
-        CONCAT(submissions_path,'*.json'),
+        CONCAT(getvariable('submissions_path'),'*.json'),
         filename = True
     ) AS t
 WHERE
     EXISTS( SELECT 1 FROM filter_list f WHERE filename = f.fileNameCol )
     ;
 DROP TABLE IF EXISTS filter_list;
+
+
+CREATE OR REPLACE TABLE financialData AS
+    cik INTEGER,
+    source VARCHAR,
+    financialMetric VARCHAR,
+    label VARCHAR,
+    description VARCHAR,
+    units VARCHAR,
+    financialYear INTEGER,
+    financialPeriod VARCHAR,
+    endDate DATE,        -- Converted from string to DATE
+    accn VARCHAR,
+    value DOUBLE         -- Matches pandas float64
+;
+
+CREATE OR REPLACE TABLE rawDataFilesLoaded AS
+SELECT cik, lastModified FROM raw_data;
+
 CHECKPOINT;
+
