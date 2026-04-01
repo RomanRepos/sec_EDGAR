@@ -1,4 +1,2 @@
 
-select * from financialData
-limit 10000
-
+select count(*) from financialData where description is null
