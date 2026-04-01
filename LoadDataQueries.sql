@@ -1,5 +1,5 @@
-SET VARIABLE facts_path = 'D:\EDGAR_Data_Analytics\Data\companyfacts\';
-SET VARIABLE submissions_path = 'D:\EDGAR_Data_Analytics\Data\submissions\';
+SET VARIABLE facts_path = '{{facts_path_param}}';
+SET VARIABLE submissions_path = '{{submissions_path_param}}';
 
 --Load raw data from company facts
 CREATE OR REPLACE TABLE raw_data AS
@@ -27,10 +27,10 @@ ALTER TABLE raw_data DROP COLUMN fileNameCol;
 DELETE FROM raw_data 
 WHERE facts IS NULL or facts='{}' or cik is NULL;
 
-CREATE OR REPLACE TEMP TABLE filter_list AS
-(select CONCAT(getvariable('submissions_path'), 'CIK', LPAD(distinctCik.cik::VARCHAR, 10, '0'), '.json') as fileNameCol from
-    (select Distinct cik from raw_data) as distinctCik);
 
+CREATE OR REPLACE TEMP TABLE filter_list AS
+(select distinct cik as cik from raw_data);
+CHECKPOINT;
 
 CREATE OR REPLACE TABLE submissions AS
 SELECT
@@ -43,10 +43,10 @@ SELECT
 FROM
     read_json_auto(
         CONCAT(getvariable('submissions_path'),'*.json'),
-        filename = True
+        filename = False
     ) AS t
 WHERE
-    EXISTS( SELECT 1 FROM filter_list f WHERE filename = f.fileNameCol )
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
     ;
 
 
@@ -84,27 +84,11 @@ FROM
         filename = True
     ) AS t
 WHERE
-    EXISTS( SELECT 1 FROM filter_list f WHERE filename = f.fileNameCol )
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
+    AND t.filename NOT LIKE '%-submissions-%.json' 
     ;
 DROP TABLE IF EXISTS filter_list;
-
-
-CREATE OR REPLACE TABLE financialData AS
-    cik INTEGER,
-    source VARCHAR,
-    financialMetric VARCHAR,
-    label VARCHAR,
-    description VARCHAR,
-    units VARCHAR,
-    financialYear INTEGER,
-    financialPeriod VARCHAR,
-    endDate DATE,        -- Converted from string to DATE
-    accn VARCHAR,
-    value DOUBLE         -- Matches pandas float64
-;
-
 CREATE OR REPLACE TABLE rawDataFilesLoaded AS
 SELECT cik, lastModified FROM raw_data;
-
 CHECKPOINT;
 
