@@ -103,7 +103,7 @@ FROM
         filename = False
     ) AS t
 WHERE
-    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(cik AS INTEGER) = f.cik )
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
     AND t.filename NOT LIKE '%-submissions-%.json' 
     ;
 
