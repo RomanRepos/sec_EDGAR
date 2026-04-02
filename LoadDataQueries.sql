@@ -43,11 +43,30 @@ SELECT
 FROM
     read_json_auto(
         CONCAT(getvariable('submissions_path'),'*.json'),
-        filename = False
+        filename = True
     ) AS t
 WHERE
-    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(cik AS INTEGER) = f.cik )
+    AND t.filename NOT LIKE '%-submissions-%.json' 
     ;
+CHECKPOINT;
+
+INSERT INTO submissions
+SELECT
+    CAST(Left(Right(filename, 31), 10) AS INTEGER) AS cik,
+    unnest(form) AS form,
+    unnest(accessionNumber) AS accessionNumber,
+    unnest(filingDate) AS filingDate,
+    NULLIF(unnest(reportDate), '') AS reportDate,
+    unnest(acceptanceDateTime) AS acceptanceDateTime
+FROM
+    read_json_auto(
+        CONCAT(getvariable('submissions_path'),'*.json'),
+        filename = True
+    ) AS t
+WHERE
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(Left(Right(t.filename, 31), 10) AS INTEGER) = f.cik ) and t.filename LIKE '%-submissions-%.json';
+CHECKPOINT;
 
 
 --load  copmpany dimesions table from submission files where facts exist
@@ -81,12 +100,13 @@ SELECT
 FROM
     read_json_auto(
         CONCAT(getvariable('submissions_path'),'*.json'),
-        filename = True
+        filename = False
     ) AS t
 WHERE
-    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
+    EXISTS( SELECT 1 FROM filter_list f WHERE CAST(cik AS INTEGER) = f.cik )
     AND t.filename NOT LIKE '%-submissions-%.json' 
     ;
+
 DROP TABLE IF EXISTS filter_list;
 CREATE OR REPLACE TABLE rawDataFilesLoaded AS
 SELECT cik, lastModified FROM raw_data;

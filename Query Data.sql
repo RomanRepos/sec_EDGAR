@@ -9,5 +9,7 @@ GROUP by units
 
 order by cnt desc;
 
-select distinct accn from financialData inner join submissions on financialData.accn = submissions.accessionNumber
+select * from financialData anti join submissions on financialData.accessionNumber = submissions.accessionNumber inner join companyDimension on financialData.cik=companyDimension.cik;
+
+
 
