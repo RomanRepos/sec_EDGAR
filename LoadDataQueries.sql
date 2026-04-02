@@ -100,7 +100,7 @@ SELECT
 FROM
     read_json_auto(
         CONCAT(getvariable('submissions_path'),'*.json'),
-        filename = False
+        filename = True
     ) AS t
 WHERE
     EXISTS( SELECT 1 FROM filter_list f WHERE CAST(t.cik AS INTEGER) = f.cik )
