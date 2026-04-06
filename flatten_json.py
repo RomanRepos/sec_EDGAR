@@ -4,7 +4,7 @@ from datetime import datetime
 import gc
 
 
-def parse_json_object(rowVar) ->[]:
+def parse_json_object(rowVar):
     try:         
         df_flat = pd.DataFrame()
         df_flat = pd.json_normalize(rowVar['facts'],  max_level=1).T
@@ -21,11 +21,11 @@ def parse_json_object(rowVar) ->[]:
         df_flat.drop(columns=['json'], inplace=True)
         df_flat = df_flat.explode('records').reset_index(drop=True)
         new_cols = pd.json_normalize(df_flat['records'])
-        new_cols = new_cols.reindex(columns=['fy', 'fp', 'end', 'accn', 'val'])
+        new_cols = new_cols.reindex(columns=['fy', 'fp', 'start', 'end', 'accn', 'val', 'frame'])
         df_flat.drop(columns=['records'], inplace=True)
         df_flat = df_flat.join(new_cols)
         df_flat['cik'] = rowVar['cik']
-        df_flat.rename(columns = {'fy':'financialYear', 'fp':'financialPeriod', 'end':'endDate', 'val':'value', 'accn':'accessionNumber'}, inplace=True)
+        df_flat.rename(columns = {'fy':'financialYear', 'fp':'financialPeriod', 'end':'endDate', 'val':'value', 'accn':'accessionNumber', 'start':'startDate'}, inplace=True)
         return df_flat.to_dict(orient='records')
     except:
         return []
@@ -41,7 +41,9 @@ def flatten(conn_arg, batch_size_arg):
         units VARCHAR,
         financialYear INTEGER,
         financialPeriod VARCHAR,
-        endDate DATE,        -- Converted from string to DATE
+        startDate DATE,
+        endDate DATE, 
+        frame VARCHAR,
         accessionNumber VARCHAR,
         value DOUBLE         -- Matches pandas float64
     );
@@ -74,13 +76,15 @@ def flatten(conn_arg, batch_size_arg):
                         units,
                         financialYear,
                         financialPeriod,
+                        CAST(startDate AS DATE) AS startDate,
                         CAST(endDate AS DATE) AS endDate,
+                        frame,
                         accessionNumber,
                         value
-                    FROM expanded_cols;
+                    FROM expanded_cols; 
+                    CHECKPOINT;
                     """)
-        if count % 5 == 0:
-            conn_arg.execute('CHECKPOINT;')
+        
         del expanded_cols
         gc.collect()
         count+=1

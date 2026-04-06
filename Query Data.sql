@@ -9,7 +9,8 @@ GROUP by units
 
 order by cnt desc;
 
-select * from financialData anti join submissions on financialData.accessionNumber = submissions.accessionNumber inner join companyDimension on financialData.cik=companyDimension.cik;
+select cd.cik, fd.financialPeriod, fd.financialMetric, fd.label, fd.value, fd.description, form, endDate, financialYear, financialPeriod, s.filingDate, s.accessionNumber from financialData fd,companyDimension cd,submissions s
+where cd.firstTicker = 'MSFT' and cd.cik=fd.cik and s.accessionNumber=fd.accessionNumber
+and  form='10-K' and financialYear=2025
 
-
-
+order by financialMetric asc, value desc

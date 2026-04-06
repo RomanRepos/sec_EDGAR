@@ -1,7 +1,6 @@
 import os
 from curl_cffi import requests
-import zipfile
-
+import subprocess
 
 def download_and_extract(url, extract_to='extracted_files'):
 
@@ -20,12 +19,14 @@ def download_and_extract(url, extract_to='extracted_files'):
 
     # 2. Unzip into a folder
     print(f"Unzipping into '{extract_to}'...")
-    if not os.path.exists(extract_to):
-        os.makedirs(extract_to)
-        
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(extract_to)
-
+    
+    subprocess.run([
+    "python", "-m", "fast_unzip", 
+    zip_path, 
+    "-d", extract_to,
+    "-p", "4", 
+    "-t", "8"
+])
     # 3. Delete the original ZIP file
     os.remove(zip_path)
     print("Done! Original ZIP deleted.")
