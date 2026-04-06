@@ -1,23 +1,25 @@
 SET VARIABLE facts_path = '{{facts_path_param}}';
 SET VARIABLE submissions_path = '{{submissions_path_param}}';
 
+SET VARIABLE fact_path_no_json= REPLACE('{{facts_path_param}}', '*.json', '');
+
 --Load raw data from company facts
 CREATE OR REPLACE TABLE raw_data AS
 SELECT
 CAST(Left(Right(filename, 15), 10) AS INTEGER)::INTEGER AS cik,
 (json->'$.facts')::JSON AS facts
-FROM read_json_objects(CONCAT(getvariable('facts_path'),'*.json'), filename=True);
+FROM read_json_objects(getvariable('facts_path'), filename=True);
 
 --add last modified file for companyfacts
 ALTER TABLE raw_data ADD COLUMN lastModified TIMESTAMPTZ;
 ALTER TABLE raw_data ADD COLUMN fileNameCol VARCHAR;
 
 UPDATE raw_data
-SET fileNameCol  = CONCAT(getvariable('facts_path'), 'CIK', LPAD(cik::VARCHAR, 10, '0'), '.json');
+SET fileNameCol  = CONCAT(getvariable('fact_path_no_json'), 'CIK', LPAD(cik::VARCHAR, 10, '0'), '.json');
 
 
 with fileNameMeta as (SELECT filename, last_modified 
-    FROM read_text(CONCAT(getvariable('facts_path'),'*.json')))
+    FROM read_text(getvariable('facts_path')))
 UPDATE raw_data
 SET lastModified = fileNameMeta.last_modified
 FROM fileNameMeta
@@ -42,7 +44,7 @@ SELECT
     unnest(filings.recent.acceptanceDateTime)::TIMESTAMPTZ AS acceptanceDateTime
 FROM
     read_json_auto(
-        CONCAT(getvariable('submissions_path'),'*.json'),
+        getvariable('submissions_path'),
         filename = True
     ) AS t
 WHERE
@@ -61,7 +63,7 @@ SELECT
     unnest(acceptanceDateTime) AS acceptanceDateTime
 FROM
     read_json_auto(
-        CONCAT(getvariable('submissions_path'),'*.json'),
+        getvariable('submissions_path'),
         filename = True
     ) AS t
 WHERE
@@ -99,7 +101,7 @@ SELECT
     now() AS ingested_at  
 FROM
     read_json_auto(
-        CONCAT(getvariable('submissions_path'),'*.json'),
+        getvariable('submissions_path'),
         filename = True
     ) AS t
 WHERE
