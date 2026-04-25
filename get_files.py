@@ -42,8 +42,3 @@ def sync_json_files(source_dir, target_dir):
             except Exception as e:
                 print(f"Error deleting {filename}: {e}")
                 continue
-
-
-#factsDir = r'D:\EDGAR_Data_Analytics\Data\companyfacts'
-#submDir = r'D:\EDGAR_Data_Analytics\Data\submissions'
-#sync_json_files(factsDir, submDir)

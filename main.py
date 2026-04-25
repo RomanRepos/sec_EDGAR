@@ -1,21 +1,30 @@
+from anyio import Path
 import duckdb as ddb
 import os
 import sys
 from get_files import download_and_extract, sync_json_files
 from flatten_json import flatten
 from jinja2 import Template
+from dotenv import load_dotenv
 
 if __name__ == "__main__":
 
+    load_dotenv()
 
-    db_directory = "/home/roman/hdd1/EDGAR_Analytics/Data"
+    PROJECT_ROOT = Path(os.getenv("PROJECT_ROOT") or Path(__file__).resolve().parent.parent)
+    DATA_DIR = PROJECT_ROOT / "Data"
+    db_directory = DATA_DIR
     db_path = os.path.join(db_directory, "secFilingsDb.duckdb")
+
+    for d in [DATA_DIR]:
+        d.mkdir(parents=True, exist_ok=True)
+
 
     conn = ddb.connect(db_path)
     main_file_path = os.path.abspath(sys.argv[0])
     main_dir = os.path.dirname(main_file_path)
-    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': '/home/roman/hdd1/Documents/EDGAR_Analytics/Data/companyfacts'},
-    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath':'/home/roman/hdd1/Documents/EDGAR_Analytics/Data/submissions'}}
+    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': DATA_DIR / "companyfacts"},
+    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': DATA_DIR / "submissions"}}
 
     for i in inputs_dict.values():
         download_and_extract(i['link'], i['savePath'])
