@@ -87,4 +87,3 @@ if not df.empty:
                 count += 1
         except Exception as e:
             continue
-    
