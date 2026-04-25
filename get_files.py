@@ -3,9 +3,7 @@ from curl_cffi import requests
 import shutil
 
 def download_and_extract(url, extract_to='extracted_files'):
-
-
-
+    
     zip_path = "temp_archive.zip"
     
     # 1. Download the file

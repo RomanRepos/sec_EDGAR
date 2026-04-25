@@ -1,0 +1,1 @@
+npx @modelcontextprotocol/inspector uvx mcp-server-motherduck   --db-path /home/roman/Documents/EDGAR_Analytics/Data/secFilingsDb.duckdb   --ephemeral-connections

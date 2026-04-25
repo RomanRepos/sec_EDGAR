@@ -14,8 +14,8 @@ def parse_json_object(rowVar):
         df_flat['label'] = df_flat['json'].apply(lambda x: x['label'])
         df_flat['description'] = df_flat['json'].apply(lambda x: x['description'])
         df_flat = df_flat.explode('units').reset_index(drop=True)
-        df_flat['source'] = df_flat['path'].apply(lambda x: x.split('.')[0])
-        df_flat['financialMetric'] = df_flat['path'].apply(lambda x: x.split('.')[1])
+        df_flat['prefix'] = df_flat['path'].apply(lambda x: x.split('.')[0])
+        df_flat['name'] = df_flat['path'].apply(lambda x: x.split('.')[1])
         df_flat.drop(columns=['path'], inplace=True)
         df_flat['records'] = df_flat.apply(lambda row: row['json']['units'][row['units']], axis=1)
         df_flat.drop(columns=['json'], inplace=True)
@@ -34,8 +34,8 @@ def flatten(conn_arg, batch_size_arg):
 
     conn_arg.execute("""CREATE OR REPLACE TABLE financialData (
         cik INTEGER,
-        source VARCHAR,
-        financialMetric VARCHAR,
+        prefix VARCHAR,
+        name VARCHAR,
         label VARCHAR,
         description VARCHAR,
         units VARCHAR,
@@ -69,8 +69,8 @@ def flatten(conn_arg, batch_size_arg):
                     INSERT INTO financialData 
                     SELECT 
                         cik,
-                        source,
-                        financialMetric,
+                        prefix,
+                        name,
                         label,
                         description,
                         units,

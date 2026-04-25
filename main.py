@@ -14,8 +14,8 @@ if __name__ == "__main__":
     conn = ddb.connect(db_path)
     main_file_path = os.path.abspath(sys.argv[0])
     main_dir = os.path.dirname(main_file_path)
-    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': '/home/roman/hdd1/EDGAR_Analytics/Data/companyfacts'},
-    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath':'/home/roman/hdd1/EDGAR_Analytics/Data/submissions'}}
+    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': '/home/roman/hdd1/Documents/EDGAR_Analytics/Data/companyfacts'},
+    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath':'/home/roman/hdd1/Documents/EDGAR_Analytics/Data/submissions'}}
 
     for i in inputs_dict.values():
         download_and_extract(i['link'], i['savePath'])
