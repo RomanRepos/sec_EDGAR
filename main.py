@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     load_dotenv()
 
-    PROJECT_ROOT = Path(os.getenv("PROJECT_ROOT") or Path(__file__).resolve().parent.parent)
+    PROJECT_ROOT = Path(Path(__file__).resolve().parent.parent or Path(os.getenv("PROJECT_ROOT")).resolve().parent)
     DATA_DIR = PROJECT_ROOT / "Data"
     db_directory = DATA_DIR
     db_path = os.path.join(db_directory, "secFilingsDb.duckdb")
