@@ -25,11 +25,8 @@ def download_and_extract(url, extract_to='extracted_files'):
 
 
 def sync_json_files(source_dir, target_dir):
-    # 1. Get a set of all .json files in the source directory
-    # Using a set allows for efficient comparison
     source_files = {f for f in os.listdir(source_dir) if f.endswith('.json')}
     
-    # 2. Iterate through files in the target directory
     for filename in os.listdir(target_dir):
         if filename.endswith('.json'):
             filename_list = filename.split('.')

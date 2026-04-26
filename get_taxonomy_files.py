@@ -84,7 +84,7 @@ def download_cal_xmls(conn):
         print(f"Files to download: {len(df)}")
         count = 1
 
-        for index, row in df.iterrows():
+        for row in df.iterrows():
             try:
                 file = download_cal_xmls(row['url'], row['url_no_file'], row['cik'], row['accessionNumber'], save_path)
                 if file:
