@@ -4,7 +4,7 @@ from pathlib import Path
 import duckdb as ddb
 from lxml import etree
 import os
-
+from tqdm import tqdm
 
 def write_files_to_db(conn_arg, xml_taxonomy_dir, func_arg):
     xml_xsd_files = []
@@ -13,7 +13,8 @@ def write_files_to_db(conn_arg, xml_taxonomy_dir, func_arg):
             xml_xsd_files.append(file)
     result = []
     insert_tries = 0
-    for file in xml_xsd_files:
+ 
+    for file in tqdm(xml_xsd_files, desc="Processing files", unit="file"):
         try:    
             result.extend(func_arg(file))
         except Exception as e:
@@ -30,6 +31,7 @@ def write_files_to_db(conn_arg, xml_taxonomy_dir, func_arg):
                     )
                     for d in result
                 ])
+                conn_arg.commit() 
                 result = []
                 insert_tries = 0
             except Exception as e:
@@ -45,7 +47,7 @@ def write_files_to_db(conn_arg, xml_taxonomy_dir, func_arg):
         if result:
             try:
                 conn_arg.executemany("""
-                    INSERT INTO calculation_arcs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO calculationTaxonomyRaw VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, [
                     (
                         d["cik"], d["accessionNumber"], d["linkXlinkType"], d["linkXlinkRole"],
@@ -54,6 +56,7 @@ def write_files_to_db(conn_arg, xml_taxonomy_dir, func_arg):
                     )
                     for d in result
                 ])
+                conn_arg.commit() 
             except Exception as e:
                 print(f"Failed to insert final batch: {e}")
 
@@ -140,6 +143,6 @@ if __name__ == "__main__":
             arcWeight       DOUBLE
         )
     """)
-    xml_taxonomy_dir = DATA_DIR / "Test"
+    xml_taxonomy_dir = DATA_DIR / "calXmls"
     write_files_to_db(conn, xml_taxonomy_dir, extract_rows)
     conn.close()
