@@ -122,6 +122,6 @@ where prefix = 'ifrs-full'order by partitionNumber, name;
 select count(*) from (select distinct cik, accessionNumber from financialData) as subCount;
 
 
-select count(*) from calculationTaxonomyRaw;
+select * from calculationTaxonomyRaw;
 
 truncate table calculationTaxonomyRaw;
