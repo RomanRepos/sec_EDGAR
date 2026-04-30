@@ -74,7 +74,7 @@ WHERE t.ctid = r.ctid;
 
 ALTER TABLE financialData ADD COLUMN partitionNumber INTEGER;
 
-UPDATE financialData
+UPDATE financialData 
 SET partitionNumber = g.rn
 FROM (
     SELECT cik,
@@ -121,7 +121,4 @@ where prefix = 'ifrs-full'order by partitionNumber, name;
 
 select count(*) from (select distinct cik, accessionNumber from financialData) as subCount;
 
-
-select * from calculationTaxonomyRaw;
-
-truncate table calculationTaxonomyRaw;
+select count(*) from calculationTaxonomyRaw;
