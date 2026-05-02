@@ -121,4 +121,77 @@ where prefix = 'ifrs-full'order by partitionNumber, name;
 
 select count(*) from (select distinct cik, accessionNumber from financialData) as subCount;
 
-select count(*) from calculationTaxonomyRaw;
+select  linkXlinkRole, count(*) as countRoles from calculationTaxonomyRaw
+group by linkXlinkRole
+ORDER by countRoles desc;
+
+select  toConcept, count(*) as countToConcepts from calculationTaxonomy
+where toConcept = '' or toConcept is null
+group by toConcept
+ORDER by countToConcepts desc;
+
+select * from (
+select  linkRole, keyStatmentRole, count(*) as countlinkRoles from (select distinct cik, accessionNUmber, ct.linkRole, keyStatmentRole from calculationTaxonomy ct left outer join CalcTaxRolesClassified ctc on ct.linkRole = ctc.linkRole)
+group by linkRole, keyStatmentRole
+ORDER by countlinkRoles desc
+limit 10000) where keyStatmentRole is null
+;
+
+select count(*) from (select distinct linkRole from calculationTaxonomy);
+
+
+ALTER TABLE calculationTaxonomy ADD COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
+WITH ranked AS (
+    SELECT
+        cik,
+        accessionNumber,
+        ct.linkRole,
+        COUNT(*) AS conceptCount,
+        ROW_NUMBER() OVER (
+            PARTITION BY cik, accessionNumber, ctc.keyStatementRole
+            ORDER BY COUNT(*) DESC
+        ) AS rn
+    FROM calculationTaxonomy ct
+    INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
+    WHERE ctc.keyStatementRole IS NOT NULL
+    GROUP BY cik, accessionNumber, ct.linkRole, ctc.keyStatementRole
+),
+primaryRoles AS (
+    SELECT cik, accessionNumber, linkRole
+    FROM ranked
+    WHERE rn = 1
+)
+UPDATE calculationTaxonomy
+SET isPrimaryRole = TRUE
+WHERE (cik, accessionNumber, linkRole) IN (
+    SELECT cik, accessionNumber, linkRole FROM primaryRoles
+);
+checkpoint;
+
+/*
+CREATE OR REPLACE TABLE calculationTaxonomy AS
+SELECT
+    cik,
+    accessionNumber,
+    COALESCE(NULLIF(regexp_extract(replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''), '([A-Z]{1}[A-Za-z]+)'), ''), replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''))  AS linkRole,
+    replace(regexp_extract(arcXlinkArcrole, '[^/]+$'), 'Role_', '') AS arcRole,
+    regexp_extract(replace(arcXlinkFrom, 'loc_', ''), '^([^.]+?)_', 1) AS fromPrefix,
+    COALESCE(NULLIF(regexp_extract(replace(arcXlinkFrom,'loc_', ''), '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkFrom,'loc_', '')) AS fromConcept,
+    regexp_extract(replace(arcXlinkTo,'loc_', ''),   '^([^.]+?)_', 1) AS toPrefix,
+    COALESCE(NULLIF(regexp_extract(replace(arcXlinkTo,'loc_', ''),   '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkTo,'loc_', '')) AS toConcept,
+    arcUse,
+    arcOrder,
+    arcWeight
+FROM calculationTaxonomyRaw
+;
+checkpoint;
+
+
+select cik, accessionNumber, arcXlinkFrom, arcXlinkTo from
+(select 
+cik, accessionNumber,
+arcXlinkFrom,
+arcXlinkTo,
+COALESCE(NULLIF(regexp_extract(replace(arcXlinkFrom,'loc_', ''), '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkFrom,'loc_', '')) AS fromConcept
+from calculationTaxonomyRaw where fromConcept is null or fromConcept='');
+*/
