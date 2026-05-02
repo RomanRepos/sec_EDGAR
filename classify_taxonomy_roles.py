@@ -140,9 +140,9 @@ if __name__ == "__main__":
 
     roles_df = conn.execute('''select distinct linkRole from calculationTaxonomy''').fetch_df()
     
-    roles_df['keyStatmentRole'] = roles_df['linkRole'].apply(classify_role)
+    roles_df['keyStatementRole'] = roles_df['linkRole'].apply(classify_role)
 
     conn.register('presentation_df', roles_df)
-    conn.execute("CREATE OR REPLACE TABLE CalcTaxRolesClassified AS SELECT * FROM roles_df; CHECKPOINT;")
+    conn.execute("CREATE OR REPLACE TABLE calcTaxRolesClassified AS SELECT * FROM roles_df; CHECKPOINT;")
 
     conn.close()
