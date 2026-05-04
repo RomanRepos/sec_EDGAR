@@ -153,6 +153,7 @@ env.bak/
 venv.bak/
 ._.*
 .env.save
+*.xlsx
 
 # Spyder project settings
 .spyderproject
