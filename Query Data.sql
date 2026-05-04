@@ -139,6 +139,11 @@ limit 10000) where keyStatmentRole is null
 
 select count(*) from (select distinct linkRole from calculationTaxonomy);
 
+SELECT ct.cik, ct.accessionNumber, ct.linkRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
+    ct.arcWeight from calculationTaxonomy ct anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
+    where ct.isPrimaryRole=TRUE
+    and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;
+
 
 ALTER TABLE calculationTaxonomy ADD COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
 WITH ranked AS (
@@ -175,23 +180,46 @@ SELECT
     accessionNumber,
     COALESCE(NULLIF(regexp_extract(replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''), '([A-Z]{1}[A-Za-z]+)'), ''), replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''))  AS linkRole,
     replace(regexp_extract(arcXlinkArcrole, '[^/]+$'), 'Role_', '') AS arcRole,
-    regexp_extract(replace(arcXlinkFrom, 'loc_', ''), '^([^.]+?)_', 1) AS fromPrefix,
-    COALESCE(NULLIF(regexp_extract(replace(arcXlinkFrom,'loc_', ''), '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkFrom,'loc_', '')) AS fromConcept,
-    regexp_extract(replace(arcXlinkTo,'loc_', ''),   '^([^.]+?)_', 1) AS toPrefix,
-    COALESCE(NULLIF(regexp_extract(replace(arcXlinkTo,'loc_', ''),   '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkTo,'loc_', '')) AS toConcept,
+    regexp_extract(replace(Replace(arcXlinkFrom, 'loc_', ''), 'Locator_', ''), '^([^.]+?)_', 1) AS fromPrefix,
+    COALESCE(NULLIF(regexp_extract(replace(replace(arcXlinkFrom,'loc_', ''), 'Locator_', ''), '([A-Z]{1}[a-z]{2,}[A-Za-z]+)', 1), ''), replace(replace(arcXlinkFrom,'loc_', ''), 'Locator_', '')) AS fromConcept,
+    regexp_extract(replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', ''),   '^([^.]+?)_', 1) AS toPrefix,
+    COALESCE(NULLIF(regexp_extract(replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', ''),   '([A-Z]{1}[a-z]{2,}[A-Za-z]+)', 1), ''), replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', '')) AS toConcept,
     arcUse,
     arcOrder,
     arcWeight
-FROM calculationTaxonomyRaw
-;
+FROM calculationTaxonomyRaw;
 checkpoint;
 
-
-select cik, accessionNumber, arcXlinkFrom, arcXlinkTo from
-(select 
-cik, accessionNumber,
-arcXlinkFrom,
-arcXlinkTo,
-COALESCE(NULLIF(regexp_extract(replace(arcXlinkFrom,'loc_', ''), '([A-Z]{1}[A-Za-z]+)', 1), ''), replace(arcXlinkFrom,'loc_', '')) AS fromConcept
-from calculationTaxonomyRaw where fromConcept is null or fromConcept='');
+ALTER TABLE calculationTaxonomy ADD COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
+WITH ranked AS (
+    SELECT
+        cik,
+        accessionNumber,
+        ct.linkRole,
+        COUNT(*) AS conceptCount,
+        ROW_NUMBER() OVER (
+            PARTITION BY cik, accessionNumber, ctc.keyStatementRole
+            ORDER BY COUNT(*) DESC
+        ) AS rn
+    FROM calculationTaxonomy ct
+    INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
+    WHERE ctc.keyStatementRole IS NOT NULL
+    GROUP BY cik, accessionNumber, ct.linkRole, ctc.keyStatementRole
+),
+primaryRoles AS (
+    SELECT cik, accessionNumber, linkRole
+    FROM ranked
+    WHERE rn = 1
+)
+UPDATE calculationTaxonomy
+SET isPrimaryRole = TRUE
+WHERE (cik, accessionNumber, linkRole) IN (
+    SELECT cik, accessionNumber, linkRole FROM primaryRoles
+);
+checkpoint;
 */
+
+SELECT ct.cik, ct.accessionNumber, ct.linkRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
+    ct.arcWeight from calculationTaxonomy ct anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
+    where ct.isPrimaryRole=TRUE
+    and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;
