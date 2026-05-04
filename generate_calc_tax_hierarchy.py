@@ -24,6 +24,7 @@ def create_taxonomy_hierarchy(df, conn):
         cik             INTEGER,
         accessionNumber VARCHAR,
         linkRole        VARCHAR,
+        keyStatementRole VARCHAR,
         ancestor        VARCHAR,
         descendant      VARCHAR,
         relativeDepth   INTEGER,
@@ -58,6 +59,7 @@ def create_taxonomy_hierarchy(df, conn):
         cik = def_df['cik'].iloc[0]
         accession_number = def_df['accessionNumber'].iloc[0]
         link_role = def_df['linkRole'].iloc[0]
+        key_statement_role = def_df['keyStatementRole'].iloc[0]
 
         node_weights = {
             row['toConcept']: (row['arcWeight'], row['arcOrder'])
@@ -69,6 +71,7 @@ def create_taxonomy_hierarchy(df, conn):
                         'cik': cik,
                         'accessionNumber': accession_number,
                         'linkRole': link_role,
+                        'keyStatementRole': key_statement_role,
                         'ancestor': child,
                         'descendant': child,
                         'relativeDepth': 0,
@@ -83,6 +86,7 @@ def create_taxonomy_hierarchy(df, conn):
                         'cik': cik,
                         'accessionNumber': accession_number,
                         'linkRole': link_role,
+                        'keyStatementRole': key_statement_role,
                         'ancestor': top_level_node,
                         'descendant': top_level_node,
                         'relativeDepth': 0,
@@ -101,6 +105,7 @@ def create_taxonomy_hierarchy(df, conn):
                     'cik': cik,
                     'accessionNumber': accession_number,
                     'linkRole': link_role,
+                    'keyStatementRole': key_statement_role,
                     'ancestor': node['fromConcept'],
                     'descendant': desc,
                     'relativeDepth': rel_dep,
@@ -122,8 +127,10 @@ if __name__ == "__main__":
 
     conn = ddb.connect(db_path)
 
-    df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
-    ct.arcWeight from calculationTaxonomy ct anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
+    df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
+    ct.arcWeight from calculationTaxonomy ct 
+    left outer join calcTaxRolesClassified crc on crc.linkRole = ct.linkRole
+    anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
     where ct.isPrimaryRole=TRUE
     and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;''').fetch_df()
 

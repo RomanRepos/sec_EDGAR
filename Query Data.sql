@@ -1,32 +1,140 @@
-
-select distinct name from financialData where description is null;
-
-select count(*) from financialData;
-select * from financialData
-anti join submissions on submissions."accessionNumber" = "financialData"."accessionNumber";
-
-
-
-select cd.cik, fd.prefix, cd."entityName", fd.units,fd.financialPeriod, fd.name, fd.label, fd.value, fd.description, form, endDate, financialYear, financialPeriod, s.filingDate, s.accessionNumber, fd.frame, fd."startDate" from financialData fd,companyDimension cd,submissions s
-where cd.cik=fd.cik and s.accessionNumber=fd.accessionNumber AND name ='PayablesToBrokerDealersAndClearingOrganizations';
+SELECT
+    DISTINCT name
+FROM
+    financialData
+WHERE
+    description IS NULL;
 
 
-select count(*) as uniqueDescr from (select distinct label from financialData );
 
-select Distinct name, label, description from financialData
-order by name;
-
-select * from companyDimension where firstTicker='MSFT';
-
-
-select companyDimension.cik, fd_gaap.prefix, fd_ifrs.prefix from companyDimension
-left outer join (select distinct cik, prefix  from financialData where prefix='us-gaap') as fd_gaap on companyDimension.cik = fd_gaap.cik
-left outer join (select distinct cik, prefix from financialData  where prefix='ifrs-full' ) as fd_ifrs on companyDimension.cik = fd_ifrs.cik;
+SELECT
+    count(*)
+FROM
+    financialData;
 
 
-select count(*) from (select distinct name from financialData where prefix='us-gaap') as gaapCount;
 
-select count(*) from (select distinct ancestorName from calculationTaxonomy where ancestorPrefix='us-gaap') as gaapCount;
+SELECT
+    *
+FROM
+    financialData anti
+    JOIN submissions ON submissions."accessionNumber" = "financialData"."accessionNumber";
+
+
+
+SELECT
+    cd.cik,
+    fd.prefix,
+    cd."entityName",
+    fd.units,
+    fd.financialPeriod,
+    fd.name,
+    fd.label,
+    fd.value,
+    fd.description,
+    form,
+    endDate,
+    financialYear,
+    financialPeriod,
+    s.filingDate,
+    s.accessionNumber,
+    fd.frame,
+    fd."startDate"
+FROM
+    financialData fd,
+    companyDimension cd,
+    submissions s
+WHERE
+    cd.cik = fd.cik
+    AND s.accessionNumber = fd.accessionNumber
+    AND name = 'PayablesToBrokerDealersAndClearingOrganizations';
+
+
+
+SELECT
+    count(*) AS uniqueDescr
+FROM
+    (
+        SELECT
+            DISTINCT label
+        FROM
+            financialData
+    );
+
+
+
+SELECT
+    DISTINCT name,
+    label,
+    description
+FROM
+    financialData
+ORDER BY
+    name;
+
+
+
+SELECT
+    *
+FROM
+    companyDimension
+WHERE
+    firstTicker = 'MSFT';
+
+
+
+SELECT
+    companyDimension.cik,
+    fd_gaap.prefix,
+    fd_ifrs.prefix
+FROM
+    companyDimension
+    LEFT OUTER JOIN (
+        SELECT
+            DISTINCT cik,
+            prefix
+        FROM
+            financialData
+        WHERE
+            prefix = 'us-gaap'
+    ) AS fd_gaap ON companyDimension.cik = fd_gaap.cik
+    LEFT OUTER JOIN (
+        SELECT
+            DISTINCT cik,
+            prefix
+        FROM
+            financialData
+        WHERE
+            prefix = 'ifrs-full'
+    ) AS fd_ifrs ON companyDimension.cik = fd_ifrs.cik;
+
+
+
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            DISTINCT name
+        FROM
+            financialData
+        WHERE
+            prefix = 'us-gaap'
+    ) AS gaapCount;
+
+
+
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            DISTINCT ancestorName
+        FROM
+            calculationTaxonomy
+        WHERE
+            ancestorPrefix = 'us-gaap'
+    ) AS gaapCount;
 
 
 
@@ -39,187 +147,377 @@ SELECT
     units,
     prefix,
     COUNT(*) AS occurrence_count
-FROM financialData
-GROUP BY accessionNumber, name, startDate, endDate, units,cik, prefix
-HAVING COUNT(*) > 1
-ORDER BY accessionNumber, occurrence_count DESC;
+FROM
+    financialData
+GROUP BY
+    accessionNumber,
+    name,
+    startDate,
+    endDate,
+    units,
+    cik,
+    prefix
+HAVING
+    COUNT(*) > 1
+ORDER BY
+    accessionNumber,
+    occurrence_count DESC;
+
 
 
 SELECT
-name,
-count(*) as count
-FROM (select distinct name from financialData) as financialData left outer join (select distinct definition, ancestorName from calculationTaxonomyHierarchy) as ct on financialData.name = ct.ancestorName
-GROUP BY name
-HAVING count>1
-ORDER BY count desc;
+    name,
+    count(*) AS count
+FROM
+    (
+        SELECT
+            DISTINCT name
+        FROM
+            financialData
+    ) AS financialData
+    LEFT OUTER JOIN (
+        SELECT
+            DISTINCT definition,
+            ancestorName
+        FROM
+            calculationTaxonomyHierarchy
+    ) AS ct ON financialData.name = ct.ancestorName
+GROUP BY
+    name
+HAVING
+    count > 1
+ORDER BY
+    count DESC;
 
 
-select distinct label from presentationTaxonomy;
+
+SELECT
+    fd.cik,
+    fd.accessionNumber,
+    fd.startDate,
+    fd.endDate,
+    s.reportDate,
+    s.filingDate,
+    fd.prefix,
+    s.form,
+    fd.frame,
+    fd.name,
+    fd.units,
+    fd."value",
+    "arcWeight",
+    "relativeDepth",
+    "keyStatementRole",
+    "ancestor",
+    descendant
+FROM
+    financialData fd
+    LEFT OUTER JOIN submissions s ON fd.cik = s.cik
+    AND fd.accessionNumber = s.accessionNumber
+    INNER JOIN calculationTaxonomyHierarchy cth ON cth.cik = fd.cik
+    AND cth."accessionNumber" = fd."accessionNumber"
+    AND fd.name = cth.descendant
+    AND cth."relativeDepth" = 1
+WHERE
+    fd.cik = 1750
+    AND fd.accessionNumber = '0001047469-11-006302'
+    AND s.reportDate = fd.endDate
+ORDER BY
+    fd.cik,
+    fd."accessionNumber",
+    s.form,
+    keyStatementRole,
+    fd.frame,
+    ancestor,
+    arcOrder;
 
 
-ALTER TABLE my_table ADD COLUMN partition_number INT;
 
-WITH ranked AS (
-    SELECT
-        ctid,  -- or your primary key
-        DENSE_RANK() OVER (ORDER BY col1, col2) AS rn
-    FROM my_table
-)
-UPDATE my_table t
-SET partition_number = r.rn
-FROM ranked r
-WHERE t.ctid = r.ctid;
+SELECT
+    ancestor,
+    descendant
+FROM
+    calculationTaxonomyHierarchy
+WHERE
+    descendant = 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'
+    AND cik = 1750
+    AND accessionNumber = '0001047469-11-006302';
 
 
 
-ALTER TABLE financialData ADD COLUMN partitionNumber INTEGER;
-
-UPDATE financialData 
-SET partitionNumber = g.rn
-FROM (
-    SELECT cik,
-    financialData.accessionNumber,
-    startDate,
-    endDate,
-    prefix, form, frame, DENSE_RANK() OVER (ORDER BY cik,
-    financialData.accessionNumber,
-    startDate,
-    endDate,
-    prefix, form, frame) AS rn
-    FROM financialData left OUTER join (select accessionNumber, form from submissions) as s on financialData.accessionNumber = s.accessionNumber
-    GROUP BY cik,
-    financialData.accessionNumber,
-    startDate,
-    endDate,
+SELECT
     prefix,
-    form, frame
-) g
-WHERE financialData.cik IS NOT DISTINCT FROM g.cik
-  AND financialData.accessionNumber IS NOT DISTINCT FROM g.accessionNumber AND 
-  financialData.startDate IS NOT DISTINCT FROM g.startDate 
-  AND financialData.endDate IS NOT DISTINCT FROM g.endDate 
-  AND financialData.prefix IS NOT DISTINCT FROM g.prefix
-  AND financialData.frame IS NOT DISTINCT FROM g.frame
-  
-  AND EXISTS (
-    SELECT 1
-    FROM financialData 
-    JOIN submissions sd ON sd.accessionNumber = financialData.accessionNumber
-    AND sd.form IS NOT DISTINCT FROM g.form);
-
-  checkpoint;
-
-
-ALTER TABLE financialData Drop COLUMN partitionNumber;
-checkpoint;
+    financialData.cik,
+    name,
+    value,
+    units,
+    partitionNumber,
+    startDate,
+    endDate,
+    form,
+    frame,
+    submissions.accessionNumber
+FROM
+    financialData
+    LEFT OUTER JOIN submissions ON financialData.accessionNumber = submissions.accessionNumber
+WHERE
+    prefix = 'ifrs-full'
+ORDER BY
+    partitionNumber,
+    name;
 
 
-select prefix, financialData.cik, name, value, units ,partitionNumber, startDate, endDate, form, frame, submissions.accessionNumber from financialData 
-left outer join submissions on financialData.accessionNumber = submissions.accessionNumber 
-where prefix = 'ifrs-full'order by partitionNumber, name;
+
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            DISTINCT cik,
+            accessionNumber
+        FROM
+            financialData
+    ) AS subCount;
 
 
-select count(*) from (select distinct cik, accessionNumber from financialData) as subCount;
 
-select  linkXlinkRole, count(*) as countRoles from calculationTaxonomyRaw
-group by linkXlinkRole
-ORDER by countRoles desc;
-
-select  toConcept, count(*) as countToConcepts from calculationTaxonomy
-where toConcept = '' or toConcept is null
-group by toConcept
-ORDER by countToConcepts desc;
-
-select * from (
-select  linkRole, keyStatmentRole, count(*) as countlinkRoles from (select distinct cik, accessionNUmber, ct.linkRole, keyStatmentRole from calculationTaxonomy ct left outer join CalcTaxRolesClassified ctc on ct.linkRole = ctc.linkRole)
-group by linkRole, keyStatmentRole
-ORDER by countlinkRoles desc
-limit 10000) where keyStatmentRole is null
-;
-
-select count(*) from (select distinct linkRole from calculationTaxonomy);
-
-SELECT ct.cik, ct.accessionNumber, ct.linkRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
-    ct.arcWeight from calculationTaxonomy ct anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
-    where ct.isPrimaryRole=TRUE
-    and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;
+SELECT
+    linkXlinkRole,
+    count(*) AS countRoles
+FROM
+    calculationTaxonomyRaw
+GROUP BY
+    linkXlinkRole
+ORDER BY
+    countRoles DESC;
 
 
-ALTER TABLE calculationTaxonomy ADD COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
-WITH ranked AS (
-    SELECT
-        cik,
-        accessionNumber,
-        ct.linkRole,
-        COUNT(*) AS conceptCount,
-        ROW_NUMBER() OVER (
-            PARTITION BY cik, accessionNumber, ctc.keyStatementRole
-            ORDER BY COUNT(*) DESC
-        ) AS rn
-    FROM calculationTaxonomy ct
-    INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
-    WHERE ctc.keyStatementRole IS NOT NULL
-    GROUP BY cik, accessionNumber, ct.linkRole, ctc.keyStatementRole
-),
-primaryRoles AS (
-    SELECT cik, accessionNumber, linkRole
-    FROM ranked
-    WHERE rn = 1
-)
-UPDATE calculationTaxonomy
-SET isPrimaryRole = TRUE
-WHERE (cik, accessionNumber, linkRole) IN (
-    SELECT cik, accessionNumber, linkRole FROM primaryRoles
-);
-checkpoint;
+
+SELECT
+    toConcept,
+    count(*) AS countToConcepts
+FROM
+    calculationTaxonomy
+WHERE
+    toConcept = ''
+    OR toConcept IS NULL
+GROUP BY
+    toConcept
+ORDER BY
+    countToConcepts DESC;
+
+
+
+SELECT
+    *
+FROM
+    (
+        SELECT
+            linkRole,
+            keyStatmentRole,
+            count(*) AS countlinkRoles
+        FROM
+            (
+                SELECT
+                    DISTINCT cik,
+                    accessionNUmber,
+                    ct.linkRole,
+                    keyStatmentRole
+                FROM
+                    calculationTaxonomy ct
+                    LEFT OUTER JOIN CalcTaxRolesClassified ctc ON ct.linkRole = ctc.linkRole
+            )
+        GROUP BY
+            linkRole,
+            keyStatmentRole
+        ORDER BY
+            countlinkRoles DESC
+        LIMIT
+            10000
+    )
+WHERE
+    keyStatmentRole IS NULL;
+
+
+
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            DISTINCT linkRole
+        FROM
+            calculationTaxonomy
+    );
+
+
+
+SELECT
+    ct.cik,
+    ct.accessionNumber,
+    ct.linkRole,
+    ct.fromConcept,
+    ct.toConcept,
+    ct.arcOrder,
+    ct.arcWeight
+FROM
+    calculationTaxonomy ct anti
+    JOIN calculationTaxonomyHierarchy cth ON cth.cik = ct.cik
+    AND cth.accessionNumber = ct.accessionNumber
+WHERE
+    ct.isPrimaryRole = TRUE
+    AND ct.fromConcept IS NOT NULL
+    AND ct.toConcept IS NOT NULL
+    AND ct.fromConcept <> ct.toConcept;
+
+
 
 /*
-CREATE OR REPLACE TABLE calculationTaxonomy AS
+CREATE
+OR REPLACE TABLE calculationTaxonomy AS
 SELECT
     cik,
     accessionNumber,
-    COALESCE(NULLIF(regexp_extract(replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''), '([A-Z]{1}[A-Za-z]+)'), ''), replace(regexp_extract(linkXlinkRole, '[^/]+$'), 'Role_', ''))  AS linkRole,
-    replace(regexp_extract(arcXlinkArcrole, '[^/]+$'), 'Role_', '') AS arcRole,
-    regexp_extract(replace(Replace(arcXlinkFrom, 'loc_', ''), 'Locator_', ''), '^([^.]+?)_', 1) AS fromPrefix,
-    COALESCE(NULLIF(regexp_extract(replace(replace(arcXlinkFrom,'loc_', ''), 'Locator_', ''), '([A-Z]{1}[a-z]{2,}[A-Za-z]+)', 1), ''), replace(replace(arcXlinkFrom,'loc_', ''), 'Locator_', '')) AS fromConcept,
-    regexp_extract(replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', ''),   '^([^.]+?)_', 1) AS toPrefix,
-    COALESCE(NULLIF(regexp_extract(replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', ''),   '([A-Z]{1}[a-z]{2,}[A-Za-z]+)', 1), ''), replace(replace(arcXlinkTo,'loc_', ''), 'Locator_', '')) AS toConcept,
+    COALESCE(
+        NULLIF(
+            regexp_extract(
+                REPLACE(
+                    regexp_extract(linkXlinkRole, '[^/]+$'),
+                    'Role_',
+                    ''
+                ),
+                '([A-Z]{1}[A-Za-z]+)'
+            ),
+            ''
+        ),
+        REPLACE(
+            regexp_extract(linkXlinkRole, '[^/]+$'),
+            'Role_',
+            ''
+        )
+    ) AS linkRole,
+    REPLACE(
+        regexp_extract(arcXlinkArcrole, '[^/]+$'),
+        'Role_',
+        ''
+    ) AS arcRole,
+    regexp_extract(
+        REPLACE(
+            REPLACE(arcXlinkFrom, 'loc_', ''),
+            'Locator_',
+            ''
+        ),
+        '^([^.]+?)_',
+        1
+    ) AS fromPrefix,
+    COALESCE(
+        NULLIF(
+            regexp_extract(
+                REPLACE(
+                    REPLACE(arcXlinkFrom, 'loc_', ''),
+                    'Locator_',
+                    ''
+                ),
+                '([A-Z]{1}[a-z]{2,}[A-Za-z]+)',
+                1
+            ),
+            ''
+        ),
+        REPLACE(
+            REPLACE(arcXlinkFrom, 'loc_', ''),
+            'Locator_',
+            ''
+        )
+    ) AS fromConcept,
+    regexp_extract(
+        REPLACE(REPLACE(arcXlinkTo, 'loc_', ''), 'Locator_', ''),
+        '^([^.]+?)_',
+        1
+    ) AS toPrefix,
+    COALESCE(
+        NULLIF(
+            regexp_extract(
+                REPLACE(REPLACE(arcXlinkTo, 'loc_', ''), 'Locator_', ''),
+                '([A-Z]{1}[a-z]{2,}[A-Za-z]+)',
+                1
+            ),
+            ''
+        ),
+        REPLACE(REPLACE(arcXlinkTo, 'loc_', ''), 'Locator_', '')
+    ) AS toConcept,
     arcUse,
     arcOrder,
     arcWeight
-FROM calculationTaxonomyRaw;
+FROM
+    calculationTaxonomyRaw;
+
+
+
 checkpoint;
 
-ALTER TABLE calculationTaxonomy ADD COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
+
+
+ALTER TABLE
+    calculationTaxonomy
+ADD
+    COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
+
+
+
 WITH ranked AS (
     SELECT
         cik,
         accessionNumber,
         ct.linkRole,
-        COUNT(*) AS conceptCount,
         ROW_NUMBER() OVER (
-            PARTITION BY cik, accessionNumber, ctc.keyStatementRole
-            ORDER BY COUNT(*) DESC
+            PARTITION BY cik,
+            accessionNumber,
+            ctc.keyStatementRole
+            ORDER BY
+                COUNT(*) DESC
         ) AS rn
-    FROM calculationTaxonomy ct
-    INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
-    WHERE ctc.keyStatementRole IS NOT NULL
-    GROUP BY cik, accessionNumber, ct.linkRole, ctc.keyStatementRole
-),
-primaryRoles AS (
-    SELECT cik, accessionNumber, linkRole
-    FROM ranked
-    WHERE rn = 1
+    FROM
+        calculationTaxonomy ct
+        INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
+    WHERE
+        ctc.keyStatementRole IS NOT NULL
+    GROUP BY
+        cik,
+        accessionNumber,
+        ct.linkRole,
+        ctc.keyStatementRole
 )
-UPDATE calculationTaxonomy
-SET isPrimaryRole = TRUE
-WHERE (cik, accessionNumber, linkRole) IN (
-    SELECT cik, accessionNumber, linkRole FROM primaryRoles
-);
-checkpoint;
+UPDATE
+    calculationTaxonomy
+SET
+    isPrimaryRole = TRUE
+FROM
+    ranked
+WHERE
+    ranked.rn = 1
+    AND calculationTaxonomy.cik = ranked.cik
+    AND calculationTaxonomy.accessionNumber = ranked.accessionNumber
+    AND calculationTaxonomy.linkRole = ranked.linkRole;
+
+CHECKPOINT;
+
 */
 
-SELECT ct.cik, ct.accessionNumber, ct.linkRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
-    ct.arcWeight from calculationTaxonomy ct anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
-    where ct.isPrimaryRole=TRUE
-    and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;
+SELECT
+    ct.cik,
+    ct.accessionNumber,
+    ct.linkRole,
+    crc.keyStatementRole,
+    ct.fromConcept,
+    ct.toConcept,
+    ct.arcOrder,
+    ct.arcWeight
+FROM
+    calculationTaxonomy ct
+    LEFT OUTER JOIN calcTaxRolesClassified crc ON crc.linkRole = ct.linkRole anti
+    JOIN calculationTaxonomyHierarchy cth ON cth.cik = ct.cik
+    AND cth.accessionNumber = ct.accessionNumber
+WHERE
+    ct.isPrimaryRole = TRUE
+    AND ct.fromConcept IS NOT NULL
+    AND ct.toConcept IS NOT NULL
+    AND ct.fromConcept <> ct.toConcept;

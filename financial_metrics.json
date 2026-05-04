@@ -1,0 +1,1036 @@
+[
+  {
+    "category": "Profitability",
+    "metric": "Gross Profit",
+    "formula": "Revenue - COGS",
+    "components": [
+      {
+        "role": "base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "RevenueFromContractWithCustomerIncludingAssessedTax"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsSoldAndServicesSold", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Profitability",
+    "metric": "Gross Profit Margin",
+    "formula": "Gross Profit / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["GrossProfit"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "RevenueFromContractWithCustomerIncludingAssessedTax"],
+        "requires_average": false
+      }
+    ],
+    "notes": "GrossProfit may be reported directly or must be derived as Revenue - COGS"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Operating Income (EBIT)",
+    "formula": "Revenue - COGS - Operating Expenses",
+    "components": [
+      {
+        "role": "base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss", "IncomeLossFromContinuingOperationsBeforeInterestExpenseInterestIncomeIncomeTaxesExtraordinaryItemsNoncontrollingInterestsNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": "OperatingIncomeLoss is usually reported directly; if absent derive from Revenue - COGS - OpEx"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Operating Margin",
+    "formula": "Operating Income / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Profitability",
+    "metric": "EBITDA",
+    "formula": "Operating Income + Depreciation & Amortization",
+    "components": [
+      {
+        "role": "base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "add",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation", "DepreciationNonproduction", "DepreciationAmortizationAndAccretionNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": "D&A is typically found in CashFlow as a non-cash adjustment under NetCashProvidedByUsedInOperatingActivities, not on the IncomeStatement"
+  },
+  {
+    "category": "Profitability",
+    "metric": "EBITDA Margin",
+    "formula": "EBITDA / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "numerator_add",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": "EBITDA must be derived first; see EBITDA metric"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Net Profit Margin",
+    "formula": "Net Income / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome", "ProfitLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Profitability",
+    "metric": "Return on Assets (ROA)",
+    "formula": "Net Income / Total Assets",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome", "ProfitLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["Assets"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Total Assets should ideally be averaged over the period (beginning + ending / 2); requires two consecutive filings"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Return on Equity (ROE)",
+    "formula": "Net Income / Shareholders Equity",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome", "ProfitLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest", "LiabilitiesAndStockholdersEquity"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Equity should ideally be averaged; requires two consecutive filings"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Return on Invested Capital (ROIC)",
+    "formula": "NOPAT / (Total Debt + Shareholders Equity)",
+    "components": [
+      {
+        "role": "numerator_base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "numerator_tax_adjustment",
+        "statement": "IncomeStatement",
+        "concept_hints": ["IncomeTaxExpenseBenefit", "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_debt",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "LongTermDebtAndCapitalLeaseObligations", "DebtCurrent", "ShortTermBorrowings"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_equity",
+        "statement": "BalanceSheet",
+        "concept_hints": ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+        "requires_average": false
+      }
+    ],
+    "notes": "NOPAT = OperatingIncome * (1 - effective tax rate); effective tax rate = IncomeTaxExpense / PreTaxIncome"
+  },
+  {
+    "category": "Profitability",
+    "metric": "Return on Capital Employed (ROCE)",
+    "formula": "EBIT / (Total Assets - Current Liabilities)",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_assets",
+        "statement": "BalanceSheet",
+        "concept_hints": ["Assets"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_subtract",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Liquidity",
+    "metric": "Current Ratio",
+    "formula": "Current Assets / Current Liabilities",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AssetsCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Liquidity",
+    "metric": "Quick Ratio",
+    "formula": "(Current Assets - Inventory) / Current Liabilities",
+    "components": [
+      {
+        "role": "numerator_base",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AssetsCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "numerator_subtract",
+        "statement": "BalanceSheet",
+        "concept_hints": ["InventoryNet", "InventoryGross", "FIFOInventoryAmount"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Liquidity",
+    "metric": "Cash Ratio",
+    "formula": "Cash & Equivalents / Current Liabilities",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CashAndCashEquivalentsAtCarryingValue", "Cash", "CashCashEquivalentsAndShortTermInvestments"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Liquidity",
+    "metric": "Operating Cash Flow Ratio",
+    "formula": "Operating Cash Flow / Current Liabilities",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Liquidity",
+    "metric": "Working Capital",
+    "formula": "Current Assets - Current Liabilities",
+    "components": [
+      {
+        "role": "base",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AssetsCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Leverage",
+    "metric": "Debt-to-Equity",
+    "formula": "Total Debt / Shareholders Equity",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "LongTermDebtAndCapitalLeaseObligations", "DebtCurrent", "ShortTermBorrowings", "LongTermDebtCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Total Debt = LongTermDebt + ShortTermBorrowings + current portion of LTD"
+  },
+  {
+    "category": "Leverage",
+    "metric": "Debt-to-Assets",
+    "formula": "Total Debt / Total Assets",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "ShortTermBorrowings", "DebtCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["Assets"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Leverage",
+    "metric": "Interest Coverage Ratio",
+    "formula": "EBIT / Interest Expense",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["InterestExpense", "InterestExpenseDebt", "InterestAndDebtExpense"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Leverage",
+    "metric": "Net Debt",
+    "formula": "Total Debt - Cash & Equivalents",
+    "components": [
+      {
+        "role": "base",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "ShortTermBorrowings", "DebtCurrent", "LongTermDebtAndCapitalLeaseObligations"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CashAndCashEquivalentsAtCarryingValue", "Cash", "CashCashEquivalentsAndShortTermInvestments"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Total Debt = LongTermDebt + ShortTermBorrowings; negative Net Debt means net cash position"
+  },
+  {
+    "category": "Leverage",
+    "metric": "Net Debt / EBITDA",
+    "formula": "Net Debt / EBITDA",
+    "components": [
+      {
+        "role": "numerator_debt",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "ShortTermBorrowings", "DebtCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "numerator_subtract_cash",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CashAndCashEquivalentsAtCarryingValue", "Cash"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_add_da",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Requires EBITDA derivation; see EBITDA metric"
+  },
+  {
+    "category": "Leverage",
+    "metric": "Debt Service Coverage",
+    "formula": "Operating Income / (Interest Expense + Current Portion LTD)",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_interest",
+        "statement": "IncomeStatement",
+        "concept_hints": ["InterestExpense", "InterestExpenseDebt"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_current_ltd",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Asset Turnover",
+    "formula": "Revenue / Average Total Assets",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["Assets"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires two consecutive filings to average Total Assets"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Fixed Asset Turnover",
+    "formula": "Revenue / Net PP&E",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["PropertyPlantAndEquipmentNet"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires averaging PP&E over the period"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Capital Turnover",
+    "formula": "Revenue / (Total Debt + Shareholders Equity)",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_debt",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LongTermDebt", "ShortTermBorrowings"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_equity",
+        "statement": "BalanceSheet",
+        "concept_hints": ["StockholdersEquity"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Working Capital Turnover",
+    "formula": "Revenue / Working Capital",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_current_assets",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AssetsCurrent"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator_subtract_current_liabilities",
+        "statement": "BalanceSheet",
+        "concept_hints": ["LiabilitiesCurrent"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Inventory Turnover",
+    "formula": "COGS / Average Inventory",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsSoldAndServicesSold", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["InventoryNet", "InventoryGross", "FIFOInventoryAmount"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires two consecutive filings to average Inventory; not applicable to service companies"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Days Inventory Outstanding (DIO)",
+    "formula": "365 / Inventory Turnover",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["InventoryNet", "InventoryGross"],
+        "requires_average": true
+      }
+    ],
+    "notes": "DIO = Average Inventory * 365 / COGS; requires two consecutive filings"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Accounts Receivable Turnover",
+    "formula": "Revenue / Average Accounts Receivable",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsReceivableNetCurrent", "AccountsReceivableNet", "ReceivablesNetCurrent"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires two consecutive filings to average AR"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Days Sales Outstanding (DSO)",
+    "formula": "Average Accounts Receivable * 365 / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsReceivableNetCurrent", "AccountsReceivableNet", "ReceivablesNetCurrent"],
+        "requires_average": true
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Requires two consecutive filings to average AR"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Accounts Payable Turnover",
+    "formula": "COGS / Average Accounts Payable",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsPayableCurrent", "AccountsPayableAndAccruedLiabilitiesCurrent"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires two consecutive filings to average AP"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Days Payable Outstanding (DPO)",
+    "formula": "Average Accounts Payable * 365 / COGS",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsPayableCurrent", "AccountsPayableAndAccruedLiabilitiesCurrent"],
+        "requires_average": true
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Requires two consecutive filings to average AP"
+  },
+  {
+    "category": "Efficiency",
+    "metric": "Cash Conversion Cycle (CCC)",
+    "formula": "DIO + DSO - DPO",
+    "components": [
+      {
+        "role": "base_dio",
+        "statement": "BalanceSheet",
+        "concept_hints": ["InventoryNet"],
+        "requires_average": true
+      },
+      {
+        "role": "add_dso",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsReceivableNetCurrent", "AccountsReceivableNet"],
+        "requires_average": true
+      },
+      {
+        "role": "subtract_dpo",
+        "statement": "BalanceSheet",
+        "concept_hints": ["AccountsPayableCurrent"],
+        "requires_average": true
+      },
+      {
+        "role": "shared_cogs",
+        "statement": "IncomeStatement",
+        "concept_hints": ["CostOfGoodsSold", "CostOfRevenue", "CostOfGoodsAndServicesSold"],
+        "requires_average": false
+      },
+      {
+        "role": "shared_revenue",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Derived metric; requires DIO, DSO, DPO. Requires two consecutive filings for all average balance components"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Operating Cash Flow (OCF)",
+    "formula": "Reported directly",
+    "components": [
+      {
+        "role": "base",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Reported directly on cash flow statement; no derivation needed"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Free Cash Flow (FCF)",
+    "formula": "Operating Cash Flow - CapEx",
+    "components": [
+      {
+        "role": "base",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsForCapitalImprovements", "PaymentsToAcquireProductiveAssets"],
+        "requires_average": false
+      }
+    ],
+    "notes": "CapEx is found under NetCashProvidedByUsedInInvestingActivities with arcWeight=-1; use absolute value before subtracting"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Free Cash Flow to Firm (FCFF)",
+    "formula": "EBIT * (1 - Tax Rate) + D&A - CapEx - Change in Working Capital",
+    "components": [
+      {
+        "role": "base_ebit",
+        "statement": "IncomeStatement",
+        "concept_hints": ["OperatingIncomeLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "tax_rate_numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["IncomeTaxExpenseBenefit"],
+        "requires_average": false
+      },
+      {
+        "role": "tax_rate_denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"],
+        "requires_average": false
+      },
+      {
+        "role": "add_da",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract_capex",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract_change_in_working_capital",
+        "statement": "CashFlow",
+        "concept_hints": ["IncreaseDecreaseInOperatingCapital", "IncreaseDecreaseInAccountsReceivable", "IncreaseDecreaseInInventories", "IncreaseDecreaseInAccountsPayable"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Complex derivation; change in working capital is often reported as a net line in CashFlow or must be summed from individual working capital changes"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Free Cash Flow to Equity (FCFE)",
+    "formula": "Net Income + D&A - CapEx - Change in Working Capital + Net Borrowing",
+    "components": [
+      {
+        "role": "base",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome", "ProfitLoss"],
+        "requires_average": false
+      },
+      {
+        "role": "add_da",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract_capex",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+        "requires_average": false
+      },
+      {
+        "role": "subtract_change_in_working_capital",
+        "statement": "CashFlow",
+        "concept_hints": ["IncreaseDecreaseInOperatingCapital"],
+        "requires_average": false
+      },
+      {
+        "role": "add_net_borrowing",
+        "statement": "CashFlow",
+        "concept_hints": ["ProceedsFromIssuanceOfLongTermDebt", "RepaymentsOfLongTermDebt", "ProceedsFromRepaymentsOfShortTermDebt"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Net Borrowing = Proceeds from debt issuance - Repayments; both found under NetCashProvidedByUsedInFinancingActivities"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Cash Flow Margin",
+    "formula": "Operating Cash Flow / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "CashFlow",
+    "metric": "CapEx to Revenue",
+    "formula": "CapEx / Revenue",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+        "requires_average": false
+      }
+    ],
+    "notes": "CapEx has arcWeight=-1 in the hierarchy; use absolute value"
+  },
+  {
+    "category": "CashFlow",
+    "metric": "CapEx to Depreciation",
+    "formula": "CapEx / Depreciation & Amortization",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "CashFlow",
+        "concept_hints": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "Depreciation"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "CashFlow",
+    "metric": "Cash Return on Assets",
+    "formula": "Operating Cash Flow / Total Assets",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["Assets"],
+        "requires_average": true
+      }
+    ],
+    "notes": "Requires two consecutive filings to average Total Assets"
+  },
+  {
+    "category": "PerShare",
+    "metric": "Earnings Per Share - Basic (EPS)",
+    "formula": "Net Income / Weighted Average Basic Shares Outstanding",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["WeightedAverageNumberOfSharesOutstandingBasic", "CommonStockSharesOutstanding"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Often reported directly as EarningsPerShareBasic"
+  },
+  {
+    "category": "PerShare",
+    "metric": "Earnings Per Share - Diluted (EPS)",
+    "formula": "Net Income / Weighted Average Diluted Shares Outstanding",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["NetIncomeLoss", "NetIncome"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "IncomeStatement",
+        "concept_hints": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
+        "requires_average": false
+      }
+    ],
+    "notes": "Often reported directly as EarningsPerShareDiluted"
+  },
+  {
+    "category": "PerShare",
+    "metric": "Book Value Per Share",
+    "formula": "Shareholders Equity / Shares Outstanding",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CommonStockSharesOutstanding"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "PerShare",
+    "metric": "Operating Cash Flow Per Share",
+    "formula": "Operating Cash Flow / Shares Outstanding",
+    "components": [
+      {
+        "role": "numerator",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CommonStockSharesOutstanding"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  },
+  {
+    "category": "PerShare",
+    "metric": "Free Cash Flow Per Share",
+    "formula": "Free Cash Flow / Shares Outstanding",
+    "components": [
+      {
+        "role": "numerator_ocf",
+        "statement": "CashFlow",
+        "concept_hints": ["NetCashProvidedByUsedInOperatingActivities"],
+        "requires_average": false
+      },
+      {
+        "role": "numerator_subtract_capex",
+        "statement": "CashFlow",
+        "concept_hints": ["PaymentsToAcquirePropertyPlantAndEquipment"],
+        "requires_average": false
+      },
+      {
+        "role": "denominator",
+        "statement": "BalanceSheet",
+        "concept_hints": ["CommonStockSharesOutstanding"],
+        "requires_average": false
+      }
+    ],
+    "notes": null
+  }
+]
