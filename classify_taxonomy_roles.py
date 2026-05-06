@@ -7,10 +7,16 @@ import os
 def normalize(s):
     return re.sub(r'[^a-z]', '', s.lower())
 
+SPECIFIC_DISCARD = ['disclosure', 'schedule', 'changes', 'credit', 'derivative', 'complement',
+                    'detailsdetails', 'changein', 'changes', 'rsoconsolidated', 'divest', 'offset']
+INCOME_STATEMENT_DISCARD = ['disclosure', 'schedule', 
+                            'equity', 'changes', 'credit',
+                            'derivative', 'othercomprehensiveincomelossdetails',
+                            'othercomprehensiveincomedetails',
+                            'othercomprehensivelossdetails', 'change']
+CASH_FLOW_DISCARD = ['disclosure', 'schedule', 'credit', 'derivative', 'complement']
+
 DISCARD_PATTERNS = [
-    'details',
-    'disclosure',
-    'schedule',
     'parenthetical',
     'supplemental',
     'calc',
@@ -18,7 +24,6 @@ DISCARD_PATTERNS = [
     'guarantor',
     'nonguarantor',
     'consolidating',   # catches CondensedConsolidating*
-    'parentcompany',
     'selectedbalancesheet',
     'selectedquarterly',
     'quarterly',
@@ -32,8 +37,74 @@ DISCARD_PATTERNS = [
     'policies',
     'description',
     'organization',
+    'acquisition'
+    'offset',
+    'reclassification',
+    'discontinued',
+    'taxschedule'
+    'taxesschedule',
+    'lease',
+    'tax',
+    'financing',
+    'component',
+    'future',
+    'productiondetail',
+    'project',
+    'selected'
+    'informationsummary',
+    'informationdetails',
+    'logistics',
+    'detaildetail',
+    'detailsdetail',
+    'assumption',
+    'fairvalue'
 ]
 
+SHARES_DISCLOSURE_PATTERNS = [
+    'earningspershare',
+    'earningspershares',
+    'earningspersharedetail',
+    'earningslosspersha',
+    'losspershare',
+    'losspersha',
+    'netincomepershare',
+    'netincomelosspersha',
+    'netlosspershare',
+    'incomepershare',
+    'incomelosspershare',
+    'dilutedearnings',
+    'basicanddiluted',
+    'weightedaverageshar',
+    'weightedaveragecommonsha',
+    'computationofbasic',
+    'computationofearningsper',
+    'reconciliationofbasicper',
+    'reconciliationofearningsper',
+    'earningsperu',             # per unit variants
+    'netincomeperunit',                    # employee stock ownership plan
+    'employeestockownership',
+    'changesinequity',
+    'changesinnetassets',
+    'changesinsharehold',
+    'statementofstockholders',
+    'statementofshareholders',
+    'statementsofstockholders',
+    'statementsofsharehold',
+    'statementofmembers',
+    'statementofpartners',
+    'partnercapital',
+    'partnerscapital',
+    'membercapital',
+    'membersequity',
+    'redeemablecapital',
+    'commonstock',              # common stock details/reserves
+    'sharesreserved',
+    'stockreserved',
+    'sharesoutstanding',
+    'sharetransactions',
+    'sharecapital',
+    'disclosureshareholdersequitydetails'
+]
 # Equity statement patterns — exclude from our 3 targets
 EQUITY_PATTERNS = [
     'stockholdersequity',
@@ -43,19 +114,23 @@ EQUITY_PATTERNS = [
     'changesinequity',
     'changesinnetassets',
     'changesinmembercapital',
-    'membercapital',
-    'statem',  # too broad — skip
+    'membercapital', 
+    'statementsofequity',
+    'statementofequity'
 ]
 
 CASH_FLOW_PATTERNS = [
     'cashflow', 'cashflows',
-    'statementofcashflow', 'statementsofcashflow',
-    'cashflowsindirect', 'cashflowsdirect',
-    'cashflowstatement',
+    'statementofcashflow', 
+    'statementsofcashflow',
+    'cashflowsindirect', 
+    'cashflowsdirect',
+    'cashflowstatement'
 ]
 
 BALANCE_SHEET_PATTERNS = [
-    'balancesheet', 'balancesheets',
+    'balancesheet', 
+    'balancesheets',
     'financialposition',
     'financialcondition',
     'assetsandliabilities',
@@ -66,17 +141,28 @@ BALANCE_SHEET_PATTERNS = [
     'statementoffinancialposition',
     'statementsoffinancialposition',
     'statementsofassetsandliabilities',
-    'statementofassetsandliabilities',
-    'schedulesofinvestments',   # investment fund balance sheet equiv
+    'statementofassetsandliabilities', 
+    'statementBalanceSheet',
+    'statementoffinancialcondtion', 
+    'consolidatedstatementoffinancialposition',
+    'consolidatedstatementsoffinancialposition' # investment fund balance sheet equiv
 ]
 
 INCOME_STATEMENT_PATTERNS = [
-    'statementsofoperations', 'statementofoperations',
-    'incomestatement', 'incomestatements',
-    'statementofincome', 'statementsofincome',
-    'statementsofearnings', 'statementofearnings',
-    'consolidatedincome',
+    'statementsofoperations', 
+    'statementofoperations',
+    'incomestatement', 
+    'incomestatements',
+    'statementofincome', 
+    'statementsofincome',
+    'statementsofearnings', 
+    'statementofearnings',
+    'consolidatedincome', 
+    'consolidatedstatementsofincome',
+    'statementsofconsolidatedincome',
+    'consolidatedstatementsofloss',
     'comprehensiveincome',
+    'statementsofconsolidatedloss',
     'comprehensiveloss',
     'comprehensiveearnings',
     'statementsofoperationsandcomprehensive',
@@ -88,43 +174,33 @@ INCOME_STATEMENT_PATTERNS = [
     'statementsofincomeandexpenses',
     'statementsofnetincome',
     'resultsofoperations',
-    'statementsofoperationsandother',
-]
-
-def is_equity_statement(n):
-    equity_signals = [
-        'stockholdersequity', 'shareholdersequity',
-        'partnerscapital', 'changesinequity',
-        'changesinnetassets', 'membercapital',
-        'changesinsharehold', 'changesinstock',
-        'statementsofequity', 'statementofequity',
-        'statementofchanges',
-    ]
-    return any(p in n for p in equity_signals)
+    'statementsofoperationsandother']
 
 def classify_role(role_tail: str):
     n = normalize(role_tail)
-    
+
     # Step 1: discard noise
     if any(p in n for p in DISCARD_PATTERNS):
         return None
     
-    # Step 2: discard equity statements
-    if is_equity_statement(n):
-        return 'EquityStatement'
-    
     # Step 3: cash flow (before income — more specific)
-    if any(p in n for p in CASH_FLOW_PATTERNS):
+    if any(p in n for p in CASH_FLOW_PATTERNS) and not any(p in n for p in CASH_FLOW_DISCARD): 
         return 'CashFlow'
     
     # Step 4: balance sheet
-    if any(p in n for p in BALANCE_SHEET_PATTERNS):
+    if any(p in n for p in BALANCE_SHEET_PATTERNS) and not any(p in n for p in SPECIFIC_DISCARD): 
         return 'BalanceSheet'
     
     # Step 5: income statement
-    if any(p in n for p in INCOME_STATEMENT_PATTERNS):
+    if any(p in n for p in INCOME_STATEMENT_PATTERNS) and not any(p in n and n != 'statementofothercomprehensiveincome' and n != 'othercomprehensiveincome' and n != 'othercomprehensiveincomestatement' for p in INCOME_STATEMENT_DISCARD): 
         return 'IncomeStatement'
     
+    if any(p in n for p in EQUITY_PATTERNS):
+        return 'EquityStatement'
+    
+    if any(p in n for p in SHARES_DISCLOSURE_PATTERNS):
+        return 'SharesDisclosure'
+   
     return None
 
 if __name__ == "__main__":
@@ -141,6 +217,7 @@ if __name__ == "__main__":
     roles_df = conn.execute('''select distinct linkRole from calculationTaxonomy''').fetch_df()
     
     roles_df['keyStatementRole'] = roles_df['linkRole'].apply(classify_role)
+    roles_df = roles_df[roles_df['keyStatementRole'].notna()]
 
     conn.register('presentation_df', roles_df)
     conn.execute("CREATE OR REPLACE TABLE calcTaxRolesClassified AS SELECT * FROM roles_df; CHECKPOINT;")

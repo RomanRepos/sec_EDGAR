@@ -51,145 +51,6 @@ WHERE
 
 
 
-SELECT
-    count(*) AS uniqueDescr
-FROM
-    (
-        SELECT
-            DISTINCT label
-        FROM
-            financialData
-    );
-
-
-
-SELECT
-    DISTINCT name,
-    label,
-    description
-FROM
-    financialData
-ORDER BY
-    name;
-
-
-
-SELECT
-    *
-FROM
-    companyDimension
-WHERE
-    firstTicker = 'MSFT';
-
-
-
-SELECT
-    companyDimension.cik,
-    fd_gaap.prefix,
-    fd_ifrs.prefix
-FROM
-    companyDimension
-    LEFT OUTER JOIN (
-        SELECT
-            DISTINCT cik,
-            prefix
-        FROM
-            financialData
-        WHERE
-            prefix = 'us-gaap'
-    ) AS fd_gaap ON companyDimension.cik = fd_gaap.cik
-    LEFT OUTER JOIN (
-        SELECT
-            DISTINCT cik,
-            prefix
-        FROM
-            financialData
-        WHERE
-            prefix = 'ifrs-full'
-    ) AS fd_ifrs ON companyDimension.cik = fd_ifrs.cik;
-
-
-
-SELECT
-    count(*)
-FROM
-    (
-        SELECT
-            DISTINCT name
-        FROM
-            financialData
-        WHERE
-            prefix = 'us-gaap'
-    ) AS gaapCount;
-
-
-
-SELECT
-    count(*)
-FROM
-    (
-        SELECT
-            DISTINCT ancestorName
-        FROM
-            calculationTaxonomy
-        WHERE
-            ancestorPrefix = 'us-gaap'
-    ) AS gaapCount;
-
-
-
-SELECT
-    cik,
-    accessionNumber,
-    startDate,
-    endDate,
-    name,
-    units,
-    prefix,
-    COUNT(*) AS occurrence_count
-FROM
-    financialData
-GROUP BY
-    accessionNumber,
-    name,
-    startDate,
-    endDate,
-    units,
-    cik,
-    prefix
-HAVING
-    COUNT(*) > 1
-ORDER BY
-    accessionNumber,
-    occurrence_count DESC;
-
-
-
-SELECT
-    name,
-    count(*) AS count
-FROM
-    (
-        SELECT
-            DISTINCT name
-        FROM
-            financialData
-    ) AS financialData
-    LEFT OUTER JOIN (
-        SELECT
-            DISTINCT definition,
-            ancestorName
-        FROM
-            calculationTaxonomyHierarchy
-    ) AS ct ON financialData.name = ct.ancestorName
-GROUP BY
-    name
-HAVING
-    count > 1
-ORDER BY
-    count DESC;
-
-
 
 SELECT
     fd.cik,
@@ -206,7 +67,8 @@ SELECT
     fd."value",
     "arcWeight",
     "relativeDepth",
-    "keyStatementRole",
+    "keyStatementRole" AS financialStatement,
+    linkRole,
     "ancestor",
     descendant
 FROM
@@ -218,9 +80,8 @@ FROM
     AND fd.name = cth.descendant
     AND cth."relativeDepth" = 1
 WHERE
-    fd.cik = 1750
-    AND fd.accessionNumber = '0001047469-11-006302'
-    AND s.reportDate = fd.endDate
+    s.reportDate = fd.endDate
+    AND units = 'shares'
 ORDER BY
     fd.cik,
     fd."accessionNumber",
@@ -228,82 +89,9 @@ ORDER BY
     keyStatementRole,
     fd.frame,
     ancestor,
-    arcOrder;
-
-
-
-SELECT
-    ancestor,
-    descendant
-FROM
-    calculationTaxonomyHierarchy
-WHERE
-    descendant = 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'
-    AND cik = 1750
-    AND accessionNumber = '0001047469-11-006302';
-
-
-
-SELECT
-    prefix,
-    financialData.cik,
-    name,
-    value,
-    units,
-    partitionNumber,
-    startDate,
-    endDate,
-    form,
-    frame,
-    submissions.accessionNumber
-FROM
-    financialData
-    LEFT OUTER JOIN submissions ON financialData.accessionNumber = submissions.accessionNumber
-WHERE
-    prefix = 'ifrs-full'
-ORDER BY
-    partitionNumber,
-    name;
-
-
-
-SELECT
-    count(*)
-FROM
-    (
-        SELECT
-            DISTINCT cik,
-            accessionNumber
-        FROM
-            financialData
-    ) AS subCount;
-
-
-
-SELECT
-    linkXlinkRole,
-    count(*) AS countRoles
-FROM
-    calculationTaxonomyRaw
-GROUP BY
-    linkXlinkRole
-ORDER BY
-    countRoles DESC;
-
-
-
-SELECT
-    toConcept,
-    count(*) AS countToConcepts
-FROM
-    calculationTaxonomy
-WHERE
-    toConcept = ''
-    OR toConcept IS NULL
-GROUP BY
-    toConcept
-ORDER BY
-    countToConcepts DESC;
+    arcOrder
+LIMIT
+    10000;
 
 
 
@@ -351,27 +139,6 @@ FROM
 
 
 
-SELECT
-    ct.cik,
-    ct.accessionNumber,
-    ct.linkRole,
-    ct.fromConcept,
-    ct.toConcept,
-    ct.arcOrder,
-    ct.arcWeight
-FROM
-    calculationTaxonomy ct anti
-    JOIN calculationTaxonomyHierarchy cth ON cth.cik = ct.cik
-    AND cth.accessionNumber = ct.accessionNumber
-WHERE
-    ct.isPrimaryRole = TRUE
-    AND ct.fromConcept IS NOT NULL
-    AND ct.toConcept IS NOT NULL
-    AND ct.fromConcept <> ct.toConcept;
-
-
-
-/*
 CREATE
 OR REPLACE TABLE calculationTaxonomy AS
 SELECT
@@ -449,42 +216,140 @@ SELECT
     arcWeight
 FROM
     calculationTaxonomyRaw;
-
-
-
 checkpoint;
 
 
+
+ALTER TABLE
+    calculationTaxonomy DROP COLUMN isPrimaryRole;
+CHECKPOINT;
 
 ALTER TABLE
     calculationTaxonomy
 ADD
     COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
 
+CREATE OR REPLACE TEMP TABLE hasNonCondensed AS
+SELECT DISTINCT
+    ct.cik,
+    ct.accessionNumber,
+    ctc.keyStatementRole
+FROM calculationTaxonomy ct
+INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
+WHERE ctc.keyStatementRole IS NOT NULL
+  AND LOWER(ct.linkRole) NOT LIKE '%condensed%';
 
 
 WITH ranked AS (
     SELECT
-        cik,
-        accessionNumber,
-        ct.linkRole,
-        ROW_NUMBER() OVER (
-            PARTITION BY cik,
-            accessionNumber,
-            ctc.keyStatementRole
-            ORDER BY
-                COUNT(*) DESC
-        ) AS rn
-    FROM
-        calculationTaxonomy ct
-        INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
-    WHERE
-        ctc.keyStatementRole IS NOT NULL
-    GROUP BY
-        cik,
-        accessionNumber,
-        ct.linkRole,
-        ctc.keyStatementRole
+    ct.cik,
+    ct.accessionNumber,
+    ct.linkRole,
+    ctc.keyStatementRole,
+    COUNT(*) AS conceptCount,
+    LENGTH(ct.linkRole) AS roleLength,
+    CASE WHEN LOWER(ct.linkRole) LIKE '%consolidated%' THEN 1 ELSE 0 END AS hasConsolidated,
+    CASE WHEN 
+        LOWER(ct.linkRole) LIKE '%parenthetical%'
+        OR LOWER(ct.linkRole) LIKE '%alternate%'
+        OR LOWER(ct.linkRole) LIKE '%alternative%'
+        OR LOWER(ct.linkRole) LIKE '%calc%'
+        OR LOWER(ct.linkRole) LIKE '%-alt'
+        OR LOWER(ct.linkRole) LIKE '%unaudited%'
+        OR LOWER(ct.linkRole) LIKE '%combined%'
+        OR LOWER(ct.linkRole) LIKE '%interim%'
+        OR (
+            LOWER(ct.linkRole) LIKE '%condensed%'
+            AND hnc.cik IS NOT NULL
+        )
+        OR (
+            LOWER(ct.linkRole) LIKE '%comprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%operationsandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%incomeandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%earningsandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%lossandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+        )
+    THEN 1 ELSE 0 END AS hasPenaltyKeyword,
+
+    -- Composite score
+    (COUNT(*) * 10)
+    + (CASE WHEN LOWER(ct.linkRole) LIKE '%consolidated%' THEN 15 ELSE 0 END)
+    - (CASE WHEN 
+        LOWER(ct.linkRole) LIKE '%parenthetical%'
+        OR LOWER(ct.linkRole) LIKE '%alternate%'
+        OR LOWER(ct.linkRole) LIKE '%alternative%'
+        OR LOWER(ct.linkRole) LIKE '%calc%'
+        OR LOWER(ct.linkRole) LIKE '%-alt'
+        OR LOWER(ct.linkRole) LIKE '%unaudited%'
+        OR LOWER(ct.linkRole) LIKE '%combined%'
+        OR LOWER(ct.linkRole) LIKE '%interim%'
+        OR (
+            LOWER(ct.linkRole) LIKE '%condensed%'
+            AND hnc.cik IS NOT NULL
+        )
+        OR (
+            LOWER(ct.linkRole) LIKE '%comprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%operationsandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%incomeandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%earningsandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%lossandcomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+        )
+       THEN 20 ELSE 0 END)
+    - (LENGTH(ct.linkRole) / 10)
+    AS compositeScore,
+
+    ROW_NUMBER() OVER (
+        PARTITION BY ct.cik, ct.accessionNumber, ctc.keyStatementRole
+        ORDER BY
+            (COUNT(*) * 10)
+            + (CASE WHEN LOWER(ct.linkRole) LIKE '%consolidated%' THEN 15 ELSE 0 END)
+            - (CASE WHEN 
+                LOWER(ct.linkRole) LIKE '%parenthetical%'
+                OR LOWER(ct.linkRole) LIKE '%alternate%'
+                OR LOWER(ct.linkRole) LIKE '%alternative%'
+                OR LOWER(ct.linkRole) LIKE '%calc%'
+                OR LOWER(ct.linkRole) LIKE '%-alt'
+                OR LOWER(ct.linkRole) LIKE '%unaudited%'
+                OR LOWER(ct.linkRole) LIKE '%combined%'
+                OR LOWER(ct.linkRole) LIKE '%interim%'
+                OR (
+                    LOWER(ct.linkRole) LIKE '%condensed%'
+                    AND hnc.cik IS NOT NULL
+                )
+                OR (
+                    LOWER(ct.linkRole) LIKE '%comprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%operationsandcomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%incomeandcomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%earningsandcomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%lossandcomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+                )
+               THEN 20 ELSE 0 END)
+            - (LENGTH(ct.linkRole) / 10)
+            DESC
+    ) AS rn
+
+FROM calculationTaxonomy ct
+INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = ct.linkRole
+LEFT JOIN hasNonCondensed hnc
+    ON hnc.cik = ct.cik
+    AND hnc.accessionNumber = ct.accessionNumber
+    AND hnc.keyStatementRole = ctc.keyStatementRole
+WHERE ctc.keyStatementRole IS NOT NULL
+GROUP BY
+    ct.cik,
+    ct.accessionNumber,
+    ct.linkRole,
+    ctc.keyStatementRole,
+    hnc.cik
 )
 UPDATE
     calculationTaxonomy
@@ -500,7 +365,7 @@ WHERE
 
 CHECKPOINT;
 
-*/
+
 
 SELECT
     ct.cik,
@@ -521,3 +386,77 @@ WHERE
     AND ct.fromConcept IS NOT NULL
     AND ct.toConcept IS NOT NULL
     AND ct.fromConcept <> ct.toConcept;
+
+
+
+ALTER TABLE
+    calculationTaxonomyHierarchy DROP COLUMN keyStatementRole;
+
+checkpoint;
+
+CREATE TABLE calculationTaxonomyHierarchy_NEW AS
+SELECT
+    cth.*,
+    ct.keyStatementRole
+FROM
+    calculationTaxonomyHierarchy cth
+    LEFT OUTER JOIN (
+        SELECT
+            DISTINCT cik,
+            accessionNumber,
+            cti.linkRole,
+            keyStatementRole
+        FROM
+            calculationTaxonomy cti
+            INNER JOIN calcTaxRolesClassified ctc ON cti.linkRole = ctc.linkRole
+            AND cti.isPrimaryRole = TRUE
+    ) ct ON cth.cik = ct.cik
+    AND cth.accessionNumber = ct.accessionNumber
+    AND cth.linkRole = ct.linkRole;
+
+DROP TABLE calculationTaxonomyHierarchy;
+
+ALTER TABLE
+    calculationTaxonomyHierarchy_NEW RENAME TO calculationTaxonomyHierarchy;
+
+CHECKPOINT;
+
+
+
+SELECT
+    DISTINCT cik,
+    accessionNumber,
+    linkRoleComp,
+    keyStatementRole
+FROM
+    (
+        SELECT
+            cth.cik,
+            cth.accessionNumber,
+            cth.linkRole AS linkRoleComp,
+            ct.keyStatementRole,
+            isPrimaryRole,
+            cth.keyStatementRole
+        FROM
+            calculationTaxonomyHierarchy cth
+            LEFT OUTER JOIN (
+                SELECT
+                    DISTINCT cik,
+                    accessionNumber,
+                    cti.linkRole,
+                    isPrimaryRole,
+                    keyStatementRole
+                FROM
+                    calculationTaxonomy cti
+                    INNER JOIN calcTaxRolesClassified ctc ON ctc.linkRole = cti.linkRole
+                    AND cti.isPrimaryRole = TRUE
+            ) ct ON cth.cik = ct.cik
+            AND cth.accessionNumber = ct.accessionNumber
+            AND cth.linkRole = ct.linkRole
+        WHERE
+            cth.keyStatementRole IS NULL
+        ORDER BY
+            cth.cik,
+            cth.accessionNumber,
+            ct.keyStatementRole
+    );

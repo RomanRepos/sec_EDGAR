@@ -71,14 +71,14 @@ def create_taxonomy_hierarchy(df, conn):
                         'cik': cik,
                         'accessionNumber': accession_number,
                         'linkRole': link_role,
-                        'keyStatementRole': key_statement_role,
                         'ancestor': child,
                         'descendant': child,
                         'relativeDepth': 0,
                         'arcOrder': 0,
                         'arcWeight': 0,
                         'highestParent': False,
-                        'lowestChild': child not in has_children
+                        'lowestChild': child not in has_children,
+                        'keyStatementRole': key_statement_role
                     })
 
         for top_level_node in set(top_level_node_list): 
@@ -86,14 +86,14 @@ def create_taxonomy_hierarchy(df, conn):
                         'cik': cik,
                         'accessionNumber': accession_number,
                         'linkRole': link_role,
-                        'keyStatementRole': key_statement_role,
                         'ancestor': top_level_node,
                         'descendant': top_level_node,
                         'relativeDepth': 0,
                         'arcOrder': 0,
                         'arcWeight': 0,
                         'highestParent': True,
-                        'lowestChild': False
+                        'lowestChild': False,
+                        'keyStatementRole': key_statement_role
                     })
         
     
@@ -105,14 +105,14 @@ def create_taxonomy_hierarchy(df, conn):
                     'cik': cik,
                     'accessionNumber': accession_number,
                     'linkRole': link_role,
-                    'keyStatementRole': key_statement_role,
                     'ancestor': node['fromConcept'],
                     'descendant': desc,
                     'relativeDepth': rel_dep,
                     'arcOrder': node_weights.get(desc)[1],
                     'arcWeight': node_weights.get(desc)[0],
                     'highestParent': False,
-                    'lowestChild': desc not in has_children
+                    'lowestChild': desc not in has_children,
+                    'keyStatementRole': key_statement_role
                 })
         insert_df = pd.DataFrame(normalized_data)
         conn.append('calculationTaxonomyHierarchy', insert_df)
@@ -127,9 +127,10 @@ if __name__ == "__main__":
 
     conn = ddb.connect(db_path)
 
-    df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole, ct.fromConcept, ct.toConcept, ct.arcOrder,
+    df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole as keyStatementRole, 
+                      ct.fromConcept, ct.toConcept, ct.arcOrder,
     ct.arcWeight from calculationTaxonomy ct 
-    left outer join calcTaxRolesClassified crc on crc.linkRole = ct.linkRole
+    inner join calcTaxRolesClassified crc on crc.linkRole = ct.linkRole
     anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
     where ct.isPrimaryRole=TRUE
     and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;''').fetch_df()
