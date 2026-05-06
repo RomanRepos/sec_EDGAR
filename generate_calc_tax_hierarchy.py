@@ -122,8 +122,8 @@ def create_taxonomy_hierarchy(df, conn):
 if __name__ == "__main__":
     load_dotenv()
     PROJECT_ROOT_PARENT = Path(Path(__file__).resolve().parent.parent or Path(os.getenv("PROJECT_ROOT")).resolve().parent)
-    DATA_DIR = PROJECT_ROOT_PARENT / "Data"
-    db_path = os.path.join(DATA_DIR, "secFilingsDb.duckdb")
+    
+    db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path)
 

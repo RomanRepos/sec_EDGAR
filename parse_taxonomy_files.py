@@ -199,11 +199,11 @@ if __name__ == "__main__":
         Path(__file__).resolve().parent.parent or 
         Path(os.getenv("PROJECT_ROOT")).resolve().parent
     )
-    DATA_DIR   = PROJECT_ROOT_PARENT / "Data"
-    db_path    = DATA_DIR / "secFilingsDb.duckdb"
+
+    db_path    = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path)
-    xml_taxonomy_dir = DATA_DIR / "calXMLs"
+    xml_taxonomy_dir = os.path.join(PROJECT_ROOT_PARENT, "Data", "calXMLs")
     write_calcs_to_db(conn, get_xml_taxonomy_files(conn, xml_taxonomy_dir), extract_calcs)
 
     conn.execute('''delete from calculationTaxonomyRaw where arcXlinkFrom = 'src' or arcXlinkto = 'dest';
