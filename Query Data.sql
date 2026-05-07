@@ -1,59 +1,7 @@
 SELECT
-    DISTINCT name
-FROM
-    financialData
-WHERE
-    description IS NULL;
-
-
-
-SELECT
-    count(*)
-FROM
-    financialData;
-
-
-
-SELECT
-    *
-FROM
-    financialData anti
-    JOIN submissions ON submissions."accessionNumber" = "financialData"."accessionNumber";
-
-
-
-SELECT
-    cd.cik,
-    fd.prefix,
-    cd."entityName",
-    fd.units,
-    fd.financialPeriod,
-    fd.name,
-    fd.label,
-    fd.value,
-    fd.description,
-    form,
-    endDate,
-    financialYear,
-    financialPeriod,
-    s.filingDate,
-    s.accessionNumber,
-    fd.frame,
-    fd."startDate"
-FROM
-    financialData fd,
-    companyDimension cd,
-    submissions s
-WHERE
-    cd.cik = fd.cik
-    AND s.accessionNumber = fd.accessionNumber
-    AND name = 'PayablesToBrokerDealersAndClearingOrganizations';
-
-
-
-
-SELECT
     fd.cik,
+    cd.firstTicker,
+    cd.entityName,
     fd.accessionNumber,
     fd.startDate,
     fd.endDate,
@@ -65,33 +13,84 @@ SELECT
     fd.name,
     fd.units,
     fd."value",
-    "arcWeight",
-    "relativeDepth",
-    "keyStatementRole" AS financialStatement,
-    linkRole,
-    "ancestor",
-    descendant
+    cth."keyStatementRole" AS financialStatement,
+    ctht.highestParent,
+    cth."ancestor",
+    cth.descendant,
+    cth."arcWeight",
+    cth.arcOrder,
+    cth.linkRole
 FROM
     financialData fd
-    LEFT OUTER JOIN submissions s ON fd.cik = s.cik
-    AND fd.accessionNumber = s.accessionNumber
-    INNER JOIN calculationTaxonomyHierarchy cth ON cth.cik = fd.cik
-    AND cth."accessionNumber" = fd."accessionNumber"
-    AND fd.name = cth.descendant
-    AND cth."relativeDepth" = 1
+    INNER JOIN submissions s 
+        ON fd.cik = s.cik AND form ='10-K'
+        AND fd.accessionNumber = s.accessionNumber
+    LEFT JOIN calculationTaxonomyHierarchy cth 
+        ON cth.cik = fd.cik
+        AND cth."accessionNumber" = fd."accessionNumber"
+        AND fd.name = cth.descendant
+        AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 and highestParent=TRUE))
+    LEFT OUTER JOIN calculationTaxonomyHierarchy ctht
+        ON ctht.cik = fd.cik
+        AND ctht."accessionNumber" = fd."accessionNumber"
+        AND cth.ancestor = ctht.ancestor
+        AND ctht."relativeDepth" = 0
+        AND ctht.highestParent = TRUE
+    INNER JOIN companyDimension cd
+        ON cd.cik = fd.cik
+ 
 WHERE
     s.reportDate = fd.endDate
-    AND units = 'shares'
+    and cd.firstTicker = 'F'
+    and s.accessionNumber = '0000037996-12-000007'
 ORDER BY
     fd.cik,
     fd."accessionNumber",
     s.form,
-    keyStatementRole,
-    fd.frame,
-    ancestor,
-    arcOrder
+    cth.keyStatementRole,
+    ctht.highestParent,
+    cth.ancestor,
+    cth.arcOrder,
+    cth.arcWeight DESC
 LIMIT
     10000;
+
+
+
+
+SELECT ct.* from calculationTaxonomy ct
+left outer join calcTaxRolesClassified ctc
+on ctc.linkRole = ct.linkRole
+where ct.accessionNumber = '0000037996-12-000007'and toConcept = 'InventoryNet';
+
+select  * from financialData where accessionNumber = '0000037996-12-000007'
+and name='InventoryNet'
+order by name asc;
+
+select count(*) from calculationTaxonomyHierarchy
+where keyStatementRole is null;
+
+/*
+CREATE TABLE calculationTaxonomyHierarchy_NEW as
+SELECT * FROM calculationTaxonomyHierarchy 
+QUALIFY ROW_NUMBER() OVER 
+(PARTITION BY 
+cik,
+accessionNumber,
+linkRole,
+ancestor,
+descendant,
+arcOrder,
+arcWeight,
+highestParent,
+lowestChild,
+keyStatementRole
+ORDER BY relativeDepth DESC) = 1
+;
+DROP TABLE calculationTaxonomyHierarchy;
+ALTER TABLE calculationTaxonomyHierarchy_NEW RENAME to calculationTaxonomyHierarchy;
+CHECKPOINT;
+*/
 
 
 

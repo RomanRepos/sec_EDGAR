@@ -66,7 +66,7 @@ def create_taxonomy_hierarchy(df, conn):
             for _, row in def_df.iterrows()
         }
         
-        for child in all_children:  
+        for child in all_children:  #self reference
             normalized_data.append({
                         'cik': cik,
                         'accessionNumber': accession_number,
@@ -136,4 +136,24 @@ if __name__ == "__main__":
     and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;''').fetch_df()
 
     create_taxonomy_hierarchy(df, conn)
+
+    conn.execute('''CREATE TABLE calculationTaxonomyHierarchy_NEW as
+SELECT * FROM calculationTaxonomyHierarchy 
+QUALIFY ROW_NUMBER() OVER 
+(PARTITION BY 
+cik,
+accessionNumber,
+linkRole,
+ancestor,
+descendant,
+arcOrder,
+arcWeight,
+highestParent,
+lowestChild,
+keyStatementRole
+ORDER BY relativeDepth DESC) = 1;
+DROP TABLE calculationTaxonomyHierarchy;
+ALTER TABLE calculationTaxonomyHierarchy_NEW RENAME to calculationTaxonomyHierarchy;
+CHECKPOINT;''')
+
     conn.close()
