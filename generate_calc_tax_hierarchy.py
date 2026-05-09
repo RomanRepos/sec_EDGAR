@@ -116,44 +116,44 @@ def create_taxonomy_hierarchy(df, conn):
                 })
         insert_df = pd.DataFrame(normalized_data)
         conn.append('calculationTaxonomyHierarchy', insert_df)
+
         normalized_data.clear()
     conn.execute('CHECKPOINT;')
-
 if __name__ == "__main__":
     load_dotenv()
     PROJECT_ROOT_PARENT = Path(Path(__file__).resolve().parent.parent or Path(os.getenv("PROJECT_ROOT")).resolve().parent)
-    
+
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path)
 
     df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole as keyStatementRole, 
-                      ct.fromConcept, ct.toConcept, ct.arcOrder,
+                        ct.fromConcept, ct.toConcept, ct.arcOrder,
     ct.arcWeight from calculationTaxonomy ct 
     inner join calcTaxRolesClassified crc on crc.linkRole = ct.linkRole
     anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
+        and ct.linkRole = cth.linkRole
     where ct.isPrimaryRole=TRUE
     and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;''').fetch_df()
 
     create_taxonomy_hierarchy(df, conn)
 
     conn.execute('''CREATE TABLE calculationTaxonomyHierarchy_NEW as
-SELECT * FROM calculationTaxonomyHierarchy 
-QUALIFY ROW_NUMBER() OVER 
-(PARTITION BY 
-cik,
-accessionNumber,
-linkRole,
-ancestor,
-descendant,
-arcOrder,
-arcWeight,
-highestParent,
-lowestChild,
-keyStatementRole
-ORDER BY relativeDepth DESC) = 1;
-DROP TABLE calculationTaxonomyHierarchy;
-ALTER TABLE calculationTaxonomyHierarchy_NEW RENAME to calculationTaxonomyHierarchy;
-CHECKPOINT;''')
-
+    SELECT * FROM calculationTaxonomyHierarchy 
+    QUALIFY ROW_NUMBER() OVER 
+    (PARTITION BY 
+    cik,
+    accessionNumber,
+    linkRole,
+    ancestor,
+    descendant,
+    arcOrder,
+    arcWeight,
+    highestParent,
+    lowestChild,
+    keyStatementRole
+    ORDER BY relativeDepth DESC) = 1;
+    DROP TABLE calculationTaxonomyHierarchy;
+    ALTER TABLE calculationTaxonomyHierarchy_NEW RENAME to calculationTaxonomyHierarchy;
+    CHECKPOINT;''')
     conn.close()

@@ -17,19 +17,20 @@ SELECT
     ctht.highestParent,
     cth."ancestor",
     cth.descendant,
+    cth.relativeDepth,
     cth."arcWeight",
     cth.arcOrder,
     cth.linkRole
 FROM
     financialData fd
     INNER JOIN submissions s 
-        ON fd.cik = s.cik AND form ='10-K'
+        ON fd.cik = s.cik 
+        --AND form ='10-K'
         AND fd.accessionNumber = s.accessionNumber
-    LEFT JOIN calculationTaxonomyHierarchy cth 
+    INNER JOIN calculationTaxonomyHierarchy cth 
         ON cth.cik = fd.cik
         AND cth."accessionNumber" = fd."accessionNumber"
         AND fd.name = cth.descendant
-        AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 and highestParent=TRUE))
     LEFT OUTER JOIN calculationTaxonomyHierarchy ctht
         ON ctht.cik = fd.cik
         AND ctht."accessionNumber" = fd."accessionNumber"
@@ -38,39 +39,108 @@ FROM
         AND ctht.highestParent = TRUE
     INNER JOIN companyDimension cd
         ON cd.cik = fd.cik
- 
 WHERE
+--#8063	0000008063-20-000042	10-Q	2020-06-27
     s.reportDate = fd.endDate
-    and cd.firstTicker = 'F'
-    and s.accessionNumber = '0000037996-12-000007'
+    and s.form = '10-Q'
+    and s.accessionNumber = '0000008063-20-000042'
+    --AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 and ctht.highestParent=TRUE))
 ORDER BY
     fd.cik,
     fd."accessionNumber",
     s.form,
     cth.keyStatementRole,
     ctht.highestParent,
-    cth.ancestor,
+    ctht.ancestor,
+    cth.descendant,
     cth.arcOrder,
     cth.arcWeight DESC
 LIMIT
     10000;
 
+--Determine submissions that have matching total for top level parents and first level nodes for each key statement role to identify filings with complete calculation hierarchies for primary financial statements.
+with topLevelParentsSum as (
+SELECT cth.cik, cth.accessionNumber, 
+cth.linkRole, 
+cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal 
+from calculationTaxonomyHierarchy cth 
+inner join financialData fd on
+    fd.cik = cth.cik 
+    --AND form ='10-K'
+    AND fd.accessionNumber = cth.accessionNumber
+    AND fd.name = cth.descendant
+    AND cth.relativeDepth = 0
+    AND cth.highestParent = TRUE
+    and fd.prefix = 'us-gaap'
+INNER JOIN submissions s 
+        ON fd.cik = s.cik 
+        --AND form ='10-K'
+        AND fd.accessionNumber = s.accessionNumber
+        AND s.reportDate = fd.endDate
+GROUP BY
+    cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+), 
+
+firstLevelNodestSum as (
+SELECT cth.cik, cth.accessionNumber, cth.linkRole,  
+cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevelNodesTotal 
+from calculationTaxonomyHierarchy cth
+inner join financialData fd on
+    fd.cik = cth.cik 
+    --AND form ='10-K'
+    AND fd.accessionNumber = cth.accessionNumber
+    AND fd.name = cth.descendant
+    AND cth.relativeDepth = 1
+    and fd.prefix = 'us-gaap'
+INNER JOIN submissions s 
+        ON fd.cik = s.cik 
+        --AND form ='10-K'
+        AND fd.accessionNumber = s.accessionNumber
+        AND s.reportDate = fd.endDate
+INNER JOIN calculationTaxonomyHierarchy ctht
+        ON ctht.cik = cth.cik
+        AND ctht."accessionNumber" = cth."accessionNumber"
+        AND cth.ancestor = ctht.ancestor
+        AND ctht."relativeDepth" = 0
+        AND ctht.highestParent = TRUE
+GROUP BY
+    cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+)     
+
+
+select tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
+INNER JOIN firstLevelNodestSum fln 
+on tlp.cik = fln.cik
+and tlp.accessionNumber = fln.accessionNumber
+and tlp.linkRole = fln.linkRole
+and tlp.keyStatementRole = fln.keyStatementRole
+and tlp.form = fln.form
+and tlp.endDate = fln.endDate
+and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
+WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'CashFlow')
+GROUP BY tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+HAVING count(*) = 3
+ORDER BY tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+;
+--------------------------------------------------------------------------------
 
 
 
-SELECT ct.* from calculationTaxonomy ct
+SELECT ct.linkRole, isPrimaryRole, ctc.keyStatementRole, fromConcept from calculationTaxonomy ct
 left outer join calcTaxRolesClassified ctc
 on ctc.linkRole = ct.linkRole
-where ct.accessionNumber = '0000037996-12-000007'and toConcept = 'InventoryNet';
+where ct.accessionNumber = '0000008063-20-000042'
+;
 
-select  * from financialData where accessionNumber = '0000037996-12-000007'
-and name='InventoryNet'
+select  * from financialData where accessionNumber = '0000008063-20-000042'
+and name LIKE '%WeightedAverageNumberOfDilutedSharesOutstanding%'
 order by name asc;
 
-select count(*) from calculationTaxonomyHierarchy
-where keyStatementRole is null;
+select distinct keystatementRole from calculationTaxonomyHierarchy
+where accessionNumber = '0000008063-20-000042';
 
 /*
+--Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.
 CREATE TABLE calculationTaxonomyHierarchy_NEW as
 SELECT * FROM calculationTaxonomyHierarchy 
 QUALIFY ROW_NUMBER() OVER 
@@ -90,6 +160,7 @@ ORDER BY relativeDepth DESC) = 1
 DROP TABLE calculationTaxonomyHierarchy;
 ALTER TABLE calculationTaxonomyHierarchy_NEW RENAME to calculationTaxonomyHierarchy;
 CHECKPOINT;
+------------------------------------------------------------------------
 */
 
 
@@ -136,8 +207,7 @@ FROM
             calculationTaxonomy
     );
 
-
-
+--Create calculationTaxonomy table with parsed link roles, arc roles, from/to concepts, and other relevant fields for analysis.
 CREATE
 OR REPLACE TABLE calculationTaxonomy AS
 SELECT
@@ -151,7 +221,7 @@ SELECT
                     'Role_',
                     ''
                 ),
-                '([A-Z]{1}[A-Za-z]+)'
+                '([A-]{1}[A-a-]+)'
             ),
             ''
         ),
@@ -183,7 +253,7 @@ SELECT
                     'Locator_',
                     ''
                 ),
-                '([A-Z]{1}[a-z]{2,}[A-Za-z]+)',
+                '([A-]{1}[a-]{2,}[A-a-]+)',
                 1
             ),
             ''
@@ -203,7 +273,7 @@ SELECT
         NULLIF(
             regexp_extract(
                 REPLACE(REPLACE(arcXlinkTo, 'loc_', ''), 'Locator_', ''),
-                '([A-Z]{1}[a-z]{2,}[A-Za-z]+)',
+                '([A-]{1}[a-]{2,}[A-a-]+)',
                 1
             ),
             ''
@@ -216,9 +286,11 @@ SELECT
 FROM
     calculationTaxonomyRaw;
 checkpoint;
+------------------------------------------------------------
 
 
 
+---Classify statement roles and identify primary role for each key statement role.
 ALTER TABLE
     calculationTaxonomy DROP COLUMN isPrimaryRole;
 CHECKPOINT;
@@ -363,7 +435,7 @@ WHERE
     AND calculationTaxonomy.linkRole = ranked.linkRole;
 
 CHECKPOINT;
-
+----------------------------------------------------------------------------
 
 
 SELECT
@@ -387,12 +459,10 @@ WHERE
     AND ct.fromConcept <> ct.toConcept;
 
 
-
+--Make sure hierarchy table only has primary statement roles.
 ALTER TABLE
     calculationTaxonomyHierarchy DROP COLUMN keyStatementRole;
-
 checkpoint;
-
 CREATE TABLE calculationTaxonomyHierarchy_NEW AS
 SELECT
     cth.*,
@@ -417,9 +487,8 @@ DROP TABLE calculationTaxonomyHierarchy;
 
 ALTER TABLE
     calculationTaxonomyHierarchy_NEW RENAME TO calculationTaxonomyHierarchy;
-
 CHECKPOINT;
-
+------------------------------------------------------
 
 
 SELECT
