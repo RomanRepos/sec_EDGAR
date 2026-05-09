@@ -60,7 +60,7 @@ def rows_to_tree(rows):
     return result
 
 
-def filing_to_yaml(conn, cik: int, accession_number: str, form: str, end_date: str) -> str:
+def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str) -> str:
     
     query_var = """
 SELECT
@@ -95,17 +95,20 @@ FROM
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
 WHERE
-    fd.cik = ?
+    fd.prefix = ?
+    AND fd.cik = ?
     AND fd.accessionNumber = ?
     AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 AND cth.highestParent = TRUE))
     AND s.form = ?
     AND fd.endDate = ?
+    AND cth.relativeDepth <= 2
+    
 ORDER BY
     cth.keyStatementRole,
     cth.ancestor,
     cth.arcWeight DESC
 """
-    rows = conn.execute(query_var, [cik, accession_number, form, end_date]).fetchall()
+    rows = conn.execute(query_var, [prefix, cik, accession_number, form, end_date]).fetchall()
     
 
     tree = rows_to_tree(rows)
@@ -127,6 +130,7 @@ if __name__ == "__main__":
     ACCESSION = "0000008063-20-000042"
     FORM = "10-Q"
     END_DATE = "2020-06-27"
+    PREFIX = "us-gaap"
 
-    yaml_str = filing_to_yaml(conn, CIK, ACCESSION, FORM, END_DATE)
+    yaml_str = filing_to_yaml(conn, PREFIX, CIK, ACCESSION, FORM, END_DATE)
     print(yaml_str)

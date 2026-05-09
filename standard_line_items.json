@@ -1,0 +1,107 @@
+[
+  {
+    "standard_label": "Revenue",
+    "statement": "IncomeStatement",
+    "semantic_description": "Total top-line revenue or net sales for the period. Must be the consolidated total, not a segment, product line, or revenue sub-type."
+  },
+  {
+    "standard_label": "Cost of Revenue",
+    "statement": "IncomeStatement",
+    "semantic_description": "Direct costs attributable to producing goods sold or services rendered. Also reported as cost of goods sold (COGS) or cost of sales."
+  },
+  {
+    "standard_label": "Gross Profit",
+    "statement": "IncomeStatement",
+    "semantic_description": "Revenue minus cost of revenue. The subtotal before operating expenses."
+  },
+  {
+    "standard_label": "Operating Expenses",
+    "statement": "IncomeStatement",
+    "semantic_description": "Total operating expenses below gross profit, such as SG&A and R&D. Not the same as total costs — excludes cost of revenue and items below the operating income line."
+  },
+  {
+    "standard_label": "Operating Income",
+    "statement": "IncomeStatement",
+    "semantic_description": "Income from operations after all operating costs. Excludes interest, taxes, and non-operating items. Also known as EBIT when D&A is not separately broken out."
+  },
+  {
+    "standard_label": "Interest Expense",
+    "statement": "IncomeStatement",
+    "semantic_description": "Cost of debt financing. Net of interest income only if the concept explicitly represents a net figure. Do not map a net interest income concept here."
+  },
+  {
+    "standard_label": "Income Tax Expense",
+    "statement": "IncomeStatement",
+    "semantic_description": "Total income tax provision for the period, both current and deferred. Must be the consolidated total tax charge."
+  },
+  {
+    "standard_label": "Net Income",
+    "statement": "IncomeStatement",
+    "semantic_description": "Bottom-line net income for the entire consolidated entity after all expenses and taxes. Must be the total, not net income attributable to a specific share class, noncontrolling interest subset, or per-share figure."
+  },
+  {
+    "standard_label": "Cash and Cash Equivalents",
+    "statement": "BalanceSheet",
+    "semantic_description": "Cash on hand and short-term liquid instruments. If the concept includes restricted cash or short-term investments beyond cash equivalents, do not map it here."
+  },
+  {
+    "standard_label": "Accounts Receivable",
+    "statement": "BalanceSheet",
+    "semantic_description": "Net trade receivables from customers, after allowance for doubtful accounts. Excludes notes receivable and non-trade receivables."
+  },
+  {
+    "standard_label": "Inventory",
+    "statement": "BalanceSheet",
+    "semantic_description": "Total inventory held for sale or use in production. Must be the consolidated total, not a single inventory component (e.g. raw materials only)."
+  },
+  {
+    "standard_label": "Total Current Assets",
+    "statement": "BalanceSheet",
+    "semantic_description": "Sum of all assets expected to be converted to cash or used within one year or one operating cycle."
+  },
+  {
+    "standard_label": "Total Assets",
+    "statement": "BalanceSheet",
+    "semantic_description": "The grand total of all assets on the balance sheet. Must be the highest-level asset aggregate — do not map to a segment or subsidiary total."
+  },
+  {
+    "standard_label": "Accounts Payable",
+    "statement": "BalanceSheet",
+    "semantic_description": "Amounts owed to suppliers for goods and services received but not yet paid. Excludes accrued liabilities and other payables unless explicitly combined in the concept."
+  },
+  {
+    "standard_label": "Total Current Liabilities",
+    "statement": "BalanceSheet",
+    "semantic_description": "Sum of all liabilities due within one year or one operating cycle."
+  },
+  {
+    "standard_label": "Total Debt",
+    "statement": "BalanceSheet",
+    "semantic_description": "Total interest-bearing debt, including both short-term borrowings and long-term debt. If no single concept covers both, do not force a mapping — leave as null."
+  },
+  {
+    "standard_label": "Total Liabilities",
+    "statement": "BalanceSheet",
+    "semantic_description": "The grand total of all liabilities on the balance sheet. Must be the highest-level liability aggregate."
+  },
+  {
+    "standard_label": "Total Equity",
+    "statement": "BalanceSheet",
+    "semantic_description": "Total stockholders' or shareholders' equity. Must be the consolidated total including noncontrolling interests if present, not equity attributable to the parent only."
+  },
+  {
+    "standard_label": "Operating Cash Flow",
+    "statement": "StatementOfCashFlows",
+    "semantic_description": "Net cash provided by or used in operating activities. The top-level subtotal of the operating section of the cash flow statement."
+  },
+  {
+    "standard_label": "Capital Expenditures",
+    "statement": "StatementOfCashFlows",
+    "semantic_description": "Cash paid to acquire or improve property, plant, and equipment. Typically has arcWeight=-1 (cash outflow). Do not include proceeds from asset sales."
+  },
+  {
+    "standard_label": "Depreciation and Amortization",
+    "statement": "StatementOfCashFlows",
+    "semantic_description": "Non-cash D&A charge added back as a reconciling item in the operating section of the cash flow statement. Do not map an income statement depreciation line here unless it also appears in cash flow reconciliation."
+  }
+]

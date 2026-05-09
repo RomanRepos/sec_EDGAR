@@ -13,7 +13,10 @@ stubs/
 *.mcpb
 tests/e2e/fixtures/*.duckdb
 tests/e2e/fixtures/*.duckdb.wal
-
+memory/
+mcp-server-motherduck
+.ipynb
+.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

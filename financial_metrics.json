@@ -42,14 +42,26 @@
   {
     "category": "Profitability",
     "metric": "Operating Income (EBIT)",
-    "formula": "Revenue - COGS - Operating Expenses",
-    "semantic_description": "Profit from core business operations before interest and taxes. Usually reported directly as operating income or loss; if absent, derive by subtracting COGS and all operating expenses from revenue.",
+    "formula": "Gross Profit - Operating Expenses",
+    "semantic_description": "Profit from core business operations before interest and taxes. Map to `base` if operating income is directly reported as a single concept. If no direct concept exists, map gross profit to `gross_profit` and total operating expenses to `opex_subtract` so it can be derived.",
     "components": [
       {
         "role": "base",
         "statement": "IncomeStatement",
         "units": "currency",
-        "semantic_description": "Operating income or loss from continuing operations, before interest expense and income taxes"
+        "semantic_description": "Operating income or loss from continuing operations reported as a single line item, before interest expense and income taxes. Use this role only when a direct concept exists — do not use both this and the derivation components."
+      },
+      {
+        "role": "gross_profit",
+        "statement": "IncomeStatement",
+        "units": "currency",
+        "semantic_description": "Gross profit (revenue minus cost of revenue). Only map here when no direct operating income concept exists."
+      },
+      {
+        "role": "opex_subtract",
+        "statement": "IncomeStatement",
+        "units": "currency",
+        "semantic_description": "Total operating expenses below gross profit (e.g. SG&A, R&D combined). Only map here when no direct operating income concept exists."
       }
     ]
   },
@@ -87,7 +99,7 @@
       },
       {
         "role": "add",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Non-cash depreciation and amortization charges reported as a reconciling item under operating activities. May appear as a single combined concept or as separate depreciation and amortization concepts — include both if split."
       }
@@ -107,7 +119,7 @@
       },
       {
         "role": "numerator_add",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Non-cash depreciation and amortization charges under operating activities"
       },
@@ -317,7 +329,7 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by or used in operating activities"
       },
@@ -455,7 +467,7 @@
       },
       {
         "role": "ebitda_add_da",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Depreciation and amortization from operating activities reconciliation"
       }
@@ -745,7 +757,7 @@
     "components": [
       {
         "role": "base",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by or used in operating activities"
       }
@@ -759,13 +771,13 @@
     "components": [
       {
         "role": "base",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by operating activities"
       },
       {
         "role": "subtract",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures — payments to acquire property, plant and equipment or other productive assets. Found under investing activities; reported as a cash outflow."
       }
@@ -797,19 +809,19 @@
       },
       {
         "role": "add_da",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Depreciation and amortization under operating activities reconciliation"
       },
       {
         "role": "subtract_capex",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures under investing activities"
       },
       {
         "role": "subtract_working_capital_change",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Change in operating working capital reported as a reconciling item in operating activities. May be a single net concept or multiple individual line items for receivables, inventory, and payables changes."
       }
@@ -829,31 +841,31 @@
       },
       {
         "role": "add_da",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Depreciation and amortization under operating activities reconciliation"
       },
       {
         "role": "subtract_capex",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures under investing activities"
       },
       {
         "role": "subtract_working_capital_change",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Change in operating working capital under operating activities"
       },
       {
         "role": "add_net_borrowing_proceeds",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Proceeds from issuance of new debt under financing activities"
       },
       {
         "role": "subtract_net_borrowing_repayments",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Repayments of debt under financing activities"
       }
@@ -867,7 +879,7 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by operating activities"
       },
@@ -887,7 +899,7 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures — payments to acquire property, plant and equipment under investing activities"
       },
@@ -907,13 +919,13 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures under investing activities"
       },
       {
         "role": "denominator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Depreciation and amortization under operating activities reconciliation"
       }
@@ -927,7 +939,7 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by operating activities"
       },
@@ -953,7 +965,7 @@
       },
       {
         "role": "denominator",
-        "statement": null,
+        "statement": ["SharesDisclosure", "EquityStatement", "IncomeStatement"],
         "units": "shares",
         "semantic_description": "Weighted average number of basic shares outstanding during the period"
       }
@@ -973,7 +985,7 @@
       },
       {
         "role": "denominator",
-        "statement": null,
+        "statement": ["SharesDisclosure", "EquityStatement", "IncomeStatement"],
         "units": "shares",
         "semantic_description": "Weighted average number of diluted shares outstanding, including effect of all dilutive securities"
       }
@@ -993,7 +1005,7 @@
       },
       {
         "role": "denominator",
-        "statement": null,
+        "statement": ["SharesDisclosure", "EquityStatement", "IncomeStatement"],
         "units": "shares",
         "semantic_description": "Common shares outstanding at period end"
       }
@@ -1007,13 +1019,13 @@
     "components": [
       {
         "role": "numerator",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by operating activities"
       },
       {
         "role": "denominator",
-        "statement": null,
+        "statement": ["SharesDisclosure", "EquityStatement", "IncomeStatement"],
         "units": "shares",
         "semantic_description": "Common shares outstanding at period end"
       }
@@ -1027,19 +1039,19 @@
     "components": [
       {
         "role": "numerator_ocf",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Net cash provided by operating activities"
       },
       {
         "role": "numerator_subtract_capex",
-        "statement": "CashFlow",
+        "statement": "StatementOfCashFlows",
         "units": "currency",
         "semantic_description": "Capital expenditures under investing activities"
       },
       {
         "role": "denominator",
-        "statement": null,
+        "statement": ["SharesDisclosure", "EquityStatement", "IncomeStatement"],
         "units": "shares",
         "semantic_description": "Common shares outstanding at period end"
       }

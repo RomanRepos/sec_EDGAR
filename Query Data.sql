@@ -1,35 +1,27 @@
 SELECT
-    fd.cik,
-    cd.firstTicker,
-    cd.entityName,
-    fd.accessionNumber,
-    fd.startDate,
-    fd.endDate,
-    s.reportDate,
-    s.filingDate,
-    fd.prefix,
-    s.form,
-    fd.frame,
-    fd.name,
-    fd.units,
-    fd."value",
-    cth."keyStatementRole" AS financialStatement,
-    ctht.highestParent,
+    CASE
+        when 
+        cth."keyStatementRole" = 'CashFlow'
+        Then 'StatementOfCashFlows'
+    ELSE
+        cth."keyStatementRole"
+    END 
+        AS financialStatement,
     cth."ancestor",
     cth.descendant,
-    cth.relativeDepth,
     cth."arcWeight",
-    cth.arcOrder,
-    cth.linkRole
+    cth.relativeDepth,
+    fd."value",
+    fd.units
 FROM
     financialData fd
-    INNER JOIN submissions s 
-        ON fd.cik = s.cik 
-        --AND form ='10-K'
+    INNER JOIN submissions s
+        ON fd.cik = s.cik
         AND fd.accessionNumber = s.accessionNumber
-    INNER JOIN calculationTaxonomyHierarchy cth 
+        AND s.reportDate = fd.endDate
+    INNER JOIN calculationTaxonomyHierarchy cth
         ON cth.cik = fd.cik
-        AND cth."accessionNumber" = fd."accessionNumber"
+        AND cth.accessionNumber = fd.accessionNumber
         AND fd.name = cth.descendant
     LEFT OUTER JOIN calculationTaxonomyHierarchy ctht
         ON ctht.cik = fd.cik
@@ -37,30 +29,27 @@ FROM
         AND cth.ancestor = ctht.ancestor
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
-    INNER JOIN companyDimension cd
-        ON cd.cik = fd.cik
 WHERE
---#8063	0000008063-20-000042	10-Q	2020-06-27
-    s.reportDate = fd.endDate
-    and s.form = '10-Q'
-    and s.accessionNumber = '0000008063-20-000042'
-    --AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 and ctht.highestParent=TRUE))
+--us-gaap 744825 0001144204-12-018468 10-K 2011-12-31
+    fd.prefix = 'us-gaap'
+    AND fd.cik = '744825'
+    AND fd.accessionNumber = '0001144204-12-018468'
+    AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 AND cth.highestParent = TRUE))
+    AND s.form = '10-K'
+    AND fd.endDate = '2011-12-31'
+    AND cth.relativeDepth <= 2
+    
 ORDER BY
-    fd.cik,
-    fd."accessionNumber",
-    s.form,
     cth.keyStatementRole,
-    ctht.highestParent,
-    ctht.ancestor,
-    cth.descendant,
-    cth.arcOrder,
-    cth.arcWeight DESC
-LIMIT
-    10000;
+    cth.ancestor,
+    cth.arcWeight DESC;
+
+
+
 
 --Determine submissions that have matching total for top level parents and first level nodes for each key statement role to identify filings with complete calculation hierarchies for primary financial statements.
 with topLevelParentsSum as (
-SELECT cth.cik, cth.accessionNumber, 
+SELECT fd.prefix, cth.cik, cth.accessionNumber, 
 cth.linkRole, 
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal 
 from calculationTaxonomyHierarchy cth 
@@ -78,11 +67,11 @@ INNER JOIN submissions s
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
 GROUP BY
-    cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 ), 
 
 firstLevelNodestSum as (
-SELECT cth.cik, cth.accessionNumber, cth.linkRole,  
+SELECT fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole,  
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevelNodesTotal 
 from calculationTaxonomyHierarchy cth
 inner join financialData fd on
@@ -104,11 +93,11 @@ INNER JOIN calculationTaxonomyHierarchy ctht
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
 GROUP BY
-    cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 )     
 
 
-select tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
+select tlp.prefix,tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
 INNER JOIN firstLevelNodestSum fln 
 on tlp.cik = fln.cik
 and tlp.accessionNumber = fln.accessionNumber
@@ -117,10 +106,10 @@ and tlp.keyStatementRole = fln.keyStatementRole
 and tlp.form = fln.form
 and tlp.endDate = fln.endDate
 and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
-WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'CashFlow')
-GROUP BY tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
+GROUP BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 HAVING count(*) = 3
-ORDER BY tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 ;
 --------------------------------------------------------------------------------
 
@@ -137,7 +126,17 @@ and name LIKE '%WeightedAverageNumberOfDilutedSharesOutstanding%'
 order by name asc;
 
 select distinct keystatementRole from calculationTaxonomyHierarchy
-where accessionNumber = '0000008063-20-000042';
+;
+
+UPDATE calculationTaxonomyHierarchy
+SET keyStatementRole = 'StatementOfCashFlows'
+WHERE keyStatementRole = 'CashFlow';
+
+UPDATE calcTaxRolesClassified
+SET keyStatementRole = 'StatementOfCashFlows'
+WHERE keyStatementRole = 'CashFlow';
+
+checkpoint;
 
 /*
 --Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.

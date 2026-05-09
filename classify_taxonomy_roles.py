@@ -185,7 +185,7 @@ def classify_role(role_tail: str):
     
     # Step 3: cash flow (before income — more specific)
     if any(p in n for p in CASH_FLOW_PATTERNS) and not any(p in n for p in CASH_FLOW_DISCARD): 
-        return 'CashFlow'
+        return 'StatementOfCashFlows'
     
     # Step 4: balance sheet
     if any(p in n for p in BALANCE_SHEET_PATTERNS) and not any(p in n for p in SPECIFIC_DISCARD): 
