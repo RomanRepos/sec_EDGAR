@@ -7,16 +7,14 @@ from dotenv import load_dotenv
 
 
 def rows_to_tree(rows):
-    concept_value = {}
     concept_units = {}
     children_of = defaultdict(list)  # (statement, parent) -> [(child, weight)]
     root_concepts = set()            # (statement, concept) — depth=0, highestParent rows
 
-    for stmt, ancestor, descendant, weight, depth, value, units in rows:
+    for stmt, ancestor, descendant, weight, depth, units in rows:
         if stmt is None:
             continue
-        if value is not None:
-            concept_value[descendant] = value
+        if units is not None:
             concept_units[descendant] = units
         if depth == 0:
             # ancestor == descendant here; marks the root of a subtree
@@ -29,10 +27,8 @@ def rows_to_tree(rows):
 
     def build_node(stmt, concept):
         node = {}
-        val = concept_value.get(concept)
         unit = concept_units.get(concept)
-        if val is not None:
-            node['value'] = fmt_value(val)
+        if unit is not None:
             node['units'] = unit
         kids = children_of.get((stmt, concept), [])
         if kids:
@@ -42,10 +38,8 @@ def rows_to_tree(rows):
                     'concept': child,
                     'weight': '+1' if w > 0 else '-1',
                 }
-                child_val = concept_value.get(child)
                 child_unit = concept_units.get(child)
-                if child_val is not None:
-                    child_node['value'] = fmt_value(child_val)
+                if child_unit is not None:
                     child_node['units'] = child_unit
                 # intermediate nodes: recurse to attach their children
                 if children_of.get((stmt, child)):
@@ -63,20 +57,12 @@ def rows_to_tree(rows):
 def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str) -> str:
     
     query_var = """
-SELECT
-    CASE
-        when 
-        cth."keyStatementRole" = 'CashFlow'
-        Then 'StatementOfCashFlows'
-    ELSE
-        cth."keyStatementRole"
-    END 
-        AS financialStatement,
+SELECT  
+    cth."keyStatementRole" AS financialStatement,
     cth."ancestor",
     cth.descendant,
     cth."arcWeight",
     cth.relativeDepth,
-    fd."value",
     fd.units
 FROM
     financialData fd
@@ -102,6 +88,7 @@ WHERE
     AND s.form = ?
     AND fd.endDate = ?
     AND cth.relativeDepth <= 2
+    and cth."keyStatementRole" IN ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
     
 ORDER BY
     cth.keyStatementRole,
