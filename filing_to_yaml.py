@@ -7,15 +7,12 @@ from dotenv import load_dotenv
 
 
 def rows_to_tree(rows):
-    concept_units = {}
     children_of = defaultdict(list)  # (statement, parent) -> [(child, weight)]
     root_concepts = set()            # (statement, concept) — depth=0, highestParent rows
 
     for stmt, ancestor, descendant, weight, depth, units in rows:
         if stmt is None:
             continue
-        if units is not None:
-            concept_units[descendant] = units
         if depth == 0:
             # ancestor == descendant here; marks the root of a subtree
             root_concepts.add((stmt, ancestor))
@@ -27,9 +24,6 @@ def rows_to_tree(rows):
 
     def build_node(stmt, concept):
         node = {}
-        unit = concept_units.get(concept)
-        if unit is not None:
-            node['units'] = unit
         kids = children_of.get((stmt, concept), [])
         if kids:
             components = []
@@ -38,9 +32,6 @@ def rows_to_tree(rows):
                     'concept': child,
                     'weight': '+1' if w > 0 else '-1',
                 }
-                child_unit = concept_units.get(child)
-                if child_unit is not None:
-                    child_node['units'] = child_unit
                 # intermediate nodes: recurse to attach their children
                 if children_of.get((stmt, child)):
                     child_node['components'] = build_node(stmt, child)['components']
@@ -56,7 +47,7 @@ def rows_to_tree(rows):
 
 def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str) -> str:
     
-    query_var = """
+    query_var = r"""
 SELECT  
     cth."keyStatementRole" AS financialStatement,
     cth."ancestor",
@@ -89,6 +80,7 @@ WHERE
     AND fd.endDate = ?
     AND cth.relativeDepth <= 2
     and cth."keyStatementRole" IN ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
+    and fd.units not like '%share%'
     
 ORDER BY
     cth.keyStatementRole,
