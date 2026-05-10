@@ -90,6 +90,33 @@ def flatten(conn_arg, batch_size_arg):
         count+=1
         print(count, datetime.now())
 
+    conn_arg.execute('''
+alter table financialData add column isStandardPeriodLength boolean;
+alter table financialData add column isPrimarySubmissionDateRange boolean;
+                     
+UPDATE financialData   
+Set isStandardPeriodLength = 
+    CASE 
+        WHEN startDate IS NULL THEN TRUE
+        ELSE 
+            -- Calculate precise month difference based on days
+            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 11 AND 14) OR 
+            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 2 AND 5)
+    END;
 
+UPDATE financialData
+SET isPrimarySubmissionDateRange = (subquery.rn = 1)
+FROM (
+    SELECT 
+        rowid AS rid, -- Hidden unique ID provided by DuckDB
+        ROW_NUMBER() OVER (
+            PARTITION BY prefix, units, cik, accessionNumber, endDate, Name 
+            ORDER BY isStandardPeriodLength DESC
+        ) AS rn
+    FROM financialData
+) AS subquery
+WHERE financialData.rowid = subquery.rid;
+CHECKPOINT;
+''')
     conn_arg.execute('DROP TABLE raw_data;')
     conn_arg.execute('CHECKPOINT;')

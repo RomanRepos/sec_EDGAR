@@ -1,24 +1,26 @@
 SELECT
-    CASE
-        when 
-        cth."keyStatementRole" = 'CashFlow'
-        Then 'StatementOfCashFlows'
-    ELSE
-        cth."keyStatementRole"
-    END 
-        AS financialStatement,
+    cth."keyStatementRole" AS financialStatement,
+    cth."ancestor",
+    cth.descendant,
+    cth."arcWeight",
+    cth.relativeDepth,
     cth."ancestor",
     cth.descendant,
     cth."arcWeight",
     cth.relativeDepth,
     fd."value",
-    fd.units
+    fd.units,
+    ctht.highestParent,
+    s.form,
+    fd.endDate,
+    fd.frame
 FROM
     financialData fd
     INNER JOIN submissions s
         ON fd.cik = s.cik
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
+        AND FD.isStandardPeriodLength = TRUE
     INNER JOIN calculationTaxonomyHierarchy cth
         ON cth.cik = fd.cik
         AND cth.accessionNumber = fd.accessionNumber
@@ -32,19 +34,16 @@ FROM
 WHERE
 --us-gaap 744825 0001144204-12-018468 10-K 2011-12-31
     fd.prefix = 'us-gaap'
-    AND fd.cik = '744825'
-    AND fd.accessionNumber = '0001144204-12-018468'
+    AND fd.cik = 8063
+    AND fd.accessionNumber = '0000008063-20-000042'
     AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 AND cth.highestParent = TRUE))
-    AND s.form = '10-K'
-    AND fd.endDate = '2011-12-31'
+    AND s.form = '10-Q'
+    AND fd.endDate = '2020-06-27'
     AND cth.relativeDepth <= 2
-    
 ORDER BY
     cth.keyStatementRole,
     cth.ancestor,
     cth.arcWeight DESC;
-
-
 
 
 --Determine submissions that have matching total for top level parents and first level nodes for each key statement role to identify filings with complete calculation hierarchies for primary financial statements.
@@ -60,7 +59,8 @@ inner join financialData fd on
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 0
     AND cth.highestParent = TRUE
-    and fd.prefix = 'us-gaap'
+    AND fd.prefix = 'us-gaap'
+    AND fd.isPrimarySubmissionDateRange = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
@@ -80,7 +80,8 @@ inner join financialData fd on
     AND fd.accessionNumber = cth.accessionNumber
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 1
-    and fd.prefix = 'us-gaap'
+    AND fd.prefix = 'us-gaap'
+    AND fd.isPrimarySubmissionDateRange = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
@@ -96,7 +97,7 @@ GROUP BY
     fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 )     
 
-
+select count(*) from (
 select tlp.prefix,tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
 INNER JOIN firstLevelNodestSum fln 
 on tlp.cik = fln.cik
@@ -109,7 +110,7 @@ and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
 WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
 GROUP BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 HAVING count(*) = 3
-ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 ;
 --------------------------------------------------------------------------------
 
@@ -121,23 +122,20 @@ on ctc.linkRole = ct.linkRole
 where ct.accessionNumber = '0000008063-20-000042'
 ;
 
-select  * from financialData where accessionNumber = '0000008063-20-000042'
-and name LIKE '%WeightedAverageNumberOfDilutedSharesOutstanding%'
-order by name asc;
+select  startDate, endDate, isStandardPeriodLength from financialData where 
+--accessionNumber = '0000008063-20-000042'
+--and name LIKE '%GrossProfit%' and endDate = '2020-06-27' AND i
+isStandardPeriodLength = TRUE
+order by name asc
+LIMIT 1000;
+
+select * from submissions where accessionNumber = '0000008063-20-000042';
 
 select distinct keystatementRole from calculationTaxonomyHierarchy
 ;
 
-UPDATE calculationTaxonomyHierarchy
-SET keyStatementRole = 'StatementOfCashFlows'
-WHERE keyStatementRole = 'CashFlow';
 
-UPDATE calcTaxRolesClassified
-SET keyStatementRole = 'StatementOfCashFlows'
-WHERE keyStatementRole = 'CashFlow';
-
-checkpoint;
-
+CHECKPOINT;
 /*
 --Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.
 CREATE TABLE calculationTaxonomyHierarchy_NEW as

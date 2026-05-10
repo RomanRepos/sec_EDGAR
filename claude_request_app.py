@@ -124,6 +124,7 @@ inner join financialData fd on
     AND cth.relativeDepth = 0
     AND cth.highestParent = TRUE
     and fd.prefix = ?
+    AND fd.isPrimarySubmissionDateRange = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
@@ -144,6 +145,7 @@ inner join financialData fd on
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 1
     and fd.prefix = ?
+    AND fd.isPrimarySubmissionDateRange = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'

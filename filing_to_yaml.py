@@ -1,48 +1,54 @@
 import duckdb as ddb
 import os
-import yaml
 from collections import defaultdict
 from pathlib import Path
 from dotenv import load_dotenv
 
 
 def rows_to_tree(rows):
-    children_of = defaultdict(list)  # (statement, parent) -> [(child, weight)]
-    root_concepts = set()            # (statement, concept) — depth=0, highestParent rows
+    children_of = defaultdict(list)
+    root_concepts = set()
 
-    for stmt, ancestor, descendant, weight, depth, units in rows:
+    for stmt, ancestor, descendant, weight, depth in rows:
         if stmt is None:
             continue
         if depth == 0:
-            # ancestor == descendant here; marks the root of a subtree
             root_concepts.add((stmt, ancestor))
         else:
             children_of[(stmt, ancestor)].append((descendant, weight))
 
-    def fmt_value(v):
-        return int(v) if v is not None and v == int(v) else v
-
-    def build_node(stmt, concept):
-        node = {}
+    def build_node(stmt, concept, weight=1):
+        name = f"(-) {concept}" if weight < 0 else concept
         kids = children_of.get((stmt, concept), [])
-        if kids:
-            components = []
-            for child, w in kids:
-                child_node = {
-                    'concept': child,
-                    'weight': '+1' if w > 0 else '-1',
-                }
-                # intermediate nodes: recurse to attach their children
-                if children_of.get((stmt, child)):
-                    child_node['components'] = build_node(stmt, child)['components']
-                components.append(child_node)
-            node['components'] = components
-        return node
+        if not kids:
+            return name
+        return {name: [build_node(stmt, child, w) for child, w in kids]}
 
     result = {}
     for stmt, root in sorted(root_concepts):
-        result.setdefault(stmt, {})[root] = build_node(stmt, root)
+        children_list = [build_node(stmt, child, w) for child, w in children_of.get((stmt, root), [])]
+        result.setdefault(stmt, {})[root] = children_list
     return result
+
+
+def _render(name, children, indent, lines):
+    pad = "  " * indent
+    lines.append(f"{pad}{name}:")
+    for child in children:
+        if isinstance(child, str):
+            lines.append(f"{pad}  {child}")
+        else:
+            child_name, child_children = next(iter(child.items()))
+            _render(child_name, child_children, indent + 1, lines)
+
+
+def tree_to_text(tree):
+    lines = []
+    for stmt, roots in sorted(tree.items()):
+        lines.append(f"{stmt}:")
+        for root, children in roots.items():
+            _render(root, children, 1, lines)
+    return "\n".join(lines)
 
 
 def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str) -> str:
@@ -53,8 +59,7 @@ SELECT
     cth."ancestor",
     cth.descendant,
     cth."arcWeight",
-    cth.relativeDepth,
-    fd.units
+    cth.relativeDepth
 FROM
     financialData fd
     INNER JOIN submissions s
@@ -71,6 +76,7 @@ FROM
         AND cth.ancestor = ctht.ancestor
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
+        
 WHERE
     fd.prefix = ?
     AND fd.cik = ?
@@ -80,6 +86,7 @@ WHERE
     AND fd.endDate = ?
     AND cth.relativeDepth <= 2
     and cth."keyStatementRole" IN ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
+    AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.units not like '%share%'
     
 ORDER BY
@@ -91,7 +98,7 @@ ORDER BY
     
 
     tree = rows_to_tree(rows)
-    return yaml.dump(tree, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    return tree_to_text(tree)
 
 
 if __name__ == "__main__":
