@@ -18,7 +18,7 @@ def rows_to_tree(rows):
             children_of[(stmt, ancestor)].append((descendant, weight))
 
     def build_node(stmt, concept, weight=1):
-        name = f"(-) {concept}" if weight < 0 else concept
+        name = f"- {concept}" if weight < 0 else f"+ {concept}"
         kids = children_of.get((stmt, concept), [])
         if not kids:
             return name
@@ -84,10 +84,10 @@ WHERE
     AND (cth."relativeDepth" = 1 OR (cth."relativeDepth" = 0 AND cth.highestParent = TRUE))
     AND s.form = ?
     AND fd.endDate = ?
-    AND cth.relativeDepth <= 2
     and cth."keyStatementRole" IN ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.units not like '%share%'
+
     
 ORDER BY
     cth.keyStatementRole,

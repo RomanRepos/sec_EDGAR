@@ -9,56 +9,51 @@ import pandas as pd
 
 load_dotenv()
 CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
-def build_system_prompt(
-    metrics_path: str = None,
-    line_items_path: str = None,
-) -> str:
-    base_file_dir =Path(__file__).resolve().parent
-    
-    metrics_path = metrics_path or os.path.join(base_file_dir, "financial_metrics.json")
+
+
+def build_system_prompt(line_items_path: str = None) -> str:
+    base_file_dir = Path(__file__).resolve().parent
     line_items_path = line_items_path or os.path.join(base_file_dir, "standard_line_items.json")
 
-    with open(metrics_path) as f:
-        metrics = json.load(f)
     with open(line_items_path) as f:
         line_items = json.load(f)
 
     lines = [
-        "You are a financial concept mapper. Given XBRL concepts from a SEC filing "
-        "in YAML format, map each concept to a financial metric component and/or a "
-        "standard line item label. Use only the definitions below — do not invent "
-        "metrics or labels not listed here.",
+        "You are a financial concept mapper. Given a financial statement hierarchy from an SEC "
+        "filing in plain-text format, identify which XBRL concepts correspond to standard "
+        "financial line items listed below.",
         "",
-        "## Metric Definitions",
+        "The hierarchy uses indentation to show parent-child relationships. A `+` prefix on a "
+        "concept means it adds to its parent; a `-` prefix means it subtracts from its parent.",
+        "",
+        "## Standard Line Items",
     ]
 
-    for m in metrics:
-        lines.append(f"\n### {m['metric']}")
-        lines.append(f"Formula: {m['formula']}")
-        lines.append(f"Description: {m['semantic_description']}")
-        lines.append("Components:")
-        for c in m["components"]:
-            lines.append(f"  - role: {c['role']} | statement: {c['statement']} | units: {c['units']}")
-            lines.append(f"    {c['semantic_description']}")
-
-    lines += ["", "## Standard Line Items"]
     for item in line_items:
-        lines.append(f"\n- label: {item['standard_label']} | statement: {item['statement']}")
+        stmt_str = "/".join(item["statement"]) if isinstance(item["statement"], list) else item["statement"]
+        lines.append(f"\n- label: {item['standard_label']} | statement: {stmt_str}")
         lines.append(f"  {item['semantic_description']}")
 
     lines += [
         "",
         "## Output Format",
-        "Return a JSON array. Each element maps one concept and must have exactly these fields:",
+        "Return a JSON array. Each element maps one standard label and must have exactly these fields:",
         "{",
-        '  "concept": "exact concept name from the input",',
-        '  "metric": "exact metric name from Metric Definitions, or null",',
-        '  "component_role": "exact role from the metric component, or null",',
-        '  "standard_label": "exact label from Standard Line Items, or null",',
+        '  "standard_label": "exact label from Standard Line Items",',
+        '  "statement": "IncomeStatement" | "BalanceSheet" | "StatementOfCashFlows",',
+        '  "concepts": [{"concept": "exact concept name from the filing", "sign": "+" | "-"}],',
         '  "confidence": "high" | "medium" | "low"',
         "}",
-        "Only include concepts that map to at least one of metric or standard_label. "
-        "Skip concepts that map to neither.",
+        "",
+        "Mapping rules:",
+        "- If a single concept directly represents the label, map it with sign \"+\".",
+        "- If multiple concepts together make up the label (e.g. D&A split into separate "
+        "depreciation and amortization lines, or operating expenses broken into R&D and SG&A), "
+        "list all concepts with the sign to sum them to the label total (almost always \"+\"; "
+        "use \"-\" only if a concept reduces the total).",
+        "- Use the `+`/`-` prefixes in the hierarchy to understand how concepts relate to their "
+        "parents, then determine the correct combining sign for the standard label.",
+        "- Only include labels that can be identified in the filing. Skip the rest."
     ]
 
     return "\n".join(lines)
@@ -91,21 +86,12 @@ def map_filing(yaml_str, system_prompt) -> list[dict]:
         }],
         messages=[{
             "role": "user",
-            "content": f"Map the following concepts:\n\n{yaml_str}",
+            "content": f"Map the following filing:\n\n{yaml_str}",
         }]
     )
 
     return extract_json(response.content[0].text)
 
-#for _, row in random_rows.iterrows():
-        #cik = row["cik"]
-        #accessionNumber = row["accessionNumber"]
-        #prefix = row["prefix"]
-        #form = row["form"]
-        #endDate = row["endDate"]
-        #print(prefix, cik, accessionNumber, form, endDate)
-        #results = map_filing(filing_to_yaml(conn, prefix, cik, accessionNumber, form, endDate), system_prompt)
-        #print(json.dumps(results, indent=2))
 
 if __name__ == "__main__":
     load_dotenv()

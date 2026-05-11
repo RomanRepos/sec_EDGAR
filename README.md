@@ -34,4 +34,4 @@ A personal portfolio project for downloading, parsing, and analyzing SEC EDGAR f
 - Applying AI mappings to as many submissions as possible
 - Storage of standardized metrics, concepts, and ratios
 - Grouping of entities by industry, sector, and peer group across time
-- Analytics, time-series analysis, and data visualization (Power BI as front end)****
+- Analytics, time-series analysis, and data visualization (Power BI as front end)
