@@ -93,7 +93,8 @@ def flatten(conn_arg, batch_size_arg):
     conn_arg.execute('''
 alter table financialData add column isStandardPeriodLength boolean;
 alter table financialData add column isPrimarySubmissionDateRange boolean;
-                     
+alter table financialData add column isPrimararyUnits boolean;
+                                        
 UPDATE financialData   
 Set isStandardPeriodLength = 
     CASE 
@@ -112,10 +113,31 @@ FROM (
         ROW_NUMBER() OVER (
             PARTITION BY prefix, units, cik, accessionNumber, endDate, Name 
             ORDER BY isStandardPeriodLength DESC
-        ) AS rn
+        ) AS c
     FROM financialData
 ) AS subquery
 WHERE financialData.rowid = subquery.rid;
+
+UPDATE financialData
+SET isPrimararyUnits = (units = subquery.pirmaryUnits)
+FROM (
+    SELECT 
+        rowid AS rid,
+        CASE 
+    WHEN list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units) IS NULL 
+        THEN 'Other'
+    WHEN ROW_NUMBER() OVER (
+        PARTITION BY prefix, cik, accessionNumber, endDate, Name
+        ORDER BY list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units)
+    ) = 1 
+        THEN units
+    ELSE NULL
+END AS pirmaryUnits
+    FROM financialData
+) AS subquery
+WHERE financialData.rowid = subquery.rid;                 
+
+
 CHECKPOINT;
 ''')
     conn_arg.execute('DROP TABLE raw_data;')

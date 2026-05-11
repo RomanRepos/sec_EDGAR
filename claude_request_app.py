@@ -98,7 +98,7 @@ if __name__ == "__main__":
     
     QUERY_FILINGS = """
     with topLevelParentsSum as (
-SELECT fd.prefix, cth.cik, cth.accessionNumber, 
+SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, 
 cth.linkRole, 
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal 
 from calculationTaxonomyHierarchy cth 
@@ -109,19 +109,20 @@ inner join financialData fd on
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 0
     AND cth.highestParent = TRUE
-    and fd.prefix = ?
+    AND fd.prefix = ?
     AND fd.isPrimarySubmissionDateRange = TRUE
+    --AND fd.isPrimararyUnits = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
 GROUP BY
-    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 ), 
 
 firstLevelNodestSum as (
-SELECT fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole,  
+SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole,  
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevelNodesTotal 
 from calculationTaxonomyHierarchy cth
 inner join financialData fd on
@@ -130,8 +131,9 @@ inner join financialData fd on
     AND fd.accessionNumber = cth.accessionNumber
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 1
-    and fd.prefix = ?
+    AND fd.prefix = ?
     AND fd.isPrimarySubmissionDateRange = TRUE
+    --AND fd.isPrimararyUnits = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
@@ -144,11 +146,10 @@ INNER JOIN calculationTaxonomyHierarchy ctht
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
 GROUP BY
-    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 )     
 
-
-select tlp.prefix,tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
+select tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
 INNER JOIN firstLevelNodestSum fln 
 on tlp.cik = fln.cik
 and tlp.accessionNumber = fln.accessionNumber
@@ -157,8 +158,14 @@ and tlp.keyStatementRole = fln.keyStatementRole
 and tlp.form = fln.form
 and tlp.endDate = fln.endDate
 and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
+
+inner join (select distinct cik, accessionNumber, prefix from financialData where isPrimararyUnits = TRUE) pu
+on pu.cik = tlp.cik
+AND pu.accessionNumber = tlp.accessionNumber
+AND pu.prefix = tlp.prefix
+
 WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
-GROUP BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 HAVING count(*) = 3
 ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 ;
@@ -181,8 +188,9 @@ ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
         cik = row["cik"]
         accessionNumber = row["accessionNumber"]
         prefix = row["prefix"]
+        units = row["units"]
         form = row["form"]
         endDate = row["endDate"]
-        print(prefix, cik, accessionNumber, form, endDate)
+        print(prefix, units, cik, accessionNumber, form, endDate)
         results = map_filing(filing_to_yaml(conn, prefix, cik, accessionNumber, form, endDate), system_prompt)
         print(json.dumps(results, indent=2))

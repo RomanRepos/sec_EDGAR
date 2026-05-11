@@ -48,7 +48,7 @@ ORDER BY
 
 --Determine submissions that have matching total for top level parents and first level nodes for each key statement role to identify filings with complete calculation hierarchies for primary financial statements.
 with topLevelParentsSum as (
-SELECT fd.prefix, cth.cik, cth.accessionNumber, 
+SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, 
 cth.linkRole, 
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal 
 from calculationTaxonomyHierarchy cth 
@@ -61,17 +61,18 @@ inner join financialData fd on
     AND cth.highestParent = TRUE
     AND fd.prefix = 'us-gaap'
     AND fd.isPrimarySubmissionDateRange = TRUE
+    --AND fd.isPrimararyUnits = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
 GROUP BY
-    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 ), 
 
 firstLevelNodestSum as (
-SELECT fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole,  
+SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole,  
 cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevelNodesTotal 
 from calculationTaxonomyHierarchy cth
 inner join financialData fd on
@@ -82,6 +83,7 @@ inner join financialData fd on
     AND cth.relativeDepth = 1
     AND fd.prefix = 'us-gaap'
     AND fd.isPrimarySubmissionDateRange = TRUE
+    --AND fd.isPrimararyUnits = TRUE
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
         --AND form ='10-K'
@@ -94,11 +96,11 @@ INNER JOIN calculationTaxonomyHierarchy ctht
         AND ctht."relativeDepth" = 0
         AND ctht.highestParent = TRUE
 GROUP BY
-    fd.prefix, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
+    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
 )     
 
 select count(*) from (
-select tlp.prefix,tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
+select tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
 INNER JOIN firstLevelNodestSum fln 
 on tlp.cik = fln.cik
 and tlp.accessionNumber = fln.accessionNumber
@@ -107,13 +109,39 @@ and tlp.keyStatementRole = fln.keyStatementRole
 and tlp.form = fln.form
 and tlp.endDate = fln.endDate
 and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
+
+inner join (select distinct cik, accessionNumber, prefix from financialData where isPrimararyUnits = TRUE) pu
+on pu.cik = tlp.cik
+AND pu.accessionNumber = tlp.accessionNumber
+AND pu.prefix = tlp.prefix
+
 WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
-GROUP BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
+GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
 HAVING count(*) = 3
 ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 ;
 --------------------------------------------------------------------------------
 
+alter table financialData add column isPrimararyUnits boolean;
+UPDATE financialData
+SET isPrimararyUnits = (units = subquery.pirmaryUnits)
+FROM (
+    SELECT 
+        rowid AS rid,
+        CASE 
+    WHEN list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units) IS NULL 
+        THEN 'Other'
+    WHEN ROW_NUMBER() OVER (
+        PARTITION BY prefix, cik, accessionNumber, endDate, Name
+        ORDER BY list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units)
+    ) = 1 
+        THEN units
+    ELSE NULL
+END AS pirmaryUnits
+    FROM financialData
+) AS subquery
+WHERE financialData.rowid = subquery.rid; 
+CHECKPOINT;
 
 
 SELECT ct.linkRole, isPrimaryRole, ctc.keyStatementRole, fromConcept from calculationTaxonomy ct
@@ -122,18 +150,30 @@ on ctc.linkRole = ct.linkRole
 where ct.accessionNumber = '0000008063-20-000042'
 ;
 
-select  startDate, endDate, isStandardPeriodLength from financialData where 
+select count(*) from (select  startDate, endDate, isStandardPeriodLength from financialData where 
 --accessionNumber = '0000008063-20-000042'
 --and name LIKE '%GrossProfit%' and endDate = '2020-06-27' AND i
-isStandardPeriodLength = TRUE
+isPrimararyUnits = TRUE
 order by name asc
-LIMIT 1000;
+);
 
 select * from submissions where accessionNumber = '0000008063-20-000042';
 
 select distinct keystatementRole from calculationTaxonomyHierarchy
 ;
 
+
+CREATE OR REPLACE TABLE standardizedConcepts AS
+(
+    prefix VARCHAR,
+    units
+    cik INTEGER,
+    accessionNumber VARCHAR,
+    form VARCHAR,
+
+    conceptName VARCHAR,
+    standardizedConcept VARCHAR
+);
 
 CHECKPOINT;
 /*
