@@ -11,6 +11,20 @@ SET
 SET
     VARIABLE fact_path_no_json = REPLACE('{{facts_path_param}}', '*.json', '');
 
+CREATE OR REPLACE TABLE standardizedConcepts (
+    prefix VARCHAR,
+    units VARCHAR,
+    cik INTEGER,
+    accessionNumber VARCHAR,
+    form VARCHAR,
+    endDate DATE,
+    conceptName VARCHAR,
+    standardLabel VARCHAR,
+    keyStatementRole VARCHAR,
+    sign VARCHAR,
+    confidenceLevel VARCHAR,
+    standarConceptId INTEGER
+);
 
 
 --Load raw data from company facts

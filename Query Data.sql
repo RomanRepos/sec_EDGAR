@@ -122,26 +122,7 @@ ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 ;
 --------------------------------------------------------------------------------
 
-alter table financialData add column isPrimararyUnits boolean;
-UPDATE financialData
-SET isPrimararyUnits = (units = subquery.pirmaryUnits)
-FROM (
-    SELECT 
-        rowid AS rid,
-        CASE 
-    WHEN list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units) IS NULL 
-        THEN 'Other'
-    WHEN ROW_NUMBER() OVER (
-        PARTITION BY prefix, cik, accessionNumber, endDate, Name
-        ORDER BY list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units)
-    ) = 1 
-        THEN units
-    ELSE NULL
-END AS pirmaryUnits
-    FROM financialData
-) AS subquery
-WHERE financialData.rowid = subquery.rid; 
-CHECKPOINT;
+
 
 
 SELECT ct.linkRole, isPrimaryRole, ctc.keyStatementRole, fromConcept from calculationTaxonomy ct
@@ -163,18 +144,20 @@ select distinct keystatementRole from calculationTaxonomyHierarchy
 ;
 
 
-CREATE OR REPLACE TABLE standardizedConcepts AS
-(
+CREATE OR REPLACE TABLE standardizedConcepts (
     prefix VARCHAR,
-    units
+    units VARCHAR,
     cik INTEGER,
     accessionNumber VARCHAR,
     form VARCHAR,
-
+    endDate DATE,
     conceptName VARCHAR,
-    standardizedConcept VARCHAR
+    standardLabel VARCHAR,
+    keyStatementRole VARCHAR,
+    sign VARCHAR,
+    confidenceLevel VARCHAR,
+    standarConceptId INTEGER
 );
-
 CHECKPOINT;
 /*
 --Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.
