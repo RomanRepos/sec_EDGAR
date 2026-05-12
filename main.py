@@ -1,4 +1,4 @@
-from anyio import Path
+from pathlib import Path
 import duckdb as ddb
 import os
 import sys
@@ -12,7 +12,9 @@ if __name__ == "__main__":
     load_dotenv()
 
     PROJECT_ROOT_PARENT = Path(Path(__file__).resolve().parent.parent or Path(os.getenv("PROJECT_ROOT")).resolve().parent)
-    DATA_DIR = os.path.join(PROJECT_ROOT_PARENT, "DATA")
+    PROJECT_ROOT = Path(Path(__file__).resolve().parent or Path(os.getenv("PROJECT_ROOT")).resolve())
+    DATA_DIR = os.path.join(PROJECT_ROOT_PARENT, "Data")
+    standard_line_items_path = os.path.join(PROJECT_ROOT, "standard_line_items.json")
 
     db_path = os.path.join(DATA_DIR, "secFilingsDb.duckdb")
 
@@ -23,8 +25,8 @@ if __name__ == "__main__":
     conn = ddb.connect(db_path)
     main_file_path = os.path.abspath(sys.argv[0])
     main_dir = os.path.dirname(main_file_path)
-    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': DATA_DIR / "companyfacts"},
-    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': DATA_DIR / "submissions"}}
+    inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': os.path.join(DATA_DIR, "companyfacts")},
+    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")}}
 
     for i in inputs_dict.values():
         download_and_extract(i['link'], i['savePath'])
@@ -34,7 +36,7 @@ if __name__ == "__main__":
     with open(os.path.join(main_dir,'LoadDataQueries.sql'), 'r') as f:
         load_sql_script = Template(f.read())
 
-    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'))
+    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
     
     for statement in final_sql.split(';'):
         if statement.strip():
