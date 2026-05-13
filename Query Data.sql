@@ -485,6 +485,7 @@ ALTER TABLE
 checkpoint;
 CREATE TABLE calculationTaxonomyHierarchy_NEW AS
 SELECT
+    DISTINCT
     cth.*,
     ct.keyStatementRole
 FROM

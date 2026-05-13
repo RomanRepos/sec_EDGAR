@@ -5,6 +5,9 @@ from pathlib import Path
 import os
 import pandas as pd
 import gc
+from utilities import load_query
+from tqdm import tqdm
+
 
 def get_subtree(node, children, rel_depth=1, visited=None):
     if visited is None:
@@ -24,14 +27,14 @@ def create_taxonomy_hierarchy(df, conn):
         cik             INTEGER,
         accessionNumber VARCHAR,
         linkRole        VARCHAR,
-        keyStatementRole VARCHAR,
         ancestor        VARCHAR,
         descendant      VARCHAR,
         relativeDepth   INTEGER,
         arcOrder        DOUBLE,
         arcWeight       DOUBLE,
         highestParent   BOOLEAN,
-        lowestChild     BOOLEAN
+        lowestChild     BOOLEAN,
+        keyStatementRole VARCHAR
     )
     """)
     conn.execute('ChECKPOINT;')
@@ -40,7 +43,8 @@ def create_taxonomy_hierarchy(df, conn):
     grouped = df.groupby(['cik', 'accessionNumber', 'linkRole'])
     del df
     gc.collect()
-    for def_name, def_df in grouped:
+    for def_name, def_df in tqdm(grouped, desc="Processing Calculation Taxonomiess", unit="file",
+                     bar_format='{desc}: {percentage:.2f}% |{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'):
         children = defaultdict(list)
         all_children = set()
         for _, row in def_df.iterrows():
@@ -128,14 +132,7 @@ if __name__ == "__main__":
 
     conn = ddb.connect(db_path)
 
-    df = conn.execute('''SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole as keyStatementRole, 
-                        ct.fromConcept, ct.toConcept, ct.arcOrder,
-    ct.arcWeight from calculationTaxonomy ct 
-    inner join calcTaxRolesClassified crc on crc.linkRole = ct.linkRole
-    anti join calculationTaxonomyHierarchy cth on cth.cik = ct.cik and cth.accessionNumber = ct.accessionNumber
-        and ct.linkRole = cth.linkRole
-    where ct.isPrimaryRole=TRUE
-    and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;''').fetch_df()
+    df = conn.execute(load_query("GenerateCalcHierarchy")).fetch_df()
 
     create_taxonomy_hierarchy(df, conn)
     conn.close()

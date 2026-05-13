@@ -1,17 +1,17 @@
 SET
     VARIABLE facts_path = '{{facts_path_param}}';
 
-
-
 SET
     VARIABLE submissions_path = '{{submissions_path_param}}';
 
 SET
     VARIABLE standard_line_items_path = '{{standard_line_items_path_param}}';
 
+SET max_temp_directory_size = '50GB';
+SET threads = 4;
 SET
     VARIABLE fact_path_no_json = REPLACE('{{facts_path_param}}', '*.json', '');
-
+SET memory_limit = '16GB';
 CREATE OR REPLACE TABLE standardizedConcepts (
     prefix VARCHAR,
     units VARCHAR,
@@ -45,14 +45,14 @@ FROM
 ALTER TABLE
     raw_data
 ADD
-    COLUMN lastModified TIMESTAMPTZ;
+    COLUMN lastModified IF NOT EXISTS TIMESTAMPTZ;
 
 
 
 ALTER TABLE
     raw_data
 ADD
-    COLUMN fileNameCol VARCHAR;
+    COLUMN fileNameCol IF NOT EXISTS VARCHAR;
 
 
 
@@ -246,6 +246,13 @@ SELECT
     standard_label,
     statement :: VARCHAR [] AS statement,
     semantic_description,
+    regexp_replace(
+    regexp_replace(
+        regexp_replace(lower(trim(semantic_description)), '[^a-z0-9]+', ' ', 'g'),
+        '(^| )([a-z])', '\1\u\2', 'g'
+    ),
+    '\s+', '', 'g'
+    ) AS standardConceptName, 
     TRUE AS isActive
 FROM
     read_json_auto(

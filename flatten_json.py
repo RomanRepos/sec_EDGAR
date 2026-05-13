@@ -66,6 +66,9 @@ def flatten(conn_arg, batch_size_arg):
         del df_chunk
         gc.collect()
         conn_arg.execute("""
+                    SET memory_limit = '16GB';
+                    SET max_temp_directory_size = '50GB';
+                    SET threads = 4;
                     INSERT INTO financialData 
                     SELECT 
                         cik,
@@ -89,56 +92,5 @@ def flatten(conn_arg, batch_size_arg):
         gc.collect()
         count+=1
         print(count, datetime.now())
-
-    conn_arg.execute('''
-alter table financialData add column isStandardPeriodLength boolean;
-alter table financialData add column isPrimarySubmissionDateRange boolean;
-alter table financialData add column isPrimararyUnits boolean;
-                                        
-UPDATE financialData   
-Set isStandardPeriodLength = 
-    CASE 
-        WHEN startDate IS NULL THEN TRUE
-        ELSE 
-            -- Calculate precise month difference based on days
-            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 11 AND 14) OR 
-            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 2 AND 5)
-    END;
-
-UPDATE financialData
-SET isPrimarySubmissionDateRange = (subquery.rn = 1)
-FROM (
-    SELECT 
-        rowid AS rid, -- Hidden unique ID provided by DuckDB
-        ROW_NUMBER() OVER (
-            PARTITION BY prefix, units, cik, accessionNumber, endDate, Name 
-            ORDER BY isStandardPeriodLength DESC
-        ) AS c
-    FROM financialData
-) AS subquery
-WHERE financialData.rowid = subquery.rid;
-
-UPDATE financialData
-SET isPrimararyUnits = (units = subquery.pirmaryUnits)
-FROM (
-    SELECT 
-        rowid AS rid,
-        CASE 
-    WHEN list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units) IS NULL 
-        THEN 'Other'
-    WHEN ROW_NUMBER() OVER (
-        PARTITION BY prefix, cik, accessionNumber, endDate, Name
-        ORDER BY list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units)
-    ) = 1 
-        THEN units
-    ELSE NULL
-END AS pirmaryUnits
-    FROM financialData
-) AS subquery
-WHERE financialData.rowid = subquery.rid;                 
-
-
-CHECKPOINT;
-''')
     conn_arg.execute('DROP TABLE raw_data;')
     conn_arg.execute('CHECKPOINT;')

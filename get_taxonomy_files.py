@@ -6,15 +6,11 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import duckdb as ddb
-from dotenv import load_dotenv
 
-def download_cal_xmls(conn):
+def download_cal_xmls(conn, data_dir):
     load_dotenv()
-    
-    for d in [DATA_DIR]:
-        d.mkdir(parents=True, exist_ok=True)
 
-    save_path = os.path.join(DATA_DIR, "calXMLs/")
+    save_path = os.path.join(data_dir, "calXMLs/")
     xml_taxonomy_folder = Path(save_path)
     xml_taxonomy_folder.mkdir(parents=True, exist_ok=True)
 
@@ -27,10 +23,11 @@ def download_cal_xmls(conn):
                 records.add((cik, accession_number))
 
 
-    df_db = conn.execute("""SELECT DISTINCT cik, accessionNumber from FinancialData
+    df_db = conn.execute("""SELECT DISTINCT cik, accessionNumber from FinancialData fd
+                         anti join (SELECT DISTINCT cik, accessionNumber from calculationTaxonomyRaw) ctr
+                         ON fd.cik = ctr.cik AND fd.accessionNumber = ctr.accessionNumber
         """).fetch_df()
-    conn.close()
-
+    
     if records:
         df_folder = pd.DataFrame(records, columns=["cik", "accessionNumber"])
         df_folder['cik'] = df_folder['cik'].astype("int32")
@@ -97,8 +94,8 @@ if __name__ == "__main__":
     load_dotenv()
 
     PROJECT_ROOT_PARENT = Path(Path(__file__).resolve().parent.parent or Path(os.getenv("PROJECT_ROOT")).resolve().parent)
-    
+    data_dir = os.path.join(PROJECT_ROOT_PARENT, "Data")
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path, read_only=True)
-    download_cal_xmls(conn)
+    download_cal_xmls(conn, data_dir)

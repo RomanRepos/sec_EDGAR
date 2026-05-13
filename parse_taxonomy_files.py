@@ -37,7 +37,7 @@ def get_xml_taxonomy_files(conn_arg, xml_taxonomy_dir):
     }
 
     return [
-        file for file in xml_taxonomy_dir.iterdir()
+        file for file in Path(xml_taxonomy_dir).iterdir()
         if file.is_file()
         and file.suffix.lower() in ('.xml', '.xsd')
         and not file.name.startswith('.')
