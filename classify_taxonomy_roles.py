@@ -8,12 +8,10 @@ def normalize(s):
     return re.sub(r'[^a-z]', '', s.lower())
 
 SPECIFIC_DISCARD = ['disclosure', 'schedule', 'changes', 'credit', 'derivative', 'complement',
-                    'detailsdetails', 'changein', 'changes', 'rsoconsolidated', 'divest', 'offset']
+                     'changein', 'changes', 'divest', 'offset']
 INCOME_STATEMENT_DISCARD = ['disclosure', 'schedule', 
                             'equity', 'changes', 'credit',
-                            'derivative', 'othercomprehensiveincomelossdetails',
-                            'othercomprehensiveincomedetails',
-                            'othercomprehensivelossdetails', 'change']
+                            'derivative', 'change']
 CASH_FLOW_DISCARD = ['disclosure', 'schedule', 'credit', 'derivative', 'complement']
 
 DISCARD_PATTERNS = [
@@ -37,11 +35,11 @@ DISCARD_PATTERNS = [
     'policies',
     'description',
     'organization',
-    'acquisition'
+    'acquisition',
     'offset',
     'reclassification',
     'discontinued',
-    'taxschedule'
+    'taxschedule',
     'taxesschedule',
     'lease',
     'tax',
@@ -50,7 +48,7 @@ DISCARD_PATTERNS = [
     'future',
     'productiondetail',
     'project',
-    'selected'
+    'selected',
     'informationsummary',
     'informationdetails',
     'logistics',
@@ -125,7 +123,8 @@ CASH_FLOW_PATTERNS = [
     'statementsofcashflow',
     'cashflowsindirect', 
     'cashflowsdirect',
-    'cashflowstatement'
+    'cashflowstatement',
+    'chasflows'
 ]
 
 BALANCE_SHEET_PATTERNS = [
@@ -149,13 +148,21 @@ BALANCE_SHEET_PATTERNS = [
 ]
 
 INCOME_STATEMENT_PATTERNS = [
-    'statementsofoperations', 
+    'statementsofexpense',
+    'statementofexpense',
+    'stamentsofoperation',
+    'consolidatedoperation',
+    'statementincome',
+    'statementsincome',
+    'statementsofoperation', 
     'statementofoperations',
+    'statementofoperation',
     'incomestatement', 
     'incomestatements',
     'statementofincome', 
     'statementsofincome',
-    'statementsofearnings', 
+    'statementsofearnings',
+    'statementofearning', 
     'statementofearnings',
     'consolidatedincome', 
     'consolidatedstatementsofincome',
@@ -166,7 +173,8 @@ INCOME_STATEMENT_PATTERNS = [
     'comprehensiveloss',
     'comprehensiveearnings',
     'statementsofoperationsandcomprehensive',
-    'statementofloss', 'statementsofloss',
+    'statementofloss', 
+    'statementsofloss',
     'statementsoflosandcomprehensive',
     'statementsofprofitorloss',     # IFRS
     'profitorlossandothercomprehensive',

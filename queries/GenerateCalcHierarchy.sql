@@ -7,4 +7,3 @@ SELECT ct.cik, ct.accessionNumber, ct.linkRole, crc.keyStatementRole as keyState
         and ct.linkRole = cth.linkRole
     where ct.isPrimaryRole=TRUE
     and ct.fromConcept IS NOT NULL and ct.toConcept IS NOT NULL and ct.fromConcept<>ct.toConcept;
-

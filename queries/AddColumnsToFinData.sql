@@ -1,6 +1,6 @@
 alter table financialData add column IF NOT EXISTS isStandardPeriodLength boolean;
 alter table financialData add column IF NOT EXISTS isPrimarySubmissionDateRange boolean;
-alter table financialData add column IF NOT EXISTS isPrimararyUnits boolean;
+alter table financialData add column IF NOT EXISTS isPrimaryUnits boolean;
                                         
 UPDATE financialData   
 Set isStandardPeriodLength = 
@@ -26,7 +26,7 @@ FROM (
 WHERE financialData.rowid = subquery.rid;
 
 UPDATE financialData
-SET isPrimararyUnits = (units = subquery.pirmaryUnits)
+SET isPrimaryUnits = (units = subquery.pirmaryUnits)
 FROM (
     SELECT 
         rowid AS rid,

@@ -1,5 +1,9 @@
 ALTER TABLE
     calculationTaxonomy
+DROP COLUMN IF EXISTS isPrimaryRole;
+
+ALTER TABLE
+    calculationTaxonomy
 ADD
     COLUMN isPrimaryRole BOOLEAN DEFAULT FALSE;
 
@@ -32,6 +36,7 @@ WITH ranked AS (
         OR LOWER(ct.linkRole) LIKE '%unaudited%'
         OR LOWER(ct.linkRole) LIKE '%combined%'
         OR LOWER(ct.linkRole) LIKE '%interim%'
+        OR LOWER(ct.linkRole) LIKE '%detail%'
         OR (
             LOWER(ct.linkRole) LIKE '%condensed%'
             AND hnc.cik IS NOT NULL
@@ -45,6 +50,7 @@ WITH ranked AS (
             AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
             AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
             AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%detail%'
         )
     THEN 1 ELSE 0 END AS hasPenaltyKeyword,
 
@@ -60,6 +66,7 @@ WITH ranked AS (
         OR LOWER(ct.linkRole) LIKE '%unaudited%'
         OR LOWER(ct.linkRole) LIKE '%combined%'
         OR LOWER(ct.linkRole) LIKE '%interim%'
+        OR LOWER(ct.linkRole) LIKE '%detail%'
         OR (
             LOWER(ct.linkRole) LIKE '%condensed%'
             AND hnc.cik IS NOT NULL
@@ -73,6 +80,7 @@ WITH ranked AS (
             AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
             AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
             AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+            AND LOWER(ct.linkRole) NOT LIKE '%detail%'
         )
        THEN 20 ELSE 0 END)
     - (LENGTH(ct.linkRole) / 10)
@@ -92,6 +100,7 @@ WITH ranked AS (
                 OR LOWER(ct.linkRole) LIKE '%unaudited%'
                 OR LOWER(ct.linkRole) LIKE '%combined%'
                 OR LOWER(ct.linkRole) LIKE '%interim%'
+                OR LOWER(ct.linkRole) LIKE '%detail%'
                 OR (
                     LOWER(ct.linkRole) LIKE '%condensed%'
                     AND hnc.cik IS NOT NULL
@@ -105,6 +114,8 @@ WITH ranked AS (
                     AND LOWER(ct.linkRole) NOT LIKE '%operationsandothercomprehensive%'
                     AND LOWER(ct.linkRole) NOT LIKE '%incomeandothercomprehensive%'
                     AND LOWER(ct.linkRole) NOT LIKE '%earningsandothercomprehensive%'
+                    AND LOWER(ct.linkRole) NOT LIKE '%detail%'
+
                 )
                THEN 20 ELSE 0 END)
             - (LENGTH(ct.linkRole) / 10)

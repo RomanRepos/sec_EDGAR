@@ -39,9 +39,9 @@ if __name__ == "__main__":
 
     #sync_json_files(inputs_dict['facts']['savePath'],inputs_dict['submissions']['savePath'])
 
-    load_sql_script = Template(load_query("LoadDataQueries"))
+    #load_sql_script = Template(load_query("LoadDataQueries"))
 
-    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
+    #final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
     
     #print("Running Queries")
     #for statement in final_sql.split(';'):
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     #flatten(conn, 75) #flatten company facts
     #conn.execute(load_query("AddColumnsToFinData"))
 
-    download_cal_xmls(conn, DATA_DIR) #download calculation taxonomy files
+    #download_cal_xmls(conn, DATA_DIR) #download calculation taxonomy files
 
     #write extracted calcs to db, first with general extraction logic, then with special case logic for files that don't follow typical calc patterns, then generate hierarchy and classify roles
     write_calcs_to_db(conn, get_xml_taxonomy_files(conn, xml_taxonomy_dir), extract_calcs)
@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
 
     #Determine new taxonomy roles
-    new_taxonomies_df = conn.execute(load_query("GenerateCaclHierarchy")).fetch_df()
+    new_taxonomies_df = conn.execute(load_query("GenerateCalcHierarchy")).fetch_df()
     #generate hierarchy for new taxonomy files and insert into db
     create_taxonomy_hierarchy(new_taxonomies_df, conn)
     

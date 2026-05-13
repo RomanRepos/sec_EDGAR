@@ -6,20 +6,20 @@ SELECT
     COALESCE(
         NULLIF(
             regexp_extract(
+            regexp_replace(
                 REPLACE(
                     regexp_extract(linkXlinkRole, '[^/]+$'),
                     'Role_',
-                    ''
-                ),
-                '([A-]{1}[A-a-]+)'
-            ),
-            ''
+                    ''), 
+                    '[^a-zA-Z]+', '', 'g'), '([A-Z]{1}[A-Za-z]+)'), ''
         ),
+
+        regexp_replace(
         REPLACE(
             regexp_extract(linkXlinkRole, '[^/]+$'),
             'Role_',
             ''
-        )
+        ), '[^a-zA-Z]+', '', 'g')
     ) AS linkRole,
     REPLACE(
         regexp_extract(arcXlinkArcrole, '[^/]+$'),
@@ -43,7 +43,7 @@ SELECT
                     'Locator_',
                     ''
                 ),
-                '([A-]{1}[a-]{2,}[A-a-]+)',
+                '([A-Z]{1}[a-z]{2,}[A-Za-z]*)',
                 1
             ),
             ''
@@ -63,7 +63,7 @@ SELECT
         NULLIF(
             regexp_extract(
                 REPLACE(REPLACE(arcXlinkTo, 'loc_', ''), 'Locator_', ''),
-                '([A-]{1}[a-]{2,}[A-a-]+)',
+                '([A-Z]{1}[a-z]{2,}[A-Za-z]*)',
                 1
             ),
             ''

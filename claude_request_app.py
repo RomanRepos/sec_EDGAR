@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import duckdb as ddb
 from filing_to_yaml import filing_to_yaml
 import pandas as pd
+from utilities import load_query
 
 load_dotenv()
 CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
@@ -96,80 +97,6 @@ def map_filing(yaml_str, system_prompt) -> list[dict]:
 if __name__ == "__main__":
     load_dotenv()
     
-    QUERY_FILINGS = """
-    with topLevelParentsSum as (
-SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, 
-cth.linkRole, 
-cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal 
-from calculationTaxonomyHierarchy cth 
-inner join financialData fd on
-    fd.cik = cth.cik 
-    --AND form ='10-K'
-    AND fd.accessionNumber = cth.accessionNumber
-    AND fd.name = cth.descendant
-    AND cth.relativeDepth = 0
-    AND cth.highestParent = TRUE
-    AND fd.prefix = ?
-    AND fd.isPrimarySubmissionDateRange = TRUE
-    --AND fd.isPrimararyUnits = TRUE
-INNER JOIN submissions s 
-        ON fd.cik = s.cik 
-        --AND form ='10-K'
-        AND fd.accessionNumber = s.accessionNumber
-        AND s.reportDate = fd.endDate
-GROUP BY
-    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
-), 
-
-firstLevelNodestSum as (
-SELECT fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole,  
-cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevelNodesTotal 
-from calculationTaxonomyHierarchy cth
-inner join financialData fd on
-    fd.cik = cth.cik 
-    --AND form ='10-K'
-    AND fd.accessionNumber = cth.accessionNumber
-    AND fd.name = cth.descendant
-    AND cth.relativeDepth = 1
-    AND fd.prefix = ?
-    AND fd.isPrimarySubmissionDateRange = TRUE
-    --AND fd.isPrimararyUnits = TRUE
-INNER JOIN submissions s 
-        ON fd.cik = s.cik 
-        --AND form ='10-K'
-        AND fd.accessionNumber = s.accessionNumber
-        AND s.reportDate = fd.endDate
-INNER JOIN calculationTaxonomyHierarchy ctht
-        ON ctht.cik = cth.cik
-        AND ctht."accessionNumber" = cth."accessionNumber"
-        AND cth.ancestor = ctht.ancestor
-        AND ctht."relativeDepth" = 0
-        AND ctht.highestParent = TRUE
-GROUP BY
-    fd.prefix, fd.units, cth.cik, cth.accessionNumber, cth.linkRole, cth.keyStatementRole, s.form, fd.endDate
-)     
-
-select tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate from topLevelParentsSum tlp
-INNER JOIN firstLevelNodestSum fln 
-on tlp.cik = fln.cik
-and tlp.accessionNumber = fln.accessionNumber
-and tlp.linkRole = fln.linkRole
-and tlp.keyStatementRole = fln.keyStatementRole
-and tlp.form = fln.form
-and tlp.endDate = fln.endDate
-and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
-
-inner join (select distinct cik, accessionNumber, prefix from financialData where isPrimararyUnits = TRUE) pu
-on pu.cik = tlp.cik
-AND pu.accessionNumber = tlp.accessionNumber
-AND pu.prefix = tlp.prefix
-
-WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
-GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
-HAVING count(*) = 3
-ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
-;
-""" 
     PROJECT_ROOT_PARENT = Path(
         Path(__file__).resolve().parent.parent or 
         Path(os.getenv("PROJECT_ROOT")).resolve().parent
@@ -180,7 +107,7 @@ ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
     system_prompt = build_system_prompt()
     filings_df = pd.DataFrame()
     for prefix in ["us-gaap", "ifrs-full"]:
-        filings_df = pd.concat([filings_df, conn.execute(QUERY_FILINGS, [prefix, prefix]).fetchdf()], ignore_index=True)
+        filings_df = pd.concat([filings_df, conn.execute(load_query("FetchSafeSubmissions"), [prefix, prefix]).fetchdf()], ignore_index=True)
     
     random_rows = filings_df.sample(2)
 

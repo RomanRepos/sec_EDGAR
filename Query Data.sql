@@ -54,17 +54,20 @@ cth.keyStatementRole, s.form, fd.endDate, sum(fd.value) highestLevelParentsTotal
 from calculationTaxonomyHierarchy cth 
 inner join financialData fd on
     fd.cik = cth.cik 
-    --AND form ='10-K'
     AND fd.accessionNumber = cth.accessionNumber
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 0
     AND cth.highestParent = TRUE
     AND fd.prefix = 'us-gaap'
     AND fd.isPrimarySubmissionDateRange = TRUE
-    --AND fd.isPrimararyUnits = TRUE
+    and fd.isPrimaryUnits = TRUE
+inner join (select distinct cik, accessionNumber, linkRole from calculationTaxonomy where isPrimaryRole = TRUE) ct
+        ON ct.cik = cth.cik
+        AND ct.accessionNumber = cth.accessionNumber
+        AND ct.linkRole = cth.linkRole
+
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
-        --AND form ='10-K'
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
 GROUP BY
@@ -77,16 +80,18 @@ cth.keyStatementRole, s.form, fd.endDate, sum(fd.value*cth.arcWeight) firstLevel
 from calculationTaxonomyHierarchy cth
 inner join financialData fd on
     fd.cik = cth.cik 
-    --AND form ='10-K'
     AND fd.accessionNumber = cth.accessionNumber
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 1
     AND fd.prefix = 'us-gaap'
     AND fd.isPrimarySubmissionDateRange = TRUE
-    --AND fd.isPrimararyUnits = TRUE
+    and fd.isPrimaryUnits = TRUE
+inner join (select distinct cik, accessionNumber, linkRole from calculationTaxonomy where isPrimaryUnits = TRUE) ct
+        ON ct.cik = cth.cik
+        AND ct.accessionNumber = cth.accessionNumber
+        AND ct.linkRole = cth.linkRole
 INNER JOIN submissions s 
         ON fd.cik = s.cik 
-        --AND form ='10-K'
         AND fd.accessionNumber = s.accessionNumber
         AND s.reportDate = fd.endDate
 INNER JOIN calculationTaxonomyHierarchy ctht
@@ -109,40 +114,61 @@ and tlp.keyStatementRole = fln.keyStatementRole
 and tlp.form = fln.form
 and tlp.endDate = fln.endDate
 and tlp.highestLevelParentsTotal = fln.firstLevelNodesTotal
+and tlp.units = fln.units
 
-inner join (select distinct cik, accessionNumber, prefix from financialData where isPrimararyUnits = TRUE) pu
+inner join (select distinct cik, accessionNumber, prefix from financialData where isPrimaryUnits = TRUE) pu
 on pu.cik = tlp.cik
 AND pu.accessionNumber = tlp.accessionNumber
 AND pu.prefix = tlp.prefix
 
 WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
 GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
-HAVING count(*) = 3
+HAVING count(*) < 3
 ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 ;
 --------------------------------------------------------------------------------
 
+select count(*) from (select distinct cik, accessionNumber from 
+financialData where units in ('USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF')
+and isPrimaryUnits = TRUE);
 
 
 
-SELECT ct.linkRole, isPrimaryRole, ctc.keyStatementRole, fromConcept from calculationTaxonomy ct
+SELECT  distinct ct.linkRole, isPrimaryRole, ctc.keyStatementRole from calculationTaxonomy ct
 left outer join calcTaxRolesClassified ctc
 on ctc.linkRole = ct.linkRole
-where ct.accessionNumber = '0000008063-20-000042'
+where accessionNumber = '0001047469-15-006136'
+order by isPrimaryRole desc
 ;
 
-select count(*) from (select  startDate, endDate, isStandardPeriodLength from financialData where 
---accessionNumber = '0000008063-20-000042'
---and name LIKE '%GrossProfit%' and endDate = '2020-06-27' AND i
-isPrimararyUnits = TRUE
-order by name asc
-);
+select distinct linkRole, keyStatementRole 
+from calculationTaxonomyHierarchy where accessionNumber = '0001564590-21-017128';
 
-select * from submissions where accessionNumber = '0000008063-20-000042';
 
-select distinct keystatementRole from calculationTaxonomyHierarchy
+
+-------Find submissions that lack on of the three main statements--------
+with missingStatementsSubmissions as (
+SELECT
+    ct.cik,
+    ct.accessionNumber,
+    BOOL_OR(ctc.keyStatementRole = 'IncomeStatement')    AS hasIncomeStatement,
+    BOOL_OR(ctc.keyStatementRole = 'BalanceSheet')        AS hasBalanceSheet,
+    BOOL_OR(ctc.keyStatementRole = 'StatementOfCashFlows') AS hasStatementOfCashFlows
+FROM (select distinct cik, accessionNumber, linkRole from calculationTaxonomy) ct inner join calcTaxRolesClassified ctc on ct.linkRole = ctc.linkRole
+GROUP BY ct.cik, ct.accessionNumber
+HAVING NOT BOOL_OR(ctc.keyStatementRole = 'IncomeStatement')
+    OR NOT BOOL_OR(ctc.keyStatementRole = 'BalanceSheet')
+    OR NOT BOOL_OR(ctc.keyStatementRole = 'StatementOfCashFlows')
+ORDER BY ct.cik, ct.accessionNumber)
+
+select mss.cik, mss.accessionNumber, ct.linkRole, mss.hasIncomeStatement, mss.hasBalanceSheet, mss.hasStatementOfCashFlows from missingStatementsSubmissions mss
+inner join (select distinct cik, accessionNumber, linkRole from calculationTaxonomy) ct on ct.cik = mss.cik and ct.accessionNumber = mss.accessionNumber
+where ct.linkRole not like '%Disclosure%'
+order by mss.cik, mss.accessionNumber, ct.linkRole;
+
+
+select distinct linkxlinkRole from calculationTaxonomyRaw where accessionNumber = '0001564590-21-017128'
 ;
-
 
 CREATE OR REPLACE TABLE standardizedConcepts (
     prefix VARCHAR,
