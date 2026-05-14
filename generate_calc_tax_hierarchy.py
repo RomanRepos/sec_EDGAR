@@ -39,7 +39,7 @@ def create_taxonomy_hierarchy(df, conn):
     """)
     conn.execute('ChECKPOINT;')
     normalized_data = []
-
+                        
     grouped = df.groupby(['cik', 'accessionNumber', 'linkRole'])
     del df
     gc.collect()
@@ -47,6 +47,7 @@ def create_taxonomy_hierarchy(df, conn):
                      bar_format='{desc}: {percentage:.2f}% |{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'):
         children = defaultdict(list)
         all_children = set()
+        def_df.drop_duplicates(subset = ['cik', 'accessionNumber', 'keyStatementRole', 'fromConcept', 'toConcept', 'arcWeight'], inplace=True, keep='last')
         for _, row in def_df.iterrows():
     
             children[row['fromConcept']].append(row['toConcept'])
@@ -104,8 +105,8 @@ def create_taxonomy_hierarchy(df, conn):
         
         for _, node in def_df.drop_duplicates().iterrows():
             subtree = get_subtree(node['toConcept'], children)
-            deduplicated_subtree = list({s: i for s, i in sorted(subtree, key=lambda x: x[1])}.items())
-            for desc, rel_dep in deduplicated_subtree:
+            deduplicated_subtree_with_different_depth = list({s: i for s, i in sorted(subtree, key=lambda x: x[1])}.items())
+            for desc, rel_dep in deduplicated_subtree_with_different_depth:
                 normalized_data.append({
                     'cik': cik,
                     'accessionNumber': accession_number,
