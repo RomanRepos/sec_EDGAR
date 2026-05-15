@@ -51,10 +51,10 @@ def tree_to_text(tree):
     return "\n".join(lines)
 
 
-def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str) -> str:
+def filing_to_yaml(conn, prefix: str, cik: int, accession_number: str, form: str, end_date: str, units: str) -> str:
     
     query_var = load_query('FetchSubmissionsMainStatement')
-    rows = conn.execute(query_var, [prefix, cik, accession_number, form, end_date]).fetchall()
+    rows = conn.execute(query_var, [prefix, cik, accession_number, form, end_date, units]).fetchall()
     
 
     tree = rows_to_tree(rows)
@@ -77,6 +77,6 @@ if __name__ == "__main__":
     FORM = "10-Q"
     END_DATE = "2020-06-27"
     PREFIX = "us-gaap"
-
-    yaml_str = filing_to_yaml(conn, PREFIX, CIK, ACCESSION, FORM, END_DATE)
+    UNITS = "USD"
+    yaml_str = filing_to_yaml(conn, PREFIX, CIK, ACCESSION, FORM, END_DATE, UNITS)
     print(yaml_str)

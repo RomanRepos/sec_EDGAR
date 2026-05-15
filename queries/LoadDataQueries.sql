@@ -12,13 +12,10 @@ SET threads = 4;
 SET
     VARIABLE fact_path_no_json = REPLACE('{{facts_path_param}}', '*.json', '');
 SET memory_limit = '16GB';
-CREATE OR REPLACE TABLE standardizedConcepts (
+CREATE TABLE IF NOT EXISTS standardizedConcepts (
     prefix VARCHAR,
-    units VARCHAR,
     cik INTEGER,
     accessionNumber VARCHAR,
-    form VARCHAR,
-    endDate DATE,
     conceptName VARCHAR,
     standardLabel VARCHAR,
     keyStatementRole VARCHAR,

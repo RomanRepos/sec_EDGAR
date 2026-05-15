@@ -35,6 +35,7 @@ WHERE
         'IncomeStatement',
         'StatementOfCashFlows'
     )
+    AND fd.units = ?
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.isPrimaryUnits = TRUE
 ORDER BY

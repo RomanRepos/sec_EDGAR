@@ -36,7 +36,7 @@ def populate_optimal_sample_table(conn, query:str, concept_top_pct:float=0.8, pr
     result_df = pd.DataFrame(selected, columns=['cik', 'accessionNumber'])
     result_df['prefix'] = prefix
     conn.execute("""
-        INSERT INTO HighConceptCoverageSubmissionsSample SELECT prefix, cik, accessionNumber FROM result_df;
+        INSERT INTO highConceptCoverageSubmissionsSample SELECT prefix, cik, accessionNumber FROM result_df;
         CHECKPOINT;
     """)
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     conn = ddb.connect(db_path)
     conn.execute("""
-        CREATE OR REPLACE TABLE HighConceptCoverageSubmissionsSample (
+        CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
             prefix VARCHAR,
             cik VARCHAR,
             accessionNumber VARCHAR

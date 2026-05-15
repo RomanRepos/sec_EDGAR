@@ -1,5 +1,6 @@
 import json
 import os
+import time
 import anthropic
 from pathlib import Path
 from dotenv import load_dotenv
@@ -60,8 +61,6 @@ def build_system_prompt(line_items_path: str = None) -> str:
     return "\n".join(lines)
 
 
-
-
 client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
 
@@ -94,30 +93,106 @@ def map_filing(yaml_str, system_prompt) -> list[dict]:
     return extract_json(response.content[0].text)
 
 
+def build_batch_requests(filings_df, conn, system_prompt) -> tuple[list, dict]:
+    requests = []
+    metadata = {}  # custom_id -> (cik, accessionNumber, prefix)
+
+    group_cols = ["prefix", "cik", "accessionNumber", "form", "endDate", "units"]
+    for i, (group_key, _) in enumerate(filings_df.groupby(group_cols)):
+        prefix, cik, accessionNumber, form, endDate, units = group_key
+        yaml_str = filing_to_yaml(conn, prefix, cik, accessionNumber, form, endDate, units)
+        custom_id = str(i)
+        metadata[custom_id] = (cik, accessionNumber, prefix)
+
+        requests.append({
+            "custom_id": custom_id,
+            "params": {
+                "model": "claude-sonnet-4-6",
+                "max_tokens": 8192,
+                "system": [{
+                    "type": "text",
+                    "text": system_prompt,
+                    "cache_control": {"type": "ephemeral"},
+                }],
+                "messages": [{
+                    "role": "user",
+                    "content": f"Map the following filing:\n\n{yaml_str}",
+                }],
+            },
+        })
+
+    return requests, metadata
+
+
+def poll_batch(batch):
+    while batch.processing_status == "in_progress":
+        time.sleep(60)
+        batch = client.messages.batches.retrieve(batch.id)
+        print(f"Batch {batch.id}: {batch.processing_status} "
+              f"({batch.request_counts.succeeded} succeeded, "
+              f"{batch.request_counts.errored} errored, "
+              f"{batch.request_counts.processing} processing)")
+    return batch
+
+
+def batch_results_to_df(batch, metadata) -> pd.DataFrame:
+    rows = []
+    for result in client.messages.batches.results(batch.id):
+        if result.result.type != "succeeded":
+            print(f"Request {result.custom_id} failed: {result.result.type}")
+            continue
+
+        cik, accessionNumber, prefix = metadata[result.custom_id]
+        try:
+            mappings = extract_json(result.result.message.content[0].text)
+        except Exception as e:
+            print(f"Failed to parse response for {result.custom_id}: {e}")
+            continue
+
+        for item in mappings:
+            for concept_entry in item.get("concepts", []):
+                rows.append({
+                    "cik": cik,
+                    "accessionNumber": accessionNumber,
+                    "prefix": prefix,
+                    "standardLabel": item["standard_label"],
+                    "keyStatementRole": item["statement"],
+                    "conceptName": concept_entry["concept"],
+                    "sign": concept_entry["sign"],
+                    "confidenceLevel": item["confidence"],
+                })
+
+    return pd.DataFrame(rows)
+
+
 if __name__ == "__main__":
     load_dotenv()
-    
+
     PROJECT_ROOT_PARENT = Path(
-        Path(__file__).resolve().parent.parent or 
+        Path(__file__).resolve().parent.parent or
         Path(os.getenv("PROJECT_ROOT")).resolve().parent
     )
 
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
     conn = ddb.connect(db_path)
     system_prompt = build_system_prompt()
-    filings_df = pd.DataFrame()
-    for prefix in ["us-gaap", "ifrs-full"]:
-        filings_df = pd.concat([filings_df, conn.execute(load_query("FetchSafeSubmissions"), [prefix, prefix]).fetchdf()], ignore_index=True)
-    
-    random_rows = filings_df.sample(2)
+    filings_df = conn.execute(load_query('FilingsForClaude')).fetch_df()[:300]  # limit for testing; remove slicing for full run
 
-    for _, row in random_rows.iterrows():
-        cik = row["cik"]
-        accessionNumber = row["accessionNumber"]
-        prefix = row["prefix"]
-        units = row["units"]
-        form = row["form"]
-        endDate = row["endDate"]
-        print(prefix, units, cik, accessionNumber, form, endDate)
-        results = map_filing(filing_to_yaml(conn, prefix, cik, accessionNumber, form, endDate), system_prompt)
-        print(json.dumps(results, indent=2))
+    if filings_df.empty:
+        print("No new filings to process.")
+    else:
+        print(f"Building batch for {len(filings_df)} filings...")
+        requests, metadata = build_batch_requests(filings_df, conn, system_prompt)
+
+        batch = client.messages.batches.create(requests=requests)
+        print(f"Batch submitted: {batch.id}")
+        batch = poll_batch(batch)
+
+        df = batch_results_to_df(batch, metadata)
+        if df.empty:
+            print("No results to insert.")
+        else:
+            conn.register("results_df", df)
+            cols = ", ".join(df.columns)                                                                  
+            conn.execute(f"INSERT INTO standardizedConcepts ({cols}) SELECT {cols} FROM results_df") 
+            print(f"Inserted {len(df)} rows into standardizedConcepts")
