@@ -2,6 +2,7 @@ import pandas as pd
 import json
 from datetime import datetime
 import gc
+from tqdm import tqdm
 
 
 def parse_json_object(rowVar):
@@ -54,7 +55,8 @@ def flatten(conn_arg, batch_size_arg):
     
     allCiks = [str(j) for j in list(conn_arg.execute("SELECT distinct cik FROM raw_data").fetch_df()['cik'])]
     print(count, datetime.now())
-    for i in range(0, len(allCiks), batch_size_arg):
+    for i in tqdm(range(0, len(allCiks), batch_size_arg), desc="Processing Facts JSON", unit="batch",
+                     bar_format='{desc}: {percentage:.2f}% |{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'):
         batch = '('+','.join(allCiks[i:i + batch_size_arg])+')'
         df_chunk = conn_arg.execute(f"SELECT * FROM raw_data where cik in {batch}").fetch_df()
         df_chunk['facts'] = df_chunk['facts'].apply(json.loads)

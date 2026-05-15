@@ -43,7 +43,7 @@ def create_taxonomy_hierarchy(df, conn):
     grouped = df.groupby(['cik', 'accessionNumber', 'linkRole'])
     del df
     gc.collect()
-    for def_name, def_df in tqdm(grouped, desc="Processing Calculation Taxonomiess", unit="file",
+    for def_name, def_df in tqdm(grouped, desc="Processing Calculation Taxonomiess", unit="submission_role",
                      bar_format='{desc}: {percentage:.2f}% |{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'):
         children = defaultdict(list)
         all_children = set()
