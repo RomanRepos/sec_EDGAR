@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="US-ASCII" standalone="no"?>
+    <!-- Field: Doc-Info; Name: Generator; Value: QXInteractive; Version: 4.26a -->
+    <!-- Field: Doc-Info; Name: Source; Value: 191201 06302019 10Q2.xfr; Date: 2019%2D08%2D02T12:52:40Z -->
+    <!-- Field: Doc-Info; Name: Status; Value: 0x80020000 -->
+<link:linkbase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xbrli="http://www.xbrl.org/2003/instance" xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd">
+    <link:roleRef roleURI="http://bktechnologies.com/role/DocumentAndEntityInformation" xlink:href="bkti-20190630.xsd#DocumentAndEntityInformation" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/BalanceSheets" xlink:href="bkti-20190630.xsd#BalanceSheets" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/BalanceSheetsParenthetical" xlink:href="bkti-20190630.xsd#BalanceSheetsParenthetical" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/StatementsOfIncome" xlink:href="bkti-20190630.xsd#StatementsOfIncome" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/StatementsOfCashFlows" xlink:href="bkti-20190630.xsd#StatementsOfCashFlows" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/CondensedConsolidatedFinancialStatements" xlink:href="bkti-20190630.xsd#CondensedConsolidatedFinancialStatements" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/SignificantEventsAndTransactions" xlink:href="bkti-20190630.xsd#SignificantEventsAndTransactions" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/AllowanceForDoubtfulAccounts" xlink:href="bkti-20190630.xsd#AllowanceForDoubtfulAccounts" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/InventoriesNet" xlink:href="bkti-20190630.xsd#InventoriesNet" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/IncomeTaxes" xlink:href="bkti-20190630.xsd#IncomeTaxes" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/InvestmentInSecurities" xlink:href="bkti-20190630.xsd#InvestmentInSecurities" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/StockholdersEquity" xlink:href="bkti-20190630.xsd#StockholdersEquity" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LossPerShare" xlink:href="bkti-20190630.xsd#LossPerShare" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensation" xlink:href="bkti-20190630.xsd#Non-cashShare-basedEmployeeCompensation" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/CommitmentsAndContingencies" xlink:href="bkti-20190630.xsd#CommitmentsAndContingencies" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/Debt" xlink:href="bkti-20190630.xsd#Debt" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/Leases" xlink:href="bkti-20190630.xsd#Leases" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/CondensedConsolidatedFinancialStatementsPolicies" xlink:href="bkti-20190630.xsd#CondensedConsolidatedFinancialStatementsPolicies" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/InventoriesNetTables" xlink:href="bkti-20190630.xsd#InventoriesNetTables" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/StockholdersEquityTables" xlink:href="bkti-20190630.xsd#StockholdersEquityTables" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LossPerShareTables" xlink:href="bkti-20190630.xsd#LossPerShareTables" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensationTables" xlink:href="bkti-20190630.xsd#Non-cashShare-basedEmployeeCompensationTables" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LeasesTables" xlink:href="bkti-20190630.xsd#LeasesTables" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/AllowanceForDoubtfulAccountsDetailsNarrative" xlink:href="bkti-20190630.xsd#AllowanceForDoubtfulAccountsDetailsNarrative" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/InventoriesNetDetails" xlink:href="bkti-20190630.xsd#InventoriesNetDetails" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/InventoriesNetDetailsNarrative" xlink:href="bkti-20190630.xsd#InventoriesNetDetailsNarrative" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/IncomeTaxesDetailsNarrative" xlink:href="bkti-20190630.xsd#IncomeTaxesDetailsNarrative" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/StockholdersEquityDetails" xlink:href="bkti-20190630.xsd#StockholdersEquityDetails" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LossPerShareDetails" xlink:href="bkti-20190630.xsd#LossPerShareDetails" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensationDetails" xlink:href="bkti-20190630.xsd#Non-cashShare-basedEmployeeCompensationDetails" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/DebtDetailsNarrative" xlink:href="bkti-20190630.xsd#DebtDetailsNarrative" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LeasesDetails" xlink:href="bkti-20190630.xsd#LeasesDetails" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LeasesDetails1" xlink:href="bkti-20190630.xsd#LeasesDetails1" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LeasesDetails2" xlink:href="bkti-20190630.xsd#LeasesDetails2" xlink:type="simple" />
+    <link:roleRef roleURI="http://bktechnologies.com/role/LeasesDetails3" xlink:href="bkti-20190630.xsd#LeasesDetails3" xlink:type="simple" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/DocumentAndEntityInformation" xlink:title="00000001 - Document - Document and Entity Information" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/BalanceSheets" xlink:title="00000002 - Statement - Condensed Consolidated Balance Sheets">
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AssetsCurrent" xlink:label="loc_us-gaapAssetsCurrent" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_CashAndCashEquivalentsAtCarryingValue" xlink:label="loc_us-gaapCashAndCashEquivalentsAtCarryingValue" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssetsCurrent" xlink:to="loc_us-gaapCashAndCashEquivalentsAtCarryingValue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AccountsReceivableNetCurrent" xlink:label="loc_us-gaapAccountsReceivableNetCurrent" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssetsCurrent" xlink:to="loc_us-gaapAccountsReceivableNetCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryNet" xlink:label="loc_us-gaapInventoryNet" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssetsCurrent" xlink:to="loc_us-gaapInventoryNet" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PrepaidExpenseAndOtherAssetsCurrent" xlink:label="loc_us-gaapPrepaidExpenseAndOtherAssetsCurrent" />
+      <link:calculationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssetsCurrent" xlink:to="loc_us-gaapPrepaidExpenseAndOtherAssetsCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_Assets" xlink:label="loc_us-gaapAssets" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapAssetsCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PropertyPlantAndEquipmentNet" xlink:label="loc_us-gaapPropertyPlantAndEquipmentNet" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapPropertyPlantAndEquipmentNet" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AvailableForSaleSecuritiesNoncurrent" xlink:label="loc_us-gaapAvailableForSaleSecuritiesNoncurrent" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapAvailableForSaleSecuritiesNoncurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DeferredTaxAssetsNetNoncurrent" xlink:label="loc_us-gaapDeferredTaxAssetsNetNoncurrent" />
+      <link:calculationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapDeferredTaxAssetsNetNoncurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OtherAssetsNoncurrent" xlink:label="loc_us-gaapOtherAssetsNoncurrent" />
+      <link:calculationArc order="5" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapOtherAssetsNoncurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OperatingLeaseRightOfUseAsset" xlink:label="loc_us-gaapOperatingLeaseRightOfUseAsset" />
+      <link:calculationArc order="6" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapAssets" xlink:to="loc_us-gaapOperatingLeaseRightOfUseAsset" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_LiabilitiesCurrent" xlink:label="loc_us-gaapLiabilitiesCurrent" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AccountsPayableCurrent" xlink:label="loc_us-gaapAccountsPayableCurrent" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapAccountsPayableCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_EmployeeRelatedLiabilitiesCurrent" xlink:label="loc_us-gaapEmployeeRelatedLiabilitiesCurrent" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapEmployeeRelatedLiabilitiesCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_ProductWarrantyAccrualClassifiedCurrent" xlink:label="loc_us-gaapProductWarrantyAccrualClassifiedCurrent" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapProductWarrantyAccrualClassifiedCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AccruedLiabilitiesCurrent" xlink:label="loc_us-gaapAccruedLiabilitiesCurrent" />
+      <link:calculationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapAccruedLiabilitiesCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DeferredRevenueCurrent" xlink:label="loc_us-gaapDeferredRevenueCurrent" />
+      <link:calculationArc order="5" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapDeferredRevenueCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DividendsPayableCurrent" xlink:label="loc_us-gaapDividendsPayableCurrent" />
+      <link:calculationArc order="6" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapDividendsPayableCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OperatingLeaseLiabilityCurrent" xlink:label="loc_us-gaapOperatingLeaseLiabilityCurrent" />
+      <link:calculationArc order="7" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesCurrent" xlink:to="loc_us-gaapOperatingLeaseLiabilityCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_Liabilities" xlink:label="loc_us-gaapLiabilities" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilities" xlink:to="loc_us-gaapLiabilitiesCurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DeferredRevenue" xlink:label="loc_us-gaapDeferredRevenue" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilities" xlink:to="loc_us-gaapDeferredRevenue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OperatingLeaseLiabilityNoncurrent" xlink:label="loc_us-gaapOperatingLeaseLiabilityNoncurrent" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilities" xlink:to="loc_us-gaapOperatingLeaseLiabilityNoncurrent" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_StockholdersEquity" xlink:label="loc_us-gaapStockholdersEquity" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PreferredStockValue" xlink:label="loc_us-gaapPreferredStockValue" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapStockholdersEquity" xlink:to="loc_us-gaapPreferredStockValue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_CommonStockValue" xlink:label="loc_us-gaapCommonStockValue" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapStockholdersEquity" xlink:to="loc_us-gaapCommonStockValue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AdditionalPaidInCapital" xlink:label="loc_us-gaapAdditionalPaidInCapital" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapStockholdersEquity" xlink:to="loc_us-gaapAdditionalPaidInCapital" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_RetainedEarningsAccumulatedDeficit" xlink:label="loc_us-gaapRetainedEarningsAccumulatedDeficit" />
+      <link:calculationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapStockholdersEquity" xlink:to="loc_us-gaapRetainedEarningsAccumulatedDeficit" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_TreasuryStockValue" xlink:label="loc_us-gaapTreasuryStockValue" />
+      <link:calculationArc order="5" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapStockholdersEquity" xlink:to="loc_us-gaapTreasuryStockValue" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_LiabilitiesAndStockholdersEquity" xlink:label="loc_us-gaapLiabilitiesAndStockholdersEquity" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesAndStockholdersEquity" xlink:to="loc_us-gaapLiabilities" xlink:type="arc" weight="1" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLiabilitiesAndStockholdersEquity" xlink:to="loc_us-gaapStockholdersEquity" xlink:type="arc" weight="1" />
+    </link:calculationLink>
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/BalanceSheetsParenthetical" xlink:title="00000003 - Statement - Condensed Consolidated Balance Sheets (Parenthetical)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/StatementsOfIncome" xlink:title="00000004 - Statement - Condensed Consolidated Statements of Income (Unaudited)">
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_CostsAndExpenses" xlink:label="loc_us-gaapCostsAndExpenses" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_CostOfRevenue" xlink:label="loc_us-gaapCostOfRevenue" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapCostsAndExpenses" xlink:to="loc_us-gaapCostOfRevenue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_SellingGeneralAndAdministrativeExpense" xlink:label="loc_us-gaapSellingGeneralAndAdministrativeExpense" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapCostsAndExpenses" xlink:to="loc_us-gaapSellingGeneralAndAdministrativeExpense" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OperatingIncomeLoss" xlink:label="loc_us-gaapOperatingIncomeLoss" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_Revenues" xlink:label="loc_us-gaapRevenues" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapOperatingIncomeLoss" xlink:to="loc_us-gaapRevenues" xlink:type="arc" weight="1" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapOperatingIncomeLoss" xlink:to="loc_us-gaapCostsAndExpenses" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NonoperatingIncomeExpense" xlink:label="loc_us-gaapNonoperatingIncomeExpense" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InterestIncomeExpenseNet" xlink:label="loc_us-gaapInterestIncomeExpenseNet" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNonoperatingIncomeExpense" xlink:to="loc_us-gaapInterestIncomeExpenseNet" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OtherNonoperatingIncomeExpense" xlink:label="loc_us-gaapOtherNonoperatingIncomeExpense" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNonoperatingIncomeExpense" xlink:to="loc_us-gaapOtherNonoperatingIncomeExpense" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_AvailableForSaleSecuritiesGrossRealizedGainLossNet" xlink:label="loc_us-gaapAvailableForSaleSecuritiesGrossRealizedGainLossNet" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNonoperatingIncomeExpense" xlink:to="loc_us-gaapAvailableForSaleSecuritiesGrossRealizedGainLossNet" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:label="loc_us-gaapIncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapIncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:to="loc_us-gaapOperatingIncomeLoss" xlink:type="arc" weight="1" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapIncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:to="loc_us-gaapNonoperatingIncomeExpense" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NetIncomeLoss" xlink:label="loc_us-gaapNetIncomeLoss" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetIncomeLoss" xlink:to="loc_us-gaapIncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncomeTaxExpenseBenefit" xlink:label="loc_us-gaapIncomeTaxExpenseBenefit" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetIncomeLoss" xlink:to="loc_us-gaapIncomeTaxExpenseBenefit" xlink:type="arc" weight="-1" />
+    </link:calculationLink>
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/StatementsOfCashFlows" xlink:title="00000005 - Statement - Condensed Consolidated Statements of Cash Flows (Unaudited)">
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:label="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NetIncomeLoss" xlink:label="loc_us-gaapNetIncomeLoss" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapNetIncomeLoss" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryWriteDown" xlink:label="loc_us-gaapInventoryWriteDown" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapInventoryWriteDown" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DeferredIncomeTaxExpenseBenefit" xlink:label="loc_us-gaapDeferredIncomeTaxExpenseBenefit" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapDeferredIncomeTaxExpenseBenefit" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_DepreciationAndAmortization" xlink:label="loc_us-gaapDepreciationAndAmortization" />
+      <link:calculationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapDepreciationAndAmortization" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_ShareBasedCompensation" xlink:label="loc_us-gaapShareBasedCompensation" />
+      <link:calculationArc order="5" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapShareBasedCompensation" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInAccountsReceivable" xlink:label="loc_us-gaapIncreaseDecreaseInAccountsReceivable" />
+      <link:calculationArc order="6" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInAccountsReceivable" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInInventories" xlink:label="loc_us-gaapIncreaseDecreaseInInventories" />
+      <link:calculationArc order="7" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInInventories" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets" xlink:label="loc_us-gaapIncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets" />
+      <link:calculationArc order="8" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInOtherOperatingAssets" xlink:label="loc_us-gaapIncreaseDecreaseInOtherOperatingAssets" />
+      <link:calculationArc order="9" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInOtherOperatingAssets" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInAccountsPayable" xlink:label="loc_us-gaapIncreaseDecreaseInAccountsPayable" />
+      <link:calculationArc order="10" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInAccountsPayable" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInEmployeeRelatedLiabilities" xlink:label="loc_us-gaapIncreaseDecreaseInEmployeeRelatedLiabilities" />
+      <link:calculationArc order="11" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInEmployeeRelatedLiabilities" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="bkti-20190630.xsd#BKTI_AccuredWarrantyExpense" xlink:label="loc_BKTIAccuredWarrantyExpense" />
+      <link:calculationArc order="12" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_BKTIAccuredWarrantyExpense" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInDeferredRevenue" xlink:label="loc_us-gaapIncreaseDecreaseInDeferredRevenue" />
+      <link:calculationArc order="13" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInDeferredRevenue" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities" xlink:label="loc_us-gaapIncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities" />
+      <link:calculationArc order="14" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapIncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_RestrictedStockExpense" xlink:label="loc_us-gaapRestrictedStockExpense" />
+      <link:calculationArc order="15" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapRestrictedStockExpense" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_GainLossOnInvestments" xlink:label="loc_us-gaapGainLossOnInvestments" />
+      <link:calculationArc order="16" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:to="loc_us-gaapGainLossOnInvestments" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NetCashProvidedByUsedInInvestingActivities" xlink:label="loc_us-gaapNetCashProvidedByUsedInInvestingActivities" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PaymentsToAcquirePropertyPlantAndEquipment" xlink:label="loc_us-gaapPaymentsToAcquirePropertyPlantAndEquipment" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInInvestingActivities" xlink:to="loc_us-gaapPaymentsToAcquirePropertyPlantAndEquipment" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PaymentsToAcquireInvestments" xlink:label="loc_us-gaapPaymentsToAcquireInvestments" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInInvestingActivities" xlink:to="loc_us-gaapPaymentsToAcquireInvestments" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_ProceedsFromSaleOfAvailableForSaleSecurities" xlink:label="loc_us-gaapProceedsFromSaleOfAvailableForSaleSecurities" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInInvestingActivities" xlink:to="loc_us-gaapProceedsFromSaleOfAvailableForSaleSecurities" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:label="loc_us-gaapNetCashProvidedByUsedInFinancingActivities" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_ProceedsFromIssuanceOfCommonStock" xlink:label="loc_us-gaapProceedsFromIssuanceOfCommonStock" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInFinancingActivities" xlink:to="loc_us-gaapProceedsFromIssuanceOfCommonStock" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PaymentsOfDividends" xlink:label="loc_us-gaapPaymentsOfDividends" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInFinancingActivities" xlink:to="loc_us-gaapPaymentsOfDividends" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_PaymentsForRepurchaseOfCommonStock" xlink:label="loc_us-gaapPaymentsForRepurchaseOfCommonStock" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapNetCashProvidedByUsedInFinancingActivities" xlink:to="loc_us-gaapPaymentsForRepurchaseOfCommonStock" xlink:type="arc" weight="-1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:label="loc_us-gaapCashAndCashEquivalentsPeriodIncreaseDecrease" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapCashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="loc_us-gaapNetCashProvidedByUsedInOperatingActivities" xlink:type="arc" weight="1" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapCashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="loc_us-gaapNetCashProvidedByUsedInInvestingActivities" xlink:type="arc" weight="1" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapCashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="loc_us-gaapNetCashProvidedByUsedInFinancingActivities" xlink:type="arc" weight="1" />
+    </link:calculationLink>
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/CondensedConsolidatedFinancialStatements" xlink:title="00000006 - Disclosure - 1. Condensed Consolidated Financial Statements" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/SignificantEventsAndTransactions" xlink:title="00000007 - Disclosure - 2. Significant Events and Transactions" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/AllowanceForDoubtfulAccounts" xlink:title="00000008 - Disclosure - 3. Allowance for Doubtful Accounts" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/InventoriesNet" xlink:title="00000009 - Disclosure - 4. Inventories, net" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/IncomeTaxes" xlink:title="00000010 - Disclosure - 5. Income Taxes" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/InvestmentInSecurities" xlink:title="00000011 - Disclosure - 6. Investment in Securities" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/StockholdersEquity" xlink:title="00000012 - Disclosure - 7. Stockholders' Equity" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LossPerShare" xlink:title="00000013 - Disclosure - 8. Loss per Share" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensation" xlink:title="00000014 - Disclosure - 9. Non-Cash Share-Based Employee Compensation" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/CommitmentsAndContingencies" xlink:title="00000015 - Disclosure - 10. Commitments and Contingencies" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/Debt" xlink:title="00000016 - Disclosure - 11. Debt" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/Leases" xlink:title="00000017 - Disclosure - 12. Leases" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/CondensedConsolidatedFinancialStatementsPolicies" xlink:title="00000018 - Disclosure - 1. Condensed Consolidated Financial Statements (Policies)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/InventoriesNetTables" xlink:title="00000019 - Disclosure - 4. Inventories, net (Tables)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/StockholdersEquityTables" xlink:title="00000020 - Disclosure - 7. Stockholders' Equity (Tables)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LossPerShareTables" xlink:title="00000021 - Disclosure - 8. Loss per Share (Tables)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensationTables" xlink:title="00000022 - Disclosure - 9. Non-Cash Share-Based Employee Compensation (Tables)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LeasesTables" xlink:title="00000023 - Disclosure - 12. Leases (Tables)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/AllowanceForDoubtfulAccountsDetailsNarrative" xlink:title="00000024 - Disclosure - 3. Allowance for Doubtful Accounts (Details Narrative)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/InventoriesNetDetails" xlink:title="00000025 - Disclosure - 4. Inventories, net (Details)">
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryNet" xlink:label="loc_us-gaapInventoryNet" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryFinishedGoods" xlink:label="loc_us-gaapInventoryFinishedGoods" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapInventoryNet" xlink:to="loc_us-gaapInventoryFinishedGoods" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryWorkInProcess" xlink:label="loc_us-gaapInventoryWorkInProcess" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapInventoryNet" xlink:to="loc_us-gaapInventoryWorkInProcess" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_InventoryRawMaterials" xlink:label="loc_us-gaapInventoryRawMaterials" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapInventoryNet" xlink:to="loc_us-gaapInventoryRawMaterials" xlink:type="arc" weight="1" />
+    </link:calculationLink>
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/InventoriesNetDetailsNarrative" xlink:title="00000026 - Disclosure - 4. Inventories, net (Details Narrative)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/IncomeTaxesDetailsNarrative" xlink:title="00000027 - Disclosure - 5. Income Taxes (Details Narrative)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/StockholdersEquityDetails" xlink:title="00000028 - Disclosure - 7. Stockholders' Equity (Details)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LossPerShareDetails" xlink:title="00000029 - Disclosure - 8. Loss per Share (Details)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/Non-cashShare-basedEmployeeCompensationDetails" xlink:title="00000030 - Disclosure - 9. Non-Cash Share-Based Employee Compensation (Details)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/DebtDetailsNarrative" xlink:title="00000031 - Disclosure - 11. Debt (Details Narrative)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LeasesDetails" xlink:title="00000032 - Disclosure - 12. Leases (Details)">
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_LeaseCost" xlink:label="loc_us-gaapLeaseCost" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_OperatingLeaseCost" xlink:label="loc_us-gaapOperatingLeaseCost" />
+      <link:calculationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLeaseCost" xlink:to="loc_us-gaapOperatingLeaseCost" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_ShortTermLeaseCost" xlink:label="loc_us-gaapShortTermLeaseCost" />
+      <link:calculationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLeaseCost" xlink:to="loc_us-gaapShortTermLeaseCost" xlink:type="arc" weight="1" />
+      <link:loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2019/elts/us-gaap-2019-01-31.xsd#us-gaap_VariableLeaseCost" xlink:label="loc_us-gaapVariableLeaseCost" />
+      <link:calculationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="loc_us-gaapLeaseCost" xlink:to="loc_us-gaapVariableLeaseCost" xlink:type="arc" weight="1" />
+    </link:calculationLink>
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LeasesDetails1" xlink:title="00000033 - Disclosure - 12. Leases (Details 1)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LeasesDetails2" xlink:title="00000034 - Disclosure - 12. Leases (Details 2)" />
+    <link:calculationLink xlink:type="extended" xlink:role="http://bktechnologies.com/role/LeasesDetails3" xlink:title="00000035 - Disclosure - 12. Leases (Details 3)" />
+</link:linkbase>

@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- RR Donnelley Xcelerate Taxonomy Calculation Linkbase, based on XBRL 2.1  http://www.rrdonnelley.com/ -->
+<!-- Version: 6.21.0 -->
+<!-- Round: 6 -->
+<!-- Creation date: 2014-03-07T13:29:12Z -->
+<!-- Copyright (c) 2005-2013 R.R. Donnelley &amp; Sons Company All Rights Reserved. -->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd">
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DocumentandEntityInformation" roleURI="http://www.astronics.com/taxonomy/role/DocumentandEntityInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfIncome" roleURI="http://www.astronics.com/taxonomy/role/StatementOfIncome"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfOtherComprehensiveIncome" roleURI="http://www.astronics.com/taxonomy/role/StatementOfOtherComprehensiveIncome"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfFinancialPositionClassified" roleURI="http://www.astronics.com/taxonomy/role/StatementOfFinancialPositionClassified"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfFinancialPositionClassifiedParen" roleURI="http://www.astronics.com/taxonomy/role/StatementOfFinancialPositionClassifiedParenthetical"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfCashFlowsIndirect" roleURI="http://www.astronics.com/taxonomy/role/StatementOfCashFlowsIndirect"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_StatementOfShareholdersEquityAndOtherComprehensiveIncome" roleURI="http://www.astronics.com/taxonomy/role/StatementOfShareholdersEquityAndOtherComprehensiveIncome"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSummaryOfSignificantAccountingPrinciplesAndPracticesAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSummaryOfSignificantAccountingPrinciplesAndPracticesAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAccountsReceivableSummaryOfAccountsReceivable" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAccountsReceivableSummaryOfAccountsReceivable"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureInventoriesSummaryOfInventories" roleURI="http://www.astronics.com/taxonomy/role/DisclosureInventoriesSummaryOfInventories"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureInventoriesAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureInventoriesAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIntangibleAssetsSummaryOfAcquiredIntangibleAssets" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsSummaryOfAcquiredIntangibleAssets"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIntangibleAssetsAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIntangibleAssetsSummaryOfAmortizationExpenseForIntangibleAssetsForEachOfNextFiveYears" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsSummaryOfAmortizationExpenseForIntangibleAssetsForEachOfNextFiveYears"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureGoodwillSummaryOfChangesInCarryingAmountOfGoodwill" roleURI="http://www.astronics.com/taxonomy/role/DisclosureGoodwillSummaryOfChangesInCarryingAmountOfGoodwill"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureGoodwillAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureGoodwillAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebt" roleURI="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebt"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebtParenthetical" roleURI="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebtParenthetical"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureLongTermDebtAndNotePayablePrincipalMaturitiesOfLongTermDebt" roleURI="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayablePrincipalMaturitiesOfLongTermDebt"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureLongTermDebtAndNotePayableAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureWarrantyAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureWarrantyAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureWarrantySummaryOfActivityInWarrantyAccrual" roleURI="http://www.astronics.com/taxonomy/role/DisclosureWarrantySummaryOfActivityInWarrantyAccrual"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesProvisionBenefitForIncomeTaxes" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesProvisionBenefitForIncomeTaxes"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesEffectiveTaxRatesDifferFromStatutoryFederalIncomeTax" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesEffectiveTaxRatesDifferFromStatutoryFederalIncomeTax"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesSignificantComponentsOfCompanysDeferredTaxAssetsAndLiabilities" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesSignificantComponentsOfCompanysDeferredTaxAssetsAndLiabilities"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesComponentsOfNetDeferredTaxAssetsAndLiabilities" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesComponentsOfNetDeferredTaxAssetsAndLiabilities"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureIncomeTaxesReconciliationOfTotalAmountsOfUnrecognizedTaxBenefitsExcludingInterestAndPenalties" roleURI="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesReconciliationOfTotalAmountsOfUnrecognizedTaxBenefitsExcludingInterestAndPenalties"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureProfitSharing401kPlanAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureProfitSharing401kPlanAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsReconciliationOfBeginningAndEndingBalancesOfProjectedBenefitObligation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsReconciliationOfBeginningAndEndingBalancesOfProjectedBenefitObligation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToCalculateThePostRetirementBenefitObligation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToCalculateThePostRetirementBenefitObligation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsSummarizesTheComponentsOfTheNetPeriodicCost" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsSummarizesTheComponentsOfTheNetPeriodicCost"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToDetermineTheNetPeriodicCost" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToDetermineTheNetPeriodicCost"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlans" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlans"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlansParenthetical" roleURI="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlansParenthetical"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureShareholdersEquityAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureShareholdersEquityComponentsOfAccumulatedOtherComprehensiveIncomeLoss" roleURI="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityComponentsOfAccumulatedOtherComprehensiveIncomeLoss"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureShareholdersEquityComponentsOfOtherComprehensiveIncomeLoss" roleURI="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityComponentsOfOtherComprehensiveIncomeLoss"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureEarningsPerShareEarningsPerShareComputations" roleURI="http://www.astronics.com/taxonomy/role/DisclosureEarningsPerShareEarningsPerShareComputations"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureEarningsPerShareAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureEarningsPerShareAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageFairValueOfOptionsGranted" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageFairValueOfOptionsGranted"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageAssumptions" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageAssumptions"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansCompensationExpenseInformationBasedOnFairValueOfStockOptions" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansCompensationExpenseInformationBasedOnFairValueOfStockOptions"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansSummaryOfCompanysStockOptionActivityAndRelatedInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfCompanysStockOptionActivityAndRelatedInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageExercisePricesAndContractualLivesForOutstandingAndExercisableStockOptions" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageExercisePricesAndContractualLivesForOutstandingAndExercisableStockOptions"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureStockOptionAndPurchasePlansFairValueForOptionsGrantedUnderEmployeeStockPurchasePlan" roleURI="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansFairValueForOptionsGrantedUnderEmployeeStockPurchasePlan"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureFairValueFinancialAssetsAndLiabilitiesCarriedAtFairValueMeasuredOnRecurringBasis" roleURI="http://www.astronics.com/taxonomy/role/DisclosureFairValueFinancialAssetsAndLiabilitiesCarriedAtFairValueMeasuredOnRecurringBasis"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureFairValueAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureFairValueAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureFairValueCalculationOfAdditionalPurchaseConsiderationEarnOut" roleURI="http://www.astronics.com/taxonomy/role/DisclosureFairValueCalculationOfAdditionalPurchaseConsiderationEarnOut"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureDerivativeFinancialInstrumentsAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureDerivativeFinancialInstrumentsAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureDerivativeFinancialInstrumentsSummaryOfActivityInAOCIRelatedToDerivatives" roleURI="http://www.astronics.com/taxonomy/role/DisclosureDerivativeFinancialInstrumentsSummaryOfActivityInAOCIRelatedToDerivatives"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSelectedQuarterlyFinancialInformationSummarizesSelectedQuarterlyFinancialInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSelectedQuarterlyFinancialInformationSummarizesSelectedQuarterlyFinancialInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureCommitmentsAndContingenciesAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureCommitmentsAndContingenciesAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureCommitmentsAndContingenciesScheduleOfFutureMinimumLeasePaymentCommitments" roleURI="http://www.astronics.com/taxonomy/role/DisclosureCommitmentsAndContingenciesScheduleOfFutureMinimumLeasePaymentCommitments"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSegmentsSummaryOfSegmentReportingInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummaryOfSegmentReportingInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSegmentsAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSegmentsAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSegmentsSummarizesTheCompanysSalesByGeographicRegion" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummarizesTheCompanysSalesByGeographicRegion"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSegmentsSummarizesTheCompanysPropertyPlantAndEquipmentByGeographicRegion" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummarizesTheCompanysPropertyPlantAndEquipmentByGeographicRegion"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSegmentsScheduleOfActivitiesWithMajorCustomers" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSegmentsScheduleOfActivitiesWithMajorCustomers"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAcquisitionsAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAcquisitionsPreliminaryAllocationOfPurchasePriceBasedOnAppraisedFairValues" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsPreliminaryAllocationOfPurchasePriceBasedOnAppraisedFairValues"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAcquisitionsAmountsAllocatedToPurchasedIntangibleAssets" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsAmountsAllocatedToPurchasedIntangibleAssets"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAcquisitionsSummaryOfSalesAndAmountsIncludedInIncomeFromOperationsOfSubsidiaryInConsolidatedFinancialStatementsOfCompany" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsSummaryOfSalesAndAmountsIncludedInIncomeFromOperationsOfSubsidiaryInConsolidatedFinancialStatementsOfCompany"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureAcquisitionsConsolidatedResultsOfOperationOfCompanyWithAcquiredBusiness" roleURI="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsConsolidatedResultsOfOperationOfCompanyWithAcquiredBusiness"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureSubsequentEventAdditionalInformation" roleURI="http://www.astronics.com/taxonomy/role/DisclosureSubsequentEventAdditionalInformation"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#DisclosureScheduleIIValuationAndQualifyingAccounts" roleURI="http://www.astronics.com/taxonomy/role/DisclosureScheduleIIValuationAndQualifyingAccounts"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsSignificantAccountingPoliciesTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSignificantAccountingPoliciesTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsSignificantAccountingPoliciesTextBlockPolicies" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSignificantAccountingPoliciesTextBlockPolicies"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsInventoryDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsInventoryDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsInventoryDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsInventoryDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsGoodwillDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsGoodwillDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsGoodwillDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsGoodwillDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDebtDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDebtDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDebtDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDebtDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsProductWarrantyDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsProductWarrantyDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsProductWarrantyDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsProductWarrantyDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsIncomeTaxDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIncomeTaxDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsIncomeTaxDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIncomeTaxDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsCompensationAndEmployeeBenefitPlansTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCompensationAndEmployeeBenefitPlansTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsEarningsPerShareTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsEarningsPerShareTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsEarningsPerShareTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsEarningsPerShareTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsFairValueDisclosuresTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsFairValueDisclosuresTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsFairValueDisclosuresTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsFairValueDisclosuresTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsQuarterlyFinancialInformationTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsQuarterlyFinancialInformationTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsQuarterlyFinancialInformationTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsQuarterlyFinancialInformationTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsSegmentReportingDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSegmentReportingDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsSegmentReportingDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSegmentReportingDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsBusinessCombinationDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsBusinessCombinationDisclosureTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsBusinessCombinationDisclosureTextBlockTables" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsBusinessCombinationDisclosureTextBlockTables"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsSubsequentEventsTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSubsequentEventsTextBlock"/>
+  <roleRef xlink:type="simple" xlink:href="atro-20131231.xsd#Role_NotesToFinancialStatementsScheduleOfValuationAndQualifyingAccountsDisclosureTextBlock" roleURI="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsScheduleOfValuationAndQualifyingAccountsDisclosureTextBlock"/>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DocumentandEntityInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfIncome">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AssetImpairmentCharges" xlink:label="us-gaap_AssetImpairmentCharges"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CostOfGoodsSold" xlink:label="us-gaap_CostOfGoodsSold"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_GrossProfit" xlink:label="us-gaap_GrossProfit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:label="us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncomeTaxExpenseBenefit" xlink:label="us-gaap_IncomeTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InterestIncomeExpenseNet" xlink:label="us-gaap_InterestIncomeExpenseNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetIncomeLoss" xlink:label="us-gaap_NetIncomeLoss"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingIncomeLoss" xlink:label="us-gaap_OperatingIncomeLoss"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_SalesRevenueGoodsNet" xlink:label="us-gaap_SalesRevenueGoodsNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_SellingGeneralAndAdministrativeExpense" xlink:label="us-gaap_SellingGeneralAndAdministrativeExpense"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_GrossProfit" xlink:to="us-gaap_SalesRevenueGoodsNet" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_GrossProfit" xlink:to="us-gaap_CostOfGoodsSold" order="1.0200" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:to="us-gaap_OperatingIncomeLoss" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" xlink:to="us-gaap_InterestIncomeExpenseNet" order="1.0700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetIncomeLoss" xlink:to="us-gaap_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments" order="1.0800" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetIncomeLoss" xlink:to="us-gaap_IncomeTaxExpenseBenefit" order="1.0900" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingIncomeLoss" xlink:to="us-gaap_GrossProfit" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingIncomeLoss" xlink:to="us-gaap_AssetImpairmentCharges" order="1.0400" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingIncomeLoss" xlink:to="us-gaap_SellingGeneralAndAdministrativeExpense" order="1.0500" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfOtherComprehensiveIncome">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ComprehensiveIncomeNetOfTax" xlink:label="us-gaap_ComprehensiveIncomeNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetIncomeLoss" xlink:label="us-gaap_NetIncomeLoss"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_ComprehensiveIncomeNetOfTax" xlink:to="us-gaap_NetIncomeLoss" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_ComprehensiveIncomeNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossNetOfTax" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax" order="1.0400" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfFinancialPositionClassified">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsPayableAndOtherAccruedLiabilitiesCurrent" xlink:label="us-gaap_AccountsPayableAndOtherAccruedLiabilitiesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsPayableCurrent" xlink:label="us-gaap_AccountsPayableCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsReceivableNetCurrent" xlink:label="us-gaap_AccountsReceivableNetCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccruedIncomeTaxesCurrent" xlink:label="us-gaap_AccruedIncomeTaxesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment" xlink:label="us-gaap_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Assets" xlink:label="us-gaap_Assets"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AssetsCurrent" xlink:label="us-gaap_AssetsCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BillingsInExcessOfCost" xlink:label="us-gaap_BillingsInExcessOfCost"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BuildingsAndImprovementsGross" xlink:label="us-gaap_BuildingsAndImprovementsGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CashAndCashEquivalentsAtCarryingValue" xlink:label="us-gaap_CashAndCashEquivalentsAtCarryingValue"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ConstructionInProgressGross" xlink:label="us-gaap_ConstructionInProgressGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredRevenueAndCreditsCurrent" xlink:label="us-gaap_DeferredRevenueAndCreditsCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsNetCurrent" xlink:label="us-gaap_DeferredTaxAssetsNetCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsNetNoncurrent" xlink:label="us-gaap_DeferredTaxAssetsNetNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilitiesCurrent" xlink:label="us-gaap_DeferredTaxLiabilitiesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilitiesNoncurrent" xlink:label="us-gaap_DeferredTaxLiabilitiesNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_EmployeeRelatedLiabilitiesCurrent" xlink:label="us-gaap_EmployeeRelatedLiabilitiesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Goodwill" xlink:label="us-gaap_Goodwill"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IntangibleAssetsNetExcludingGoodwill" xlink:label="us-gaap_IntangibleAssetsNetExcludingGoodwill"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InventoryNet" xlink:label="us-gaap_InventoryNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Land" xlink:label="us-gaap_Land"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Liabilities" xlink:label="us-gaap_Liabilities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LiabilitiesAndStockholdersEquity" xlink:label="us-gaap_LiabilitiesAndStockholdersEquity"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LiabilitiesCurrent" xlink:label="us-gaap_LiabilitiesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtCurrent" xlink:label="us-gaap_LongTermDebtCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtNoncurrent" xlink:label="us-gaap_LongTermDebtNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_MachineryAndEquipmentGross" xlink:label="us-gaap_MachineryAndEquipmentGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherAssetsNoncurrent" xlink:label="us-gaap_OtherAssetsNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherLiabilitiesNoncurrent" xlink:label="us-gaap_OtherLiabilitiesNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PensionAndOtherPostretirementDefinedBenefitPlansLiabilitiesNoncurrent" xlink:label="us-gaap_PensionAndOtherPostretirementDefinedBenefitPlansLiabilitiesNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PrepaidExpenseAndOtherAssetsCurrent" xlink:label="us-gaap_PrepaidExpenseAndOtherAssetsCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PropertyPlantAndEquipmentGross" xlink:label="us-gaap_PropertyPlantAndEquipmentGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PropertyPlantAndEquipmentNet" xlink:label="us-gaap_PropertyPlantAndEquipmentNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_StockholdersEquity" xlink:label="us-gaap_StockholdersEquity"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Assets" xlink:to="us-gaap_PropertyPlantAndEquipmentNet" order="1.1200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Assets" xlink:to="us-gaap_DeferredTaxAssetsNetNoncurrent" order="1.1300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Assets" xlink:to="us-gaap_OtherAssetsNoncurrent" order="1.1400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Assets" xlink:to="us-gaap_IntangibleAssetsNetExcludingGoodwill" order="1.1500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Assets" xlink:to="us-gaap_Goodwill" order="1.1600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AssetsCurrent" xlink:to="us-gaap_CashAndCashEquivalentsAtCarryingValue" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AssetsCurrent" xlink:to="us-gaap_AccountsReceivableNetCurrent" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AssetsCurrent" xlink:to="us-gaap_InventoryNet" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AssetsCurrent" xlink:to="us-gaap_PrepaidExpenseAndOtherAssetsCurrent" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AssetsCurrent" xlink:to="us-gaap_DeferredTaxAssetsNetCurrent" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Liabilities" xlink:to="us-gaap_LiabilitiesCurrent" order="1.2500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Liabilities" xlink:to="us-gaap_LongTermDebtNoncurrent" order="1.2600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Liabilities" xlink:to="us-gaap_PensionAndOtherPostretirementDefinedBenefitPlansLiabilitiesNoncurrent" order="1.2700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Liabilities" xlink:to="us-gaap_OtherLiabilitiesNoncurrent" order="1.2800" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Liabilities" xlink:to="us-gaap_DeferredTaxLiabilitiesNoncurrent" order="1.2900" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesAndStockholdersEquity" xlink:to="us-gaap_Liabilities" order="1.3000" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesAndStockholdersEquity" xlink:to="us-gaap_StockholdersEquity" order="1.3400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_LongTermDebtCurrent" order="1.1700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_AccountsPayableCurrent" order="1.1800" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_EmployeeRelatedLiabilitiesCurrent" order="1.1900" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_AccruedIncomeTaxesCurrent" order="1.2000" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_AccountsPayableAndOtherAccruedLiabilitiesCurrent" order="1.2100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_DeferredRevenueAndCreditsCurrent" order="1.2200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_BillingsInExcessOfCost" order="1.2300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LiabilitiesCurrent" xlink:to="us-gaap_DeferredTaxLiabilitiesCurrent" order="1.2400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentGross" xlink:to="us-gaap_Land" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentGross" xlink:to="us-gaap_BuildingsAndImprovementsGross" order="1.0700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentGross" xlink:to="us-gaap_MachineryAndEquipmentGross" order="1.0800" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentGross" xlink:to="us-gaap_ConstructionInProgressGross" order="1.0900" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentNet" xlink:to="us-gaap_PropertyPlantAndEquipmentGross" order="1.1000" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_PropertyPlantAndEquipmentNet" xlink:to="us-gaap_AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment" order="1.1100" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfFinancialPositionClassifiedParenthetical">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfCashFlowsIndirect">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AssetImpairmentCharges" xlink:label="us-gaap_AssetImpairmentCharges"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:label="us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredIncomeTaxExpenseBenefit" xlink:label="us-gaap_DeferredIncomeTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DepreciationDepletionAndAmortization" xlink:label="us-gaap_DepreciationDepletionAndAmortization"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents" xlink:label="us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ExcessTaxBenefitFromShareBasedCompensationFinancingActivities" xlink:label="us-gaap_ExcessTaxBenefitFromShareBasedCompensationFinancingActivities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInAccountsPayable" xlink:label="us-gaap_IncreaseDecreaseInAccountsPayable"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInAccountsReceivable" xlink:label="us-gaap_IncreaseDecreaseInAccountsReceivable"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInAccruedIncomeTaxesPayable" xlink:label="us-gaap_IncreaseDecreaseInAccruedIncomeTaxesPayable"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInAccruedLiabilities" xlink:label="us-gaap_IncreaseDecreaseInAccruedLiabilities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInBillingInExcessOfCostOfEarnings" xlink:label="us-gaap_IncreaseDecreaseInBillingInExcessOfCostOfEarnings"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInDeferredRevenueAndCustomerAdvancesAndDeposits" xlink:label="us-gaap_IncreaseDecreaseInDeferredRevenueAndCustomerAdvancesAndDeposits"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInEmployeeRelatedLiabilities" xlink:label="us-gaap_IncreaseDecreaseInEmployeeRelatedLiabilities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInInventories" xlink:label="us-gaap_IncreaseDecreaseInInventories"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncreaseDecreaseInPrepaidExpense" xlink:label="us-gaap_IncreaseDecreaseInPrepaidExpense"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:label="us-gaap_NetCashProvidedByUsedInFinancingActivities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetCashProvidedByUsedInInvestingActivities" xlink:label="us-gaap_NetCashProvidedByUsedInInvestingActivities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:label="us-gaap_NetCashProvidedByUsedInOperatingActivities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_NetIncomeLoss" xlink:label="us-gaap_NetIncomeLoss"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherNoncashIncomeExpense" xlink:label="us-gaap_OtherNoncashIncomeExpense"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PaymentsForPreviousAcquisition" xlink:label="us-gaap_PaymentsForPreviousAcquisition"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PaymentsForProceedsFromOtherInvestingActivities" xlink:label="us-gaap_PaymentsForProceedsFromOtherInvestingActivities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PaymentsOfDebtIssuanceCosts" xlink:label="us-gaap_PaymentsOfDebtIssuanceCosts"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired" xlink:label="us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_PaymentsToAcquireProductiveAssets" xlink:label="us-gaap_PaymentsToAcquireProductiveAssets"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ProceedsFromNotesPayable" xlink:label="us-gaap_ProceedsFromNotesPayable"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ProceedsFromStockOptionsExercised" xlink:label="us-gaap_ProceedsFromStockOptionsExercised"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_ProceedsFromTermNote" xlink:label="atro_ProceedsFromTermNote"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_ProvisionForNonCashLossesOnInventoryAndReceivables" xlink:label="atro_ProvisionForNonCashLossesOnInventoryAndReceivables"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_RepaymentsOfLongTermDebt" xlink:label="us-gaap_RepaymentsOfLongTermDebt"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_RepaymentsOfNotesPayable" xlink:label="us-gaap_RepaymentsOfNotesPayable"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_ShareBasedCompensation" xlink:label="us-gaap_ShareBasedCompensation"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="us-gaap_NetCashProvidedByUsedInOperatingActivities" order="1.1700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="us-gaap_NetCashProvidedByUsedInInvestingActivities" order="1.2100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="us-gaap_NetCashProvidedByUsedInFinancingActivities" order="1.3000" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_CashAndCashEquivalentsPeriodIncreaseDecrease" xlink:to="us-gaap_EffectOfExchangeRateOnCashAndCashEquivalents" order="1.3100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="atro_ProceedsFromTermNote" order="1.2200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_RepaymentsOfLongTermDebt" order="1.2300" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_ProceedsFromNotesPayable" order="1.2400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_RepaymentsOfNotesPayable" order="1.2500" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_PaymentsForPreviousAcquisition" order="1.2600" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_PaymentsOfDebtIssuanceCosts" order="1.2700" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_ProceedsFromStockOptionsExercised" order="1.2800" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInFinancingActivities" xlink:to="us-gaap_ExcessTaxBenefitFromShareBasedCompensationFinancingActivities" order="1.2900" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInInvestingActivities" xlink:to="us-gaap_PaymentsToAcquireBusinessesNetOfCashAcquired" order="1.1800" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInInvestingActivities" xlink:to="us-gaap_PaymentsToAcquireProductiveAssets" order="1.1900" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInInvestingActivities" xlink:to="us-gaap_PaymentsForProceedsFromOtherInvestingActivities" order="1.2000" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_NetIncomeLoss" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_AssetImpairmentCharges" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_DepreciationDepletionAndAmortization" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="atro_ProvisionForNonCashLossesOnInventoryAndReceivables" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_ShareBasedCompensation" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_DeferredIncomeTaxExpenseBenefit" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_OtherNoncashIncomeExpense" order="1.0700" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInAccountsReceivable" order="1.0800" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInInventories" order="1.0900" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInPrepaidExpense" order="1.1000" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInAccountsPayable" order="1.1100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInAccruedLiabilities" order="1.1200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInAccruedIncomeTaxesPayable" order="1.1300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInDeferredRevenueAndCustomerAdvancesAndDeposits" order="1.1400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInBillingInExcessOfCostOfEarnings" order="1.1500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_NetCashProvidedByUsedInOperatingActivities" xlink:to="us-gaap_IncreaseDecreaseInEmployeeRelatedLiabilities" order="1.1600" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/StatementOfShareholdersEquityAndOtherComprehensiveIncome">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSummaryOfSignificantAccountingPrinciplesAndPracticesAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAccountsReceivableSummaryOfAccountsReceivable">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsReceivableBilledForLongTermContractsOrPrograms" xlink:label="us-gaap_AccountsReceivableBilledForLongTermContractsOrPrograms"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsReceivableGross" xlink:label="us-gaap_AccountsReceivableGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsReceivableGrossCurrent" xlink:label="us-gaap_AccountsReceivableGrossCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccountsReceivableNetCurrent" xlink:label="us-gaap_AccountsReceivableNetCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AllowanceForDoubtfulAccountsReceivableCurrent" xlink:label="us-gaap_AllowanceForDoubtfulAccountsReceivableCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BilledContractReceivables" xlink:label="us-gaap_BilledContractReceivables"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_UnbilledContractsReceivable" xlink:label="us-gaap_UnbilledContractsReceivable"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableBilledForLongTermContractsOrPrograms" xlink:to="us-gaap_BilledContractReceivables" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableBilledForLongTermContractsOrPrograms" xlink:to="us-gaap_UnbilledContractsReceivable" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableGrossCurrent" xlink:to="us-gaap_AccountsReceivableGross" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableGrossCurrent" xlink:to="us-gaap_AccountsReceivableBilledForLongTermContractsOrPrograms" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableNetCurrent" xlink:to="us-gaap_AccountsReceivableGrossCurrent" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccountsReceivableNetCurrent" xlink:to="us-gaap_AllowanceForDoubtfulAccountsReceivableCurrent" order="1.0600" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureInventoriesSummaryOfInventories">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InventoryFinishedGoods" xlink:label="us-gaap_InventoryFinishedGoods"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InventoryNet" xlink:label="us-gaap_InventoryNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InventoryRawMaterials" xlink:label="us-gaap_InventoryRawMaterials"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_InventoryWorkInProcess" xlink:label="us-gaap_InventoryWorkInProcess"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_InventoryNet" xlink:to="us-gaap_InventoryFinishedGoods" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_InventoryNet" xlink:to="us-gaap_InventoryWorkInProcess" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_InventoryNet" xlink:to="us-gaap_InventoryRawMaterials" order="1.0300" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureInventoriesAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsSummaryOfAcquiredIntangibleAssets">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIntangibleAssetsSummaryOfAmortizationExpenseForIntangibleAssetsForEachOfNextFiveYears">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureGoodwillSummaryOfChangesInCarryingAmountOfGoodwill">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Goodwill" xlink:label="us-gaap_Goodwill"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_GoodwillGross" xlink:label="us-gaap_GoodwillGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_GoodwillImpairedAccumulatedImpairmentLoss" xlink:label="us-gaap_GoodwillImpairedAccumulatedImpairmentLoss"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Goodwill" xlink:to="us-gaap_GoodwillGross" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_Goodwill" xlink:to="us-gaap_GoodwillImpairedAccumulatedImpairmentLoss" order="1.0500" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureGoodwillAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebt">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableSummaryOfLongTermDebtParenthetical">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayablePrincipalMaturitiesOfLongTermDebt">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebt" xlink:label="us-gaap_LongTermDebt"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo" xlink:label="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_LongTermDebt" xlink:to="us-gaap_LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive" order="1.0600" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureLongTermDebtAndNotePayableAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureWarrantyAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureWarrantySummaryOfActivityInWarrantyAccrual">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesProvisionBenefitForIncomeTaxes">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CurrentFederalTaxExpenseBenefit" xlink:label="us-gaap_CurrentFederalTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CurrentForeignTaxExpenseBenefit" xlink:label="us-gaap_CurrentForeignTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_CurrentStateAndLocalTaxExpenseBenefit" xlink:label="us-gaap_CurrentStateAndLocalTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredIncomeTaxExpenseBenefit" xlink:label="us-gaap_DeferredIncomeTaxExpenseBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_IncomeTaxExpenseBenefit" xlink:label="us-gaap_IncomeTaxExpenseBenefit"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeTaxExpenseBenefit" xlink:to="us-gaap_CurrentFederalTaxExpenseBenefit" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeTaxExpenseBenefit" xlink:to="us-gaap_CurrentStateAndLocalTaxExpenseBenefit" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeTaxExpenseBenefit" xlink:to="us-gaap_CurrentForeignTaxExpenseBenefit" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_IncomeTaxExpenseBenefit" xlink:to="us-gaap_DeferredIncomeTaxExpenseBenefit" order="1.0400" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesEffectiveTaxRatesDifferFromStatutoryFederalIncomeTax">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesSignificantComponentsOfCompanysDeferredTaxAssetsAndLiabilities">
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_DeferredTaxAssetIntangibleAssets" xlink:label="atro_DeferredTaxAssetIntangibleAssets"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_DeferredTaxAssetsCustomerAdvancedPaymentsAndDeferredRevenue" xlink:label="atro_DeferredTaxAssetsCustomerAdvancedPaymentsAndDeferredRevenue"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsGoodwillAndIntangibleAssets" xlink:label="us-gaap_DeferredTaxAssetsGoodwillAndIntangibleAssets"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsGross" xlink:label="us-gaap_DeferredTaxAssetsGross"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:label="us-gaap_DeferredTaxAssetsLiabilitiesNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsNet" xlink:label="us-gaap_DeferredTaxAssetsNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsOperatingLossCarryforwardsStateAndLocal" xlink:label="us-gaap_DeferredTaxAssetsOperatingLossCarryforwardsStateAndLocal"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsOther" xlink:label="us-gaap_DeferredTaxAssetsOther"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsTaxCreditCarryforwardsOther" xlink:label="us-gaap_DeferredTaxAssetsTaxCreditCarryforwardsOther"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsTaxDeferredExpenseCompensationAndBenefits" xlink:label="us-gaap_DeferredTaxAssetsTaxDeferredExpenseCompensationAndBenefits"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsTaxDeferredExpenseReservesAndAccrualsReserves" xlink:label="us-gaap_DeferredTaxAssetsTaxDeferredExpenseReservesAndAccrualsReserves"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsValuationAllowance" xlink:label="us-gaap_DeferredTaxAssetsValuationAllowance"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilities" xlink:label="us-gaap_DeferredTaxLiabilities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilitiesPropertyPlantAndEquipment" xlink:label="us-gaap_DeferredTaxLiabilitiesPropertyPlantAndEquipment"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="us-gaap_DeferredTaxAssetsGoodwillAndIntangibleAssets" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="us-gaap_DeferredTaxAssetsTaxDeferredExpenseReservesAndAccrualsReserves" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="us-gaap_DeferredTaxAssetsTaxDeferredExpenseCompensationAndBenefits" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="us-gaap_DeferredTaxAssetsTaxCreditCarryforwardsOther" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="atro_DeferredTaxAssetsCustomerAdvancedPaymentsAndDeferredRevenue" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsGross" xlink:to="us-gaap_DeferredTaxAssetsOperatingLossCarryforwardsStateAndLocal" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxAssetsNet" order="1.0900" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxLiabilities" order="1.1300" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsNet" xlink:to="us-gaap_DeferredTaxAssetsGross" order="1.0700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsNet" xlink:to="us-gaap_DeferredTaxAssetsValuationAllowance" order="1.0800" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxLiabilities" xlink:to="us-gaap_DeferredTaxLiabilitiesPropertyPlantAndEquipment" order="1.1000" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxLiabilities" xlink:to="atro_DeferredTaxAssetIntangibleAssets" order="1.1100" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxLiabilities" xlink:to="us-gaap_DeferredTaxAssetsOther" order="1.1200" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesComponentsOfNetDeferredTaxAssetsAndLiabilities">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:label="us-gaap_DeferredTaxAssetsLiabilitiesNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsLiabilitiesNetCurrent" xlink:label="us-gaap_DeferredTaxAssetsLiabilitiesNetCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxAssetsLiabilitiesNetNoncurrent" xlink:label="us-gaap_DeferredTaxAssetsLiabilitiesNetNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilitiesCurrent" xlink:label="us-gaap_DeferredTaxLiabilitiesCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DeferredTaxLiabilitiesNoncurrent" xlink:label="us-gaap_DeferredTaxLiabilitiesNoncurrent"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxAssetsLiabilitiesNetCurrent" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxAssetsLiabilitiesNetNoncurrent" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxLiabilitiesCurrent" order="1.0300" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DeferredTaxAssetsLiabilitiesNet" xlink:to="us-gaap_DeferredTaxLiabilitiesNoncurrent" order="1.0400" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureIncomeTaxesReconciliationOfTotalAmountsOfUnrecognizedTaxBenefitsExcludingInterestAndPenalties">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureProfitSharing401kPlanAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsReconciliationOfBeginningAndEndingBalancesOfProjectedBenefitObligation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToCalculateThePostRetirementBenefitObligation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsSummarizesTheComponentsOfTheNetPeriodicCost">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DefinedBenefitPlanAmortizationOfPriorServiceCostCredit" xlink:label="us-gaap_DefinedBenefitPlanAmortizationOfPriorServiceCostCredit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DefinedBenefitPlanFutureAmortizationOfGainLoss" xlink:label="us-gaap_DefinedBenefitPlanFutureAmortizationOfGainLoss"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DefinedBenefitPlanInterestCost" xlink:label="us-gaap_DefinedBenefitPlanInterestCost"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost" xlink:label="us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_DefinedBenefitPlanServiceCost" xlink:label="us-gaap_DefinedBenefitPlanServiceCost"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost" xlink:to="us-gaap_DefinedBenefitPlanServiceCost" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost" xlink:to="us-gaap_DefinedBenefitPlanInterestCost" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost" xlink:to="us-gaap_DefinedBenefitPlanAmortizationOfPriorServiceCostCredit" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_DefinedBenefitPlanNetPeriodicBenefitCost" xlink:to="us-gaap_DefinedBenefitPlanFutureAmortizationOfGainLoss" order="1.0400" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsAssumptionsUsedToDetermineTheNetPeriodicCost">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlans">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureRetirementPlansAndRelatedPostRetirementBenefitsDetailsOfMultiEmployerPlansParenthetical">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityComponentsOfAccumulatedOtherComprehensiveIncomeLoss">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax" xlink:label="us-gaap_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_AccumulatedOtherComprehensiveIncomeLossDerivativesTaxBenefit" xlink:label="atro_AccumulatedOtherComprehensiveIncomeLossDerivativesTaxBenefit"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax" xlink:label="us-gaap_AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_AccumulatedOtherComprehensiveIncomeLossMarkToMarketAdjustmentsForDerivativesBeforeTax" xlink:label="atro_AccumulatedOtherComprehensiveIncomeLossMarkToMarketAdjustmentsForDerivativesBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax" xlink:label="us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentBeforeTax" xlink:label="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentNetOfTax" xlink:label="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityTaxBenefit" xlink:label="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityTaxBenefit"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax" xlink:to="atro_AccumulatedOtherComprehensiveIncomeLossMarkToMarketAdjustmentsForDerivativesBeforeTax" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax" xlink:to="atro_AccumulatedOtherComprehensiveIncomeLossDerivativesTaxBenefit" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax" xlink:to="us-gaap_AccumulatedOtherComprehensiveIncomeLossForeignCurrencyTranslationAdjustmentNetOfTax" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax" xlink:to="us-gaap_AccumulatedOtherComprehensiveIncomeLossCumulativeChangesInNetGainLossFromCashFlowHedgesEffectNetOfTax" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AccumulatedOtherComprehensiveIncomeLossNetOfTax" xlink:to="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentNetOfTax" order="1.0700" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentNetOfTax" xlink:to="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentBeforeTax" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityAdjustmentNetOfTax" xlink:to="atro_AccumulatedOtherComprehensiveIncomeLossRetirementLiabilityTaxBenefit" order="1.0600" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureShareholdersEquityComponentsOfOtherComprehensiveIncomeLoss">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_OtherComprehensiveIncomePensionLiabilityNetAdjustmentBeforeTax" xlink:label="atro_OtherComprehensiveIncomePensionLiabilityNetAdjustmentBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax" xlink:label="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax" order="1.0200" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesTax" order="1.0400" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax" xlink:to="atro_OtherComprehensiveIncomePensionLiabilityNetAdjustmentBeforeTax" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansAdjustmentNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossPensionAndOtherPostretirementBenefitPlansTax" order="1.0700" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureEarningsPerShareEarningsPerShareComputations">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_WeightedAverageNumberDilutedSharesOutstandingAdjustment" xlink:label="us-gaap_WeightedAverageNumberDilutedSharesOutstandingAdjustment"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding" xlink:label="us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_WeightedAverageNumberOfSharesOutstandingBasic" xlink:label="us-gaap_WeightedAverageNumberOfSharesOutstandingBasic"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding" xlink:to="us-gaap_WeightedAverageNumberOfSharesOutstandingBasic" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_WeightedAverageNumberOfDilutedSharesOutstanding" xlink:to="us-gaap_WeightedAverageNumberDilutedSharesOutstandingAdjustment" order="1.0200" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureEarningsPerShareAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageFairValueOfOptionsGranted">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageAssumptions">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansCompensationExpenseInformationBasedOnFairValueOfStockOptions">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AllocatedShareBasedCompensationExpense" xlink:label="us-gaap_AllocatedShareBasedCompensationExpense"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_AllocatedShareBasedCompensationExpenseNetOfTax" xlink:label="us-gaap_AllocatedShareBasedCompensationExpenseNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense" xlink:label="us-gaap_EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AllocatedShareBasedCompensationExpenseNetOfTax" xlink:to="us-gaap_AllocatedShareBasedCompensationExpense" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_AllocatedShareBasedCompensationExpenseNetOfTax" xlink:to="us-gaap_EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense" order="1.0200" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfCompanysStockOptionActivityAndRelatedInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansSummaryOfWeightedAverageExercisePricesAndContractualLivesForOutstandingAndExercisableStockOptions">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureStockOptionAndPurchasePlansFairValueForOptionsGrantedUnderEmployeeStockPurchasePlan">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureFairValueFinancialAssetsAndLiabilitiesCarriedAtFairValueMeasuredOnRecurringBasis">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureFairValueAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureFairValueCalculationOfAdditionalPurchaseConsiderationEarnOut">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureDerivativeFinancialInstrumentsAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureDerivativeFinancialInstrumentsSummaryOfActivityInAOCIRelatedToDerivatives">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesTax" xlink:label="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax" xlink:label="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax" xlink:label="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodTax" xlink:label="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodTax"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossDerivativesQualifyingAsHedgesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax" order="1.0700" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesBeforeTax" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeLossReclassificationAdjustmentFromAOCIOnDerivativesTax" order="1.0600" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodBeforeTax" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodNetOfTax" xlink:to="us-gaap_OtherComprehensiveIncomeUnrealizedGainLossOnDerivativesArisingDuringPeriodTax" order="1.0300" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSelectedQuarterlyFinancialInformationSummarizesSelectedQuarterlyFinancialInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureCommitmentsAndContingenciesAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureCommitmentsAndContingenciesScheduleOfFutureMinimumLeasePaymentCommitments">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDue"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDueCurrent" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDueCurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFiveYears" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFiveYears"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFourYears" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFourYears"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDueInThreeYears" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInThreeYears"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_OperatingLeasesFutureMinimumPaymentsDueInTwoYears" xlink:label="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInTwoYears"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:to="us-gaap_OperatingLeasesFutureMinimumPaymentsDueCurrent" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:to="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInTwoYears" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:to="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInThreeYears" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:to="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFourYears" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_OperatingLeasesFutureMinimumPaymentsDue" xlink:to="us-gaap_OperatingLeasesFutureMinimumPaymentsDueInFiveYears" order="1.0500" weight="1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummaryOfSegmentReportingInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSegmentsAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummarizesTheCompanysSalesByGeographicRegion">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSegmentsSummarizesTheCompanysPropertyPlantAndEquipmentByGeographicRegion">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSegmentsScheduleOfActivitiesWithMajorCustomers">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsPreliminaryAllocationOfPurchasePriceBasedOnAppraisedFairValues">
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsOther" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsOther"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsReceivables" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsReceivables"/>
+    <loc xlink:type="locator" xlink:href="atro-20131231.xsd#atro_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentLiabilitiesAccountsPayableAccruedExpensesAndLongTermLiabilities" xlink:label="atro_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentLiabilitiesAccountsPayableAccruedExpensesAndLongTermLiabilities"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedDeferredTaxLiabilitiesNoncurrent" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedDeferredTaxLiabilitiesNoncurrent"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedIntangibleAssetsOtherThanGoodwill" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedIntangibleAssetsOtherThanGoodwill"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedInventory" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedInventory"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedNoncurrentAssets" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedNoncurrentAssets"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:label="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet"/>
+    <loc xlink:type="locator" xlink:href="http://xbrl.fasb.org/us-gaap/2013/elts/us-gaap-2013-01-31.xsd#us-gaap_Goodwill" xlink:label="us-gaap_Goodwill"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsReceivables" order="1.0100" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedInventory" order="1.0200" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentAssetsOther" order="1.0300" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedNoncurrentAssets" order="1.0400" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedIntangibleAssetsOtherThanGoodwill" order="1.0500" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_Goodwill" order="1.0600" weight="1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="atro_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedCurrentLiabilitiesAccountsPayableAccruedExpensesAndLongTermLiabilities" order="1.0700" weight="-1.00" priority="2" use="optional"/>
+    <calculationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/summation-item" xlink:from="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredGoodwillAndLiabilitiesAssumedNet" xlink:to="us-gaap_BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedDeferredTaxLiabilitiesNoncurrent" order="1.0800" weight="-1.00" priority="2" use="optional"/>
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsAmountsAllocatedToPurchasedIntangibleAssets">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsSummaryOfSalesAndAmountsIncludedInIncomeFromOperationsOfSubsidiaryInConsolidatedFinancialStatementsOfCompany">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureAcquisitionsConsolidatedResultsOfOperationOfCompanyWithAcquiredBusiness">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureSubsequentEventAdditionalInformation">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/DisclosureScheduleIIValuationAndQualifyingAccounts">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSignificantAccountingPoliciesTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSignificantAccountingPoliciesTextBlockPolicies">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsLoansNotesTradeAndOtherReceivablesDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsInventoryDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsInventoryDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIntangibleAssetsDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsGoodwillDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsGoodwillDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDebtDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDebtDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsProductWarrantyDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsProductWarrantyDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIncomeTaxDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsIncomeTaxDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCompensationAndEmployeeBenefitPlansTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsPensionAndOtherPostretirementBenefitsDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsStockholdersEquityNoteDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsEarningsPerShareTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsEarningsPerShareTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDisclosureOfCompensationRelatedCostsShareBasedPaymentsTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsFairValueDisclosuresTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsFairValueDisclosuresTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsDerivativeInstrumentsAndHedgingActivitiesDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsQuarterlyFinancialInformationTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsQuarterlyFinancialInformationTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsCommitmentsAndContingenciesDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSegmentReportingDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSegmentReportingDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsBusinessCombinationDisclosureTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsBusinessCombinationDisclosureTextBlockTables">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsSubsequentEventsTextBlock">
+  </calculationLink>
+  <calculationLink xlink:type="extended" xlink:role="http://www.astronics.com/taxonomy/role/NotesToFinancialStatementsScheduleOfValuationAndQualifyingAccountsDisclosureTextBlock">
+  </calculationLink>
+</linkbase>
