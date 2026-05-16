@@ -199,3 +199,4 @@ if __name__ == "__main__":
             cols = ", ".join(df.columns)                                                                  
             conn.execute(f"INSERT INTO standardizedConcepts ({cols}) SELECT {cols} FROM results_df") 
             print(f"Inserted {len(df)} rows into standardizedConcepts")
+    conn.close()

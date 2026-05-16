@@ -165,11 +165,6 @@ FROM
     INNER JOIN calculationTaxonomyHierarchy cth ON cth.cik = fd.cik
     AND cth.accessionNumber = fd.accessionNumber
     AND fd.name = cth.descendant
-    INNER JOIN subs ON fd.prefix = subs.prefix
-    AND fd.cik = subs.cik
-    AND fd.accessionNumber = subs.accessionNumber
-    AND s.form = subs.form
-    AND fd.endDate = subs.endDate
     AND (
         cth."relativeDepth" = 1
         OR (
@@ -182,6 +177,12 @@ FROM
         'IncomeStatement',
         'StatementOfCashFlows'
     )
+    INNER JOIN subs ON fd.prefix = subs.prefix
+    AND fd.cik = subs.cik
+    AND fd.accessionNumber = subs.accessionNumber
+    AND s.form = subs.form
+    AND fd.endDate = subs.endDate
+   
     AND fd.isPrimarySubmissionDateRange = TRUE
     AND fd.isPrimaryUnits = TRUE
     AND fd.isPrimaryPrefix = TRUE

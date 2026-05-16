@@ -17,7 +17,7 @@ def populate_optimal_sample_table(conn, query_name:str, concept_top_pct:float=0.
     top_concepts = set(concept_counts.iloc[:top_n].index)
     df = df[df["conceptName"].isin(top_concepts)]
 
-    company_concepts = df.groupby(['cik', 'accessionNumber'])["conceptName"].agg(set).to_dict()
+    company_concepts = df.groupby(['prefix', 'cik', 'accessionNumber', 'form', 'endDate', 'units'])["conceptName"].agg(set).to_dict()
 
     covered = set()
     selected = []
@@ -33,9 +33,10 @@ def populate_optimal_sample_table(conn, query_name:str, concept_top_pct:float=0.
 
     pbar.close()
 
-    result_df = pd.DataFrame(selected, columns=['cik', 'accessionNumber', 'prefix'])
-    conn.execute("""
-        INSERT INTO highConceptCoverageSubmissionsSample SELECT prefix, cik, accessionNumber, units, form, endDate FROM result_df;
+    result_df = pd.DataFrame(selected, columns=['prefix', 'cik', 'accessionNumber', 'form', 'endDate', 'units'])
+    cols = ", ".join(result_df.columns)
+    conn.execute(f"""
+        INSERT INTO highConceptCoverageSubmissionsSample ({cols}) SELECT {cols} FROM result_df;
         CHECKPOINT;
     """)
 
@@ -60,5 +61,5 @@ if __name__ == "__main__":
             units VARCHAR
         ); CHECKPOINT;
     """)
-    populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.85)
+    populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.90)
     conn.close()

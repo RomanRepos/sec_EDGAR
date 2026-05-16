@@ -62,7 +62,7 @@ def filing_to_yaml(conn, query_name: str, prefix: str, cik: int, accession_numbe
 
 
 if __name__ == "__main__":
-#8063	0000008063-20-000042	10-Q	2020-06-27
+
     load_dotenv()
     PROJECT_ROOT_PARENT = Path(
         Path(__file__).resolve().parent.parent or 
@@ -80,3 +80,4 @@ if __name__ == "__main__":
     UNITS = "USD"
     yaml_str = filing_to_yaml(conn, 'FetchSubmissionsMainStatement', PREFIX, CIK, ACCESSION, FORM, END_DATE, UNITS)
     print(yaml_str)
+    conn.close()

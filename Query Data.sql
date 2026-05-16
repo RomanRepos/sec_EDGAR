@@ -148,6 +148,7 @@ GROUP BY cik, accessionNumber
 having count(*)>1
 order by cik, accessionNumber;
 
+
 /*
 --Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.
 CREATE TABLE calculationTaxonomyHierarchy_NEW as
