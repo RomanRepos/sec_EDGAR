@@ -21,10 +21,12 @@ mcp-server-motherduck/
 __pycache__/
 *.py[cod]
 *$py.class
-
+__pycache__/
+*.pyc
+*.pyo
 # C extensions
 *.so
-
+*.db
 # Distribution / packaging
 .Python
 build/
@@ -161,10 +163,11 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
-
+._*
+.sh
 # Rope project settings
 .ropeproject
-
+mother_duck_MCP_inspector.sh
 # mkdocs documentation
 /site
 
