@@ -13,7 +13,7 @@ inner join financialData fd on
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 0
     AND cth.highestParent = TRUE
-    AND fd.prefix = 'us-gaap'
+    AND isPrimaryPrefix = TRUE
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.isPrimaryUnits = TRUE
 inner join (select distinct cik, accessionNumber, linkRole from calculationTaxonomy where isPrimaryRole = TRUE) ct
@@ -38,7 +38,7 @@ inner join financialData fd on
     AND fd.accessionNumber = cth.accessionNumber
     AND fd.name = cth.descendant
     AND cth.relativeDepth = 1
-    AND fd.prefix = 'us-gaap'
+    AND fd.isPrimaryPrefix = TRUE
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.isPrimaryUnits = TRUE
 inner join (select distinct cik, accessionNumber, linkRole from calculationTaxonomy where isPrimaryUnits = TRUE) ct
@@ -78,7 +78,7 @@ AND pu.prefix = tlp.prefix
 
 WHERE tlp.keyStatementRole in ('BalanceSheet', 'IncomeStatement', 'StatementOfCashFlows')
 GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate
-HAVING count(*) < 3
+HAVING count(*) = 3
 ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 
 
@@ -88,11 +88,11 @@ SELECT
 distinct
     --cth."keyStatementRole" AS financialStatement,
     --cth."ancestor",
-    cth.descendant,
+    --cth.descendant,
     --cth."arcWeight",
     --cth.relativeDepth,
-    subs.cik,
-    subs.accessionNumber
+    cth.cik,
+    cth.accessionNumber
 FROM
     financialData fd
 INNER JOIN submissions s ON fd.cik = s.cik
@@ -108,8 +108,8 @@ LEFT OUTER JOIN calculationTaxonomyHierarchy ctht ON ctht.cik = fd.cik
     AND ctht.highestParent = TRUE
 INNER JOIN subs ON
     fd.prefix = subs.prefix
-    AND fd.cik = subs.cik
-    AND fd.accessionNumber = subs.accessionNumber
+    AND cth.cik = subs.cik
+    AND cth.accessionNumber = subs.accessionNumber
     AND s.form = subs.form
     AND fd.endDate = subs.endDate
     AND (
@@ -126,6 +126,7 @@ INNER JOIN subs ON
     )
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.isPrimaryUnits = TRUE
+    AND fd.isPrimaryPrefix = TRUE
     and fd.units = subs.units
     
 ORDER BY

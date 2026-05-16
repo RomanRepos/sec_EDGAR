@@ -34,24 +34,24 @@ if __name__ == "__main__":
     inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': os.path.join(DATA_DIR, "companyfacts")},
     'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")}}
 
-    #for i in inputs_dict.values():
-        #download_and_extract(i['link'], i['savePath'])
+    for i in inputs_dict.values():
+        download_and_extract(i['link'], i['savePath'])
 
-    #sync_json_files(inputs_dict['facts']['savePath'],inputs_dict['submissions']['savePath'])
+    sync_json_files(inputs_dict['facts']['savePath'],inputs_dict['submissions']['savePath'])
 
-    #load_sql_script = Template(load_query("LoadDataQueries"))
+    load_sql_script = Template(load_query("LoadDataQueries"))
 
-    #final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
+    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
     
-    #print("Running Queries")
-    #for statement in final_sql.split(';'):
-        #if statement.strip():
-            #conn.execute(statement)
-    #print("Flattening facts")
-    #flatten(conn, 75) #flatten company facts
-    #conn.execute(load_query("AddColumnsToFinData"))
+    print("Running Queries")
+    for statement in final_sql.split(';'):
+        if statement.strip():
+            conn.execute(statement)
+    print("Flattening facts")
+    flatten(conn, 75) #flatten company facts
+    conn.execute(load_query("AddColumnsToFinData"))
 
-    #download_cal_xmls(conn, DATA_DIR) #download calculation taxonomy files
+    download_cal_xmls(conn, DATA_DIR) #download calculation taxonomy files
 
     #write extracted calcs to db, first with general extraction logic, then with special case logic for files that don't follow typical calc patterns, then generate hierarchy and classify roles
     write_calcs_to_db(conn, get_xml_taxonomy_files(conn, xml_taxonomy_dir), extract_calcs)

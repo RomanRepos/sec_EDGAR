@@ -6,18 +6,18 @@ from pathlib import Path
 import os
 from tqdm import tqdm
 
-def populate_optimal_sample_table(conn, query:str, concept_top_pct:float=0.8, prefix:str="us-gaap"):
+def populate_optimal_sample_table(conn, query_name:str, concept_top_pct:float=0.8):
     print("Loading clean submissions from database...")
-    df = conn.execute(query, [prefix, prefix]).fetch_df()
-    concept_counts = df["descendant"].value_counts().sort_values(ascending=False)
+    df = conn.execute(load_query(query_name)).fetch_df()
+    concept_counts = df["conceptName"].value_counts().sort_values(ascending=False)
     concept_counts.to_excel('/home/roman/Documents/EDGAR_Analytics/Analytics/ConceptCounts.xlsx')
 
    
     top_n = max(1, int(len(concept_counts) * concept_top_pct))
     top_concepts = set(concept_counts.iloc[:top_n].index)
-    df = df[df["descendant"].isin(top_concepts)]
+    df = df[df["conceptName"].isin(top_concepts)]
 
-    company_concepts = df.groupby(['cik', 'accessionNumber'])["descendant"].agg(set).to_dict()
+    company_concepts = df.groupby(['cik', 'accessionNumber'])["conceptName"].agg(set).to_dict()
 
     covered = set()
     selected = []
@@ -33,10 +33,9 @@ def populate_optimal_sample_table(conn, query:str, concept_top_pct:float=0.8, pr
 
     pbar.close()
 
-    result_df = pd.DataFrame(selected, columns=['cik', 'accessionNumber'])
-    result_df['prefix'] = prefix
+    result_df = pd.DataFrame(selected, columns=['cik', 'accessionNumber', 'prefix'])
     conn.execute("""
-        INSERT INTO highConceptCoverageSubmissionsSample SELECT prefix, cik, accessionNumber FROM result_df;
+        INSERT INTO highConceptCoverageSubmissionsSample SELECT prefix, cik, accessionNumber, units, form, endDate FROM result_df;
         CHECKPOINT;
     """)
 
@@ -55,10 +54,11 @@ if __name__ == "__main__":
         CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
             prefix VARCHAR,
             cik VARCHAR,
-            accessionNumber VARCHAR
+            accessionNumber VARCHAR,
+            form VARCHAR,
+            endDate DATE,
+            units VARCHAR
         ); CHECKPOINT;
     """)
-    populate_optimal_sample_table(conn, load_query('AllSafeSubmissionsAndConcepts'), concept_top_pct=0.95, prefix="ifrs-full")
-    populate_optimal_sample_table(conn, load_query('AllSafeSubmissionsAndConcepts'), concept_top_pct=0.8, prefix="us-gaap")
-
+    populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.85)
     conn.close()

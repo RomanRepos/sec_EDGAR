@@ -78,7 +78,7 @@ def extract_json(text: str) -> list[dict]:
 def map_filing(yaml_str, system_prompt) -> list[dict]:
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=8192,
+        max_tokens=50000,
         system=[{
             "type": "text",
             "text": system_prompt,
@@ -100,15 +100,15 @@ def build_batch_requests(filings_df, conn, system_prompt) -> tuple[list, dict]:
     group_cols = ["prefix", "cik", "accessionNumber", "form", "endDate", "units"]
     for i, (group_key, _) in enumerate(filings_df.groupby(group_cols)):
         prefix, cik, accessionNumber, form, endDate, units = group_key
-        yaml_str = filing_to_yaml(conn, prefix, cik, accessionNumber, form, endDate, units)
+        yaml_str = filing_to_yaml(conn, 'FetchSubmissionsMainStatement', prefix, cik, accessionNumber, form, endDate, units)
         custom_id = str(i)
-        metadata[custom_id] = (cik, accessionNumber, prefix)
+        metadata[custom_id] = (cik, accessionNumber, prefix, form, endDate, units)
 
         requests.append({
             "custom_id": custom_id,
             "params": {
                 "model": "claude-sonnet-4-6",
-                "max_tokens": 8192,
+                "max_tokens": 50000,
                 "system": [{
                     "type": "text",
                     "text": system_prompt,
@@ -142,7 +142,7 @@ def batch_results_to_df(batch, metadata) -> pd.DataFrame:
             print(f"Request {result.custom_id} failed: {result.result.type}")
             continue
 
-        cik, accessionNumber, prefix = metadata[result.custom_id]
+        cik, accessionNumber, prefix, form, endDate, units = metadata[result.custom_id]
         try:
             mappings = extract_json(result.result.message.content[0].text)
         except Exception as e:
@@ -155,6 +155,9 @@ def batch_results_to_df(batch, metadata) -> pd.DataFrame:
                     "cik": cik,
                     "accessionNumber": accessionNumber,
                     "prefix": prefix,
+                    "form": form,
+                    "endDate": endDate,
+                    "units": units,
                     "standardLabel": item["standard_label"],
                     "keyStatementRole": item["statement"],
                     "conceptName": concept_entry["concept"],
@@ -176,7 +179,7 @@ if __name__ == "__main__":
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
     conn = ddb.connect(db_path)
     system_prompt = build_system_prompt()
-    filings_df = conn.execute(load_query('FilingsForClaude')).fetch_df()[:300]  # limit for testing; remove slicing for full run
+    filings_df = conn.execute(load_query('FilingsForClaude')).fetch_df()  # limit for testing; remove slicing for full run
 
     if filings_df.empty:
         print("No new filings to process.")

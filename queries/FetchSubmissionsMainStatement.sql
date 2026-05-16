@@ -18,7 +18,7 @@ FROM
     AND ctht."relativeDepth" = 0
     AND ctht.highestParent = TRUE
 WHERE
-    fd.prefix = ?
+    
     AND fd.cik = ?
     AND fd.accessionNumber = ?
     AND (
@@ -38,6 +38,7 @@ WHERE
     AND fd.units = ?
     AND fd.isPrimarySubmissionDateRange = TRUE
     and fd.isPrimaryUnits = TRUE
+    AND fd.isPrimaryPrefix = TRUE
 ORDER BY
     cth.keyStatementRole,
     cth.ancestor,

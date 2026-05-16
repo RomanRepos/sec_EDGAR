@@ -1,6 +1,8 @@
+
 alter table financialData add column IF NOT EXISTS isStandardPeriodLength boolean;
 alter table financialData add column IF NOT EXISTS isPrimarySubmissionDateRange boolean;
 alter table financialData add column IF NOT EXISTS isPrimaryUnits boolean;
+alter table financialData add column IF NOT EXISTS isPrimaryPrefix boolean;
                                         
 UPDATE financialData   
 Set isStandardPeriodLength = 
@@ -26,23 +28,37 @@ FROM (
 WHERE financialData.rowid = subquery.rid;
 
 UPDATE financialData
-SET isPrimaryUnits = (units = subquery.pirmaryUnits)
+SET isPrimaryUnits = (units = subquery.primaryUnits)
 FROM (
-    SELECT 
+    SELECT
         rowid AS rid,
-        CASE 
-    WHEN list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units) IS NULL 
-        THEN 'Other'
-    WHEN ROW_NUMBER() OVER (
-        PARTITION BY prefix, cik, accessionNumber, endDate, Name
-        ORDER BY list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF'], units)
-    ) = 1 
-        THEN units
-    ELSE NULL
-END AS pirmaryUnits
+        FIRST_VALUE(units) OVER (
+            PARTITION BY prefix, cik, accessionNumber
+            ORDER BY COALESCE(
+                list_position(['USD','EUR','CAD','GBP','JPY','AUD','CNY','KRW','CHF','CNY'], units),
+                999
+            )
+        ) AS primaryUnits
     FROM financialData
 ) AS subquery
-WHERE financialData.rowid = subquery.rid;                 
+WHERE financialData.rowid = subquery.rid;    
+
+
+UPDATE financialData
+SET isPrimaryPrefix = (prefix = subquery.primaryPrefix)
+FROM (
+    SELECT
+        rowid AS rid,
+        FIRST_VALUE(prefix) OVER (
+            PARTITION BY cik, accessionNumber
+            ORDER BY COALESCE(
+                list_position(['us-gaap', 'ifrs-full'], prefix),
+                999
+            )
+        ) AS primaryPrefix
+    FROM financialData
+) AS subquery
+WHERE financialData.rowid = subquery.rid;   
 
 
 CHECKPOINT;

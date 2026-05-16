@@ -17,7 +17,7 @@ with
             AND fd.name = cth.descendant
             AND cth.relativeDepth = 0
             AND cth.highestParent = TRUE
-            AND fd.prefix = ?
+            AND fd.isPrimaryPrefix = TRUE
             AND fd.isPrimarySubmissionDateRange = TRUE
             and fd.isPrimaryUnits = TRUE
             inner join (
@@ -62,7 +62,7 @@ with
             AND fd.accessionNumber = cth.accessionNumber
             AND fd.name = cth.descendant
             AND cth.relativeDepth = 1
-            AND fd.prefix = ?
+            AND fd.isPrimaryPrefix = TRUE
             AND fd.isPrimarySubmissionDateRange = TRUE
             and fd.isPrimaryUnits = TRUE
             inner join (
@@ -139,7 +139,7 @@ with
             tlp.form,
             tlp.endDate
         HAVING
-            count(*) < 3
+            count(*) = 3
         ORDER BY
             tlp.prefix,
             tlp.cik,
@@ -147,14 +147,16 @@ with
             tlp.form,
             tlp.endDate
     )
+
+
 SELECT distinct
-    --cth."keyStatementRole" AS financialStatement,
-    --cth."ancestor",
-    cth.descendant,
-    --cth."arcWeight",
-    --cth.relativeDepth,
+    subs.prefix,
     subs.cik,
-    subs.accessionNumber
+    subs.accessionNumber,
+    subs.form,
+    subs.endDate,
+    subs.units,
+    fd.name as conceptName
 FROM
     financialData fd
     INNER JOIN submissions s ON fd.cik = s.cik
@@ -163,11 +165,6 @@ FROM
     INNER JOIN calculationTaxonomyHierarchy cth ON cth.cik = fd.cik
     AND cth.accessionNumber = fd.accessionNumber
     AND fd.name = cth.descendant
-    LEFT OUTER JOIN calculationTaxonomyHierarchy ctht ON ctht.cik = fd.cik
-    AND ctht."accessionNumber" = fd."accessionNumber"
-    AND cth.ancestor = ctht.ancestor
-    AND ctht."relativeDepth" = 0
-    AND ctht.highestParent = TRUE
     INNER JOIN subs ON fd.prefix = subs.prefix
     AND fd.cik = subs.cik
     AND fd.accessionNumber = subs.accessionNumber
@@ -186,8 +183,9 @@ FROM
         'StatementOfCashFlows'
     )
     AND fd.isPrimarySubmissionDateRange = TRUE
-    and fd.isPrimaryUnits = TRUE
-    and fd.units = subs.units ANTI
+    AND fd.isPrimaryUnits = TRUE
+    AND fd.isPrimaryPrefix = TRUE
+    AND fd.units = subs.units ANTI
     JOIN (
         SELECT DISTINCT
             cik,
