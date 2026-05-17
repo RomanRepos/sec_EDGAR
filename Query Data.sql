@@ -148,6 +148,23 @@ GROUP BY cik, accessionNumber
 having count(*)>1
 order by cik, accessionNumber;
 
+select conceptName, sign, count(*) as count
+from standardizedConcepts
+group by conceptName, sign
+qualify count(distinct sign) over (partition by conceptName) > 1
+order by conceptName, sign;
+
+
+select count(*) from (select distinct 
+    subsTbl.prefix,
+    subsTbl.cik,
+    subsTbl.accessionNumber,
+    subsTbl.form,
+    subsTbl.endDate,
+    subsTbl.units
+     from keyStatementsValuesAndHierarchy subsTbl
+where allKeyStatementsPresent = TRUE and rollUpIsAccurate = TRUE);
+
 
 /*
 --Remove duplicate rows from hierarchy table that may have been caused by multiple statement roles per link role. We want to keep the one with the greatest relative depth to ensure we are capturing the most specific role for each link role.

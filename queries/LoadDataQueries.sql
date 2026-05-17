@@ -257,5 +257,14 @@ FROM
     );
 
 
+CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
+            prefix VARCHAR,
+            cik INTEGER,
+            accessionNumber VARCHAR,
+            form VARCHAR,
+            endDate DATE,
+            units VARCHAR
+        );
+
 CHECKPOINT;
 

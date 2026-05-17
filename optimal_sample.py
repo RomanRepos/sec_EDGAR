@@ -34,6 +34,15 @@ def populate_optimal_sample_table(conn, query_name:str, concept_top_pct:float=0.
     pbar.close()
 
     result_df = pd.DataFrame(selected, columns=['prefix', 'cik', 'accessionNumber', 'form', 'endDate', 'units'])
+
+    existing_sample = conn.execute("SELECT prefix, cik, accessionNumber, form, " \
+    "endDate, units FROM highConceptCoverageSubmissionsSample").fetch_df()
+
+    merged = result_df.merge(existing_sample, how='left', indicator=True)
+    result_df = merged[merged['_merge'] == 'left_only'].drop(columns='_merge')
+
+
+
     cols = ", ".join(result_df.columns)
     conn.execute(f"""
         INSERT INTO highConceptCoverageSubmissionsSample ({cols}) SELECT {cols} FROM result_df;
@@ -51,15 +60,15 @@ if __name__ == "__main__":
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path)
-    conn.execute("""
-        CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
-            prefix VARCHAR,
-            cik VARCHAR,
-            accessionNumber VARCHAR,
-            form VARCHAR,
-            endDate DATE,
-            units VARCHAR
-        ); CHECKPOINT;
-    """)
+    #conn.execute("""
+        #CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
+            #prefix VARCHAR,
+            #cik VARCHAR,
+            #accessionNumber VARCHAR,
+            #form VARCHAR,
+            #endDate DATE,
+            #units VARCHAR
+        #); CHECKPOINT;
+    #""")
     populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.90)
     conn.close()
