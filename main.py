@@ -78,6 +78,6 @@ if __name__ == "__main__":
     #generate hierarchy for new taxonomy files and insert into db
     create_taxonomy_hierarchy(new_taxonomies_df, conn)
     
-    conn.execute(load_query("KeyStatementsAndHierarchy"))
+    conn.execute(load_query("CreateKeyStatementsAndHierarchyTbl"))
 
     conn.close()

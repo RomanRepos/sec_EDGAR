@@ -168,7 +168,9 @@ SELECT
     cth.arcWeight,
     cth.relativeDepth,
     subs.allKeyStatementsPresent,
-    subs.rollUpIsAccurate
+    subs.rollUpIsAccurate,
+    cth.highestParent,
+    cth.lowestChild
     
 FROM
     financialData fd
@@ -202,4 +204,4 @@ FROM
     AND fd.isPrimaryPrefix = TRUE
     AND fd.units = subs.units;
 
-    checkpoint;
+    CHECKPOINT;

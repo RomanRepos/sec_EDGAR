@@ -81,8 +81,6 @@ GROUP BY tlp.prefix, tlp.units, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endD
 HAVING count(*) = 3
 ORDER BY tlp.prefix, tlp.cik, tlp.accessionNumber, tlp.form, tlp.endDate)
 
-
-
 select count(*) from (
 SELECT
 distinct
@@ -137,6 +135,9 @@ ORDER BY
 ;
 --------------------------------------------------------------------------------
 
+
+
+
 select count(*) from (
 Select distinct * from calculationTaxonomyHierarchy);
 
@@ -155,15 +156,14 @@ qualify count(distinct sign) over (partition by conceptName) > 1
 order by conceptName, sign;
 
 
-select count(*) from (select distinct 
-    subsTbl.prefix,
-    subsTbl.cik,
-    subsTbl.accessionNumber,
-    subsTbl.form,
-    subsTbl.endDate,
-    subsTbl.units
+select
+
+    count(distinct cik) as numFilers
+    
      from keyStatementsValuesAndHierarchy subsTbl
-where allKeyStatementsPresent = TRUE and rollUpIsAccurate = TRUE);
+where allKeyStatementsPresent = TRUE and rollUpIsAccurate = TRUE
+AND highestParent = TRUE
+;
 
 
 /*

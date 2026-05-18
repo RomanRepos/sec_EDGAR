@@ -72,10 +72,10 @@ if __name__ == "__main__":
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
     #799235	0001376474-17-000241	us-gaap	2017-06-30	10-Q	USD
     conn = ddb.connect(db_path)
-    CIK = 799235
-    ACCESSION = "0001376474-17-000241"
-    FORM = "10-Q"
-    END_DATE = "2017-06-30"
+    CIK = 1750
+    ACCESSION = "0001047469-11-006302"
+    FORM = "10-K"
+    END_DATE = "2011-05-31"
     PREFIX = "us-gaap"
     UNITS = "USD"
     yaml_str = filing_to_yaml(conn, 'FetchSubmissionsMainStatement', PREFIX, CIK, ACCESSION, FORM, END_DATE, UNITS)
