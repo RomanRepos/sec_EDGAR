@@ -159,6 +159,8 @@ SELECT
     subs.cik,
     subs.accessionNumber,
     subs.form,
+    fd.frame,
+    fd.startDate,
     subs.endDate,
     subs.units,
     cth.keyStatementRole,
