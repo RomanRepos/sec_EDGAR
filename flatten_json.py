@@ -48,7 +48,7 @@ def flatten(conn_arg, batch_size_arg):
         accessionNumber VARCHAR,
         value DOUBLE         -- Matches pandas float64
     );
-    CHECKPOINT;""")
+    """)
 
     count=0
     # 2. Iterate until all chunks are pulled
