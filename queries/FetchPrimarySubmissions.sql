@@ -58,4 +58,3 @@ ORDER BY
     ksvh.keyStatementRole,
     ksvh.descendant,
     uhp.absoluteDepth
-LIMIT 300;
