@@ -80,7 +80,7 @@ def create_taxonomy_hierarchy(df, conn):
                         'descendant': child,
                         'relativeDepth': 0,
                         'arcOrder': 0,
-                        'arcWeight': 0,
+                        'arcWeight': 1,
                         'highestParent': False,
                         'lowestChild': child not in has_children,
                         'keyStatementRole': key_statement_role
@@ -95,7 +95,7 @@ def create_taxonomy_hierarchy(df, conn):
                         'descendant': top_level_node,
                         'relativeDepth': 0,
                         'arcOrder': 0,
-                        'arcWeight': 0,
+                        'arcWeight': 1,
                         'highestParent': True,
                         'lowestChild': False,
                         'keyStatementRole': key_statement_role

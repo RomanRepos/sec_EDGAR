@@ -36,17 +36,17 @@ FROM
     AND ksvh.descendant = uhp.descendant
     ANTI JOIN (SELECT DISTINCT cik, accessionNumber from standardizedConcepts) scs
     on scs.cik = ksvh.cik and scs.accessionNumber = ksvh.accessionNumber
+    
+
 ANTI JOIN 
     standardMetrics sm on
     ksvh.cik = sm.cik and ksvh.accessionNumber = sm.accessionNumber
     and ksvh.endDate = sm.endDate and ksvh.units = sm.units
     and ksvh.form = sm.form
-
 WHERE
     (ksvh.relativeDepth = 1 or (ksvh.relativeDepth=0 and ksvh.highestParent=TRUE))
-
---AND ksvh.cik = 1102934
---AND ksvh.accessionNumber = '0001102934-21-000007'
+--AND ksvh.cik = 1840292
+--AND ksvh.accessionNumber = '0001840292-23-000015'
 
 ORDER BY 
     ksvh.prefix,
@@ -58,4 +58,4 @@ ORDER BY
     ksvh.keyStatementRole,
     ksvh.descendant,
     uhp.absoluteDepth
-LIMIT 300
+LIMIT 300;
