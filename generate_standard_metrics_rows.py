@@ -20,6 +20,11 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
     grouped = df.groupby(submission_group)
     signed_labels = {"Gross Profit", "Operating Income", "Pre-tax Income", "Net Income", "Retained Earnings", "Operating Cash Flow"}
     label_keys = ['standardLabel', 'standardLabelID']
+
+    def _jaccard(a, b):
+        union = a | b
+        return len(a & b) / len(union) if union else 0.0
+
     for (prefix, cik, accession_number, form, end_date, units), group in tqdm(grouped, desc="Processing Submissions", unit="submission",
                      bar_format='{desc}: {percentage:.2f}% |{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'):
         merged = pd.DataFrame()
@@ -31,29 +36,46 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
         )
 
         #Next steps determine which concepts will be allocated to which standard metrics
-        merged = merged[(
-            merged.groupby(label_keys)['descendant'].transform('count') ==
-            merged['conceptsPerStandardLabel']) & 
-            (merged.groupby(label_keys)['absoluteDepth'].transform('nunique') == 1)
-        ] #count of available components is the same as count of componets in the sample and they are at the same hierarchy depth.
+        merged = merged[merged.groupby(label_keys)['absoluteDepth'].transform('nunique') == 1] # Available components per standardLabelID are at the same hierarchy depth.
+
+        # Per standardLabel, keep the standardLabelID whose concept set most closely matches the actual descendants
+        label_id_sets = (
+            merged.groupby(label_keys)['descendant']
+            .apply(set)
+            .reset_index(name='descendant_set')
+        )
+        label_id_sets['standardLabelID_set'] = label_id_sets['standardLabelID'].apply(
+            lambda s: set(s.split('|'))
+        )
+        label_id_sets['similarity'] = label_id_sets.apply(
+            lambda r: _jaccard(r['descendant_set'], r['standardLabelID_set']), axis=1
+        )
+        
+        best_ids = label_id_sets[
+            label_id_sets['similarity'] == label_id_sets.groupby('standardLabel')['similarity'].transform('max')
+        ][label_keys]
+        merged = merged.merge(best_ids, on=label_keys, how='inner')
+
         merged = merged.groupby(
         label_keys + ['confidenceScore', 'conceptsPerStandardLabel', 'absoluteDepth'],
             as_index=False
         )['value'].sum()
+
         merged = merged[
             merged.groupby('standardLabel')['confidenceScore'].transform('max') ==
             merged['confidenceScore']
         ].reset_index(drop=True)  #select sample standard concepts with highest confidence score
+
         merged = merged[ #select sample standard concepts with highest number of componentes available.
             merged.groupby('standardLabel')['conceptsPerStandardLabel'].transform('max') ==
             merged['conceptsPerStandardLabel']
         ].reset_index(drop=True)
         
-        merged = merged[ #select standard concept with min hierarchy depth
-            merged.groupby('standardLabel')['absoluteDepth'].transform('min') ==
-            merged['absoluteDepth']
-        ].reset_index(drop=True)
-        merged = merged.loc[merged.groupby('standardLabel')['value'].idxmax()].copy()
+        #merged = merged[ #select standard concept with min hierarchy depth
+            #merged.groupby('standardLabel')['absoluteDepth'].transform('min') ==
+            #merged['absoluteDepth']
+        #].reset_index(drop=True)
+        merged = merged.loc[merged['value'].abs().groupby(merged['standardLabel']).idxmax()].copy()
         
         merged['value'] = merged.apply(
             lambda r: r['value'] if r['standardLabel'] in signed_labels else abs(r['value']),

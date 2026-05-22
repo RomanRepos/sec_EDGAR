@@ -1,30 +1,13 @@
-SET
-    VARIABLE facts_path = '{{facts_path_param}}';
+select sm.* from standardMetrics sm
+inner join 
+(select distinct cik, accessionNumber, prefix, form, endDate from keyStatementsValuesAndHierarchy where rollUpIsAccurate = TRUE and allKeyStatementsPresent = TRUE)  as safeStatements
+on safeStatements.cik = sm.cik  
+and safeStatements.accessionNumber = sm.accessionNumber
+and sm.prefix = safeStatements.prefix
+and sm.form = safeStatements.form
+and sm.endDate = safeStatements.endDate
+where sm.accessionNumber = '0001445866-18-001247'
+limit 10000;
 
-
-
-SET
-    VARIABLE submissions_path = '{{submissions_path_param}}';
-
-SET
-    VARIABLE standard_line_items_path = '{{standard_line_items_path_param}}';
-
-SET
-    VARIABLE fact_path_no_json = REPLACE('{{facts_path_param}}', '*.json', '');
-
-
-CREATE OR REPLACE TABLE standardLineItems AS
-SELECT
-    row_number() OVER () AS id,
-    standard_label,
-    statement :: VARCHAR [] AS statement,
-    semantic_description,
-    TRUE AS isActive
-FROM
-    read_json_auto(
-        getvariable('standard_line_items_path')
-    );
-
-
-CHECKPOINT;
-
+DELETE from standardMetrics
+where accessionNumber = '0001445866-18-001247';
