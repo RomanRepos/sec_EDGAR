@@ -20,6 +20,15 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
     grouped = df.groupby(submission_group)
     signed_labels = {"Gross Profit", "Operating Income", "Pre-tax Income", "Net Income", "Retained Earnings", "Operating Cash Flow"}
     label_keys = ['standardLabel', 'standardLabelID']
+    _exempt_from_min_concepts = {
+            'Intangible Assets', 'Total Debt', 'Cash and Cash Equivalents',
+            'Interest Income', 'Interest Expense', 'Stock-based Compensation',
+            'Operating Expenses', 'Research and Development Expenses', 'Total Current Assets',
+            'Total Current Liabilities', 'Accounts Payable', 'Current Portion of Long-term Debt',
+            'Depreciation and Amortization', 'Selling, General and Administrative Expenses', 'Long-term Debt',
+            'Capital Expenditures', 'Accounts Receivable', 'Short-term Borrowings', 'Dividends Paid', 'Inventory',
+            'Property, Plant and Equipment, Net'
+        }
 
     def _jaccard(a, b):
         union = a | b
@@ -44,18 +53,20 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
             .apply(set)
             .reset_index(name='descendant_set')
         )
-        label_id_sets['standardLabelID_set'] = label_id_sets['standardLabelID'].apply(
-            lambda s: set(s.split('|'))
-        )
-        label_id_sets['similarity'] = label_id_sets.apply(
-            lambda r: _jaccard(r['descendant_set'], r['standardLabelID_set']), axis=1
-        )
+        try:
+            label_id_sets['standardLabelID_set'] = label_id_sets['standardLabelID'].apply(
+                lambda s: set(s.split('|'))
+            )
+            label_id_sets['similarity'] = label_id_sets.apply(
+                lambda r: _jaccard(r['descendant_set'], r['standardLabelID_set']), axis=1
+            )
+        except:
+            continue
         
         best_ids = label_id_sets[
             label_id_sets['similarity'] == label_id_sets.groupby('standardLabel')['similarity'].transform('max')
         ][label_keys]
         merged = merged.merge(best_ids, on=label_keys, how='inner')
-
         merged = merged.groupby(
         label_keys + ['confidenceScore', 'conceptsPerStandardLabel', 'absoluteDepth'],
             as_index=False
@@ -66,9 +77,13 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
             merged['confidenceScore']
         ].reset_index(drop=True)  #select sample standard concepts with highest confidence score
 
-        merged = merged[ #select sample standard concepts with highest number of componentes available.
-            merged.groupby('standardLabel')['conceptsPerStandardLabel'].transform('max') ==
-            merged['conceptsPerStandardLabel']
+        merged = merged[ #Assign concept to a standard label with max number of components for lower level concepts and min number of components for top level concepts.
+            (merged['standardLabel'].isin(_exempt_from_min_concepts) &
+             (merged.groupby(label_keys)['conceptsPerStandardLabel'].transform('max') ==
+              merged['conceptsPerStandardLabel'])) |
+            (~merged['standardLabel'].isin(_exempt_from_min_concepts) &
+             (merged.groupby(label_keys)['conceptsPerStandardLabel'].transform('min') ==
+              merged['conceptsPerStandardLabel']))
         ].reset_index(drop=True)
         
         #merged = merged[ #select standard concept with min hierarchy depth

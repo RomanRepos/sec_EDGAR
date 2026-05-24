@@ -37,16 +37,17 @@ FROM
     ANTI JOIN (SELECT DISTINCT cik, accessionNumber from standardizedConcepts) scs
     on scs.cik = ksvh.cik and scs.accessionNumber = ksvh.accessionNumber
     
-
+/*
 ANTI JOIN 
     standardMetrics sm on
     ksvh.cik = sm.cik and ksvh.accessionNumber = sm.accessionNumber
     and ksvh.endDate = sm.endDate and ksvh.units = sm.units
     and ksvh.form = sm.form
+*/
 WHERE
     (ksvh.relativeDepth = 1 or (ksvh.relativeDepth=0 and ksvh.highestParent=TRUE))
 --AND ksvh.cik = 1840292
---AND ksvh.accessionNumber = '0001445866-18-001247'
+AND ksvh.accessionNumber = '0001564590-21-009205'
 
 ORDER BY 
     ksvh.prefix,
@@ -57,4 +58,7 @@ ORDER BY
     ksvh.units,
     ksvh.keyStatementRole,
     ksvh.descendant,
-    uhp.absoluteDepth
+    uhp.absoluteDepth;
+
+select * from financialData
+where accessionNumber = '0001628280-16-012476'

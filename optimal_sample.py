@@ -60,15 +60,15 @@ if __name__ == "__main__":
     db_path = os.path.join(PROJECT_ROOT_PARENT, "Data", "secFilingsDb.duckdb")
 
     conn = ddb.connect(db_path)
-    #conn.execute("""
-        #CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
-            #prefix VARCHAR,
-            #cik VARCHAR,
-            #accessionNumber VARCHAR,
-            #form VARCHAR,
-            #endDate DATE,
-            #units VARCHAR
-        #); CHECKPOINT;
-    #""")
-    populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.90)
+    conn.execute("""
+        CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
+            prefix VARCHAR,
+            cik VARCHAR,
+            accessionNumber VARCHAR,
+            form VARCHAR,
+            endDate DATE,
+            units VARCHAR
+        ); CHECKPOINT;
+    """)
+    populate_optimal_sample_table(conn, 'AllSafeSubmissionsAndConcepts', concept_top_pct=0.93)
     conn.close()
