@@ -34,9 +34,11 @@ FROM
     AND ksvh.accessionNumber = uhp.accessionNumber
     AND ksvh.keyStatementRole = uhp.keyStatementRole
     AND ksvh.descendant = uhp.descendant
+
+    /*
     ANTI JOIN (SELECT DISTINCT cik, accessionNumber from standardizedConcepts) scs
     on scs.cik = ksvh.cik and scs.accessionNumber = ksvh.accessionNumber
-    
+    */
 
 ANTI JOIN 
     standardMetrics sm on
