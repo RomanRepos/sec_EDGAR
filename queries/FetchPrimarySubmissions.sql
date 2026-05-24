@@ -59,6 +59,3 @@ ORDER BY
     ksvh.keyStatementRole,
     ksvh.descendant,
     uhp.absoluteDepth;
-
-select * from financialData
-where accessionNumber = '0001628280-16-012476'
