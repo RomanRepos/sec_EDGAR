@@ -16,10 +16,10 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
 
 
     submission_group = ['prefix', 'cik', 'accessionNumber', 'form', 'endDate', 'units']
-    submissions_group_plus_lbl = submission_group + ['standardLabel']
+    #submissions_group_plus_lbl = submission_group + ['standardLabel']
     grouped = df.groupby(submission_group)
     signed_labels = {"Gross Profit", "Operating Income", "Pre-tax Income", "Net Income", "Retained Earnings", "Operating Cash Flow"}
-    label_keys = ['standardLabel', 'standardLabelID']
+    label_keys = ['standardLabel', 'standardLabelID', 'keyStatementRole']
     _exempt_from_min_concepts = {
             'Intangible Assets', 'Total Debt', 'Cash and Cash Equivalents',
             'Interest Income', 'Interest Expense', 'Stock-based Compensation',
@@ -46,7 +46,8 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
 
         #Next steps determine which concepts will be allocated to which standard metrics
         merged = merged[merged.groupby(label_keys)['absoluteDepth'].transform('nunique') == 1] # Available components per standardLabelID are at the same hierarchy depth.
-
+        
+        
         # Per standardLabel, keep the standardLabelID whose concept set most closely matches the actual descendants
         label_id_sets = (
             merged.groupby(label_keys)['descendant']
@@ -67,16 +68,18 @@ def generate_standard_metrics_rows(conn, primary_submissions_query_name:str, sta
             label_id_sets['similarity'] == label_id_sets.groupby('standardLabel')['similarity'].transform('max')
         ][label_keys]
         merged = merged.merge(best_ids, on=label_keys, how='inner')
+         
         merged = merged.groupby(
         label_keys + ['confidenceScore', 'conceptsPerStandardLabel', 'absoluteDepth'],
             as_index=False
         )['value'].sum()
-
+       
+        
         merged = merged[
             merged.groupby('standardLabel')['confidenceScore'].transform('max') ==
             merged['confidenceScore']
         ].reset_index(drop=True)  #select sample standard concepts with highest confidence score
-
+       
         merged = merged[ #Assign concept to a standard label with max number of components for lower level concepts and min number of components for top level concepts.
             (merged['standardLabel'].isin(_exempt_from_min_concepts) &
              (merged.groupby(label_keys)['conceptsPerStandardLabel'].transform('max') ==
