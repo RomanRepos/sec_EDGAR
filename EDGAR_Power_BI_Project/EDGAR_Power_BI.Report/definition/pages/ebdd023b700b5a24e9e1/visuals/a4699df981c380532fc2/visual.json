@@ -1,0 +1,117 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a4699df981c380532fc2",
+  "position": {
+    "x": 621.64948453608247,
+    "y": 167.01030927835052,
+    "z": 0,
+    "height": 280.20618556701032,
+    "width": 658.14432989690715,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "secFilingsDb   main   standardMetrics"
+                    }
+                  },
+                  "Property": "endDate"
+                }
+              },
+              "queryRef": "secFilingsDb   main   standardMetrics.endDate",
+              "nativeQueryRef": "endDate",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "secFilingsDb   main   standardMetrics"
+                        }
+                      },
+                      "Property": "Revenue"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(secFilingsDb   main   standardMetrics.Revenue)",
+              "nativeQueryRef": "Sum of Revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "secFilingsDb   main   standardMetrics"
+                  }
+                },
+                "Property": "endDate"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9c5b128315d7948e3bad",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "secFilingsDb   main   standardMetrics"
+                  }
+                },
+                "Property": "Revenue"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "247b2ff093baffa16882",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "secFilingsDb   main   standardMetrics"
+              }
+            },
+            "Property": "endDate"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

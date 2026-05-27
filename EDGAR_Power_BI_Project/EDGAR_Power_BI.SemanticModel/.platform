@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "EDGAR_Power_BI"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "492426e3-952f-4693-8b1e-122f324fc8eb"
+  }
+}

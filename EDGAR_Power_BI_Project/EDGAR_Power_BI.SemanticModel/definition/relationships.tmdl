@@ -1,0 +1,4 @@
+relationship AutoDetected_4b32bcc9-0ef0-436b-98ff-3fe8ec7694ef
+	fromColumn: 'secFilingsDb   main   standardMetrics'.cik
+	toColumn: 'secFilingsDb   main   companyDimension'.cik
+

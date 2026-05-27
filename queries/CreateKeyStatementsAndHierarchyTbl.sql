@@ -1,3 +1,6 @@
+SET max_temp_directory_size = '50GB';
+SET threads = 4;
+SET memory_limit = '24GB';
 CREATE OR REPLACE TABLE keyStatementsValuesAndHierarchy AS
 
 with
@@ -37,6 +40,7 @@ with
             INNER JOIN submissions s ON fd.cik = s.cik
             AND fd.accessionNumber = s.accessionNumber
             AND s.reportDate = fd.endDate
+            AND s.form in ('10-K', '20-F', '40-F', '10-K/A', '20-F/A', '40-F/A', '10-Q', '10-Q/A')
         GROUP BY
             fd.prefix,
             fd.units,
@@ -82,6 +86,7 @@ with
             INNER JOIN submissions s ON fd.cik = s.cik
             AND fd.accessionNumber = s.accessionNumber
             AND s.reportDate = fd.endDate
+            AND s.form in ('10-K', '20-F', '40-F', '10-K/A', '20-F/A', '40-F/A', '10-Q', '10-Q/A')
             INNER JOIN calculationTaxonomyHierarchy ctht ON ctht.cik = cth.cik
             AND ctht."accessionNumber" = cth."accessionNumber"
             AND cth.ancestor = ctht.ancestor
@@ -179,6 +184,7 @@ FROM
     INNER JOIN submissions s ON fd.cik = s.cik
     AND fd.accessionNumber = s.accessionNumber
     AND s.reportDate = fd.endDate
+    AND s.form in ('10-K', '20-F', '40-F', '10-K/A', '20-F/A', '40-F/A', '10-Q', '10-Q/A')
     INNER JOIN calculationTaxonomyHierarchy cth ON cth.cik = fd.cik
     AND cth.accessionNumber = fd.accessionNumber
     AND fd.name = cth.descendant

@@ -1,0 +1,193 @@
+table 'secFilingsDb   main   companyDimension'
+	lineageTag: 6ce05292-c3fa-4898-8899-bb46cf847e85
+
+	column cik
+		dataType: int64
+		formatString: 0
+		lineageTag: d6207181-1bc5-434a-afed-f2cc751a7d0c
+		summarizeBy: none
+		sourceColumn: cik
+
+		annotation SummarizationSetBy = Automatic
+
+	column entityType
+		dataType: string
+		lineageTag: 20031939-9206-47f8-9f6c-dac7e8ade7df
+		summarizeBy: none
+		sourceColumn: entityType
+
+		annotation SummarizationSetBy = Automatic
+
+	column entityName
+		dataType: string
+		lineageTag: 0683ec82-1242-4dd0-b05e-adc328a488e8
+		summarizeBy: none
+		sourceColumn: entityName
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 04aa9c8a-0c69-4c34-b552-82382d9de661
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscalYearEnd
+		dataType: string
+		lineageTag: e480ee62-aff3-4ad4-bddd-139b20ce1cdb
+		summarizeBy: none
+		sourceColumn: fiscalYearEnd
+
+		annotation SummarizationSetBy = Automatic
+
+	column stateOfIncorporation
+		dataType: string
+		lineageTag: 737b92cc-6835-440f-80b6-816c2fe799c5
+		summarizeBy: none
+		sourceColumn: stateOfIncorporation
+
+		annotation SummarizationSetBy = Automatic
+
+	column isLatest
+		dataType: string
+		lineageTag: 66be11b5-7842-4e34-8e10-e37a4d83337e
+		summarizeBy: none
+		sourceColumn: isLatest
+
+		annotation SummarizationSetBy = Automatic
+
+	column firstTicker
+		dataType: string
+		lineageTag: cca6bce4-4b84-4853-a0fe-859885a460c8
+		summarizeBy: none
+		sourceColumn: firstTicker
+
+		annotation SummarizationSetBy = Automatic
+
+	column firstExchange
+		dataType: string
+		lineageTag: e862c844-9d7c-4f10-87c2-9c0bf73bbdfe
+		summarizeBy: none
+		sourceColumn: firstExchange
+
+		annotation SummarizationSetBy = Automatic
+
+	column sic
+		dataType: int64
+		formatString: 0
+		lineageTag: 40264e21-fc4c-4db2-a101-aa3883f66713
+		summarizeBy: none
+		sourceColumn: sic
+
+		annotation SummarizationSetBy = Automatic
+
+	column sicDescription
+		dataType: string
+		lineageTag: 222e64f6-3a51-4366-a63f-abb25814462e
+		summarizeBy: none
+		sourceColumn: sicDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column street1
+		dataType: string
+		lineageTag: 62a7a030-7d67-4c04-8ce0-a8457e859e1d
+		summarizeBy: none
+		sourceColumn: street1
+
+		annotation SummarizationSetBy = Automatic
+
+	column street2
+		dataType: string
+		lineageTag: a594632c-d12f-4ca6-997a-13ad889fe75b
+		summarizeBy: none
+		sourceColumn: street2
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: c3fab6cb-cd8c-4ec7-aec8-f67a1d1dca18
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column stateOrCountry
+		dataType: string
+		lineageTag: 909cdde5-96d4-402a-b2b9-f4ae39c6217b
+		summarizeBy: none
+		sourceColumn: stateOrCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	column zipCode
+		dataType: string
+		lineageTag: 9fe927c5-7cd2-42bb-86b6-a42090b94e1d
+		summarizeBy: none
+		sourceColumn: zipCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column stateOrCountryDescription
+		dataType: string
+		lineageTag: 0aa2818b-69c4-411f-a9f2-ac5f5346ef52
+		summarizeBy: none
+		sourceColumn: stateOrCountryDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column isForeignLocation
+		dataType: string
+		lineageTag: 240621a9-3dc8-46cc-86f5-c0794bb0662c
+		summarizeBy: none
+		sourceColumn: isForeignLocation
+
+		annotation SummarizationSetBy = Automatic
+
+	column foreignStateTerritory
+		dataType: string
+		lineageTag: 40f3cfa1-cb0b-433e-bd8e-4fd1dcb1fc00
+		summarizeBy: none
+		sourceColumn: foreignStateTerritory
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: e2b81e10-cdcc-43a9-9aae-87d46060505f
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column countryCode
+		dataType: string
+		lineageTag: fae0a2d7-f404-4f01-9916-cd769507848e
+		summarizeBy: none
+		sourceColumn: countryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingested_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36b86baf-98c7-4a72-862d-1e4ea6cadc71
+		summarizeBy: none
+		sourceColumn: ingested_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'secFilingsDb   main   companyDimension' = m
+		mode: import
+		source =
+				let
+				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
+				    companyDimension_main_secFilingsDb = Source{[Item="companyDimension",Schema="main",Catalog="secFilingsDb"]}[Data]
+				in
+				    companyDimension_main_secFilingsDb
+
+	annotation PBI_ResultType = Table
+

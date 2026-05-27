@@ -9,7 +9,7 @@ SELECT
 FROM
 
     standardizedConcepts sc
-WHERE sc.confidenceScore > 1
+WHERE sc.confidenceScore = 3
 QUALIFY NOT list_contains(list(sc.sign) OVER 
 (PARTITION BY sc.conceptName, sc.accessionNumber, sc.keyStatementRole),
     '-')

@@ -49,7 +49,7 @@ ANTI JOIN
 WHERE
     (ksvh.relativeDepth = 1 or (ksvh.relativeDepth=0 and ksvh.highestParent=TRUE))
 --AND ksvh.cik = 1840292
---AND ksvh.accessionNumber = '0001564590-21-009205'
+--AND ksvh.accessionNumber = '0000950170-25-034843'
 
 ORDER BY 
     ksvh.prefix,
@@ -60,4 +60,5 @@ ORDER BY
     ksvh.units,
     ksvh.keyStatementRole,
     ksvh.descendant,
-    uhp.absoluteDepth;
+    uhp.absoluteDepth
+;

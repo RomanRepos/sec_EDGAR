@@ -1,0 +1,416 @@
+table 'secFilingsDb   main   standardMetrics'
+	lineageTag: f5354aaa-aafe-440b-9cf7-498b60a64149
+
+	column prefix
+		dataType: string
+		lineageTag: 9bbbd9fc-9f86-4655-bc09-5f35376a1f90
+		summarizeBy: none
+		sourceColumn: prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column cik
+		dataType: int64
+		formatString: 0
+		lineageTag: e1f4ff5a-b955-4d1c-9290-1d2556a88f47
+		summarizeBy: none
+		sourceColumn: cik
+
+		annotation SummarizationSetBy = Automatic
+
+	column accessionNumber
+		dataType: string
+		lineageTag: 896b9bab-59c6-45e1-8628-1eb6b2a16b40
+		summarizeBy: none
+		sourceColumn: accessionNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column form
+		dataType: string
+		lineageTag: 3850b3d0-d1cb-4af7-b907-1d98e780dd26
+		summarizeBy: none
+		sourceColumn: form
+
+		annotation SummarizationSetBy = Automatic
+
+	column endDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b52546d0-159f-4e77-9ddb-a16d091c80ee
+		summarizeBy: none
+		sourceColumn: endDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column units
+		dataType: string
+		lineageTag: 6a76f1d7-215a-45ec-bac5-b5c68440bdc3
+		summarizeBy: none
+		sourceColumn: units
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		lineageTag: c0e80480-2c9b-41b4-aefc-7da50e5faac9
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Cost of Revenue'
+		dataType: double
+		lineageTag: a37ed9d3-152f-494c-8caa-3d55dd52212c
+		summarizeBy: sum
+		sourceColumn: Cost of Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gross Profit'
+		dataType: double
+		lineageTag: 00f18b7b-23ad-49bc-955b-7424ef7495f5
+		summarizeBy: sum
+		sourceColumn: Gross Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Research and Development Expenses'
+		dataType: double
+		lineageTag: 464a446f-1887-4a8d-9b99-ae8a72acf5d0
+		summarizeBy: sum
+		sourceColumn: Research and Development Expenses
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Selling, General and Administrative Expenses'
+		dataType: double
+		lineageTag: 34eaf91f-5d89-4355-b14e-b923a71cc871
+		summarizeBy: sum
+		sourceColumn: Selling, General and Administrative Expenses
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Operating Expenses'
+		dataType: double
+		lineageTag: 43e449c3-6199-4f5a-9263-d6b7c72009b9
+		summarizeBy: sum
+		sourceColumn: Operating Expenses
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Operating Income'
+		dataType: double
+		lineageTag: dc40fa35-0903-4582-810b-bc80d25f18b9
+		summarizeBy: sum
+		sourceColumn: Operating Income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Interest Expense'
+		dataType: double
+		lineageTag: f148a8b9-870f-419d-97c3-89d4fcc31f58
+		summarizeBy: sum
+		sourceColumn: Interest Expense
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Interest Income'
+		dataType: double
+		lineageTag: 96dd392a-bfd2-464f-9786-17194add9a53
+		summarizeBy: sum
+		sourceColumn: Interest Income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Pre-tax Income'
+		dataType: double
+		lineageTag: 594687ac-715f-43d4-b3f5-1b728254cc7a
+		summarizeBy: sum
+		sourceColumn: Pre-tax Income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Income Tax Expense'
+		dataType: double
+		lineageTag: 05af5d17-3fd3-4bd3-a1dc-2c5f10005d8e
+		summarizeBy: sum
+		sourceColumn: Income Tax Expense
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net Income'
+		dataType: double
+		lineageTag: 8e4c3368-718a-4d02-9696-9afc74742133
+		summarizeBy: sum
+		sourceColumn: Net Income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Cash and Cash Equivalents'
+		dataType: double
+		lineageTag: b94eb0ad-f440-4300-a7a4-818d888e1898
+		summarizeBy: sum
+		sourceColumn: Cash and Cash Equivalents
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Accounts Receivable'
+		dataType: double
+		lineageTag: e615f04b-730e-423c-adb6-04a4acd8a18f
+		summarizeBy: sum
+		sourceColumn: Accounts Receivable
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Inventory
+		dataType: double
+		lineageTag: c316257a-ddc5-4389-84ff-1e71d86e5956
+		summarizeBy: sum
+		sourceColumn: Inventory
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Current Assets'
+		dataType: double
+		lineageTag: eece8b01-4f53-4d5e-958d-72c826aeba7b
+		summarizeBy: sum
+		sourceColumn: Total Current Assets
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Property, Plant and Equipment, Net'
+		dataType: double
+		lineageTag: c98f4530-dce6-4e38-8867-37aa02eb73d7
+		summarizeBy: sum
+		sourceColumn: Property, Plant and Equipment, Net
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Goodwill
+		dataType: double
+		lineageTag: a488831e-a2b5-4e43-a407-2c0277704038
+		summarizeBy: sum
+		sourceColumn: Goodwill
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Intangible Assets'
+		dataType: double
+		lineageTag: da4905fb-1002-4d8a-bb9b-9c1bd8fabbab
+		summarizeBy: sum
+		sourceColumn: Intangible Assets
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Assets'
+		dataType: double
+		lineageTag: f1628cee-fe7c-41fc-a18b-c52deb0a6752
+		summarizeBy: sum
+		sourceColumn: Total Assets
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Accounts Payable'
+		dataType: double
+		lineageTag: b7daabb0-a9b7-4dd8-b8e1-8f8a05ba5b9a
+		summarizeBy: sum
+		sourceColumn: Accounts Payable
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Short-term Borrowings'
+		dataType: double
+		lineageTag: 4a88a014-1429-4bd2-90f0-273449dfd88c
+		summarizeBy: sum
+		sourceColumn: Short-term Borrowings
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current Portion of Long-term Debt'
+		dataType: double
+		lineageTag: df48b7b8-981c-4984-8957-cf297aea889c
+		summarizeBy: sum
+		sourceColumn: Current Portion of Long-term Debt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Deferred Revenue'
+		dataType: double
+		lineageTag: ce823275-4988-4898-829d-3a454527b488
+		summarizeBy: sum
+		sourceColumn: Deferred Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Current Liabilities'
+		dataType: double
+		lineageTag: b5cc8acf-496a-4800-95f9-73e9b0adbad8
+		summarizeBy: sum
+		sourceColumn: Total Current Liabilities
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Long-term Debt'
+		dataType: double
+		lineageTag: 34d62c89-4c26-4679-be9d-f495061a3152
+		summarizeBy: sum
+		sourceColumn: Long-term Debt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Debt'
+		dataType: double
+		lineageTag: ef83e76c-44e8-421c-833b-70a4baec57a4
+		summarizeBy: sum
+		sourceColumn: Total Debt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Liabilities'
+		dataType: double
+		lineageTag: 86dce08a-51d1-40c8-ac10-e662456c003c
+		summarizeBy: sum
+		sourceColumn: Total Liabilities
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Retained Earnings'
+		dataType: double
+		lineageTag: 15c66e10-a224-42e0-b921-eaa4beb8f7ca
+		summarizeBy: sum
+		sourceColumn: Retained Earnings
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Equity'
+		dataType: double
+		lineageTag: 9367d111-7d58-4ba8-8b57-6a5519a8e3be
+		summarizeBy: sum
+		sourceColumn: Total Equity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Operating Cash Flow'
+		dataType: double
+		lineageTag: 5d91f829-d8a7-4e2f-ac9c-064e5328e44f
+		summarizeBy: sum
+		sourceColumn: Operating Cash Flow
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Depreciation and Amortization'
+		dataType: double
+		lineageTag: 5b569180-1327-4300-9767-1faa5d0bf6d8
+		summarizeBy: sum
+		sourceColumn: Depreciation and Amortization
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Stock-based Compensation'
+		dataType: double
+		lineageTag: ec184cb5-e312-4add-8cda-34d10c7db994
+		summarizeBy: sum
+		sourceColumn: Stock-based Compensation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Capital Expenditures'
+		dataType: double
+		lineageTag: 781143ce-a866-4010-b5a0-a60759785452
+		summarizeBy: sum
+		sourceColumn: Capital Expenditures
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Dividends Paid'
+		dataType: double
+		lineageTag: bb6fd75b-4f4d-4cf3-9ecb-6d28e38fbec4
+		summarizeBy: sum
+		sourceColumn: Dividends Paid
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'secFilingsDb   main   standardMetrics' = m
+		mode: import
+		source =
+				let
+				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
+				    standardMetrics_main_secFilingsDb = Source{[Item="standardMetrics",Schema="main",Catalog="secFilingsDb"]}[Data]
+				in
+				    standardMetrics_main_secFilingsDb
+
+	annotation PBI_ResultType = Table
+
