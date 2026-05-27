@@ -1,31 +1,20 @@
 
-alter table financialData add column IF NOT EXISTS isStandardPeriodLength boolean;
 alter table financialData add column IF NOT EXISTS isPrimarySubmissionDateRange boolean;
 alter table financialData add column IF NOT EXISTS isPrimaryUnits boolean;
 alter table financialData add column IF NOT EXISTS isPrimaryPrefix boolean;
                                         
-UPDATE financialData   
-Set isStandardPeriodLength = 
+UPDATE financialData fd  
+Set isPrimarySubmissionDateRange = 
     CASE 
         WHEN startDate IS NULL THEN TRUE
         ELSE 
             -- Calculate precise month difference based on days
-            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 11 AND 14) OR 
-            (ceil(date_diff('day', startDate, endDate) / 30.436875) BETWEEN 2 AND 5)
-    END;
+            ((ceil(date_diff('day', fd.startDate, fd.endDate) / 30.436875) BETWEEN 11 AND 14) AND s.form in ('10-K', '20-F', '40-F', '10-K/A', '20-F/A', '40-F/A')) OR 
+            ((ceil(date_diff('day', fd.startDate, fd.endDate) / 30.436875) BETWEEN 2 AND 5) AND s.form in ('10-Q', '10-Q/A'))
+    END
+FROM submissions s
+where s.accessionNumber = fd.accessionNumber;
 
-UPDATE financialData
-SET isPrimarySubmissionDateRange = (subquery.rn = 1)
-FROM (
-    SELECT 
-        rowid AS rid, -- Hidden unique ID provided by DuckDB
-        ROW_NUMBER() OVER (
-            PARTITION BY prefix, units, cik, accessionNumber, endDate, Name 
-            ORDER BY isStandardPeriodLength DESC
-        ) AS rn
-    FROM financialData
-) AS subquery
-WHERE financialData.rowid = subquery.rid;
 
 UPDATE financialData
 SET isPrimaryUnits = (units = subquery.primaryUnits)
