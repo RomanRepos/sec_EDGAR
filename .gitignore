@@ -8,7 +8,7 @@ stubs/
 .stubs
 .DS_Store
 # Custom
-
+cache.abf
 .mcpregistry_*
 *.mcpb
 tests/e2e/fixtures/*.duckdb
