@@ -33,15 +33,15 @@ def build_system_prompt(line_items_path: str = None) -> str:
 
     for item in line_items:
         stmt_str = "/".join(item["statement"]) if isinstance(item["statement"], list) else item["statement"]
-        lines.append(f"\n- label: {item['standard_label']} | statement: {stmt_str}")
-        lines.append(f"  {item['semantic_description']}")
+        lines.append(f"\n- label: {item['standardLabel']} | statement: {stmt_str}")
+        lines.append(f"  {item['semanticDescription']}")
 
     lines += [
         "",
         "## Output Format",
         "Return a JSON array. Each element maps one standard label and must have exactly these fields:",
         "{",
-        '  "standard_label": "exact label from Standard Line Items",',
+        '  "standardLabel": "exact label from Standard Line Items",',
         '  "statement": "IncomeStatement" | "BalanceSheet" | "StatementOfCashFlows",',
         '  "concepts": [{"concept": "exact concept name from the filing", "sign": "+" | "-"}],',
         '  "confidence": "high" | "medium" | "low"',
@@ -158,7 +158,7 @@ def batch_results_to_df(batch, metadata) -> pd.DataFrame:
                     "form": form,
                     "endDate": endDate,
                     "units": units,
-                    "standardLabel": item["standard_label"],
+                    "standardLabel": item["standardLabel"],
                     "keyStatementRole": item["statement"],
                     "conceptName": concept_entry["concept"],
                     "sign": concept_entry["sign"],

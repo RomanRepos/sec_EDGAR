@@ -240,16 +240,9 @@ FROM
 CREATE OR REPLACE TABLE standardLineItems AS
 SELECT
     row_number() OVER () AS id,
-    standard_label,
+    standardLabel,
     statement :: VARCHAR [] AS statement,
-    semantic_description,
-    regexp_replace(
-    regexp_replace(
-        regexp_replace(lower(trim(semantic_description)), '[^a-z0-9]+', ' ', 'g'),
-        '(^| )([a-z])', '\1\u\2', 'g'
-    ),
-    '\s+', '', 'g'
-    ) AS standardConceptName, 
+    semanticDescription as semanticDescription,
     TRUE AS isActive
 FROM
     read_json_auto(

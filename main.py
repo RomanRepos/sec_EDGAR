@@ -41,7 +41,8 @@ if __name__ == "__main__":
 
     load_sql_script = Template(load_query("LoadDataQueries"))
 
-    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'), standard_line_items_path_param=standard_line_items_path)
+    final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'),
+                                        standard_line_items_path_param=standard_line_items_path)
     
     print("Running Queries")
     for statement in final_sql.split(';'):

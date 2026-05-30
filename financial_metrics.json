@@ -2,7 +2,7 @@
   {
     "category": "Profitability",
     "metric": "Gross Profit",
-    "semantic_description": "Profit remaining after deducting the direct costs of producing goods or services from revenue. Represents core production profitability before operating expenses.",
+    "semanticDescription": "Profit remaining after deducting the direct costs of producing goods or services from revenue. Represents core production profitability before operating expenses.",
     "formula": {
       "numerator": [
         {"role": "base", "sign": "+"},
@@ -12,22 +12,22 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales reported by the company"
+        "semanticDescription": "Total revenue or net sales reported by the company"
       },
       {
         "role": "subtract",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Direct cost of producing goods or services sold, variously labelled as cost of goods sold, cost of revenue, or cost of sales"
+        "semanticDescription": "Direct cost of producing goods or services sold, variously labelled as cost of goods sold, cost of revenue, or cost of sales"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Gross Profit Margin",
-    "semantic_description": "Percentage of revenue retained after direct production costs. Gross profit may be reported directly or derived as Revenue minus COGS.",
+    "semanticDescription": "Percentage of revenue retained after direct production costs. Gross profit may be reported directly or derived as Revenue minus COGS.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -35,22 +35,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Gross Profit",
+        "standardLabel": "Gross Profit",
         "statement": "IncomeStatement",
-        "semantic_description": "Gross profit reported directly, or derived as revenue minus cost of goods sold"
+        "semanticDescription": "Gross profit reported directly, or derived as revenue minus cost of goods sold"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales reported by the company"
+        "semanticDescription": "Total revenue or net sales reported by the company"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Operating Income (EBIT)",
-    "semantic_description": "Profit from core business operations before interest and taxes. Map to `base` if operating income is directly reported as a single concept. If no direct concept exists, map gross profit to `gross_profit` and total operating expenses to `opex_subtract` so it can be derived.",
+    "semanticDescription": "Profit from core business operations before interest and taxes. Map to `base` if operating income is directly reported as a single concept. If no direct concept exists, map gross profit to `gross_profit` and total operating expenses to `opex_subtract` so it can be derived.",
     "formula": {
       "direct": [{"role": "base", "sign": "+"}],
       "derived": [
@@ -61,28 +61,28 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss from continuing operations reported as a single line item, before interest expense and income taxes. Use this role only when a direct concept exists — do not use both this and the derivation components."
+        "semanticDescription": "Operating income or loss from continuing operations reported as a single line item, before interest expense and income taxes. Use this role only when a direct concept exists — do not use both this and the derivation components."
       },
       {
         "role": "gross_profit",
-        "standard_label": "Gross Profit",
+        "standardLabel": "Gross Profit",
         "statement": "IncomeStatement",
-        "semantic_description": "Gross profit (revenue minus cost of revenue). Only map here when no direct operating income concept exists."
+        "semanticDescription": "Gross profit (revenue minus cost of revenue). Only map here when no direct operating income concept exists."
       },
       {
         "role": "opex_subtract",
-        "standard_label": "Operating Expenses",
+        "standardLabel": "Operating Expenses",
         "statement": "IncomeStatement",
-        "semantic_description": "Total operating expenses below gross profit (e.g. SG&A, R&D combined). Only map here when no direct operating income concept exists."
+        "semanticDescription": "Total operating expenses below gross profit (e.g. SG&A, R&D combined). Only map here when no direct operating income concept exists."
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Operating Margin",
-    "semantic_description": "Percentage of revenue retained after all operating costs. Measures operational efficiency independent of capital structure and taxes.",
+    "semanticDescription": "Percentage of revenue retained after all operating costs. Measures operational efficiency independent of capital structure and taxes.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -90,22 +90,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss from continuing operations"
+        "semanticDescription": "Operating income or loss from continuing operations"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales reported by the company"
+        "semanticDescription": "Total revenue or net sales reported by the company"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "EBITDA",
-    "semantic_description": "Earnings before interest, taxes, depreciation and amortization. Proxy for operating cash generation before capital structure and accounting choices. D&A is typically not a standalone income statement line — look for it in the cash flow statement as a non-cash reconciling item under operating activities.",
+    "semanticDescription": "Earnings before interest, taxes, depreciation and amortization. Proxy for operating cash generation before capital structure and accounting choices. D&A is typically not a standalone income statement line — look for it in the cash flow statement as a non-cash reconciling item under operating activities.",
     "formula": {
       "numerator": [
         {"role": "base", "sign": "+"},
@@ -115,22 +115,22 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss from continuing operations"
+        "semanticDescription": "Operating income or loss from continuing operations"
       },
       {
         "role": "add",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Non-cash depreciation and amortization charges reported as a reconciling item under operating activities. May appear as a single combined concept or as separate depreciation and amortization concepts — include both if split."
+        "semanticDescription": "Non-cash depreciation and amortization charges reported as a reconciling item under operating activities. May appear as a single combined concept or as separate depreciation and amortization concepts — include both if split."
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "EBITDA Margin",
-    "semantic_description": "EBITDA as a percentage of revenue. EBITDA is derived as operating income plus D&A; D&A is found in the cash flow statement under operating activities.",
+    "semanticDescription": "EBITDA as a percentage of revenue. EBITDA is derived as operating income plus D&A; D&A is found in the cash flow statement under operating activities.",
     "formula": {
       "numerator": [
         {"role": "numerator_base", "sign": "+"},
@@ -141,28 +141,28 @@
     "components": [
       {
         "role": "numerator_base",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss from continuing operations"
+        "semanticDescription": "Operating income or loss from continuing operations"
       },
       {
         "role": "numerator_add",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Non-cash depreciation and amortization charges under operating activities"
+        "semanticDescription": "Non-cash depreciation and amortization charges under operating activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales reported by the company"
+        "semanticDescription": "Total revenue or net sales reported by the company"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Net Profit Margin",
-    "semantic_description": "Percentage of revenue that becomes profit after all expenses including taxes and interest. Bottom-line profitability measure.",
+    "semanticDescription": "Percentage of revenue that becomes profit after all expenses including taxes and interest. Bottom-line profitability measure.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -170,22 +170,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Net Income",
+        "standardLabel": "Net Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Net income or net loss attributable to the company after all expenses and taxes"
+        "semanticDescription": "Net income or net loss attributable to the company after all expenses and taxes"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales reported by the company"
+        "semanticDescription": "Total revenue or net sales reported by the company"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Return on Assets (ROA)",
-    "semantic_description": "How efficiently a company generates profit from its asset base. Total assets should be averaged using beginning and ending balance sheet values, requiring two consecutive filings.",
+    "semanticDescription": "How efficiently a company generates profit from its asset base. Total assets should be averaged using beginning and ending balance sheet values, requiring two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -193,22 +193,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Net Income",
+        "standardLabel": "Net Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Net income or net loss for the period"
+        "semanticDescription": "Net income or net loss for the period"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Assets",
+        "standardLabel": "Total Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total assets; average of beginning and ending period values"
+        "semanticDescription": "Total assets; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Return on Equity (ROE)",
-    "semantic_description": "Return generated for shareholders on their equity investment. Equity should be averaged using beginning and ending values, requiring two consecutive filings.",
+    "semanticDescription": "Return generated for shareholders on their equity investment. Equity should be averaged using beginning and ending values, requiring two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -216,22 +216,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Net Income",
+        "standardLabel": "Net Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Net income or net loss for the period"
+        "semanticDescription": "Net income or net loss for the period"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Equity",
+        "standardLabel": "Total Equity",
         "statement": "BalanceSheet",
-        "semantic_description": "Total stockholders equity; average of beginning and ending period values"
+        "semanticDescription": "Total stockholders equity; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Return on Invested Capital (ROIC)",
-    "semantic_description": "How efficiently a company generates after-tax operating profit relative to all capital invested. NOPAT is derived as OperatingIncome * (1 - EffectiveTaxRate), where EffectiveTaxRate = IncomeTaxExpense / PreTaxIncome. Invested capital is the sum of total debt and equity.",
+    "semanticDescription": "How efficiently a company generates after-tax operating profit relative to all capital invested. NOPAT is derived as OperatingIncome * (1 - EffectiveTaxRate), where EffectiveTaxRate = IncomeTaxExpense / PreTaxIncome. Invested capital is the sum of total debt and equity.",
     "formula": {
       "nopat": {
         "base": "nopat_operating_income",
@@ -248,40 +248,40 @@
     "components": [
       {
         "role": "nopat_operating_income",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss; base for NOPAT calculation"
+        "semanticDescription": "Operating income or loss; base for NOPAT calculation"
       },
       {
         "role": "nopat_tax_expense",
-        "standard_label": "Income Tax Expense",
+        "standardLabel": "Income Tax Expense",
         "statement": "IncomeStatement",
-        "semantic_description": "Income tax expense; numerator of effective tax rate"
+        "semanticDescription": "Income tax expense; numerator of effective tax rate"
       },
       {
         "role": "nopat_pretax_income",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "IncomeStatement",
-        "semantic_description": "Pre-tax income or loss; denominator of effective tax rate"
+        "semanticDescription": "Pre-tax income or loss; denominator of effective tax rate"
       },
       {
         "role": "invested_capital_debt",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt including long-term debt and short-term borrowings"
+        "semanticDescription": "Total interest-bearing debt including long-term debt and short-term borrowings"
       },
       {
         "role": "invested_capital_equity",
-        "standard_label": "Total Equity",
+        "standardLabel": "Total Equity",
         "statement": "BalanceSheet",
-        "semantic_description": "Total stockholders equity"
+        "semanticDescription": "Total stockholders equity"
       }
     ]
   },
   {
     "category": "Profitability",
     "metric": "Return on Capital Employed (ROCE)",
-    "semantic_description": "Return generated from all capital employed in the business, where capital employed equals total assets minus current liabilities.",
+    "semanticDescription": "Return generated from all capital employed in the business, where capital employed equals total assets minus current liabilities.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [
@@ -292,28 +292,28 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss (EBIT)"
+        "semanticDescription": "Operating income or loss (EBIT)"
       },
       {
         "role": "denominator_base",
-        "standard_label": "Total Assets",
+        "standardLabel": "Total Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total assets"
+        "semanticDescription": "Total assets"
       },
       {
         "role": "denominator_subtract",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities"
+        "semanticDescription": "Total current liabilities"
       }
     ]
   },
   {
     "category": "Liquidity",
     "metric": "Current Ratio",
-    "semantic_description": "Ability to cover short-term obligations with short-term assets. A ratio above 1 indicates the company can meet its near-term liabilities.",
+    "semanticDescription": "Ability to cover short-term obligations with short-term assets. A ratio above 1 indicates the company can meet its near-term liabilities.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -321,22 +321,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Total Current Assets",
+        "standardLabel": "Total Current Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current assets expected to be converted to cash within one year"
+        "semanticDescription": "Total current assets expected to be converted to cash within one year"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities due within one year"
+        "semanticDescription": "Total current liabilities due within one year"
       }
     ]
   },
   {
     "category": "Liquidity",
     "metric": "Quick Ratio",
-    "semantic_description": "Stricter liquidity measure that excludes inventory since it may not be quickly convertible to cash.",
+    "semanticDescription": "Stricter liquidity measure that excludes inventory since it may not be quickly convertible to cash.",
     "formula": {
       "numerator": [
         {"role": "numerator_base", "sign": "+"},
@@ -347,28 +347,28 @@
     "components": [
       {
         "role": "numerator_base",
-        "standard_label": "Total Current Assets",
+        "standardLabel": "Total Current Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current assets"
+        "semanticDescription": "Total current assets"
       },
       {
         "role": "numerator_subtract",
-        "standard_label": "Inventory",
+        "standardLabel": "Inventory",
         "statement": "BalanceSheet",
-        "semantic_description": "Inventory balance, net of any reserves"
+        "semanticDescription": "Inventory balance, net of any reserves"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities due within one year"
+        "semanticDescription": "Total current liabilities due within one year"
       }
     ]
   },
   {
     "category": "Liquidity",
     "metric": "Cash Ratio",
-    "semantic_description": "Most conservative liquidity measure — only cash and near-cash assets against current obligations.",
+    "semanticDescription": "Most conservative liquidity measure — only cash and near-cash assets against current obligations.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -376,22 +376,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Cash and Cash Equivalents",
+        "standardLabel": "Cash and Cash Equivalents",
         "statement": "BalanceSheet",
-        "semantic_description": "Cash and cash equivalents, including short-term liquid investments"
+        "semanticDescription": "Cash and cash equivalents, including short-term liquid investments"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities due within one year"
+        "semanticDescription": "Total current liabilities due within one year"
       }
     ]
   },
   {
     "category": "Liquidity",
     "metric": "Operating Cash Flow Ratio",
-    "semantic_description": "Whether the company generates enough operating cash flow to cover its short-term obligations.",
+    "semanticDescription": "Whether the company generates enough operating cash flow to cover its short-term obligations.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -399,22 +399,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Cash Flow",
+        "standardLabel": "Operating Cash Flow",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Net cash provided by or used in operating activities"
+        "semanticDescription": "Net cash provided by or used in operating activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities due within one year"
+        "semanticDescription": "Total current liabilities due within one year"
       }
     ]
   },
   {
     "category": "Liquidity",
     "metric": "Working Capital",
-    "semantic_description": "Absolute measure of short-term financial health. Positive working capital means the company can fund day-to-day operations.",
+    "semanticDescription": "Absolute measure of short-term financial health. Positive working capital means the company can fund day-to-day operations.",
     "formula": {
       "numerator": [
         {"role": "base", "sign": "+"},
@@ -424,22 +424,22 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Total Current Assets",
+        "standardLabel": "Total Current Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current assets"
+        "semanticDescription": "Total current assets"
       },
       {
         "role": "subtract",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities"
+        "semanticDescription": "Total current liabilities"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Debt-to-Equity",
-    "semantic_description": "Proportion of financing from creditors versus shareholders. Total debt includes long-term debt, short-term borrowings, and current portion of long-term debt.",
+    "semanticDescription": "Proportion of financing from creditors versus shareholders. Total debt includes long-term debt, short-term borrowings, and current portion of long-term debt.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -447,22 +447,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt: sum of long-term debt, short-term borrowings, and current portion of long-term debt"
+        "semanticDescription": "Total interest-bearing debt: sum of long-term debt, short-term borrowings, and current portion of long-term debt"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Equity",
+        "standardLabel": "Total Equity",
         "statement": "BalanceSheet",
-        "semantic_description": "Total stockholders equity"
+        "semanticDescription": "Total stockholders equity"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Debt-to-Assets",
-    "semantic_description": "Proportion of assets financed by debt. Higher values indicate greater financial leverage and risk.",
+    "semanticDescription": "Proportion of assets financed by debt. Higher values indicate greater financial leverage and risk.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -470,22 +470,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt including long-term and short-term borrowings"
+        "semanticDescription": "Total interest-bearing debt including long-term and short-term borrowings"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Assets",
+        "standardLabel": "Total Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total assets"
+        "semanticDescription": "Total assets"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Interest Coverage Ratio",
-    "semantic_description": "How easily a company can pay interest on its debt from operating earnings. A ratio below 1.5 signals potential difficulty servicing debt.",
+    "semanticDescription": "How easily a company can pay interest on its debt from operating earnings. A ratio below 1.5 signals potential difficulty servicing debt.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -493,22 +493,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss before interest and taxes"
+        "semanticDescription": "Operating income or loss before interest and taxes"
       },
       {
         "role": "denominator",
-        "standard_label": "Interest Expense",
+        "standardLabel": "Interest Expense",
         "statement": "IncomeStatement",
-        "semantic_description": "Interest expense on debt obligations"
+        "semanticDescription": "Interest expense on debt obligations"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Net Debt",
-    "semantic_description": "Effective debt burden after netting available cash. Negative net debt means the company holds more cash than debt.",
+    "semanticDescription": "Effective debt burden after netting available cash. Negative net debt means the company holds more cash than debt.",
     "formula": {
       "numerator": [
         {"role": "base", "sign": "+"},
@@ -518,22 +518,22 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt including long-term and short-term borrowings"
+        "semanticDescription": "Total interest-bearing debt including long-term and short-term borrowings"
       },
       {
         "role": "subtract",
-        "standard_label": "Cash and Cash Equivalents",
+        "standardLabel": "Cash and Cash Equivalents",
         "statement": "BalanceSheet",
-        "semantic_description": "Cash and cash equivalents including short-term liquid investments"
+        "semanticDescription": "Cash and cash equivalents including short-term liquid investments"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Net Debt / EBITDA",
-    "semantic_description": "Years of EBITDA needed to repay net debt. Common leverage benchmark; above 4x is generally considered high. Net Debt = TotalDebt - Cash. EBITDA = OperatingIncome + D&A where D&A comes from the cash flow statement.",
+    "semanticDescription": "Years of EBITDA needed to repay net debt. Common leverage benchmark; above 4x is generally considered high. Net Debt = TotalDebt - Cash. EBITDA = OperatingIncome + D&A where D&A comes from the cash flow statement.",
     "formula": {
       "numerator": [
         {"role": "net_debt_gross", "sign": "+"},
@@ -547,34 +547,34 @@
     "components": [
       {
         "role": "net_debt_gross",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt"
+        "semanticDescription": "Total interest-bearing debt"
       },
       {
         "role": "net_debt_subtract_cash",
-        "standard_label": "Cash and Cash Equivalents",
+        "standardLabel": "Cash and Cash Equivalents",
         "statement": "BalanceSheet",
-        "semantic_description": "Cash and cash equivalents"
+        "semanticDescription": "Cash and cash equivalents"
       },
       {
         "role": "ebitda_operating_income",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss"
+        "semanticDescription": "Operating income or loss"
       },
       {
         "role": "ebitda_add_da",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Depreciation and amortization from operating activities reconciliation"
+        "semanticDescription": "Depreciation and amortization from operating activities reconciliation"
       }
     ]
   },
   {
     "category": "Leverage",
     "metric": "Debt Service Coverage",
-    "semantic_description": "Ability to service all debt obligations from operating income, covering both interest payments and scheduled principal repayments.",
+    "semanticDescription": "Ability to service all debt obligations from operating income, covering both interest payments and scheduled principal repayments.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [
@@ -585,28 +585,28 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss"
+        "semanticDescription": "Operating income or loss"
       },
       {
         "role": "denominator_interest",
-        "standard_label": "Interest Expense",
+        "standardLabel": "Interest Expense",
         "statement": "IncomeStatement",
-        "semantic_description": "Interest expense on debt"
+        "semanticDescription": "Interest expense on debt"
       },
       {
         "role": "denominator_current_ltd",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "BalanceSheet",
-        "semantic_description": "Current portion of long-term debt due within one year"
+        "semanticDescription": "Current portion of long-term debt due within one year"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Asset Turnover",
-    "semantic_description": "Revenue generated per unit of assets. Higher values indicate more efficient use of the asset base. Requires averaging total assets across two consecutive filings.",
+    "semanticDescription": "Revenue generated per unit of assets. Higher values indicate more efficient use of the asset base. Requires averaging total assets across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -614,22 +614,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Assets",
+        "standardLabel": "Total Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total assets; average of beginning and ending period values"
+        "semanticDescription": "Total assets; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Fixed Asset Turnover",
-    "semantic_description": "Revenue generated per unit of fixed assets. Measures how productively the company uses its property, plant and equipment. Requires averaging PP&E across two consecutive filings.",
+    "semanticDescription": "Revenue generated per unit of fixed assets. Measures how productively the company uses its property, plant and equipment. Requires averaging PP&E across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -637,22 +637,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       },
       {
         "role": "denominator",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "BalanceSheet",
-        "semantic_description": "Net property, plant and equipment after accumulated depreciation; average of beginning and ending period values"
+        "semanticDescription": "Net property, plant and equipment after accumulated depreciation; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Capital Turnover",
-    "semantic_description": "Revenue generated per unit of total invested capital. Measures overall capital productivity.",
+    "semanticDescription": "Revenue generated per unit of total invested capital. Measures overall capital productivity.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [
@@ -663,28 +663,28 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       },
       {
         "role": "denominator_debt",
-        "standard_label": "Total Debt",
+        "standardLabel": "Total Debt",
         "statement": "BalanceSheet",
-        "semantic_description": "Total interest-bearing debt"
+        "semanticDescription": "Total interest-bearing debt"
       },
       {
         "role": "denominator_equity",
-        "standard_label": "Total Equity",
+        "standardLabel": "Total Equity",
         "statement": "BalanceSheet",
-        "semantic_description": "Total stockholders equity"
+        "semanticDescription": "Total stockholders equity"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Working Capital Turnover",
-    "semantic_description": "Revenue generated per unit of working capital. Higher values suggest efficient use of short-term assets and liabilities to drive sales.",
+    "semanticDescription": "Revenue generated per unit of working capital. Higher values suggest efficient use of short-term assets and liabilities to drive sales.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [
@@ -695,28 +695,28 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       },
       {
         "role": "denominator_current_assets",
-        "standard_label": "Total Current Assets",
+        "standardLabel": "Total Current Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current assets"
+        "semanticDescription": "Total current assets"
       },
       {
         "role": "denominator_subtract_current_liabilities",
-        "standard_label": "Total Current Liabilities",
+        "standardLabel": "Total Current Liabilities",
         "statement": "BalanceSheet",
-        "semantic_description": "Total current liabilities"
+        "semanticDescription": "Total current liabilities"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Inventory Turnover",
-    "semantic_description": "How many times inventory is sold and replaced in a period. Higher values indicate faster-moving inventory. Not meaningful for pure service companies. Requires averaging inventory across two consecutive filings.",
+    "semanticDescription": "How many times inventory is sold and replaced in a period. Higher values indicate faster-moving inventory. Not meaningful for pure service companies. Requires averaging inventory across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -724,22 +724,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Cost of goods sold or cost of revenue"
+        "semanticDescription": "Cost of goods sold or cost of revenue"
       },
       {
         "role": "denominator",
-        "standard_label": "Inventory",
+        "standardLabel": "Inventory",
         "statement": "BalanceSheet",
-        "semantic_description": "Inventory net of reserves; average of beginning and ending period values"
+        "semanticDescription": "Inventory net of reserves; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Days Inventory Outstanding (DIO)",
-    "semantic_description": "Average number of days inventory is held before being sold. Lower values indicate faster inventory conversion. Requires averaging inventory across two consecutive filings.",
+    "semanticDescription": "Average number of days inventory is held before being sold. Lower values indicate faster inventory conversion. Requires averaging inventory across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}],
@@ -748,22 +748,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Inventory",
+        "standardLabel": "Inventory",
         "statement": "BalanceSheet",
-        "semantic_description": "Inventory net of reserves; average of beginning and ending period values"
+        "semanticDescription": "Inventory net of reserves; average of beginning and ending period values"
       },
       {
         "role": "denominator",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Cost of goods sold or cost of revenue"
+        "semanticDescription": "Cost of goods sold or cost of revenue"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Days Sales Outstanding (DSO)",
-    "semantic_description": "Average number of days to collect payment after a sale. Lower values indicate faster cash collection. Requires averaging accounts receivable across two consecutive filings.",
+    "semanticDescription": "Average number of days to collect payment after a sale. Lower values indicate faster cash collection. Requires averaging accounts receivable across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}],
@@ -772,22 +772,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Accounts Receivable",
+        "standardLabel": "Accounts Receivable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts receivable net of allowances; average of beginning and ending period values"
+        "semanticDescription": "Accounts receivable net of allowances; average of beginning and ending period values"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Accounts Receivable Turnover",
-    "semantic_description": "How many times receivables are collected in a period. Higher values indicate faster collection. Requires averaging accounts receivable across two consecutive filings.",
+    "semanticDescription": "How many times receivables are collected in a period. Higher values indicate faster collection. Requires averaging accounts receivable across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -795,22 +795,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       },
       {
         "role": "denominator",
-        "standard_label": "Accounts Receivable",
+        "standardLabel": "Accounts Receivable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts receivable net of allowances; average of beginning and ending period values"
+        "semanticDescription": "Accounts receivable net of allowances; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Days Payable Outstanding (DPO)",
-    "semantic_description": "Average number of days the company takes to pay its suppliers. Higher values mean the company holds cash longer before paying. Requires averaging accounts payable across two consecutive filings.",
+    "semanticDescription": "Average number of days the company takes to pay its suppliers. Higher values mean the company holds cash longer before paying. Requires averaging accounts payable across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}],
@@ -819,22 +819,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Accounts Payable",
+        "standardLabel": "Accounts Payable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts payable to suppliers; average of beginning and ending period values"
+        "semanticDescription": "Accounts payable to suppliers; average of beginning and ending period values"
       },
       {
         "role": "denominator",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Cost of goods sold or cost of revenue"
+        "semanticDescription": "Cost of goods sold or cost of revenue"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Accounts Payable Turnover",
-    "semantic_description": "How many times payables are paid in a period. Lower values indicate the company takes longer to pay suppliers. Requires averaging accounts payable across two consecutive filings.",
+    "semanticDescription": "How many times payables are paid in a period. Lower values indicate the company takes longer to pay suppliers. Requires averaging accounts payable across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -842,22 +842,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Cost of goods sold or cost of revenue"
+        "semanticDescription": "Cost of goods sold or cost of revenue"
       },
       {
         "role": "denominator",
-        "standard_label": "Accounts Payable",
+        "standardLabel": "Accounts Payable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts payable to suppliers; average of beginning and ending period values"
+        "semanticDescription": "Accounts payable to suppliers; average of beginning and ending period values"
       }
     ]
   },
   {
     "category": "Efficiency",
     "metric": "Cash Conversion Cycle (CCC)",
-    "semantic_description": "Days from cash outlay for inventory to cash collection from customers. Lower or negative values indicate the business collects cash before paying suppliers. Derived from DIO, DSO, and DPO — requires inventory, receivables, payables, COGS, and revenue, all averaged across two consecutive filings.",
+    "semanticDescription": "Days from cash outlay for inventory to cash collection from customers. Lower or negative values indicate the business collects cash before paying suppliers. Derived from DIO, DSO, and DPO — requires inventory, receivables, payables, COGS, and revenue, all averaged across two consecutive filings.",
     "formula": {
       "terms": [
         {"numerator": "inventory",           "denominator": "cogs",    "scale": 365, "sign": "+"},
@@ -868,56 +868,56 @@
     "components": [
       {
         "role": "inventory",
-        "standard_label": "Inventory",
+        "standardLabel": "Inventory",
         "statement": "BalanceSheet",
-        "semantic_description": "Inventory net of reserves; average of beginning and ending period values — used to compute DIO"
+        "semanticDescription": "Inventory net of reserves; average of beginning and ending period values — used to compute DIO"
       },
       {
         "role": "accounts_receivable",
-        "standard_label": "Accounts Receivable",
+        "standardLabel": "Accounts Receivable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts receivable net of allowances; average of beginning and ending period values — used to compute DSO"
+        "semanticDescription": "Accounts receivable net of allowances; average of beginning and ending period values — used to compute DSO"
       },
       {
         "role": "accounts_payable",
-        "standard_label": "Accounts Payable",
+        "standardLabel": "Accounts Payable",
         "statement": "BalanceSheet",
-        "semantic_description": "Accounts payable to suppliers; average of beginning and ending period values — used to compute DPO"
+        "semanticDescription": "Accounts payable to suppliers; average of beginning and ending period values — used to compute DPO"
       },
       {
         "role": "cogs",
-        "standard_label": "Cost of Revenue",
+        "standardLabel": "Cost of Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Cost of goods sold or cost of revenue — used in both DIO and DPO"
+        "semanticDescription": "Cost of goods sold or cost of revenue — used in both DIO and DPO"
       },
       {
         "role": "revenue",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales — used to compute DSO"
+        "semanticDescription": "Total revenue or net sales — used to compute DSO"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Operating Cash Flow (OCF)",
-    "semantic_description": "Cash generated from core business operations. Reported directly on the cash flow statement — no derivation needed.",
+    "semanticDescription": "Cash generated from core business operations. Reported directly on the cash flow statement — no derivation needed.",
     "formula": {
       "numerator": [{"role": "base", "sign": "+"}]
     },
     "components": [
       {
         "role": "base",
-        "standard_label": "Operating Cash Flow",
+        "standardLabel": "Operating Cash Flow",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Net cash provided by or used in operating activities"
+        "semanticDescription": "Net cash provided by or used in operating activities"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Free Cash Flow (FCF)",
-    "semantic_description": "Cash available after maintaining and expanding the asset base. CapEx is found under investing activities with a negative sign (arcWeight=-1); use its absolute value.",
+    "semanticDescription": "Cash available after maintaining and expanding the asset base. CapEx is found under investing activities with a negative sign (arcWeight=-1); use its absolute value.",
     "formula": {
       "numerator": [
         {"role": "base", "sign": "+"},
@@ -927,22 +927,22 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Operating Cash Flow",
+        "standardLabel": "Operating Cash Flow",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Net cash provided by operating activities"
+        "semanticDescription": "Net cash provided by operating activities"
       },
       {
         "role": "subtract",
-        "standard_label": "Capital Expenditures",
+        "standardLabel": "Capital Expenditures",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Capital expenditures — payments to acquire property, plant and equipment or other productive assets. Found under investing activities; reported as a cash outflow."
+        "semanticDescription": "Capital expenditures — payments to acquire property, plant and equipment or other productive assets. Found under investing activities; reported as a cash outflow."
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Free Cash Flow to Firm (FCFF)",
-    "semantic_description": "Cash flow available to all capital providers before financing. NOPAT = OperatingIncome * (1 - EffectiveTaxRate) where EffectiveTaxRate = IncomeTaxExpense / PreTaxIncome. D&A is in the cash flow statement under operating activities. CapEx is under investing activities. Change in working capital may be a single net line or must be summed from individual working capital movement concepts in the cash flow statement.",
+    "semanticDescription": "Cash flow available to all capital providers before financing. NOPAT = OperatingIncome * (1 - EffectiveTaxRate) where EffectiveTaxRate = IncomeTaxExpense / PreTaxIncome. D&A is in the cash flow statement under operating activities. CapEx is under investing activities. Change in working capital may be a single net line or must be summed from individual working capital movement concepts in the cash flow statement.",
     "formula": {
       "nopat": {
         "base": "operating_income",
@@ -960,46 +960,46 @@
     "components": [
       {
         "role": "operating_income",
-        "standard_label": "Operating Income",
+        "standardLabel": "Operating Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Operating income or loss; base for NOPAT calculation"
+        "semanticDescription": "Operating income or loss; base for NOPAT calculation"
       },
       {
         "role": "tax_expense",
-        "standard_label": "Income Tax Expense",
+        "standardLabel": "Income Tax Expense",
         "statement": "IncomeStatement",
-        "semantic_description": "Income tax expense; numerator of effective tax rate"
+        "semanticDescription": "Income tax expense; numerator of effective tax rate"
       },
       {
         "role": "pretax_income",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "IncomeStatement",
-        "semantic_description": "Pre-tax income or loss; denominator of effective tax rate"
+        "semanticDescription": "Pre-tax income or loss; denominator of effective tax rate"
       },
       {
         "role": "add_da",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Depreciation and amortization under operating activities reconciliation"
+        "semanticDescription": "Depreciation and amortization under operating activities reconciliation"
       },
       {
         "role": "subtract_capex",
-        "standard_label": "Capital Expenditures",
+        "standardLabel": "Capital Expenditures",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Capital expenditures under investing activities"
+        "semanticDescription": "Capital expenditures under investing activities"
       },
       {
         "role": "subtract_working_capital_change",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Change in operating working capital reported as a reconciling item in operating activities. May be a single net concept or multiple individual line items for receivables, inventory, and payables changes."
+        "semanticDescription": "Change in operating working capital reported as a reconciling item in operating activities. May be a single net concept or multiple individual line items for receivables, inventory, and payables changes."
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Free Cash Flow to Equity (FCFE)",
-    "semantic_description": "Cash flow available to equity holders after debt obligations and reinvestment needs. Net borrowing = proceeds from new debt minus debt repayments, both found under financing activities.",
+    "semanticDescription": "Cash flow available to equity holders after debt obligations and reinvestment needs. Net borrowing = proceeds from new debt minus debt repayments, both found under financing activities.",
     "formula": {
       "numerator": [
         {"role": "base",                             "sign": "+"},
@@ -1013,46 +1013,46 @@
     "components": [
       {
         "role": "base",
-        "standard_label": "Net Income",
+        "standardLabel": "Net Income",
         "statement": "IncomeStatement",
-        "semantic_description": "Net income or loss for the period"
+        "semanticDescription": "Net income or loss for the period"
       },
       {
         "role": "add_da",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Depreciation and amortization under operating activities reconciliation"
+        "semanticDescription": "Depreciation and amortization under operating activities reconciliation"
       },
       {
         "role": "subtract_capex",
-        "standard_label": "Capital Expenditures",
+        "standardLabel": "Capital Expenditures",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Capital expenditures under investing activities"
+        "semanticDescription": "Capital expenditures under investing activities"
       },
       {
         "role": "subtract_working_capital_change",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Change in operating working capital under operating activities"
+        "semanticDescription": "Change in operating working capital under operating activities"
       },
       {
         "role": "add_net_borrowing_proceeds",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Proceeds from issuance of new debt under financing activities"
+        "semanticDescription": "Proceeds from issuance of new debt under financing activities"
       },
       {
         "role": "subtract_net_borrowing_repayments",
-        "standard_label": null,
+        "standardLabel": null,
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Repayments of debt under financing activities"
+        "semanticDescription": "Repayments of debt under financing activities"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Cash Flow Margin",
-    "semantic_description": "Percentage of revenue converted to operating cash flow. Less susceptible to accounting adjustments than net profit margin.",
+    "semanticDescription": "Percentage of revenue converted to operating cash flow. Less susceptible to accounting adjustments than net profit margin.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -1060,22 +1060,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Cash Flow",
+        "standardLabel": "Operating Cash Flow",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Net cash provided by operating activities"
+        "semanticDescription": "Net cash provided by operating activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "CapEx to Revenue",
-    "semantic_description": "Capital investment intensity relative to revenue. Higher values indicate more capital-intensive businesses. CapEx is reported as a cash outflow under investing activities.",
+    "semanticDescription": "Capital investment intensity relative to revenue. Higher values indicate more capital-intensive businesses. CapEx is reported as a cash outflow under investing activities.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -1083,22 +1083,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Capital Expenditures",
+        "standardLabel": "Capital Expenditures",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Capital expenditures — payments to acquire property, plant and equipment under investing activities"
+        "semanticDescription": "Capital expenditures — payments to acquire property, plant and equipment under investing activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Revenue",
+        "standardLabel": "Revenue",
         "statement": "IncomeStatement",
-        "semantic_description": "Total revenue or net sales"
+        "semanticDescription": "Total revenue or net sales"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "CapEx to Depreciation",
-    "semantic_description": "Whether the company is investing more or less than it is depreciating. A ratio above 1 suggests growth investment; below 1 suggests underinvestment. Both components are in the cash flow statement.",
+    "semanticDescription": "Whether the company is investing more or less than it is depreciating. A ratio above 1 suggests growth investment; below 1 suggests underinvestment. Both components are in the cash flow statement.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -1106,22 +1106,22 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Capital Expenditures",
+        "standardLabel": "Capital Expenditures",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Capital expenditures under investing activities"
+        "semanticDescription": "Capital expenditures under investing activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Depreciation and Amortization",
+        "standardLabel": "Depreciation and Amortization",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Depreciation and amortization under operating activities reconciliation"
+        "semanticDescription": "Depreciation and amortization under operating activities reconciliation"
       }
     ]
   },
   {
     "category": "CashFlow",
     "metric": "Cash Return on Assets",
-    "semantic_description": "Cash-based return on assets, less susceptible to accrual accounting than ROA. Requires averaging total assets across two consecutive filings.",
+    "semanticDescription": "Cash-based return on assets, less susceptible to accrual accounting than ROA. Requires averaging total assets across two consecutive filings.",
     "formula": {
       "numerator": [{"role": "numerator", "sign": "+"}],
       "denominator": [{"role": "denominator", "sign": "+"}]
@@ -1129,15 +1129,15 @@
     "components": [
       {
         "role": "numerator",
-        "standard_label": "Operating Cash Flow",
+        "standardLabel": "Operating Cash Flow",
         "statement": "StatementOfCashFlows",
-        "semantic_description": "Net cash provided by operating activities"
+        "semanticDescription": "Net cash provided by operating activities"
       },
       {
         "role": "denominator",
-        "standard_label": "Total Assets",
+        "standardLabel": "Total Assets",
         "statement": "BalanceSheet",
-        "semantic_description": "Total assets; average of beginning and ending period values"
+        "semanticDescription": "Total assets; average of beginning and ending period values"
       }
     ]
   }

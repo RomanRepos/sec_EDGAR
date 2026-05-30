@@ -93,14 +93,18 @@ ORDER BY
 select * from financialData
 where 
 --prefix = 'us-gaap'
- accessionNumber = '0000936468-21-000013' 
-and endDate = '2020-12-31'
+ accessionNumber = '0001193125-13-412507' 
+and endDate = '2013-09-30'
 and name like '%Depr%';
 
 select * from calculationTaxonomyHierarchy where 
 accessionNumber = '0000936468-21-000013';
 
 select * from standardMetrics
+where "Depreciation and Amortization" IS NULL
+;
+
+SELECT DISTINCT keyStatementRole FROM standardizedConcepts
 ;
 
 

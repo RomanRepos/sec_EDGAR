@@ -1,177 +1,177 @@
 [
   {
-    "standard_label": "Revenue",
+    "standardLabel": "Revenue",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Total revenue or net sales; the top line of the income statement representing all income from core business activities"
+    "semanticDescription": "Total revenue or net sales; the top line of the income statement representing all income from core business activities"
   },
   {
-    "standard_label": "Cost of Revenue",
+    "standardLabel": "Cost of Revenue",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Direct cost of producing goods or services sold; variously labelled cost of goods sold, cost of revenue, or cost of sales"
+    "semanticDescription": "Direct cost of producing goods or services sold; variously labelled cost of goods sold, cost of revenue, or cost of sales"
   },
   {
-    "standard_label": "Gross Profit",
+    "standardLabel": "Gross Profit",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Revenue minus cost of revenue; profit remaining after direct production costs before operating expenses"
+    "semanticDescription": "Revenue minus cost of revenue; profit remaining after direct production costs before operating expenses"
   },
   {
-    "standard_label": "Research and Development Expenses",
+    "standardLabel": "Research and Development Expenses",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Expenditures on research and development activities; a key operating expense for technology and pharmaceutical companies"
+    "semanticDescription": "Expenditures on research and development activities; a key operating expense for technology and pharmaceutical companies"
   },
   {
-    "standard_label": "Selling, General and Administrative Expenses",
+    "standardLabel": "Selling, General and Administrative Expenses",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Overhead and sales costs not directly tied to production; includes selling expenses and general administrative costs"
+    "semanticDescription": "Overhead and sales costs not directly tied to production; includes selling expenses and general administrative costs"
   },
   {
-    "standard_label": "Operating Expenses",
+    "standardLabel": "Operating Expenses",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Total operating expenses below gross profit; may aggregate R&D, SG&A, and other operating costs when reported as a combined line item"
+    "semanticDescription": "Total operating expenses below gross profit; may aggregate R&D, SG&A, and other operating costs when reported as a combined line item"
   },
   {
-    "standard_label": "Operating Income",
+    "standardLabel": "Operating Income",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Profit from core business operations before interest and taxes; also known as EBIT. May be reported directly or derived as gross profit minus total operating expenses."
+    "semanticDescription": "Profit from core business operations before interest and taxes; also known as EBIT. May be reported directly or derived as gross profit minus total operating expenses."
   },
   {
-    "standard_label": "Interest Expense",
+    "standardLabel": "Interest Expense",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Interest expense on debt obligations; typically reported below operating income as a non-operating expense"
+    "semanticDescription": "Interest expense on debt obligations; typically reported below operating income as a non-operating expense"
   },
   {
-    "standard_label": "Interest Income",
+    "standardLabel": "Interest Income",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Income earned from cash deposits, short-term investments, and other interest-bearing assets"
+    "semanticDescription": "Income earned from cash deposits, short-term investments, and other interest-bearing assets"
   },
   {
-    "standard_label": "Pre-tax Income",
+    "standardLabel": "Pre-tax Income",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Income or loss before income tax expense; used as the denominator when computing the effective tax rate for NOPAT calculations"
+    "semanticDescription": "Income or loss before income tax expense; used as the denominator when computing the effective tax rate for NOPAT calculations"
   },
   {
-    "standard_label": "Income Tax Expense",
+    "standardLabel": "Income Tax Expense",
     "statement": ["IncomeStatement"],
-    "semantic_description": "Total income tax provision for the period, including current and deferred components; used as the numerator of the effective tax rate"
+    "semanticDescription": "Total income tax provision for the period, including current and deferred components; used as the numerator of the effective tax rate"
   },
   {
-    "standard_label": "Net Income",
+    "standardLabel": "Net Income",
     "statement": ["IncomeStatement", "StatementOfCashFlows"],
-    "semantic_description": "Net income or net loss after all expenses and taxes; the bottom line of the income statement. Also appears as the opening line of the cash flow statement under the indirect reconciliation method."
+    "semanticDescription": "Net income or net loss after all expenses and taxes; the bottom line of the income statement. Also appears as the opening line of the cash flow statement under the indirect reconciliation method."
   },
   {
-    "standard_label": "Cash and Cash Equivalents",
+    "standardLabel": "Cash and Cash Equivalents",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Cash on hand plus short-term liquid investments with original maturities of three months or less"
+    "semanticDescription": "Cash on hand plus short-term liquid investments with original maturities of three months or less"
   },
   {
-    "standard_label": "Accounts Receivable",
+    "standardLabel": "Accounts Receivable",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Amounts owed by customers for goods or services delivered; reported net of allowances for doubtful accounts"
+    "semanticDescription": "Amounts owed by customers for goods or services delivered; reported net of allowances for doubtful accounts"
   },
   {
-    "standard_label": "Inventory",
+    "standardLabel": "Inventory",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Raw materials, work-in-process, and finished goods held for sale; reported net of any reserves or write-downs"
+    "semanticDescription": "Raw materials, work-in-process, and finished goods held for sale; reported net of any reserves or write-downs"
   },
   {
-    "standard_label": "Total Current Assets",
+    "standardLabel": "Total Current Assets",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Sum of all assets expected to be converted to cash or consumed within one year"
+    "semanticDescription": "Sum of all assets expected to be converted to cash or consumed within one year"
   },
   {
-    "standard_label": "Property, Plant and Equipment, Net",
+    "standardLabel": "Property, Plant and Equipment, Net",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Tangible long-lived assets including land, buildings, machinery, and equipment, reported net of accumulated depreciation"
+    "semanticDescription": "Tangible long-lived assets including land, buildings, machinery, and equipment, reported net of accumulated depreciation"
   },
   {
-    "standard_label": "Goodwill",
+    "standardLabel": "Goodwill",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Excess of acquisition purchase price over the fair value of net identifiable assets acquired; subject to annual impairment testing rather than amortization"
+    "semanticDescription": "Excess of acquisition purchase price over the fair value of net identifiable assets acquired; subject to annual impairment testing rather than amortization"
   },
   {
-    "standard_label": "Intangible Assets",
+    "standardLabel": "Intangible Assets",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Non-physical long-lived assets such as patents, trademarks, customer relationships, and acquired software; typically net of accumulated amortization and excluding goodwill"
+    "semanticDescription": "Non-physical long-lived assets such as patents, trademarks, customer relationships, and acquired software; typically net of accumulated amortization and excluding goodwill"
   },
   {
-    "standard_label": "Total Assets",
+    "standardLabel": "Total Assets",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Sum of all assets on the balance sheet; equals total liabilities plus total equity"
+    "semanticDescription": "Sum of all assets on the balance sheet; equals total liabilities plus total equity"
   },
   {
-    "standard_label": "Accounts Payable",
+    "standardLabel": "Accounts Payable",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Amounts owed to suppliers for goods or services received but not yet paid; a key working capital component"
+    "semanticDescription": "Amounts owed to suppliers for goods or services received but not yet paid; a key working capital component"
   },
   {
-    "standard_label": "Short-term Borrowings",
+    "standardLabel": "Short-term Borrowings",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Borrowings due within one year, including revolving credit facilities, commercial paper, and other short-term debt instruments"
+    "semanticDescription": "Borrowings due within one year, including revolving credit facilities, commercial paper, and other short-term debt instruments"
   },
   {
-    "standard_label": "Current Portion of Long-term Debt",
+    "standardLabel": "Current Portion of Long-term Debt",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Principal payments on long-term debt obligations scheduled to come due within the next twelve months; reclassified from long-term debt"
+    "semanticDescription": "Principal payments on long-term debt obligations scheduled to come due within the next twelve months; reclassified from long-term debt"
   },
   {
-    "standard_label": "Deferred Revenue",
+    "standardLabel": "Deferred Revenue",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Cash received from customers for goods or services not yet delivered; a liability that converts to revenue as performance obligations are satisfied"
+    "semanticDescription": "Cash received from customers for goods or services not yet delivered; a liability that converts to revenue as performance obligations are satisfied"
   },
   {
-    "standard_label": "Total Current Liabilities",
+    "standardLabel": "Total Current Liabilities",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Sum of all obligations due within one year; key denominator in liquidity ratios"
+    "semanticDescription": "Sum of all obligations due within one year; key denominator in liquidity ratios"
   },
   {
-    "standard_label": "Long-term Debt",
+    "standardLabel": "Long-term Debt",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Interest-bearing debt obligations due after one year, including bonds, notes payable, and term loans"
+    "semanticDescription": "Interest-bearing debt obligations due after one year, including bonds, notes payable, and term loans"
   },
   {
-    "standard_label": "Total Debt",
+    "standardLabel": "Total Debt",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Total interest-bearing debt; sum of long-term debt, short-term borrowings, and current portion of long-term debt"
+    "semanticDescription": "Total interest-bearing debt; sum of long-term debt, short-term borrowings, and current portion of long-term debt"
   },
   {
-    "standard_label": "Total Liabilities",
+    "standardLabel": "Total Liabilities",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Sum of all obligations on the balance sheet; equals total assets minus total equity"
+    "semanticDescription": "Sum of all obligations on the balance sheet; equals total assets minus total equity"
   },
   {
-    "standard_label": "Retained Earnings",
+    "standardLabel": "Retained Earnings",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Cumulative net income retained in the business after dividends paid; a component of stockholders equity"
+    "semanticDescription": "Cumulative net income retained in the business after dividends paid; a component of stockholders equity"
   },
   {
-    "standard_label": "Total Equity",
+    "standardLabel": "Total Equity",
     "statement": ["BalanceSheet"],
-    "semantic_description": "Total stockholders equity; includes common stock, additional paid-in capital, retained earnings, and accumulated other comprehensive income"
+    "semanticDescription": "Total stockholders equity; includes common stock, additional paid-in capital, retained earnings, and accumulated other comprehensive income"
   },
   {
-    "standard_label": "Operating Cash Flow",
+    "standardLabel": "Operating Cash Flow",
     "statement": ["StatementOfCashFlows"],
-    "semantic_description": "Net cash provided by or used in operating activities; the primary measure of cash generation from core business operations"
+    "semanticDescription": "Net cash provided by or used in operating activities; the primary measure of cash generation from core business operations"
   },
   {
-    "standard_label": "Depreciation and Amortization",
+    "standardLabel": "Depreciation and Amortization",
     "statement": ["StatementOfCashFlows", "IncomeStatement"],
-    "semantic_description": "Non-cash charges for the periodic reduction in value of tangible and intangible assets. Primarily found as a reconciling add-back under operating activities in the cash flow statement; may also appear as a separate line in the income statement for some companies."
+    "semanticDescription": "Non-cash charges for the periodic reduction in value of tangible and intangible assets. Primarily found as a reconciling add-back under operating activities in the cash flow statement; may also appear as a separate line in the income statement for some companies."
   },
   {
-    "standard_label": "Stock-based Compensation",
+    "standardLabel": "Stock-based Compensation",
     "statement": ["StatementOfCashFlows"],
-    "semantic_description": "Non-cash expense for equity awards granted to employees; added back as a reconciling item under operating activities in the indirect method cash flow statement"
+    "semanticDescription": "Non-cash expense for equity awards granted to employees; added back as a reconciling item under operating activities in the indirect method cash flow statement"
   },
   {
-    "standard_label": "Capital Expenditures",
+    "standardLabel": "Capital Expenditures",
     "statement": ["StatementOfCashFlows"],
-    "semantic_description": "Cash paid to acquire or improve property, plant, and equipment; reported as a cash outflow under investing activities"
+    "semanticDescription": "Cash paid to acquire or improve property, plant, and equipment; reported as a cash outflow under investing activities"
   },
   {
-    "standard_label": "Dividends Paid",
+    "standardLabel": "Dividends Paid",
     "statement": ["StatementOfCashFlows"],
-    "semantic_description": "Cash dividends distributed to shareholders; reported as a cash outflow under financing activities"
+    "semanticDescription": "Cash dividends distributed to shareholders; reported as a cash outflow under financing activities"
   }
 ]
