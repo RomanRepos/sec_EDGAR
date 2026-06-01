@@ -1,6 +1,6 @@
 SET max_temp_directory_size = '50GB';
-SET threads = 4;
-SET memory_limit = '24GB';
+SET threads = 2;
+SET memory_limit = '18GB';
 CREATE OR REPLACE TABLE keyStatementsValuesAndHierarchy AS
 
 with

@@ -242,7 +242,8 @@ SELECT
     row_number() OVER () AS id,
     standardLabel,
     statement :: VARCHAR [] AS statement,
-    semanticDescription as semanticDescription,
+    semanticDescription,
+    maxComponents :: INTEGER as maxComponents,
     TRUE AS isActive
 FROM
     read_json_auto(

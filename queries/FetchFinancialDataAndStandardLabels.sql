@@ -1,17 +1,25 @@
+SET threads = 2;
+SET memory_limit = '16GB';
+SET preserve_insertion_order = false;
+SET max_temp_directory_size = '150GB';
 with
     sc as (
         SELECT DISTINCT
-            conceptName,
-            standardLabel,
-            standardLabelID,
-            conceptsPerStandardLabel,
-            confidenceScore,
-            keyStatementRole
+            sc.conceptName,
+            sc.standardLabel,
+            sc.standardLabelID,
+            sc.conceptsPerStandardLabel,
+            sc.confidenceScore,
+            sc.keyStatementRole
         FROM
             standardizedConcepts sc
+        INNER JOIN standardLineItems sli on
+            sli.standardLabel = sc.standardLabel
         WHERE
-            standardLabel = 'Net Income'
-            AND confidenceScore >= 2
+            1=1
+            --AND sc.standardLabel = ?
+            AND sc.confidenceScore >= 2
+            AND sc.conceptsPerStandardLabel <= sli.maxComponents
             --AND standardLabel = 'Depreciation and Amortization'
             --AND keyStatementRole IN ('StatementOfCashFlows', 'IncomeStatement') 
             --AND keyStatementRole = 'BalanceSheet'
@@ -27,22 +35,17 @@ with
             )
     )
 SELECT
-/*
     fd.prefix,
     fd.cik,
-    fd.name as conceptName,
+    fd.accessionNumber,
+    fd.name AS conceptName,
     fd.units,
     fd.endDate,
     s.form,
-    sc.confidenceScore,
-    fd.name AS conceptName,
     sc.conceptsPerStandardLabel,
     sc.standardLabel,
     sc.standardLabelID,
-    sc.keyStatementRole,
     fd.value
-    */
-    count(*)
 FROM
     financialData fd
     INNER JOIN sc ON sc.conceptName = fd.name
@@ -65,33 +68,5 @@ where
         '10-Q',
         '10-Q/A'
     )
-    AND prefix in ('us-gaap', 'ifrs-full');
-
-
-
-    SELECT DISTINCT
-            conceptName,
-            standardLabel,
-            standardLabelID,
-            conceptsPerStandardLabel,
-            confidenceScore,
-            keyStatementRole
-        FROM
-            standardizedConcepts sc
-        WHERE
-            standardLabel = 'Total Assets'
-            AND confidenceScore >= 1
-            AND "conceptsPerStandardLabel" <= 4
-            --AND standardLabel = 'Depreciation and Amortization'
-            --AND keyStatementRole IN ('StatementOfCashFlows', 'IncomeStatement') 
-            --AND keyStatementRole = 'BalanceSheet'
-            QUALIFY NOT list_contains (
-                list (sc.sign) OVER (
-                    PARTITION BY
-                        sc.cik,
-                        sc.accessionNumber,
-                        sc.keyStatementRole,
-                        sc.standardLabelID
-                ),
-                '-'
-            );
+    AND prefix in ('us-gaap', 'ifrs-full')
+    ;
