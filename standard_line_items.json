@@ -3,7 +3,7 @@
     "standardLabel": "Revenue",
     "statement": ["IncomeStatement"],
     "semanticDescription": "Total revenue or net sales; the top line of the income statement representing all income from core business activities",
-    "maxComponents": 8
+    "maxComponents": 6
   },
   {
     "standardLabel": "Cost of Revenue",
@@ -33,7 +33,7 @@
     "standardLabel": "Operating Expenses",
     "statement": ["IncomeStatement"],
     "semanticDescription": "Total operating expenses below gross profit; may aggregate R&D, SG&A, and other operating costs when reported as a combined line item",
-    "maxComponents": 4
+    "maxComponents": 2
   },
   {
     "standardLabel": "Operating Income",
@@ -117,7 +117,7 @@
     "standardLabel": "Total Assets",
     "statement": ["BalanceSheet"],
     "semanticDescription": "Sum of all assets on the balance sheet; equals total liabilities plus total equity",
-    "maxComponents": 4
+    "maxComponents": 2
   },
   {
     "standardLabel": "Accounts Payable",
@@ -165,7 +165,7 @@
     "standardLabel": "Total Liabilities",
     "statement": ["BalanceSheet"],
     "semanticDescription": "Sum of all obligations on the balance sheet; equals total assets minus total equity",
-    "maxComponents": 8
+    "maxComponents": 2
   },
   {
     "standardLabel": "Retained Earnings",
@@ -177,7 +177,7 @@
     "standardLabel": "Total Equity",
     "statement": ["BalanceSheet"],
     "semanticDescription": "Total stockholders equity; includes common stock, additional paid-in capital, retained earnings, and accumulated other comprehensive income",
-    "maxComponents": 6
+    "maxComponents": 4
   },
   {
     "standardLabel": "Operating Cash Flow",

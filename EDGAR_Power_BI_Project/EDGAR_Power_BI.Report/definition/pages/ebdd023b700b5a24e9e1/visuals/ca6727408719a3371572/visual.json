@@ -4,10 +4,10 @@
   "position": {
     "x": 56.288659793814432,
     "y": 420,
-    "z": 2,
+    "z": 2000,
     "height": 300,
     "width": 300,
-    "tabOrder": 2
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'10-Q'"
+                                "Value": "'10-K'"
                               }
                             }
                           ]
@@ -101,7 +101,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7c980cc66e12d6ecef99",
+        "name": "7b94e2b6789a4e15464a",
         "field": {
           "Column": {
             "Expression": {

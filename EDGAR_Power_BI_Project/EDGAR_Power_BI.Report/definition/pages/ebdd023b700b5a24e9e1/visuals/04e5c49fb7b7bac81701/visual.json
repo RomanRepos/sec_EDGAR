@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "04e5c49fb7b7bac81701",
   "position": {
-    "x": 150,
-    "y": 86,
-    "z": 1,
-    "height": 300,
-    "width": 300,
-    "tabOrder": 1
+    "x": 65.5885363357216,
+    "y": 60.429887410440116,
+    "z": 1000,
+    "height": 299.93858751279424,
+    "width": 299.93858751279424,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -58,6 +58,44 @@
                 }
               }
             },
+            "selfFilter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "s",
+                    "Entity": "secFilingsDb   main   companyDimension",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Contains": {
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "s"
+                              }
+                            },
+                            "Property": "entityName"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'woodwar'"
+                          }
+                        }
+                      }
+                    },
+                    "Annotations": {
+                      "PowerBI.MParameterBehavior": 1
+                    }
+                  }
+                ]
+              }
+            },
             "filter": {
               "filter": {
                 "Version": 2,
@@ -88,50 +126,12 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'LOCKHEED MARTIN CORP'"
+                                "Value": "'Woodward, Inc.'"
                               }
                             }
                           ]
                         ]
                       }
-                    }
-                  }
-                ]
-              }
-            },
-            "selfFilter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "s",
-                    "Entity": "secFilingsDb   main   companyDimension",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Contains": {
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "s"
-                              }
-                            },
-                            "Property": "entityName"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "'lockh'"
-                          }
-                        }
-                      }
-                    },
-                    "Annotations": {
-                      "PowerBI.MParameterBehavior": 1
                     }
                   }
                 ]
@@ -146,7 +146,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "968603f5fa260feb1c6a",
+        "name": "a8ddd9d93ad1d4731178",
         "field": {
           "Column": {
             "Expression": {

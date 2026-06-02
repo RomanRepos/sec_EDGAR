@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "a4699df981c380532fc2",
+  "name": "fd23bc2407420aa743d0",
   "position": {
-    "x": 621.64948453608247,
-    "y": 0,
-    "z": 0,
-    "height": 280.20618556701032,
-    "width": 658.14432989690715,
-    "tabOrder": 0
+    "x": 384.68781985670415,
+    "y": 344.89252814738995,
+    "z": 3000,
+    "height": 299.93858751279424,
+    "width": 515.86489252814738,
+    "tabOrder": 3000
   },
   "visual": {
-    "visualType": "lineChart",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -23,35 +23,11 @@
                       "Entity": "secFilingsDb   main   standardMetrics"
                     }
                   },
-                  "Property": "endDate"
+                  "Property": "accessionNumber"
                 }
               },
-              "queryRef": "secFilingsDb   main   standardMetrics.endDate",
-              "nativeQueryRef": "endDate",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
-                        }
-                      },
-                      "Property": "Revenue"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(secFilingsDb   main   standardMetrics.Revenue)",
-              "nativeQueryRef": "Sum of Revenue"
+              "queryRef": "secFilingsDb   main   standardMetrics.accessionNumber",
+              "nativeQueryRef": "accessionNumber"
             },
             {
               "field": {
@@ -93,32 +69,37 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
-                  }
-                },
-                "Property": "endDate"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": true
       }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "142.95876194836143D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "secFilingsDb   main   standardMetrics.accessionNumber"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "fe1fa2265c2b505b9b0b",
+        "name": "ae8b35e3952010384b4b",
         "field": {
           "Column": {
             "Expression": {
@@ -126,32 +107,13 @@
                 "Entity": "secFilingsDb   main   standardMetrics"
               }
             },
-            "Property": "endDate"
+            "Property": "accessionNumber"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "78c2d2cc58ea56db0936",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
-                  }
-                },
-                "Property": "Revenue"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "4d9373d2156b0a2c866d",
+        "name": "4a763dc3b0d81eb6c862",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -170,7 +132,7 @@
         "type": "Advanced"
       },
       {
-        "name": "5ae3f19c97d46406100b",
+        "name": "b98469b0d6c018adc48a",
         "field": {
           "Aggregation": {
             "Expression": {

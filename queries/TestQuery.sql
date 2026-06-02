@@ -1,15 +1,8 @@
 select 
-sm.*
+count(sm.*)
 
 from standardMetrics sm
-inner join 
-(select distinct cik, accessionNumber, prefix, form, endDate 
-from keyStatementsValuesAndHierarchy WHERE allKeyStatementsPresent = TRUE )  as safeStatements
-on safeStatements.cik = sm.cik  
-and safeStatements.accessionNumber = sm.accessionNumber
-and sm.prefix = safeStatements.prefix
-and sm.form = safeStatements.form
-and sm.endDate = safeStatements.endDate
+
 /*inner join companyDimension cd on cd.cik = sm.cik
 
 --Revenue is null and "Cost of Revenue" is null 
@@ -22,8 +15,9 @@ and cd.firstTicker = 'EOSE'
 
 where 1=1
 --sm.accessionNumber = '0000936468-21-000013' 
-and sm.form = '10-K'
-limit 10000;
+and sm.form in ('10-K')
+and sm."Total Current Assets" is null
+;
 
 SELECT
 
@@ -93,9 +87,11 @@ ORDER BY
 select * from financialData
 where 
 --prefix = 'us-gaap'
- accessionNumber = '0001193125-13-412507' 
-and endDate = '2013-09-30'
-and name like '%Depr%';
+ accessionNumber = '0001213900-22-015208' 
+and endDate = '2021-12-31'
+and name like '%Current%'
+--and value = -24774000
+;
 
 select * from calculationTaxonomyHierarchy where 
 accessionNumber = '0000936468-21-000013';
@@ -124,6 +120,8 @@ WHERE sc.confidenceScore > 2
 QUALIFY NOT list_contains(list(sc.sign) OVER 
 (PARTITION BY sc.conceptName, sc.accessionNumber, sc.keyStatementRole),
     '-'));
+
+SELECT DISTINCT standardLabel FROM standardizedConcepts ORDER BY standardLabel DESC;
 
 /*
 delete from standardizedConcepts where standardLabel = 'Pre-tax Income'
