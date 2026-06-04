@@ -85,7 +85,7 @@ def extract_json(text: str) -> list[dict]:
 
 def map_filing(yaml_str, system_prompt) -> list[dict]:
     response = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-sonnet-4-6",
         max_tokens=25000,
         system=[{
             "type": "text",
@@ -115,7 +115,7 @@ def build_batch_requests(filings_df, conn, system_prompt) -> tuple[list, dict]:
         requests.append({
             "custom_id": custom_id,
             "params": {
-                "model": "claude-opus-4-6",
+                "model": "claude-sonnet-4-6",
                 "max_tokens": 25000,
                 "system": [{
                     "type": "text",
