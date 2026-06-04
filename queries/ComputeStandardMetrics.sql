@@ -9,6 +9,7 @@ sc AS (
         sc.standardLabel,
         sc.standardLabelID,
         sc.conceptsPerStandardLabel,
+        sc.confidenceScore,
         len(list_distinct(string_split(sc.standardLabelID, '|'))) AS id_set_size
     FROM standardizedConcepts sc
     INNER JOIN standardLineItems sli ON sli.standardLabel = sc.standardLabel
@@ -37,6 +38,7 @@ raw_data AS (
         sc.standardLabel,
         sc.standardLabelID,
         sc.id_set_size,
+        sc.confidenceScore,
         fd.value
     FROM financialData fd
     INNER JOIN sc ON sc.conceptName = fd.name
@@ -52,11 +54,11 @@ raw_data AS (
         AND fd.prefix IN ('us-gaap', 'ifrs-full')
 ),
 -- Aggregate per (submission + label_keys) using scalar counts — no array_agg.
--- id_set_size is constant per standardLabelID so MAX() just carries it through.
+-- id_set_size and confidenceScore are constant per standardLabelID so MAX() carries them through.
 concept_agg AS (
     SELECT
         prefix, cik, accessionNumber, form, endDate, units,
-        standardLabel, standardLabelID, conceptsPerStandardLabel,
+        standardLabel, standardLabelID, conceptsPerStandardLabel, confidenceScore,
         MAX(id_set_size)            AS id_set_size,
         COUNT(DISTINCT conceptName) AS matched_count,
         SUM(value)                  AS total_value
@@ -67,17 +69,27 @@ concept_agg AS (
 with_jaccard AS (
     SELECT
         prefix, cik, accessionNumber, form, endDate, units,
-        standardLabel, standardLabelID, conceptsPerStandardLabel, total_value,
+        standardLabel, standardLabelID, conceptsPerStandardLabel, total_value, confidenceScore,
         matched_count * 1.0 / NULLIF(id_set_size, 0) AS similarity
     FROM concept_agg
 ),
--- Keep only the best-matching standardLabelID per (submission + standardLabel)
+-- Step 1: keep only standardLabelIDs with the best Jaccard similarity per (submission + standardLabel)
+best_similarity AS (
+    SELECT
+        prefix, cik, accessionNumber, form, endDate, units,
+        standardLabel, standardLabelID, conceptsPerStandardLabel, total_value, confidenceScore
+    FROM with_jaccard
+    QUALIFY similarity = MAX(similarity) OVER (
+        PARTITION BY prefix, cik, accessionNumber, form, endDate, units, standardLabel
+    )
+),
+-- Step 2: among similarity ties, keep the standardLabelID with the highest confidence score
 best_match AS (
     SELECT
         prefix, cik, accessionNumber, form, endDate, units,
         standardLabel, conceptsPerStandardLabel, total_value
-    FROM with_jaccard
-    QUALIFY similarity = MAX(similarity) OVER (
+    FROM best_similarity
+    QUALIFY confidenceScore = MAX(confidenceScore) OVER (
         PARTITION BY prefix, cik, accessionNumber, form, endDate, units, standardLabel
     )
 ),
@@ -92,10 +104,10 @@ filtered AS (
     QUALIFY (
         standardLabel IN (
             'Intangible Assets', 'Total Debt', 'Cash and Cash Equivalents',
-            'Interest Income', 'Interest Expense', 'Stock-based Compensation',
+            'Stock-based Compensation',
             'Operating Expenses', 'Research and Development Expenses', 'Total Current Assets',
             'Total Current Liabilities', 'Accounts Payable', 'Current Portion of Long-term Debt',
-            'Depreciation and Amortization', 'Selling, General and Administrative Expenses',
+            'Depreciation and Amortization',
             'Long-term Debt', 'Capital Expenditures', 'Accounts Receivable',
             'Short-term Borrowings', 'Dividends Paid', 'Inventory',
             'Property, Plant and Equipment, Net'
@@ -106,10 +118,10 @@ filtered AS (
     ) OR (
         standardLabel NOT IN (
             'Intangible Assets', 'Total Debt', 'Cash and Cash Equivalents',
-            'Interest Income', 'Interest Expense', 'Stock-based Compensation',
+           'Stock-based Compensation',
             'Operating Expenses', 'Research and Development Expenses', 'Total Current Assets',
             'Total Current Liabilities', 'Accounts Payable', 'Current Portion of Long-term Debt',
-            'Depreciation and Amortization', 'Selling, General and Administrative Expenses',
+            'Depreciation and Amortization',
             'Long-term Debt', 'Capital Expenditures', 'Accounts Receivable',
             'Short-term Borrowings', 'Dividends Paid', 'Inventory',
             'Property, Plant and Equipment, Net'
@@ -141,7 +153,7 @@ SELECT
     CASE
         WHEN standardLabel IN (
             'Gross Profit', 'Operating Income', 'Pre-tax Income',
-            'Net Income', 'Retained Earnings', 'Operating Cash Flow'
+            'Net Income', 'Retained Earnings', 'Operating Cash Flow', 'Interest Income', 'Interest Expense'
         ) THEN total_value
         ELSE ABS(total_value)
     END AS value

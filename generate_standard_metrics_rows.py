@@ -20,12 +20,12 @@ def generate_standard_metrics_rows(conn, compute_query_name: str):
     submission_group = ['prefix', 'cik', 'accessionNumber', 'form', 'endDate', 'units']
 
     standard_labels = (
-        conn.execute("SELECT DISTINCT standardLabel FROM standardizedConcepts ORDER BY standardLabel DESC")
+        conn.execute('''SELECT DISTINCT standardLabel FROM standardizedConcepts 
+                     WHERE standardLabel NOT IN ('Gross Profit', 'Operating Expenses')
+                     ORDER BY standardLabel DESC''')
         .df()['standardLabel']
         .tolist()
     )
-
-    standard_labels.sort(key=lambda x: 0 if x == 'Operating Expenses' else 1)
 
     query = load_query(compute_query_name)
     long_results = []
@@ -71,6 +71,7 @@ if __name__ == "__main__":
     conn = ddb.connect(db_path)
     
     generate_standard_metrics_rows(conn, 'ComputeStandardMetrics')
+    conn.execute(load_query('AddSharesColumnsToStandardMetrics'))
     conn.close()
 
 

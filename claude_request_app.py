@@ -20,15 +20,19 @@ def build_system_prompt(line_items_path: str = None) -> str:
     with open(line_items_path) as f:
         line_items = json.load(f)
 
+    for obj in line_items:
+        obj.pop('maxComponents', None)
+
+
     lines = [
-        "You are a financial concept mapper. Given a financial statement hierarchy from an SEC "
-        "filing in plain-text format, identify which XBRL concepts correspond to standard "
+        "You are a financial concept mapper. Given a financial statement hierarchy from an SEC ",
+        "filing in plain-text format, identify which XBRL concepts correspond to standard ",
         "financial line items listed below.",
         "",
-        "The hierarchy uses indentation to show parent-child relationships. A `+` prefix on a "
+        "The hierarchy uses indentation to show parent-child relationships. A `+` prefix on a ",
         "concept means it adds to its parent; a `-` prefix means it subtracts from its parent.",
         "",
-        "## Standard Line Items",
+        "## Standard Line Items"
     ]
 
     for item in line_items:
@@ -49,11 +53,15 @@ def build_system_prompt(line_items_path: str = None) -> str:
         "",
         "Mapping rules:",
         "- If a single concept directly represents the label, map it with sign \"+\".",
-        "- If multiple concepts together make up the label (e.g. D&A split into separate "
-        "depreciation and amortization lines, or operating expenses broken into R&D and SG&A), "
-        "list all concepts with the sign to sum them to the label total (almost always \"+\"; "
+        "- If multiple concepts together make up the label (e.g. D&A split into separate ",
+        "depreciation and amortization lines, or operating expenses broken into R&D and SG&A), ",
+        "list all concepts with the sign to sum them to the label total (almost always \"+\"; ",
         "use \"-\" only if a concept reduces the total).",
-        "- Use the `+`/`-` prefixes in the hierarchy to understand how concepts relate to their "
+        "- Use the most aggregated concepts available to map each label. If a concept in the hierarchy ",
+        "already represents a subtotal or total that covers its children, use that concept alone — ",
+        "do not expand it into its components. For example, to map Total Debt, use LongTermDebt ",
+        "and ShortTermDebt directly, if available, rather than listing every long and short dept line item underneath them. ",
+        "- Use the `+`/`-` prefixes in the hierarchy to understand how concepts relate to their ",
         "parents, then determine the correct combining sign for the standard label.",
         "- Only include labels that can be identified in the filing. Skip the rest."
     ]
@@ -77,8 +85,8 @@ def extract_json(text: str) -> list[dict]:
 
 def map_filing(yaml_str, system_prompt) -> list[dict]:
     response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=50000,
+        model="claude-opus-4-6",
+        max_tokens=25000,
         system=[{
             "type": "text",
             "text": system_prompt,
@@ -107,8 +115,8 @@ def build_batch_requests(filings_df, conn, system_prompt) -> tuple[list, dict]:
         requests.append({
             "custom_id": custom_id,
             "params": {
-                "model": "claude-sonnet-4-6",
-                "max_tokens": 50000,
+                "model": "claude-opus-4-6",
+                "max_tokens": 25000,
                 "system": [{
                     "type": "text",
                     "text": system_prompt,

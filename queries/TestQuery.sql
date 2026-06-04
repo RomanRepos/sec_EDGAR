@@ -1,5 +1,5 @@
 select 
-count(sm.*)
+sm.*
 
 from standardMetrics sm
 
@@ -14,9 +14,10 @@ and cd.firstTicker = 'EOSE'
 */
 
 where 1=1
---sm.accessionNumber = '0000936468-21-000013' 
+--and sm.accessionNumber = '0001493152-21-007591' 
 and sm.form in ('10-K')
-and sm."Total Current Assets" is null
+--and sm.accessionNumber = '0000950170-24-024987'
+--and sm."Total Current Assets" is null
 ;
 
 SELECT
@@ -87,10 +88,12 @@ ORDER BY
 select * from financialData
 where 
 --prefix = 'us-gaap'
- accessionNumber = '0001213900-22-015208' 
-and endDate = '2021-12-31'
-and name like '%Current%'
+ accessionNumber = '0000950170-24-024987' 
+--and endDate = '2021-12-31'
+--and name like '%Dev%'
+--and prefix = 'us-gaap'
 --and value = -24774000
+
 ;
 
 select * from calculationTaxonomyHierarchy where 
@@ -103,12 +106,20 @@ where "Depreciation and Amortization" IS NULL
 SELECT DISTINCT keyStatementRole FROM standardizedConcepts
 ;
 
+select prefix, name, endDate, count(*) from financialData where 
+1=1 
+and (name like '%Stock%')
+and "accessionNumber" = '0001193125-12-194474'
+group by prefix, name, endDate
+order by count(*) desc;
+
 
 select count(*) from (
 SELECT 
     DISTINCT
     sc.conceptName,
     sc.standardLabel,
+
     sc.keyStatementRole,
     sc.standardLabelID,
     sc.conceptsPerStandardLabel,
@@ -121,9 +132,11 @@ QUALIFY NOT list_contains(list(sc.sign) OVER
 (PARTITION BY sc.conceptName, sc.accessionNumber, sc.keyStatementRole),
     '-'));
 
-SELECT DISTINCT standardLabel FROM standardizedConcepts ORDER BY standardLabel DESC;
+SELECT DISTINCT standardLabel, standardLabelID FROM standardizedConcepts
+where standardLabel in ('Interest Income', 'Interest Expense')
+ ORDER BY standardLabel DESC;
 
-/*
-delete from standardizedConcepts where standardLabel = 'Pre-tax Income'
-and standardLabelID Not LIkE '%Tax%' AND conceptsPerStandardLabel = 1;
-checkpoint;*/
+
+SELECT DISTINCT standardLabel FROM standardizedConcepts 
+                     WHERE standardLabel NOT IN ('Gross Profit', 'Operating Expenses')
+                     ORDER BY standardLabel DESC

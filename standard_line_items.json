@@ -12,12 +12,6 @@
     "maxComponents": 8
   },
   {
-    "standardLabel": "Gross Profit",
-    "statement": ["IncomeStatement"],
-    "semanticDescription": "Revenue minus cost of revenue; profit remaining after direct production costs before operating expenses",
-    "maxComponents": 6
-  },
-  {
     "standardLabel": "Research and Development Expenses",
     "statement": ["IncomeStatement"],
     "semanticDescription": "Expenditures on research and development activities; a key operating expense for technology and pharmaceutical companies",
@@ -27,13 +21,7 @@
     "standardLabel": "Selling, General and Administrative Expenses",
     "statement": ["IncomeStatement"],
     "semanticDescription": "Overhead and sales costs not directly tied to production; includes selling expenses and general administrative costs",
-    "maxComponents": 20
-  },
-  {
-    "standardLabel": "Operating Expenses",
-    "statement": ["IncomeStatement"],
-    "semanticDescription": "Total operating expenses below gross profit; may aggregate R&D, SG&A, and other operating costs when reported as a combined line item",
-    "maxComponents": 2
+    "maxComponents": 22
   },
   {
     "standardLabel": "Operating Income",
@@ -177,7 +165,7 @@
     "standardLabel": "Total Equity",
     "statement": ["BalanceSheet"],
     "semanticDescription": "Total stockholders equity; includes common stock, additional paid-in capital, retained earnings, and accumulated other comprehensive income",
-    "maxComponents": 4
+    "maxComponents": 2
   },
   {
     "standardLabel": "Operating Cash Flow",
@@ -189,7 +177,7 @@
     "standardLabel": "Depreciation and Amortization",
     "statement": ["StatementOfCashFlows", "IncomeStatement"],
     "semanticDescription": "Non-cash charges for the periodic reduction in value of tangible and intangible assets. Primarily found as a reconciling add-back under operating activities in the cash flow statement; may also appear as a separate line in the income statement for some companies.",
-    "maxComponents": 6
+    "maxComponents": 8
   },
   {
     "standardLabel": "Stock-based Compensation",
