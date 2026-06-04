@@ -1,7 +1,9 @@
 select 
+cd.firstTicker,
 sm.*
 
 from standardMetrics sm
+inner JOIN companyDimension cd on cd.cik = sm.cik
 
 /*inner join companyDimension cd on cd.cik = sm.cik
 
@@ -10,14 +12,16 @@ from standardMetrics sm
 --AND 
 
 sm.form = '10-Q'
-and cd.firstTicker = 'EOSE'
+
 */
 
 where 1=1
 --and sm.accessionNumber = '0001493152-21-007591' 
 and sm.form in ('10-K')
---and sm.accessionNumber = '0000950170-24-024987'
---and sm."Total Current Assets" is null
+--and sm."Cost of Revenue" is null
+and cd.firstTicker is not null
+and cd.firstTicker = 'ELDN'
+Limit 1000
 ;
 
 SELECT
@@ -88,7 +92,7 @@ ORDER BY
 select * from financialData
 where 
 --prefix = 'us-gaap'
- accessionNumber = '0000950170-24-024987' 
+ accessionNumber = '0000950170-25-042754' 
 --and endDate = '2021-12-31'
 --and name like '%Dev%'
 --and prefix = 'us-gaap'

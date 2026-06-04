@@ -2,6 +2,9 @@ SET
     VARIABLE facts_path = '{{facts_path_param}}';
 
 SET
+    VARIABLE d_us_txt_path = '{{d_us_txt_path_param}}';
+
+SET
     VARIABLE submissions_path = '{{submissions_path_param}}';
 
 SET
@@ -259,6 +262,26 @@ CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
             endDate DATE,
             units VARCHAR
         );
+
+CHECKPOINT;
+
+
+
+-- Load daily OHLCV price data from stooq-format txt files under d_us_txt (all subfolders)
+CREATE OR REPLACE TABLE dailyStockPrices AS
+SELECT
+    "<TICKER>"::VARCHAR                           AS ticker,
+    strptime("<DATE>"::VARCHAR, '%Y%m%d')::DATE   AS date,
+    "<OPEN>"::DOUBLE                              AS open,
+    "<HIGH>"::DOUBLE                              AS high,
+    "<LOW>"::DOUBLE                               AS low,
+    "<CLOSE>"::DOUBLE                             AS close,
+    "<VOL>"::BIGINT                               AS volume,
+    "<OPENINT>"::BIGINT                           AS openInterest
+FROM read_csv(
+    getvariable('d_us_txt_path'),
+    header = true
+);
 
 CHECKPOINT;
 

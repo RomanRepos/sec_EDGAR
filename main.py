@@ -29,10 +29,14 @@ if __name__ == "__main__":
     for d in [Path(DATA_DIR)]:
         d.mkdir(parents=True, exist_ok=True)
 
+    #'/home/roman/Documents/EDGAR_Analytics/Data/d_us_txt/**/*.txt'
 
     conn = ddb.connect(db_path)
     inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': os.path.join(DATA_DIR, "companyfacts")},
-    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")}}
+    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")},
+    'stocks': {'link':'https://stooq.com/db/d_us_txt.zip', 'savePath': os.path.join(DATA_DIR, "d_us_txt")}
+    }
+
 
     for i in inputs_dict.values():
         download_and_extract(i['link'], i['savePath'])
