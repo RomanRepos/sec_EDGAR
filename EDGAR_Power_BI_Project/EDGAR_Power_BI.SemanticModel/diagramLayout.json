@@ -13,8 +13,7 @@
             "x": 971,
             "y": 57
           },
-          "nodeIndex": "secFilingsDb   main   companyDimension",
-          "nodeLineageTag": "6ce05292-c3fa-4898-8899-bb46cf847e85",
+          "nodeIndex": "companyDimension",
           "size": {
             "height": 300,
             "width": 234
@@ -26,10 +25,22 @@
             "x": 50,
             "y": -50
           },
-          "nodeIndex": "secFilingsDb   main   standardMetrics",
-          "nodeLineageTag": "f5354aaa-aafe-440b-9cf7-498b60a64149",
+          "nodeIndex": "standardMetrics",
           "size": {
             "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 608,
+            "y": 239.5
+          },
+          "nodeIndex": "dailyStockPrices",
+          "nodeLineageTag": "7e90db02-e004-482a-b9b3-babcfeaafc81",
+          "size": {
+            "height": 248,
             "width": 234
           },
           "zIndex": 0

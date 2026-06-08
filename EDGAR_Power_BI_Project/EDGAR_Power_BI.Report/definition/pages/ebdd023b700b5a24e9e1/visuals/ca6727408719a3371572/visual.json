@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   standardMetrics"
+                      "Entity": "standardMetrics"
                     }
                   },
                   "Property": "form"
@@ -57,7 +57,7 @@
                 "From": [
                   {
                     "Name": "s",
-                    "Entity": "secFilingsDb   main   standardMetrics",
+                    "Entity": "standardMetrics",
                     "Type": 0
                   }
                 ],
@@ -106,7 +106,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "secFilingsDb   main   standardMetrics"
+                "Entity": "standardMetrics"
               }
             },
             "Property": "form"

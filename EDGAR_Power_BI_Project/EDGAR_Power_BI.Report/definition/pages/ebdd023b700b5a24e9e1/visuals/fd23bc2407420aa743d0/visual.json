@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   standardMetrics"
+                      "Entity": "standardMetrics"
                     }
                   },
                   "Property": "accessionNumber"
@@ -36,7 +36,7 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
+                          "Entity": "standardMetrics"
                         }
                       },
                       "Property": "Operating Cash Flow"
@@ -55,7 +55,7 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
+                          "Entity": "standardMetrics"
                         }
                       },
                       "Property": "Net Income"
@@ -104,7 +104,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "secFilingsDb   main   standardMetrics"
+                "Entity": "standardMetrics"
               }
             },
             "Property": "accessionNumber"
@@ -120,7 +120,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "standardMetrics"
                   }
                 },
                 "Property": "Operating Cash Flow"
@@ -139,7 +139,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "standardMetrics"
                   }
                 },
                 "Property": "Net Income"

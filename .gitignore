@@ -64,6 +64,8 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
 nosetests.xml
 coverage.xml
 *.cover

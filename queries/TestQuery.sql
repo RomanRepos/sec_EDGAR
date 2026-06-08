@@ -143,4 +143,9 @@ where standardLabel in ('Interest Income', 'Interest Expense')
 
 SELECT DISTINCT standardLabel FROM standardizedConcepts 
                      WHERE standardLabel NOT IN ('Gross Profit', 'Operating Expenses')
-                     ORDER BY standardLabel DESC
+                     ORDER BY standardLabel DESC;
+
+select distinct exchange from dailyStockPrices;
+
+select distinct firstExchange from companyDimension;
+

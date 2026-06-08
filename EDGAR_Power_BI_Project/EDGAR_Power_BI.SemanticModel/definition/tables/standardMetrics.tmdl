@@ -1,4 +1,4 @@
-table 'secFilingsDb   main   standardMetrics'
+table standardMetrics
 	lineageTag: f5354aaa-aafe-440b-9cf7-498b60a64149
 
 	column prefix
@@ -73,16 +73,6 @@ table 'secFilingsDb   main   standardMetrics'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Gross Profit'
-		dataType: double
-		lineageTag: 00f18b7b-23ad-49bc-955b-7424ef7495f5
-		summarizeBy: sum
-		sourceColumn: Gross Profit
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column 'Research and Development Expenses'
 		dataType: double
 		lineageTag: 464a446f-1887-4a8d-9b99-ae8a72acf5d0
@@ -98,16 +88,6 @@ table 'secFilingsDb   main   standardMetrics'
 		lineageTag: 34eaf91f-5d89-4355-b14e-b923a71cc871
 		summarizeBy: sum
 		sourceColumn: Selling, General and Administrative Expenses
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Operating Expenses'
-		dataType: double
-		lineageTag: 43e449c3-6199-4f5a-9263-d6b7c72009b9
-		summarizeBy: sum
-		sourceColumn: Operating Expenses
 
 		annotation SummarizationSetBy = Automatic
 
@@ -403,7 +383,43 @@ table 'secFilingsDb   main   standardMetrics'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition 'secFilingsDb   main   standardMetrics' = m
+	column 'Weighted Averages Shares Outsanding Basic'
+		dataType: int64
+		formatString: 0
+		lineageTag: 24f642bc-e2f4-470d-b3ef-44e2e3e2320d
+		summarizeBy: sum
+		sourceColumn: Weighted Averages Shares Outsanding Basic
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weighted Averages Shares Outsanding Diluted'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad00acd3-4066-4cfc-9be6-2b82193869ca
+		summarizeBy: sum
+		sourceColumn: Weighted Averages Shares Outsanding Diluted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Common Stock Shares Outstanding'
+		dataType: int64
+		formatString: 0
+		lineageTag: ff188f59-dd56-4456-ba77-0c715fcce695
+		summarizeBy: sum
+		sourceColumn: Common Stock Shares Outstanding
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Stock Shares Outstanding Basic'
+		dataType: int64
+		formatString: 0
+		lineageTag: e47dd7ac-4f16-47b3-a403-d3ec26e67371
+		summarizeBy: sum
+		sourceColumn: Preferred Stock Shares Outstanding Basic
+
+		annotation SummarizationSetBy = Automatic
+
+	partition standardMetrics = m
 		mode: import
 		source =
 				let

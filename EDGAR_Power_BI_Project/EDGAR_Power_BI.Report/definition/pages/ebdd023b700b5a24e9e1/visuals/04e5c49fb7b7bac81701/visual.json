@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   companyDimension"
+                      "Entity": "companyDimension"
                     }
                   },
                   "Property": "entityName"
@@ -102,7 +102,7 @@
                 "From": [
                   {
                     "Name": "s",
-                    "Entity": "secFilingsDb   main   companyDimension",
+                    "Entity": "companyDimension",
                     "Type": 0
                   }
                 ],
@@ -151,7 +151,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "secFilingsDb   main   companyDimension"
+                "Entity": "companyDimension"
               }
             },
             "Property": "entityName"

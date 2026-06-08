@@ -1,4 +1,4 @@
-table 'secFilingsDb   main   companyDimension'
+table companyDimension
 	lineageTag: 6ce05292-c3fa-4898-8899-bb46cf847e85
 
 	column cik
@@ -171,23 +171,30 @@ table 'secFilingsDb   main   companyDimension'
 
 		annotation SummarizationSetBy = Automatic
 
-	column ingested_at
-		dataType: dateTime
-		formatString: General Date
-		lineageTag: 36b86baf-98c7-4a72-862d-1e4ea6cadc71
+	column firstTicker_firstExchange_Key
+		dataType: string
+		lineageTag: 790fec2e-f9b6-4c67-a30f-586352b33662
 		summarizeBy: none
-		sourceColumn: ingested_at
+		sourceColumn: firstTicker_firstExchange_Key
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'secFilingsDb   main   companyDimension' = m
+	partition companyDimension = m
 		mode: import
 		source =
 				let
 				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
-				    companyDimension_main_secFilingsDb = Source{[Item="companyDimension",Schema="main",Catalog="secFilingsDb"]}[Data]
+				    companyDimension_main_secFilingsDb = Source{[Item="companyDimension",Schema="main",Catalog="secFilingsDb"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(companyDimension_main_secFilingsDb,{"ingested_at"}),
+				    #"Added Custom" = Table.AddColumn(Table.Buffer(#"Removed Columns"), "firstTicker_firstExchange_Key", each Text.Upper([firstTicker]) & "_" & Text.Upper([firstExchange])),
+				    #"Filtered Rows1" = Table.SelectRows(#"Added Custom", each ([firstExchange] <> "OTC")),
+				    #"Filtered Rows" = Table.SelectRows(#"Filtered Rows1", each [firstTicker_firstExchange_Key] <> null and [firstTicker_firstExchange_Key] <> ""),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"firstTicker_firstExchange_Key", type text}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type",{"tickers", "exchanges"})
 				in
-				    companyDimension_main_secFilingsDb
+				    #"Removed Columns1"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

@@ -2,7 +2,7 @@ SET
     VARIABLE facts_path = '{{facts_path_param}}';
 
 SET
-    VARIABLE d_us_txt_path = '{{d_us_txt_path_param}}';
+    VARIABLE stocks_files_folder_path = '{{stocks_files_folder_path_param}}';
 
 SET
     VARIABLE submissions_path = '{{submissions_path_param}}';
@@ -194,8 +194,8 @@ SELECT
     TRUE AS isLatest,
     tickers :: VARCHAR [] AS tickers,
     exchanges :: VARCHAR [] AS exchanges,
-    firstTicker: tickers [1],
-    firstExchange: exchanges [1],
+    UPPER(tickers[1])::VARCHAR AS firstTicker,
+    UPPER(exchanges[1])::VARCHAR AS firstExchange,
     CAST(NULLIF(sic, '') AS INTEGER) :: INTEGER AS sic,
     sicDescription :: VARCHAR AS sicDescription,
     addresses.business.street1 :: VARCHAR AS street1,
@@ -265,22 +265,22 @@ CREATE OR REPLACE TABLE highConceptCoverageSubmissionsSample (
 
 CHECKPOINT;
 
-
-
 -- Load daily OHLCV price data from stooq-format txt files under d_us_txt (all subfolders)
 CREATE OR REPLACE TABLE dailyStockPrices AS
 SELECT
-    "<TICKER>"::VARCHAR                           AS ticker,
-    strptime("<DATE>"::VARCHAR, '%Y%m%d')::DATE   AS date,
-    "<OPEN>"::DOUBLE                              AS open,
-    "<HIGH>"::DOUBLE                              AS high,
-    "<LOW>"::DOUBLE                               AS low,
-    "<CLOSE>"::DOUBLE                             AS close,
-    "<VOL>"::BIGINT                               AS volume,
-    "<OPENINT>"::BIGINT                           AS openInterest
+    "<TICKER>"::VARCHAR                                                         AS ticker,
+    strptime("<DATE>"::VARCHAR, '%Y%m%d')::DATE                                 AS date,
+    "<OPEN>"::DOUBLE                                                            AS open,
+    "<HIGH>"::DOUBLE                                                            AS high,
+    "<LOW>"::DOUBLE                                                             AS low,
+    "<CLOSE>"::DOUBLE                                                           AS close,
+    "<VOL>"::BIGINT                                                             AS volume,
+    Upper(regexp_extract(filename, '/us/(\w+) \w+/', 1))::VARCHAR                     AS exchange,
+    Upper(regexp_extract(filename, '/us/\w+ (\w+)/', 1))::VARCHAR                     AS instrumentType
 FROM read_csv(
-    getvariable('d_us_txt_path'),
-    header = true
+    getvariable('stocks_files_folder_path'),
+    header = true,
+    filename = true
 );
 
 CHECKPOINT;
