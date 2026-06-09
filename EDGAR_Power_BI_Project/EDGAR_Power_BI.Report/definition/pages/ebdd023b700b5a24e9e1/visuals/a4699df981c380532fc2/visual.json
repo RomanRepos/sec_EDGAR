@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "a4699df981c380532fc2",
   "position": {
-    "x": 621.64948453608247,
-    "y": 0,
+    "x": 487.52556237218818,
+    "y": 23.558282208588956,
     "z": 0,
-    "height": 280.20618556701032,
-    "width": 658.14432989690715,
+    "height": 280.08179959100204,
+    "width": 658.32310838445812,
     "tabOrder": 0
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   standardMetrics"
+                      "Entity": "Date"
                     }
                   },
-                  "Property": "endDate"
+                  "Property": "Date"
                 }
               },
-              "queryRef": "secFilingsDb   main   standardMetrics.endDate",
-              "nativeQueryRef": "endDate",
+              "queryRef": "Date.Date",
+              "nativeQueryRef": "Date",
               "active": true
             }
           ]
@@ -41,17 +41,17 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
+                          "Entity": "standardMetrics"
                         }
                       },
-                      "Property": "Revenue"
+                      "Property": "Return on Assets"
                     }
                   },
-                  "Function": 0
+                  "Function": 1
                 }
               },
-              "queryRef": "Sum(secFilingsDb   main   standardMetrics.Revenue)",
-              "nativeQueryRef": "Sum of Revenue"
+              "queryRef": "CountNonNull(standardMetrics.Return on Assets)",
+              "nativeQueryRef": "Average of Return on Assets"
             },
             {
               "field": {
@@ -60,17 +60,17 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
+                          "Entity": "standardMetrics"
                         }
                       },
-                      "Property": "Operating Cash Flow"
+                      "Property": "Net Profit Margin"
                     }
                   },
-                  "Function": 0
+                  "Function": 1
                 }
               },
-              "queryRef": "Sum(secFilingsDb   main   standardMetrics.Operating Cash Flow)",
-              "nativeQueryRef": "Sum of Operating Cash Flow"
+              "queryRef": "Avg(standardMetrics.Net Profit Margin)",
+              "nativeQueryRef": "Average of Net Profit Margin"
             },
             {
               "field": {
@@ -79,17 +79,40 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "secFilingsDb   main   standardMetrics"
+                          "Entity": "standardMetrics"
                         }
                       },
-                      "Property": "Net Income"
+                      "Property": "Operating Margin"
                     }
                   },
-                  "Function": 0
+                  "Function": 1
                 }
               },
-              "queryRef": "Sum(secFilingsDb   main   standardMetrics.Net Income)",
-              "nativeQueryRef": "Sum of Net Income"
+              "queryRef": "CountNonNull(standardMetrics.Operating Margin)",
+              "nativeQueryRef": "Average of Operating Margin"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dailyStockPrices"
+                        }
+                      },
+                      "Property": "close"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(dailyStockPrices.close)",
+              "nativeQueryRef": "Average of close"
             }
           ]
         }
@@ -101,10 +124,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "Date"
                   }
                 },
-                "Property": "endDate"
+                "Property": "Date"
               }
             },
             "direction": "Ascending"
@@ -113,77 +136,111 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "fe1fa2265c2b505b9b0b",
+        "name": "5d025d0bd9067dc04a72",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "secFilingsDb   main   standardMetrics"
+                "Entity": "Date"
               }
             },
-            "Property": "endDate"
+            "Property": "Date"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "78c2d2cc58ea56db0936",
+        "name": "b773d300587146997a4b",
         "field": {
           "Aggregation": {
             "Expression": {
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "dailyStockPrices"
                   }
                 },
-                "Property": "Revenue"
+                "Property": "close"
               }
             },
-            "Function": 0
+            "Function": 1
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "4d9373d2156b0a2c866d",
+        "name": "b5d38062230ca28049d4",
         "field": {
           "Aggregation": {
             "Expression": {
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "standardMetrics"
                   }
                 },
-                "Property": "Operating Cash Flow"
+                "Property": "Net Profit Margin"
               }
             },
-            "Function": 0
+            "Function": 1
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "5ae3f19c97d46406100b",
+        "name": "02e9a684bed23500360d",
         "field": {
           "Aggregation": {
             "Expression": {
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "secFilingsDb   main   standardMetrics"
+                    "Entity": "standardMetrics"
                   }
                 },
-                "Property": "Net Income"
+                "Property": "Return on Assets"
               }
             },
-            "Function": 0
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "14855d45b5e0dd7b9042",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "standardMetrics"
+                  }
+                },
+                "Property": "Operating Margin"
+              }
+            },
+            "Function": 1
           }
         },
         "type": "Advanced"

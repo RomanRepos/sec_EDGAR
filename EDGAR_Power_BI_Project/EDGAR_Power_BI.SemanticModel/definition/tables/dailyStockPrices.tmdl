@@ -1,0 +1,110 @@
+table dailyStockPrices
+	lineageTag: 7e90db02-e004-482a-b9b3-babcfeaafc81
+
+	column ticker
+		dataType: string
+		lineageTag: dcd9b146-fefa-434b-af39-80ede1daf8ae
+		summarizeBy: none
+		sourceColumn: ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b57cd417-2ab8-4989-8de5-92eeaa87c42e
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column open
+		dataType: double
+		lineageTag: 82f84dc6-affb-4f6f-9c2a-cba3447ed74e
+		summarizeBy: sum
+		sourceColumn: open
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column high
+		dataType: double
+		lineageTag: 27237f98-c416-46c3-86c5-97ec374b7006
+		summarizeBy: sum
+		sourceColumn: high
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column low
+		dataType: double
+		lineageTag: a698ecdc-d598-427b-a5ea-537596a22782
+		summarizeBy: sum
+		sourceColumn: low
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column close
+		dataType: double
+		lineageTag: ccc0c18e-d290-401a-afef-3289885bfe3e
+		summarizeBy: sum
+		sourceColumn: close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column volume
+		dataType: int64
+		formatString: 0
+		lineageTag: a01b3eff-902e-4698-8ec5-b2f9b15d30c8
+		summarizeBy: sum
+		sourceColumn: volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column exchange
+		dataType: string
+		lineageTag: 81c0d796-a58d-463a-a2bb-4f94345137e8
+		summarizeBy: none
+		sourceColumn: exchange
+
+		annotation SummarizationSetBy = Automatic
+
+	column instrumentType
+		dataType: string
+		lineageTag: cbe999da-34cd-4e81-9219-c5353779415c
+		summarizeBy: none
+		sourceColumn: instrumentType
+
+		annotation SummarizationSetBy = Automatic
+
+	column exchangeTickerKey
+		dataType: string
+		lineageTag: e651d6e9-818a-4c59-a477-b4a66afd66a0
+		summarizeBy: none
+		sourceColumn: exchangeTickerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dailyStockPrices = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only",
+				    "Select * from dailyStockPrices where exchange in ('NYSE', 'NASDAQ') and date >= DATE'2000-01-01';"),
+				    #"Added Custom" = Table.AddColumn(Source, "exchangeTickerKey", each [exchange]&"_"&[ticker]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"exchangeTickerKey", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

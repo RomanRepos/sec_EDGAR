@@ -32,7 +32,9 @@ if __name__ == "__main__":
 
     conn = ddb.connect(db_path)
     inputs_dict = {'facts': {'link':'https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip', 'savePath': os.path.join(DATA_DIR, "companyfacts")},
-    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")}}
+    'submissions': {'link':'https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip', 'savePath': os.path.join(DATA_DIR, "submissions")}
+    }
+
 
     for i in inputs_dict.values():
         download_and_extract(i['link'], i['savePath'])
@@ -42,7 +44,8 @@ if __name__ == "__main__":
     load_sql_script = Template(load_query("LoadDataQueries"))
 
     final_sql = load_sql_script.render(facts_path_param=os.path.join(inputs_dict['facts']['savePath'], '*.json'), submissions_path_param=os.path.join(inputs_dict['submissions']['savePath'], '*.json'),
-                                        standard_line_items_path_param=standard_line_items_path)
+                                        standard_line_items_path_param=standard_line_items_path,
+                                        stocks_files_folder_path_param=os.path.join(DATA_DIR, "d_us_txt/**/*.txt"))
     
     print("Running Queries")
     for statement in final_sql.split(';'):

@@ -8,12 +8,15 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["secFilingsDb   main   companyDimension","secFilingsDb   main   standardMetrics"]
+annotation PBI_QueryOrder = ["standardMetrics","companyDimension","dailyStockPrices","driverName","databasePath","measuresTable"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table 'secFilingsDb   main   companyDimension'
-ref table 'secFilingsDb   main   standardMetrics'
+ref table companyDimension
+ref table standardMetrics
+ref table dailyStockPrices
+ref table Date
+ref table measuresTable
 
 ref cultureInfo en-US
 

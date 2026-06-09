@@ -4,10 +4,10 @@
   "position": {
     "x": 56.288659793814432,
     "y": 420,
-    "z": 2000,
+    "z": 1000,
     "height": 300,
     "width": 300,
-    "tabOrder": 2000
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   standardMetrics"
+                      "Entity": "standardMetrics"
                     }
                   },
                   "Property": "form"
@@ -57,7 +57,7 @@
                 "From": [
                   {
                     "Name": "s",
-                    "Entity": "secFilingsDb   main   standardMetrics",
+                    "Entity": "standardMetrics",
                     "Type": 0
                   }
                 ],
@@ -97,23 +97,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "7b94e2b6789a4e15464a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "secFilingsDb   main   standardMetrics"
-              }
-            },
-            "Property": "form"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "04e5c49fb7b7bac81701",
+  "name": "f316aa0d5e1aebe8c032",
   "position": {
-    "x": 65.5885363357216,
-    "y": 60.429887410440116,
-    "z": 1000,
-    "height": 299.93858751279424,
-    "width": 299.93858751279424,
-    "tabOrder": 1000
+    "x": 68.711656441717793,
+    "y": 59.550102249488752,
+    "z": 4000,
+    "height": 280.08179959100204,
+    "width": 299.71370143149284,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "secFilingsDb   main   companyDimension"
+                      "Entity": "companyDimension"
                     }
                   },
                   "Property": "entityName"
                 }
               },
-              "queryRef": "secFilingsDb   main   companyDimension.entityName",
+              "queryRef": "companyDimension.entityName",
               "nativeQueryRef": "entityName",
               "active": true
             }
@@ -34,6 +34,48 @@
         }
       }
     },
+    "expansionStates": [
+      {
+        "roles": [
+          "Values"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "companyDimension.entityName"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "companyDimension"
+                    }
+                  },
+                  "Property": "entityName"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "null"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
     "objects": {
       "data": [
         {
@@ -63,8 +105,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "s",
-                    "Entity": "secFilingsDb   main   companyDimension",
+                    "Name": "c",
+                    "Entity": "companyDimension",
                     "Type": 0
                   }
                 ],
@@ -76,7 +118,7 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "s"
+                                "Source": "c"
                               }
                             },
                             "Property": "entityName"
@@ -84,7 +126,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "'woodwar'"
+                            "Value": "'woodward'"
                           }
                         }
                       }
@@ -101,8 +143,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "s",
-                    "Entity": "secFilingsDb   main   companyDimension",
+                    "Name": "c",
+                    "Entity": "companyDimension",
                     "Type": 0
                   }
                 ],
@@ -115,7 +157,7 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "s"
+                                  "Source": "c"
                                 }
                               },
                               "Property": "entityName"
@@ -146,12 +188,12 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "a8ddd9d93ad1d4731178",
+        "name": "497838cf0085924b18b6",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "secFilingsDb   main   companyDimension"
+                "Entity": "companyDimension"
               }
             },
             "Property": "entityName"

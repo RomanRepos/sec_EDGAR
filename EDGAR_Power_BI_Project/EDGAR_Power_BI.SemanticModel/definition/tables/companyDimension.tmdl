@@ -1,4 +1,4 @@
-table 'secFilingsDb   main   companyDimension'
+table companyDimension
 	lineageTag: 6ce05292-c3fa-4898-8899-bb46cf847e85
 
 	column cik
@@ -78,7 +78,7 @@ table 'secFilingsDb   main   companyDimension'
 		dataType: int64
 		formatString: 0
 		lineageTag: 40264e21-fc4c-4db2-a101-aa3883f66713
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: sic
 
 		annotation SummarizationSetBy = Automatic
@@ -171,23 +171,28 @@ table 'secFilingsDb   main   companyDimension'
 
 		annotation SummarizationSetBy = Automatic
 
-	column ingested_at
-		dataType: dateTime
-		formatString: General Date
-		lineageTag: 36b86baf-98c7-4a72-862d-1e4ea6cadc71
+	column exchangeTickerKey
+		dataType: string
+		lineageTag: a33bf33e-2432-4e6e-84b3-86cace5fb096
 		summarizeBy: none
-		sourceColumn: ingested_at
+		sourceColumn: exchangeTickerKey
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'secFilingsDb   main   companyDimension' = m
+	partition companyDimension = m
 		mode: import
 		source =
 				let
-				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
-				    companyDimension_main_secFilingsDb = Source{[Item="companyDimension",Schema="main",Catalog="secFilingsDb"]}[Data]
+				    Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only",
+				    "Select * from companyDimension where firstExchange in ('NYSE', 'NASDAQ') and firstTicker is not null;"),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"ingested_at", "tickers", "exchanges"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Columns", "exchangeTickerKey", each [firstExchange] & "_" & [firstTicker]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"exchangeTickerKey", type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"exchangeTickerKey"})
 				in
-				    companyDimension_main_secFilingsDb
+				    #"Removed Duplicates"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

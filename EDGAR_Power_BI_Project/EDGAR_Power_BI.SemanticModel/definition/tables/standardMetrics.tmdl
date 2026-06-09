@@ -1,4 +1,4 @@
-table 'secFilingsDb   main   standardMetrics'
+table standardMetrics
 	lineageTag: f5354aaa-aafe-440b-9cf7-498b60a64149
 
 	column prefix
@@ -73,16 +73,6 @@ table 'secFilingsDb   main   standardMetrics'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Gross Profit'
-		dataType: double
-		lineageTag: 00f18b7b-23ad-49bc-955b-7424ef7495f5
-		summarizeBy: sum
-		sourceColumn: Gross Profit
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column 'Research and Development Expenses'
 		dataType: double
 		lineageTag: 464a446f-1887-4a8d-9b99-ae8a72acf5d0
@@ -103,41 +93,11 @@ table 'secFilingsDb   main   standardMetrics'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Operating Expenses'
-		dataType: double
-		lineageTag: 43e449c3-6199-4f5a-9263-d6b7c72009b9
-		summarizeBy: sum
-		sourceColumn: Operating Expenses
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column 'Operating Income'
 		dataType: double
 		lineageTag: dc40fa35-0903-4582-810b-bc80d25f18b9
 		summarizeBy: sum
 		sourceColumn: Operating Income
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Interest Expense'
-		dataType: double
-		lineageTag: f148a8b9-870f-419d-97c3-89d4fcc31f58
-		summarizeBy: sum
-		sourceColumn: Interest Expense
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Interest Income'
-		dataType: double
-		lineageTag: 96dd392a-bfd2-464f-9786-17194add9a53
-		summarizeBy: sum
-		sourceColumn: Interest Income
 
 		annotation SummarizationSetBy = Automatic
 
@@ -403,14 +363,194 @@ table 'secFilingsDb   main   standardMetrics'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition 'secFilingsDb   main   standardMetrics' = m
+	column 'Weighted Averages Shares Outsanding Basic'
+		dataType: int64
+		formatString: 0
+		lineageTag: 24f642bc-e2f4-470d-b3ef-44e2e3e2320d
+		summarizeBy: sum
+		sourceColumn: Weighted Averages Shares Outsanding Basic
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weighted Averages Shares Outsanding Diluted'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad00acd3-4066-4cfc-9be6-2b82193869ca
+		summarizeBy: sum
+		sourceColumn: Weighted Averages Shares Outsanding Diluted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Common Stock Shares Outstanding'
+		dataType: int64
+		formatString: 0
+		lineageTag: ff188f59-dd56-4456-ba77-0c715fcce695
+		summarizeBy: sum
+		sourceColumn: Common Stock Shares Outstanding
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Stock Shares Outstanding Basic'
+		dataType: int64
+		formatString: 0
+		lineageTag: e47dd7ac-4f16-47b3-a403-d3ec26e67371
+		summarizeBy: sum
+		sourceColumn: Preferred Stock Shares Outstanding Basic
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Interest Expense'
+		dataType: int64
+		formatString: 0
+		lineageTag: 887f2051-68ac-4d7f-ba0f-5d54ab78148c
+		summarizeBy: sum
+		sourceColumn: Interest Expense
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Interest Income'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a09b9be-3e87-4a99-b521-83bb701fa9a5
+		summarizeBy: sum
+		sourceColumn: Interest Income
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gross Profit' =
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
+			    BLANK (),
+			    standardMetrics[Revenue] - standardMetrics[Cost of Revenue]
+			)
+		dataType: double
+		lineageTag: 9a8b7c6d-5e4f-3210-9876-543210fedcba
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gross Profit Margin' =
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Revenue] - standardMetrics[Cost of Revenue],
+			        standardMetrics[Revenue]
+			    )
+			)
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 8f9e0d1c-2b3a-4567-89ab-cdef01234567
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operating Margin' =
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Operating Income] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Operating Income],
+			        standardMetrics[Revenue]
+			    )
+			)
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 7e8d9c0b-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column EBITDA =
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] )
+			        || ISBLANK ( standardMetrics[Interest Expense] )
+			        || ISBLANK ( standardMetrics[Income Tax Expense] )
+			        || ISBLANK ( standardMetrics[Depreciation and Amortization] ),
+			    BLANK (),
+			    standardMetrics[Net Income]
+			        + standardMetrics[Interest Expense]
+			        + standardMetrics[Income Tax Expense]
+			        + standardMetrics[Depreciation and Amortization]
+			)
+		dataType: double
+		lineageTag: 6d7c8b9a-0f1e-2d3c-4b5a-6978a8b9c0d1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EBITDA Margin' =
+			IF (
+			    ISBLANK ( standardMetrics[EBITDA] ) || ISBLANK ( standardMetrics[Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[EBITDA],
+			        standardMetrics[Revenue]
+			    )
+			)
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 5c6b7a89-ef01-2345-6789-abcdef012345
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Profit Margin' =
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Net Income],
+			        standardMetrics[Revenue]
+			    )
+			)
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 4b5a6978-de90-1234-5678-9abcdef01234
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Return on Assets' =
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Total Assets] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Net Income],
+			        standardMetrics[Total Assets]
+			    )
+			)
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 3a4b5c6d-cd89-0123-4567-89abcdef0123
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition standardMetrics = m
 		mode: import
-		source =
+		source = ```
 				let
-				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
-				    standardMetrics_main_secFilingsDb = Source{[Item="standardMetrics",Schema="main",Catalog="secFilingsDb"]}[Data]
+				  Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only", 
+				    "Select * from standardMetrics;"),
+				    #"Added Custom" = Table.AddColumn(Source, "Interest Expense Clean", each if [Interest Expense]<>null and [Interest Income]<>null then
+				if [Interest Expense] = [Interest Income] and [Interest Expense] < 0 then Number.Abs([Interest Expense]) 
+				else if [Interest Expense] = [Interest Income] and [Interest Expense] >= 0 then null else Number.Abs([Interest Expense])
+				else if [Interest Expense]<>null and [Interest Income]=null then Number.Abs([Interest Expense])
+				else null),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Interest Income Clean", each if [Interest Expense]<>null and [Interest Income]<>null then
+				if [Interest Expense] = [Interest Income] and [Interest Income] >= 0 then [Interest Income]
+				else if [Interest Expense] = [Interest Income] and [Interest Income] < 0 then null else if [Interest Income]<0 then null  else [Interest Income]
+				else if [Interest Income]<>null and [Interest Expense]=null and [Interest Income]>=0 then [Interest Income]
+				else null),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"Interest Expense Clean", Int64.Type}, {"Interest Income Clean", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Interest Expense", "Interest Income"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Interest Expense Clean", "Interest Expense"}, {"Interest Income Clean", "Interest Income"}})
 				in
-				    standardMetrics_main_secFilingsDb
+				    #"Renamed Columns"
+				```
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

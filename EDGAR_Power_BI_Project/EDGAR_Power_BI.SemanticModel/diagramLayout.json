@@ -10,26 +10,65 @@
       "nodes": [
         {
           "location": {
-            "x": 971,
-            "y": 57
+            "x": 321,
+            "y": 584.375
           },
-          "nodeIndex": "secFilingsDb   main   companyDimension",
+          "nodeIndex": "companyDimension",
           "nodeLineageTag": "6ce05292-c3fa-4898-8899-bb46cf847e85",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 50,
-            "y": -50
+            "x": 1019,
+            "y": 662.375
           },
-          "nodeIndex": "secFilingsDb   main   standardMetrics",
+          "nodeIndex": "standardMetrics",
           "nodeLineageTag": "f5354aaa-aafe-440b-9cf7-498b60a64149",
           "size": {
             "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 745,
+            "y": 88.875
+          },
+          "nodeIndex": "dailyStockPrices",
+          "nodeLineageTag": "7e90db02-e004-482a-b9b3-babcfeaafc81",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1166,
+            "y": 283.125
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "e4a8b1c2-d3e4-5f67-8901-23456789abcd",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1129,
+            "y": 414.375
+          },
+          "nodeIndex": "measuresTable",
+          "nodeLineageTag": "c6b534f0-6c7d-4b67-bc24-36c408718985",
+          "size": {
+            "height": 104,
             "width": 234
           },
           "zIndex": 0
