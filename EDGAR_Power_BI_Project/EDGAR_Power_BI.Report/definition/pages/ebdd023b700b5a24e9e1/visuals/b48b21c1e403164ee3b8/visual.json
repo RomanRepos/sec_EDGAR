@@ -3,11 +3,11 @@
   "name": "b48b21c1e403164ee3b8",
   "position": {
     "x": 983.5051546391752,
-    "y": 368.04123711340208,
-    "z": 4000,
+    "y": 360,
+    "z": 3000,
     "height": 300,
     "width": 296.28865979381442,
-    "tabOrder": 4000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "standardMetrics"
+                      "Entity": "Date"
                     }
                   },
-                  "Property": "endDate"
+                  "Property": "Date"
                 }
               },
-              "queryRef": "secFilingsDb   main   standardMetrics.endDate",
-              "nativeQueryRef": "endDate",
+              "queryRef": "Date.Date",
+              "nativeQueryRef": "Date",
               "active": true
             }
           ]
@@ -40,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "standardMetrics"
+                    "Entity": "Date"
                   }
                 },
-                "Property": "endDate"
+                "Property": "Date"
               }
             },
             "direction": "Ascending"
@@ -59,7 +59,7 @@
             "startDate": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2007-11-24T03:08:03.153'"
+                  "Value": "datetime'2019-09-06T01:00:00'"
                 }
               }
             },
@@ -81,8 +81,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "s",
-                    "Entity": "standardMetrics",
+                    "Name": "d",
+                    "Entity": "Date",
                     "Type": 0
                   }
                 ],
@@ -95,15 +95,15 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "s"
+                                "Source": "d"
                               }
                             },
-                            "Property": "endDate"
+                            "Property": "Date"
                           }
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "datetime'2007-11-24T00:00:00'"
+                            "Value": "datetime'2019-09-06T00:00:00'"
                           }
                         }
                       }
@@ -117,5 +117,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "089bcb3490a16c06d293",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

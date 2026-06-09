@@ -418,119 +418,112 @@ table standardMetrics
 		annotation SummarizationSetBy = Automatic
 
 	column 'Gross Profit' =
-				IF (
-				    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
-				    BLANK (),
-				    standardMetrics[Revenue] - standardMetrics[Cost of Revenue]
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
+			    BLANK (),
+			    standardMetrics[Revenue] - standardMetrics[Cost of Revenue]
+			)
 		dataType: double
 		lineageTag: 9a8b7c6d-5e4f-3210-9876-543210fedcba
 		summarizeBy: sum
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Gross Profit Margin' =
-				IF (
-				    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
-				    BLANK (),
-				    DIVIDE (
-				        standardMetrics[Revenue] - standardMetrics[Cost of Revenue],
-				        standardMetrics[Revenue]
-				    )
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Cost of Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Revenue] - standardMetrics[Cost of Revenue],
+			        standardMetrics[Revenue]
+			    )
+			)
 		dataType: double
 		formatString: 0.00%
 		lineageTag: 8f9e0d1c-2b3a-4567-89ab-cdef01234567
 		summarizeBy: none
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Operating Margin' =
-				IF (
-				    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Operating Income] ),
-				    BLANK (),
-				    DIVIDE (
-				        standardMetrics[Operating Income],
-				        standardMetrics[Revenue]
-				    )
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Revenue] ) || ISBLANK ( standardMetrics[Operating Income] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Operating Income],
+			        standardMetrics[Revenue]
+			    )
+			)
 		dataType: double
 		formatString: 0.00%
 		lineageTag: 7e8d9c0b-1a2b-3c4d-5e6f-7a8b9c0d1e2f
 		summarizeBy: none
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column EBITDA =
-				IF (
-				    ISBLANK ( standardMetrics[Net Income] )
-				        || ISBLANK ( standardMetrics[Interest Expense] )
-				        || ISBLANK ( standardMetrics[Income Tax Expense] )
-				        || ISBLANK ( standardMetrics[Depreciation and Amortization] ),
-				    BLANK (),
-				    standardMetrics[Net Income]
-				        + standardMetrics[Interest Expense]
-				        + standardMetrics[Income Tax Expense]
-				        + standardMetrics[Depreciation and Amortization]
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] )
+			        || ISBLANK ( standardMetrics[Interest Expense] )
+			        || ISBLANK ( standardMetrics[Income Tax Expense] )
+			        || ISBLANK ( standardMetrics[Depreciation and Amortization] ),
+			    BLANK (),
+			    standardMetrics[Net Income]
+			        + standardMetrics[Interest Expense]
+			        + standardMetrics[Income Tax Expense]
+			        + standardMetrics[Depreciation and Amortization]
+			)
 		dataType: double
 		lineageTag: 6d7c8b9a-0f1e-2d3c-4b5a-6978a8b9c0d1
 		summarizeBy: sum
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'EBITDA Margin' =
-				IF (
-				    ISBLANK ( standardMetrics[EBITDA] ) || ISBLANK ( standardMetrics[Revenue] ),
-				    BLANK (),
-				    DIVIDE (
-				        standardMetrics[EBITDA],
-				        standardMetrics[Revenue]
-				    )
-				)
+			IF (
+			    ISBLANK ( standardMetrics[EBITDA] ) || ISBLANK ( standardMetrics[Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[EBITDA],
+			        standardMetrics[Revenue]
+			    )
+			)
 		dataType: double
 		formatString: 0.00%
 		lineageTag: 5c6b7a89-ef01-2345-6789-abcdef012345
 		summarizeBy: none
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Net Profit Margin' =
-				IF (
-				    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Revenue] ),
-				    BLANK (),
-				    DIVIDE (
-				        standardMetrics[Net Income],
-				        standardMetrics[Revenue]
-				    )
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Revenue] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Net Income],
+			        standardMetrics[Revenue]
+			    )
+			)
 		dataType: double
 		formatString: 0.00%
 		lineageTag: 4b5a6978-de90-1234-5678-9abcdef01234
 		summarizeBy: none
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Return on Assets' =
-				IF (
-				    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Total Assets] ),
-				    BLANK (),
-				    DIVIDE (
-				        standardMetrics[Net Income],
-				        standardMetrics[Total Assets]
-				    )
-				)
+			IF (
+			    ISBLANK ( standardMetrics[Net Income] ) || ISBLANK ( standardMetrics[Total Assets] ),
+			    BLANK (),
+			    DIVIDE (
+			        standardMetrics[Net Income],
+			        standardMetrics[Total Assets]
+			    )
+			)
 		dataType: double
 		formatString: 0.00%
 		lineageTag: 3a4b5c6d-cd89-0123-4567-89abcdef0123
 		summarizeBy: none
-		type: calculated
 
 		annotation SummarizationSetBy = Automatic
 

@@ -4,10 +4,10 @@
   "position": {
     "x": 384.68781985670415,
     "y": 344.89252814738995,
-    "z": 3000,
+    "z": 2000,
     "height": 299.93858751279424,
     "width": 515.86489252814738,
-    "tabOrder": 3000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "tableEx",
@@ -95,61 +95,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "ae8b35e3952010384b4b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "standardMetrics"
-              }
-            },
-            "Property": "accessionNumber"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "4a763dc3b0d81eb6c862",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "standardMetrics"
-                  }
-                },
-                "Property": "Operating Cash Flow"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b98469b0d6c018adc48a",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "standardMetrics"
-                  }
-                },
-                "Property": "Net Income"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

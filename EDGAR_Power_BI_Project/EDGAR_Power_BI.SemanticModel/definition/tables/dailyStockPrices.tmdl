@@ -98,7 +98,7 @@ table dailyStockPrices
 		source =
 				let
 				    Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only",
-				    "Select * from dailyStockPrices where exchange in ('NYSE', 'NASDAQ');"),
+				    "Select * from dailyStockPrices where exchange in ('NYSE', 'NASDAQ') and date >= DATE'2000-01-01';"),
 				    #"Added Custom" = Table.AddColumn(Source, "exchangeTickerKey", each [exchange]&"_"&[ticker]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"exchangeTickerKey", type text}})
 				in
@@ -106,5 +106,5 @@ table dailyStockPrices
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

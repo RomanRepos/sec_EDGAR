@@ -4,10 +4,10 @@
   "position": {
     "x": 68.711656441717793,
     "y": 59.550102249488752,
-    "z": 4001,
+    "z": 4000,
     "height": 280.08179959100204,
     "width": 299.71370143149284,
-    "tabOrder": 4001
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "slicer",
@@ -126,13 +126,54 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "'apple'"
+                            "Value": "'woodward'"
                           }
                         }
                       }
                     },
                     "Annotations": {
                       "PowerBI.MParameterBehavior": 1
+                    }
+                  }
+                ]
+              }
+            },
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "c",
+                    "Entity": "companyDimension",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "c"
+                                }
+                              },
+                              "Property": "entityName"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'Woodward, Inc.'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
                     }
                   }
                 ]
@@ -147,7 +188,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "66b3fc3070b973c17ca1",
+        "name": "497838cf0085924b18b6",
         "field": {
           "Column": {
             "Expression": {
