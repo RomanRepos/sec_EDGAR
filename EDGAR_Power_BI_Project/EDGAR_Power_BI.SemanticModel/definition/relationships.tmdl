@@ -2,3 +2,15 @@ relationship AutoDetected_4b32bcc9-0ef0-436b-98ff-3fe8ec7694ef
 	fromColumn: standardMetrics.cik
 	toColumn: companyDimension.cik
 
+relationship 23943379-ee23-ef54-98a8-38153f6bbe6d
+	fromColumn: dailyStockPrices.exchangeTickerKey
+	toColumn: companyDimension.exchangeTickerKey
+
+relationship 3bc91550-575c-435f-139f-ced5fd9d2c5a
+	fromColumn: dailyStockPrices.date
+	toColumn: Date.Date
+
+relationship ab8bc4cd-e8ea-9410-2804-c7184295a5ac
+	fromColumn: standardMetrics.endDate
+	toColumn: Date.Date
+

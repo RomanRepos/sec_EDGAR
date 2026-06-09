@@ -85,15 +85,24 @@ table dailyStockPrices
 
 		annotation SummarizationSetBy = Automatic
 
+	column exchangeTickerKey
+		dataType: string
+		lineageTag: e651d6e9-818a-4c59-a477-b4a66afd66a0
+		summarizeBy: none
+		sourceColumn: exchangeTickerKey
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dailyStockPrices = m
 		mode: import
 		source =
 				let
-				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
-				    standardMetrics_main_secFilingsDb = Source{[Item="dailyStockPrices",Schema="main",Catalog="secFilingsDb"]}[Data],
-				    FilteredExchanges = Table.SelectRows(standardMetrics_main_secFilingsDb, each [exchange] = "NYSE" or [exchange] = "NASDAQ")
+				    Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only",
+				    "Select * from dailyStockPrices where exchange in ('NYSE', 'NASDAQ');"),
+				    #"Added Custom" = Table.AddColumn(Source, "exchangeTickerKey", each [exchange]&"_"&[ticker]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"exchangeTickerKey", type text}})
 				in
-				    FilteredExchanges
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 

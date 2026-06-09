@@ -268,15 +268,15 @@ CHECKPOINT;
 -- Load daily OHLCV price data from stooq-format txt files under d_us_txt (all subfolders)
 CREATE OR REPLACE TABLE dailyStockPrices AS
 SELECT
-    "<TICKER>"::VARCHAR                                                         AS ticker,
+    Replace(split_part("<TICKER>", '.', 1), '_', '-')::VARCHAR                  AS ticker,
     strptime("<DATE>"::VARCHAR, '%Y%m%d')::DATE                                 AS date,
     "<OPEN>"::DOUBLE                                                            AS open,
     "<HIGH>"::DOUBLE                                                            AS high,
     "<LOW>"::DOUBLE                                                             AS low,
     "<CLOSE>"::DOUBLE                                                           AS close,
     "<VOL>"::BIGINT                                                             AS volume,
-    Upper(regexp_extract(filename, '/us/(\w+) \w+/', 1))::VARCHAR                     AS exchange,
-    Upper(regexp_extract(filename, '/us/\w+ (\w+)/', 1))::VARCHAR                     AS instrumentType
+    Upper(regexp_extract(filename, '/us/(\w+) \w+/', 1))::VARCHAR               AS exchange,
+    Upper(regexp_extract(filename, '/us/\w+ (\w+)/', 1))::VARCHAR               AS instrumentType
 FROM read_csv(
     getvariable('stocks_files_folder_path'),
     header = true,

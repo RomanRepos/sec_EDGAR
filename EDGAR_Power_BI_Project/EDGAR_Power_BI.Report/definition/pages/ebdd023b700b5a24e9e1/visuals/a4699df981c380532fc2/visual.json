@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "a4699df981c380532fc2",
   "position": {
-    "x": 621.64948453608247,
-    "y": 0,
+    "x": 487.52556237218818,
+    "y": 23.558282208588956,
     "z": 0,
-    "height": 280.20618556701032,
-    "width": 658.14432989690715,
+    "height": 280.08179959100204,
+    "width": 658.32310838445812,
     "tabOrder": 0
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "standardMetrics"
+                      "Entity": "Date"
                     }
                   },
-                  "Property": "endDate"
+                  "Property": "Date"
                 }
               },
-              "queryRef": "secFilingsDb   main   standardMetrics.endDate",
-              "nativeQueryRef": "endDate",
+              "queryRef": "Date.Date",
+              "nativeQueryRef": "Date",
               "active": true
             }
           ]
@@ -92,6 +92,29 @@
               "nativeQueryRef": "Sum of Net Income"
             }
           ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dailyStockPrices"
+                        }
+                      },
+                      "Property": "close"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(dailyStockPrices.close)",
+              "nativeQueryRef": "Average of close"
+            }
+          ]
         }
       },
       "sortDefinition": {
@@ -101,10 +124,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "standardMetrics"
+                    "Entity": "Date"
                   }
                 },
-                "Property": "endDate"
+                "Property": "Date"
               }
             },
             "direction": "Ascending"
@@ -117,20 +140,6 @@
   },
   "filterConfig": {
     "filters": [
-      {
-        "name": "fe1fa2265c2b505b9b0b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "standardMetrics"
-              }
-            },
-            "Property": "endDate"
-          }
-        },
-        "type": "Categorical"
-      },
       {
         "name": "78c2d2cc58ea56db0936",
         "field": {
@@ -187,6 +196,39 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "ec86a0ad1aad30d85e95",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dailyStockPrices"
+                  }
+                },
+                "Property": "close"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b1a9f7a0b60245d7d0e2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

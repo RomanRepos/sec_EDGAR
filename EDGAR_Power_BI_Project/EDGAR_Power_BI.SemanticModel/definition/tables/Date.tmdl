@@ -1,0 +1,77 @@
+table Date
+	lineageTag: e4a8b1c2-d3e4-5f67-8901-23456789abcd
+	dataCategory: Time
+
+	column Date
+		isKey
+		lineageTag: f1234abc-5678-90de-f123-456789abcdef
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		lineageTag: a2345bcd-6789-01ef-2345-6789abcdef01
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: b3456cde-789a-12f0-3456-789abcdef012
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		lineageTag: c4567def-89ab-23f1-4567-89abcdef0123
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: d5678ef0-9abc-34f2-5678-9abcdef01234
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		lineageTag: e6789f01-abcd-45f3-6789-abcdef012345
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		lineageTag: f7890012-bcde-56f4-789a-bcdef0123456
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(
+				    CALENDARAUTO(),
+				    "Weekday", FORMAT([Date], "DDDD"),
+				    "Month Name", FORMAT([Date], "MMMM"),
+				    "Month Number", MONTH([Date]),
+				    "Quarter", "Q" & QUARTER([Date]),
+				    "Year Month", YEAR([Date]) * 100 + MONTH([Date]),
+				    "Year", YEAR([Date])
+				)
+
+	annotation PBI_ResultType = Table
+

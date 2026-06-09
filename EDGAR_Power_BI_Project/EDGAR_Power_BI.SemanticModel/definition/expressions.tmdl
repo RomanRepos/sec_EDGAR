@@ -1,0 +1,12 @@
+expression driverName = "DuckDB Driver" meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: c61501fc-1b6c-462f-8187-ed97d0495b8d
+
+	annotation PBI_ResultType = Text
+
+expression databasePath = "C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 7ee1d562-0ca4-4cb8-a09c-673aa929d81a
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

@@ -78,7 +78,7 @@ table companyDimension
 		dataType: int64
 		formatString: 0
 		lineageTag: 40264e21-fc4c-4db2-a101-aa3883f66713
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: sic
 
 		annotation SummarizationSetBy = Automatic
@@ -171,11 +171,11 @@ table companyDimension
 
 		annotation SummarizationSetBy = Automatic
 
-	column firstTicker_firstExchange_Key
+	column exchangeTickerKey
 		dataType: string
-		lineageTag: 790fec2e-f9b6-4c67-a30f-586352b33662
+		lineageTag: a33bf33e-2432-4e6e-84b3-86cace5fb096
 		summarizeBy: none
-		sourceColumn: firstTicker_firstExchange_Key
+		sourceColumn: exchangeTickerKey
 
 		annotation SummarizationSetBy = Automatic
 
@@ -183,16 +183,14 @@ table companyDimension
 		mode: import
 		source =
 				let
-				    Source = DuckDB.Contents("C:\Users\roman\Desktop\Shared\Documents\EDGAR_Analytics\Data\secFilingsDb.duckdb", "localtoken", true, null, null, []),
-				    companyDimension_main_secFilingsDb = Source{[Item="companyDimension",Schema="main",Catalog="secFilingsDb"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(companyDimension_main_secFilingsDb,{"ingested_at"}),
-				    #"Added Custom" = Table.AddColumn(Table.Buffer(#"Removed Columns"), "firstTicker_firstExchange_Key", each Text.Upper([firstTicker]) & "_" & Text.Upper([firstExchange])),
-				    #"Filtered Rows1" = Table.SelectRows(#"Added Custom", each ([firstExchange] <> "OTC")),
-				    #"Filtered Rows" = Table.SelectRows(#"Filtered Rows1", each [firstTicker_firstExchange_Key] <> null and [firstTicker_firstExchange_Key] <> ""),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"firstTicker_firstExchange_Key", type text}}),
-				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type",{"tickers", "exchanges"})
+				    Source = Odbc.Query("Driver={"&driverName&"};Database="&databasePath&";access_mode=read_only",
+				    "Select * from companyDimension where firstExchange in ('NYSE', 'NASDAQ') and firstTicker is not null;"),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"ingested_at", "tickers", "exchanges"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Columns", "exchangeTickerKey", each [firstExchange] & "_" & [firstTicker]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"exchangeTickerKey", type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"exchangeTickerKey"})
 				in
-				    #"Removed Columns1"
+				    #"Removed Duplicates"
 
 	annotation PBI_ResultType = Table
 

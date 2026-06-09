@@ -8,13 +8,14 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["standardMetrics","companyDimension","dailyStockPrices"]
+annotation PBI_QueryOrder = ["standardMetrics","companyDimension","dailyStockPrices","driverName","databasePath"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table companyDimension
 ref table standardMetrics
 ref table dailyStockPrices
+ref table Date
 
 ref cultureInfo en-US
 
